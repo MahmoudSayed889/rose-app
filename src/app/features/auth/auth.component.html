@@ -1,11 +1,16 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 h-screen">
-    <div class="h-full flex justify-center items-center">
-        <div class="container mx-auto p-5 sm:p-15 lg:p-30 xl:p-40">
-            <router-outlet />
-        </div>
+  <div class="h-full flex justify-center items-center">
+    <div class="container mx-auto p-5 sm:p-15 lg:p-30 xl:p-40">
+      <img class="w-80 mx-auto my-7" src="assets/imgs/separator-1.png" alt="" />
+      <router-outlet />
+      <img class="w-80 mx-auto my-7 rotate-180" src="assets/imgs/separator-1.png" alt="" />
     </div>
+  </div>
 
-    <div class="bg-auth relative hidden lg:inline" style="background-image: url(assets/imgs/auth-bg.png);">
-        <!-- <img class="w-full" src="assets/imgs/auth-bg.png" alt=""> -->
-    </div>
+  <div
+    class="bg-auth relative hidden lg:inline"
+    style="background-image: url(assets/imgs/auth-bg.png)"
+  >
+    <!-- <img class="w-full" src="assets/imgs/auth-bg.png" alt=""> -->
+  </div>
 </div>

@@ -12,7 +12,13 @@ export const AuthRoutes: Routes = [
         children: [
             {
                 path: 'login',
-                loadComponent: () => import('./components/login/login.component').then((C) => C.LoginComponent),
+                loadComponent: () => import('./components/login/login.component')
+                    .then((C) => C.LoginComponent),
+            },
+            {
+                path: 'forgot-pass',
+                loadComponent: () => import('./components/forgot-password/forgot-password.component')
+                    .then((C) => C.ForgotPasswordComponent)
             }
         ]
     }
