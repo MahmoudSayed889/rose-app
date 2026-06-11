@@ -53,9 +53,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -95,6 +93,32 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        }
+      }
+    },
+    "reusable-components": {
+      "projectType": "library",
+      "root": "projects/reusable-components",
+      "sourceRoot": "projects/reusable-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/reusable-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/reusable-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/reusable-components/tsconfig.spec.json"
+          }
         }
       }
     }

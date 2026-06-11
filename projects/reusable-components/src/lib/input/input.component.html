@@ -1,0 +1,19 @@
+<div class="lib-input">
+  @if (label) {
+    <label class="lib-input__label">{{ label }}</label>
+  }
+
+  <input
+    class="lib-input__field"
+    type="text"
+    [placeholder]="placeholder"
+    [value]="value()"
+    [disabled]="isDisabled()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  />
+
+  @if (errorMessage) {
+    <p class="lib-input__error">{{ errorMessage }}</p>
+  }
+</div>
