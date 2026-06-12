@@ -3,16 +3,21 @@
 
 @import 'tailwindcss';
 @import "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import './app/app.scss';
 
 
 :root {
-  --p-primary-color: #741C21 !important;
-  --p-primary-hover-color: #741C21 !important;
-  --p-primary-active-color: #741C21 !important;
+  --p-primary-color: #A6252A !important;
+  --p-primary-hover-color: #A6252A !important;
+  --p-primary-active-color: #A6252A !important;
   --p-primary-contrast-color: #ffffff !important;
+
+  --p-checkbox-border-radius: .45rem !important;
+  --p-checkbox-border-color: #A6252A !important;
+  --p-checkbox-hover-border-color: #A6252A !important;
 }
 
 .dark {
@@ -22,6 +27,9 @@
 
   --p-inputtext-background: #3F3F46 !important;
   --p-inputtext-disabled-background: #212124 !important;
+
+  --p-checkbox-border-color: #FFA3B9 !important;
+  --p-checkbox-hover-border-color: #FFA3B9 !important;
 
   background: #27272A;
 }

@@ -103,6 +103,36 @@
       "root": "projects/auth-library",
       "sourceRoot": "projects/auth-library/src",
       "prefix": "lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "type": "component",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:directive": {
+          "type": "directive",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:service": {
+          "type": "service",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:guard": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:interceptor": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:module": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+          "typeSeparator": "."
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -129,6 +159,36 @@
       "root": "projects/reusable-components",
       "sourceRoot": "projects/reusable-components/src",
       "prefix": "lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "type": "component",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:directive": {
+          "type": "directive",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:service": {
+          "type": "service",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:guard": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:interceptor": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:module": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+          "typeSeparator": "."
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",

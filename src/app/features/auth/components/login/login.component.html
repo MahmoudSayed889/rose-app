@@ -1,10 +1,51 @@
-<!-- <img class="w-80 mx-auto my-7" src="assets/imgs/separator-1.png" alt=""> -->
 
 <h2 class="font-edwardian text-center text-primary text-5xl mb-4">Welcome back!</h2>
 <app-sp-line></app-sp-line>
 
-<div class="mt-12">
+<form class="mt-7">
+    <div class="mb-4">
+        <lib-input
+            label="email"
+            inputType="email"
+            labelForAndInputId="email"
+            placeholder="user@example.com"
+        ></lib-input>
+    </div>
+
+    <div class="">
+        <lib-input
+            label="password"
+            inputType="password"
+            labelForAndInputId="password"
+            placeholder="********"
+        ></lib-input>
+    </div>
+</form>
+
+<div class="flex justify-end">
+    <a routerLink="/register" class="text-primary font-bold">Forgot your password?</a>
+</div>
+
+<div class="flex items-center gap-1">
+    <p-checkbox inputId="rememberMe" name="remember" value="true" checkbox.root.borderRadius="50rem"/>
+    <label for="rememberMe" class="ml-2"> Remember me </label>
+</div>
+
+<lib-button
+    type="button"
+    text="login"
+    styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full"
+    [disabled]="false"
+    [loading]="false"
+    (onClick)="login()"
+></lib-button>
+
+
+<div class="mt-7">
     <app-sp-line></app-sp-line>
 </div>
 
-<!-- <img class="w-80 mx-auto my-7 rotate-180" src="assets/imgs/separator-1.png" alt=""> -->
+<p class="text-center my-7">
+    Don’t have an account yet? 
+    <a routerLink="/register" class="text-primary font-bold">Create one now!</a>
+</p>

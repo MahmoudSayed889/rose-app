@@ -1,9 +1,13 @@
 import { Component, forwardRef, Input, signal } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { LucideAngularModule, icons } from 'lucide-angular';
+import { NgStyle } from '@angular/common';
+
 
 @Component({
   selector: 'lib-input',
-  imports: [],
+  imports: [InputTextModule, FormsModule, LucideAngularModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   providers: [
@@ -17,7 +21,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = '';
+  @Input() labelForAndInputId!: string;
   @Input() errorMessage?: string;
+  @Input() styleClass: string = '';
+  @Input() inputType!: string;
 
   @Input() set disabled(value: boolean) {
     this.isDisabled.set(value);
@@ -25,6 +32,13 @@ export class InputComponent implements ControlValueAccessor {
 
   value = signal('');
   isDisabled = signal(false);
+
+  icons = icons;
+  isShow: boolean = false
+
+  show() {
+    this.isShow = !this.isShow
+  }
 
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
