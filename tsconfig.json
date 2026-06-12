@@ -4,7 +4,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "auth-library": ["./dist/auth-library"]
+      "auth-library": [
+        "./dist/auth-library"
+      ],
+      "reusable-components": [
+        "./dist/reusable-components"
+      ]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -35,6 +40,12 @@
     },
     {
       "path": "./projects/auth-library/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/reusable-components/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/reusable-components/tsconfig.spec.json"
     }
   ]
 }
