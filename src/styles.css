@@ -18,6 +18,8 @@
   --p-checkbox-border-radius: .45rem !important;
   --p-checkbox-border-color: #A6252A !important;
   --p-checkbox-hover-border-color: #A6252A !important;
+
+  --p-toast-text-gap: 0rem !important;
 }
 
 .dark {
