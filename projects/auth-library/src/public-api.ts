@@ -2,4 +2,5 @@
  * Public API Surface of auth-library
  */
 
-export * from './lib/auth-library';
+export * from './lib/services/auth.service';
+export * from './lib/enums/tokens';

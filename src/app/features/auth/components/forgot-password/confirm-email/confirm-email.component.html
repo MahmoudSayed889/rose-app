@@ -1,0 +1,23 @@
+<section>
+    <h2 class="text-3xl font-bold mb-4">Password Reset Sent</h2>
+    <div class="">
+        <p class="text-zinc-800">
+            We have sent a password reset link to:
+            <span class="block text-blue-600 cursor-pointer hover:underline" (click)="goBackToEmail()">{{userEmail()}}.</span>
+        </p>
+        <br>
+        <p class="text-zinc-800">
+            Please check your inbox and follow the instructions to reset your password.
+        </p>
+        <br>
+        <p class="text-gray-500">
+             If you don’t see the email within a few minutes, check your spam or junk folder.
+        </p>
+    </div>
+    <div class="mt-10">
+        <p class="text-sm text-gray-500 font-medium">
+            Don’t have an account? 
+            <a  routerLink="/auth/register" class="text-blue-600">Create yours</a>
+        </p>
+    </div>
+</section>

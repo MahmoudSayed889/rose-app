@@ -1,0 +1,47 @@
+<section>
+  <header class="mb-6">
+    <h1 class="text-2xl font-semibold text-zinc-800 mb-1">Forgot Password?</h1>
+    <p class="text-zinc-800 mb-4">Worry not, we’ll send you instructions to help you reset it.</p>
+    <app-sp-line></app-sp-line>
+  </header>
+  <form [formGroup]="sendEmailForm" (ngSubmit)="onSubmit()" class="space-y-9">
+    <div class="">
+      <!-- <label for="email" class="mb-1.5 block">Email</label> -->
+      <!-- <input
+      formControlName="email"
+        type="email"
+        id="email"
+        class="border border-zinc-300 rounded-[10px] p-4 w-full placeholder:text-zinc-400 placeholder:text-sm"
+        placeholder="user@example.com"
+      /> -->
+      <lib-input
+        label="Email"
+        inputType="email"
+        labelForAndInputId="email"
+        placeholder="user@example.com"
+        formControlName="email"
+      ></lib-input>
+    </div>
+    <div class="">
+      <lib-button
+        type="submit"
+        text="Continue"
+        styleClass="bg-[#A6252A] w-full text-white py-3.5 px-4 rounded-[10px] font-medium cursor-pointer"
+        [disabled]="sendEmailForm.invalid"
+        [loading]="isLoading()"
+      ></lib-button>
+      <!-- <button
+        type="submit"
+        class="bg-[#A6252A] w-full text-white py-3.5 px-4 rounded-[10px] font-medium cursor-pointer"
+      >
+        Continue
+      </button> -->
+    </div>
+    <div class="text-center">
+      <app-sp-line></app-sp-line>
+      <p class="text-zinc-800 text-sm font-medium mt-5">
+        Don’t have an account yet? <a href="" class="font-bold text-[#741C21]">Create one now!</a>
+      </p>
+    </div>
+  </form>
+</section>
