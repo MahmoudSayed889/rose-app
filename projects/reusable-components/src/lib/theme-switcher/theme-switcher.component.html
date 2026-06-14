@@ -1,0 +1,9 @@
+<button (click)="toggleTheme()" class="p-3 cursor-pointer">
+    @if (currentTheme() == 'dark') {
+        <i class="pi pi-sun"></i>
+    }
+
+    @if (currentTheme() == 'light') {
+        <i class="pi pi-moon"></i>
+    }
+</button>
