@@ -10,18 +10,37 @@
         },
         "messages": {},
         "validation": {
-            "This field is required": "This field is required"
+            "This field is required": "This field is required",
+            "Please enter a valid email.": "Please enter a valid email.",
+            "passwordMismatch": "Passwords do not match"
         }
     },
     "auth": {
         "username": "Username",
         "password": "Password",
+        "email": "Email",
+        "confirmPassword": "Confirm Password",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "gender": "Gender",
+        "male": "Male",
+        "female": "Female",
         "login": "Login",
         "logout": "Logout",
-        "don’t have an account yet?": "Don't have an account yet?",
+        "don\u2019t have an account yet?": "Don't have an account yet?",
         "create one now!": "Create one now!",
         "forgot your password?": "Forgot your password?",
-        "Remember me": "Remember Me"
+        "Remember me": "Remember Me",
+        "register": {
+            "emailTitle": "Create your account",
+            "otpTitle": "Verify your email",
+            "formTitle": "Complete your profile",
+            "otpLabel": "Verification code",
+            "otpInvalid": "Please enter the 6-digit verification code",
+            "selectGender": "Select gender",
+            "submit": "Register",
+            "alreadyHaveAccount": "Already have an account?"
+        }
     },
     "home": {
         "title": ""

@@ -1,0 +1,30 @@
+.register-otp {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.register-otp__digit {
+  width: 2.75rem;
+  height: 2.75rem;
+  text-align: center;
+  padding: var(--lib-spacing-input, 0.5rem 0.75rem);
+  border: 1px solid var(--lib-color-border, #ccc);
+  border-radius: var(--lib-border-radius, 0.25rem);
+  font-size: 1.125rem;
+  font-family: inherit;
+}
+
+.register-select {
+  padding: var(--lib-spacing-input, 0.5rem 0.75rem);
+  border: 1px solid var(--lib-color-border, #ccc);
+  border-radius: var(--lib-border-radius, 0.25rem);
+  font-size: 1rem;
+  font-family: var(--lib-font-family, system-ui, -apple-system, sans-serif);
+  background-color: transparent;
+}
+
+.register-select:invalid,
+.register-select.ng-invalid.ng-touched {
+  border-color: var(--lib-color-error, #d32f2f);
+}
