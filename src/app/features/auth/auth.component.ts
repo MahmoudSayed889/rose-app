@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { LanguageSwitcherComponent } from 'reusable-components';
 
 @Component({
   selector: 'app-auth',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LanguageSwitcherComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })

@@ -1,0 +1,38 @@
+{
+    "common": {
+        "actions": {
+            "next": "Next",
+            "previous": "Previous",
+            "start": "Start",
+            "submite": "Submit",
+            "save-changes": "Save Changes",
+            "delete-my-account": "Delete My Account"
+        },
+        "messages": {},
+        "validation": {
+            "This field is required": "This field is required"
+        }
+    },
+    "auth": {
+        "username": "Username",
+        "password": "Password",
+        "login": "Login",
+        "logout": "Logout",
+        "don’t have an account yet?": "Don't have an account yet?",
+        "create one now!": "Create one now!",
+        "forgot your password?": "Forgot your password?",
+        "Remember me": "Remember Me"
+    },
+    "home": {
+        "title": ""
+    },
+    "products": {
+        "title": ""
+    },
+    "cart": {
+        "title": ""
+    },
+    "profile": {
+        "title": ""
+    }
+}

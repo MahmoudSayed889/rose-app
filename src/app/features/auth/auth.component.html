@@ -1,9 +1,16 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 h-screen">
   <div class="h-full flex justify-center items-center">
-    <div class="container mx-auto p-5 sm:p-15 lg:p-30 xl:p-40">
-      <img class="w-80 mx-auto my-7" src="assets/imgs/separator-1.png" alt="" />
+    <div class="container mx-auto px-5 sm:px-15 lg:px-30 xl:px-40">
+
+      <div class="flex justify-end">
+        <lib-language-switcher></lib-language-switcher>
+      </div>
+
+      <img class="w-80 mx-auto my-7 block dark:hidden" src="assets/imgs/separator-1.png" alt="" />
+      <img class="w-80 mx-auto my-7 hidden dark:block" src="assets/imgs/separator-1-dark.png" alt="" />
       <router-outlet />
-      <img class="w-80 mx-auto my-7 rotate-180" src="assets/imgs/separator-1.png" alt="" />
+      <img class="w-80 mx-auto my-7 rotate-180 block dark:hidden" src="assets/imgs/separator-1.png" alt="" />
+      <img class="w-80 mx-auto my-7 rotate-180 hidden dark:block" src="assets/imgs/separator-1-dark.png" alt="" />
     </div>
   </div>
 

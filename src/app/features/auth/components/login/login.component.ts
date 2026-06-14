@@ -6,10 +6,19 @@ import { InputComponent, ButtonComponent } from 'reusable-components'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'auth-library';
 import { AppComponentBase } from '../../../../shared/app-component-base';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [SpLineComponent, InputComponent, RouterLink, CheckboxModule, ButtonComponent, ReactiveFormsModule],
+  imports: [
+    SpLineComponent,
+    InputComponent,
+    RouterLink,
+    CheckboxModule,
+    ButtonComponent,
+    ReactiveFormsModule,
+    TranslatePipe
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

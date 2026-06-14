@@ -6,6 +6,9 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { AUTH_API_URL } from 'auth-library';
 
+import {provideTranslateService} from "@ngx-translate/core";
+import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -17,6 +20,12 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.dark'
         }
       }
+    }),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: './assets/i18n/',
+        suffix: '.json'
+      }),
     }),
     {
       provide: AUTH_API_URL,

@@ -1,0 +1,38 @@
+{
+    "common": {
+        "actions": {
+            "next": "التالي",
+            "previous": "السابق",
+            "start": "ابدأ",
+            "submite": "إرسال",
+            "save-changes": "حفظ التغييرات",
+            "delete-my-account": "حذف حسابي"
+        },
+        "messages": {},
+        "validation": {
+            "This field is required": "هذا الحقل مطلوب"
+        }
+    },
+    "auth": {
+        "username": "اسم المستخدم",
+        "password": "كلمة المرور",
+        "login": "تسجيل الدخول",
+        "logout": "تسجيل الخروج",
+        "don’t have an account yet?": "ليس لديك حساب؟",
+        "create one now!": "أنشئ حساباً الآن!",
+        "forgot your password?": "نسيت كلمة المرور؟",
+        "Remember me": "تذكرنى"
+    },
+    "home": {
+        "title": ""
+    },
+    "products": {
+        "title": ""
+    },
+    "cart": {
+        "title": ""
+    },
+    "profile": {
+        "title": ""
+    }
+}
