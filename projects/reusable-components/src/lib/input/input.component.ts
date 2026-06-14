@@ -1,9 +1,19 @@
-import { Component, forwardRef, Input, signal } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  forwardRef,
+  inject,
+  Input,
+  OnInit,
+  signal,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { LucideAngularModule, icons } from 'lucide-angular';
-import { NgStyle } from '@angular/common';
-
+import { LucideAngularModule, Eye, EyeOff } from 'lucide-angular';
 
 @Component({
   selector: 'lib-input',
@@ -18,27 +28,59 @@ import { NgStyle } from '@angular/common';
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, OnInit {
+
   @Input() label = '';
   @Input() placeholder = '';
-  @Input() labelForAndInputId!: string;
-  @Input() errorMessage?: string;
-  @Input() styleClass: string = '';
-  @Input() inputType!: string;
+  @Input() inputId!: string;  
+  @Input() styleClass = '';
+
+  @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
 
   @Input() set disabled(value: boolean) {
     this.isDisabled.set(value);
   }
 
+
+  readonly Eye = Eye;
+  readonly EyeOff = EyeOff;
+
+
   value = signal('');
   isDisabled = signal(false);
+  isPasswordVisible = signal(false);
 
-  icons = icons;
-  isShow: boolean = false
+  
+  private ngControl = inject(NgControl, { optional: true, self: true });
 
-  show() {
-    this.isShow = !this.isShow
+  ngOnInit(): void {
+    
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
   }
+
+ 
+  get resolvedType(): string {
+    if (this.type !== 'password') return this.type;
+    return this.isPasswordVisible() ? 'text' : 'password';
+  }
+
+ 
+  get errorMessage(): string | null {
+    const ctrl = this.ngControl?.control;
+    if (!ctrl || !ctrl.invalid || !ctrl.touched) return null;
+
+    if (ctrl.errors?.['required']) return 'This field is required.';
+    if (ctrl.errors?.['email'])    return 'Please enter a valid email.';
+    if (ctrl.errors?.['minlength']) {
+      return `Minimum ${ctrl.errors['minlength'].requiredLength} characters.`;
+    }
+
+    const firstKey = Object.keys(ctrl.errors ?? {})[0];
+    return firstKey ?? 'Invalid value.';
+  }
+
 
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
@@ -59,6 +101,7 @@ export class InputComponent implements ControlValueAccessor {
     this.isDisabled.set(isDisabled);
   }
 
+
   onInput(event: Event): void {
     const newValue = (event.target as HTMLInputElement).value;
     this.value.set(newValue);
@@ -67,5 +110,9 @@ export class InputComponent implements ControlValueAccessor {
 
   onBlur(): void {
     this.onTouched();
+  }
+
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible.update(v => !v);
   }
 }

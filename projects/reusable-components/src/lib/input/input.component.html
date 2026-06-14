@@ -7,16 +7,16 @@
     pInputText
     [id]="labelForAndInputId"
     [class]="styleClass"
-    [type]="inputType == 'password' ? isShow ? 'text' : 'password' : inputType"
+    [type]="type == 'password' ? isShow ? 'text' : 'password' : type"
     [placeholder]="placeholder"
     [value]="value()"
     [disabled]="isDisabled()"
     (input)="onInput($event)"
     (blur)="onBlur()"
-    [style.padding-inline-end]="inputType === 'password' ? '3rem' : null"
+    [style.padding-inline-end]="type === 'password' ? '3rem' : null"
   />
 
-  @if (inputType == 'password') {
+  @if (type == 'password') {
     <div>
       <button type="button" class="btn-show bg-transparent p-2 cursor-pointer" (click)="show()">
         @if (isShow) {
