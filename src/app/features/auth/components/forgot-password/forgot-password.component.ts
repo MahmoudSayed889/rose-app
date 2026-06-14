@@ -19,7 +19,7 @@ export class ForgotPasswordComponent implements OnInit {
   private readonly _router = inject(Router);
   private readonly _destoryRef = inject(DestroyRef);
 
-  currentState: WritableSignal<'email' | 'verification' | 'password'> = signal('password');
+  currentState: WritableSignal<'email' | 'verification' | 'password'> = signal('email');
   userEmail: WritableSignal<string> = signal('user@example.com');
   userToken: WritableSignal<string> = signal('');
   sendEmailLoading: WritableSignal<boolean> = signal(false);
