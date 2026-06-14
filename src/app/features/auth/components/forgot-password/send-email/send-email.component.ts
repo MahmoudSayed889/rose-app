@@ -1,11 +1,12 @@
-import { Component, EventEmitter, inject, input, Output } from '@angular/core';
+import { Component, inject, input, output, signal, WritableSignal } from '@angular/core';
 import { SpLineComponent } from "../../../../../shared/components/sp-line/sp-line.component";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent, ButtonComponent } from "reusable-components";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-send-email',
-  imports: [SpLineComponent, ReactiveFormsModule, InputComponent, ButtonComponent],
+  imports: [SpLineComponent, ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink],
   templateUrl: './send-email.component.html',
   styleUrl: './send-email.component.scss',
 })
@@ -13,20 +14,29 @@ export class SendEmailComponent {
   private readonly _fb = inject(FormBuilder);
 
   isLoading = input<boolean>(false);
-  @Output() emailSubmitted = new EventEmitter<string>();
+  emailSubmitted = output<string>();
 
   sendEmailForm: FormGroup = this._fb.group({
     email: [null, [Validators.email, Validators.required]]
   })
 
-  onSubmit(): void {
-    if(this.sendEmailForm.valid) {
-      const emailValue = this.sendEmailForm.value.email
-      this.emailSubmitted.emit(emailValue);    
+  get emailControl() {
+    return this.sendEmailForm.get('email');
+  }
+  get emailError(): string {
+    const control = this.emailControl;
+    if (control?.hasError('required') && control?.touched) {
+      return 'Email is required';
     }
-    else {
-      console.log('no no no');
-      
+    if (control?.hasError('email') && control?.touched) {
+      return 'Please enter a valid email address';
+    }
+    return '';
+  }
+
+  onSubmit(): void {
+    if (this.sendEmailForm.valid && this.emailControl?.value) {
+      this.emailSubmitted.emit(this.emailControl.value);
     }
   }
 
