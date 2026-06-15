@@ -1,6 +1,8 @@
 {
     "common": {
         "actions": {
+            "continue": "Continue",
+            "edit": "Edit",
             "next": "Next",
             "previous": "Previous",
             "start": "Start",
@@ -8,6 +10,9 @@
             "save-changes": "Save Changes",
             "delete-my-account": "Delete My Account"
         },
+        "or": "or",
+        "Need help?": "Need help?",
+        "Contact us": "Contact us",
         "messages": {},
         "validation": {
             "This field is required": "This field is required",
@@ -29,6 +34,7 @@
         "logout": "Logout",
         "don\u2019t have an account yet?": "Don't have an account yet?",
         "create one now!": "Create one now!",
+        "Create yours": "Create yours",
         "forgot your password?": "Forgot your password?",
         "Remember me": "Remember Me",
         "register": {
@@ -40,6 +46,18 @@
             "selectGender": "Select gender",
             "submit": "Register",
             "alreadyHaveAccount": "Already have an account?"
+        },
+        "forgot-password": {
+            "Forgot Password?": "Forgot Password?",
+            "Worry not, we’ll send you instructions to help you reset it.": "Worry not, we’ll send you instructions to help you reset it.",
+            "Password Reset Sent": "Password Reset Sent",
+            "We have sent a password reset link to": "We have sent a password reset link to:",
+            "Please check your inbox and follow the instructions to reset your password": "Please check your inbox and follow the instructions to reset your password.",
+            "If you don’t see the email within a few minutes, check your spam or junk folder": "If you don’t see the email within a few minutes, check your spam or junk folder.",
+            "Send a new link": "Send a new link",
+            "Create a new password": "Create a new password",
+            "Set a strong password to secure your account.": "Set a strong password to secure your account.",
+            "resetPassword": "Reset Password"
         }
     },
     "home": {

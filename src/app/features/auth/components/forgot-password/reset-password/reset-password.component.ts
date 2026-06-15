@@ -1,12 +1,14 @@
-import { Component, EventEmitter, inject, input, Output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { SpLineComponent } from "../../../../../shared/components/sp-line/sp-line.component";
 import { InputComponent, ButtonComponent } from "reusable-components";
+import { PASSWORD_REGEX } from 'auth-library'
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reset-password',
-  imports: [PasswordModule, FormsModule, SpLineComponent, InputComponent, ReactiveFormsModule, ButtonComponent],
+  imports: [PasswordModule, FormsModule, SpLineComponent, InputComponent, ReactiveFormsModule, ButtonComponent, TranslatePipe],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss',
 })
@@ -14,7 +16,7 @@ export class ResetPasswordComponent {
   private readonly _fb = inject(FormBuilder);
 
   isLoading = input<boolean>(false);
-  @Output() passwordChanged = new EventEmitter<FormGroup>();
+  passwordChanged = output<FormGroup>();
 
   rePasswordValidation: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password: string = control.get('newPassword')?.value
@@ -23,18 +25,24 @@ export class ResetPasswordComponent {
   }
 
   resetPasswordForm = this._fb.group({
-    // token: [null, [Validators.required]],
-    newPassword: [null, [Validators.required]],
-    confirmPassword: [null, [Validators.required]]
+    newPassword: ['', [Validators.required, Validators.pattern(PASSWORD_REGEX)]],
+    confirmPassword: ['', [Validators.required]]
   }, { validators: this.rePasswordValidation })
 
+  get passwordError(): string {
+    const control = this.resetPasswordForm.get('newPassword');
+    if (control?.hasError('required') && control?.touched) {
+      return 'Password is required';
+    }
+    if (control?.hasError('pattern') && control?.touched) {
+      return 'Password must include uppercase, lowercase, number, and special character.';
+    }
+    return '';
+  }
 
   onSubmit(): void {
     if (this.resetPasswordForm.valid) {
       this.passwordChanged.emit(this.resetPasswordForm);
-    }
-    else {
-      console.log('no no no');
     }
   }
 

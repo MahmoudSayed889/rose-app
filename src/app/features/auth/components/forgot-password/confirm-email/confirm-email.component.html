@@ -1,23 +1,29 @@
 <section>
-    <h2 class="text-3xl font-bold mb-4">Password Reset Sent</h2>
-    <div class="">
-        <p class="text-zinc-800">
-            We have sent a password reset link to:
-            <span class="block text-blue-600 cursor-pointer hover:underline" (click)="goBackToEmail()">{{userEmail()}}.</span>
-        </p>
-        <br>
-        <p class="text-zinc-800">
-            Please check your inbox and follow the instructions to reset your password.
-        </p>
-        <br>
-        <p class="text-gray-500">
-             If you don’t see the email within a few minutes, check your spam or junk folder.
-        </p>
-    </div>
-    <div class="mt-10">
-        <p class="text-sm text-gray-500 font-medium">
-            Don’t have an account? 
-            <a  routerLink="/auth/register" class="text-blue-600">Create yours</a>
-        </p>
-    </div>
+  <h2 class="text-3xl font-bold mb-4 dark:text-zinc-50">{{'auth.forgot-password.Password Reset Sent'|translate}}</h2>
+  <div class="">
+    <p class="text-zinc-800 dark:text-zinc-50">
+      {{'auth.forgot-password.We have sent a password reset link to'|translate}} <br />
+      <span class="font-semibold dark:text-zinc-50">{{ userEmail() }}. </span>
+      <span (click)="goBackToEmail()" class="text-blue-600 cursor-pointer underline">{{'common.actions.edit'|translate}}</span>
+    </p>
+    <br />
+    <p class="text-zinc-800 dark:text-zinc-50">
+      {{'auth.forgot-password.Please check your inbox and follow the instructions to reset your password'|translate}}
+    </p>
+    <br />
+    <p class="text-gray-500 dark:text-zinc-50">
+      {{'auth.forgot-password.If you don’t see the email within a few minutes, check your spam or junk folder'|translate}}
+      <br /><br>
+      <span>{{'common.or'|translate}} </span>
+      <button class="cursor-pointer font-medium text-gray-700 hover:underline dark:text-zinc-100">
+        {{'auth.forgot-password.Send a new link'|translate}}
+      </button>
+    </p>
+  </div>
+  <div class="mt-10">
+    <p class="text-sm text-gray-500 font-medium dark:text-zinc-50">
+      {{'auth.don\u2019t have an account yet?'|translate}}
+      <a routerLink="/auth/register" class="text-blue-600">{{'auth.Create yours'|translate}}</a>
+    </p>
+  </div>
 </section>

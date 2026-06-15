@@ -1,10 +1,11 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { SendEmailComponent } from "./send-email/send-email.component";
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from 'auth-library';
+import { FormGroup } from '@angular/forms';
+import { AuthService, RequestPasswordResetREQ, ResetPasswordREQ } from 'auth-library';
 import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,34 +17,39 @@ export class ForgotPasswordComponent implements OnInit {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
+  private readonly _destoryRef = inject(DestroyRef);
 
   currentState: WritableSignal<'email' | 'verification' | 'password'> = signal('email');
-  userEmail: WritableSignal<string> = signal('');
+  userEmail: WritableSignal<string> = signal('user@example.com');
   userToken: WritableSignal<string> = signal('');
   sendEmailLoading: WritableSignal<boolean> = signal(false);
+  resetPasswordLoading: WritableSignal<boolean> = signal(false);
 
   onEmailSubmit(email: string): void {
     this.userEmail.set(email);
 
     this.sendEmail();
   }
-  sendEmail(): any {
+  sendEmail(): void {
     if (this.userEmail()) {
       this.sendEmailLoading.set(true);
-      const data = {
+      const data: RequestPasswordResetREQ = {
         email: this.userEmail()
       }
-      this._authService.RequestPasswordReset(data).subscribe({
-        next: (res) => {
-          this.sendEmailLoading.set(false);
-          console.log(res);
-          this.currentState.set('verification');
-        },
-        error: (err) => {
-          this.sendEmailLoading.set(false);
-          console.log(err);
-        }
-      })
+
+      this._authService.RequestPasswordReset(data)
+        .pipe(takeUntilDestroyed(this._destoryRef))
+        .subscribe({
+          next: (res) => {
+            this.sendEmailLoading.set(false);
+            console.log(res);
+            this.currentState.set('verification');
+          },
+          error: (err) => {
+            this.sendEmailLoading.set(false);
+            console.log(err);
+          }
+        })
     }
   }
 
@@ -51,35 +57,37 @@ export class ForgotPasswordComponent implements OnInit {
     this._router.navigate(['login']);
   }
   onPasswordSubmit(passwordForm: FormGroup): void {
-    const data = {
+    const data: ResetPasswordREQ = {
       token: this.userToken(),
       ...passwordForm.value
     }
-    
+
     this.resetPassword(data);
   }
-  resetPassword(data: any): any {
-    if(data) {
-      this._authService.ResetPassword(data).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.redirectToLogin();
-        },
-        error: (err) => {
-          console.log(err);
-          
-        }
-      })
+  resetPassword(data: ResetPasswordREQ): void {
+    if (data) {
+      this.resetPasswordLoading.set(true);
+      this._authService.ResetPassword(data)
+        .pipe(takeUntilDestroyed(this._destoryRef))
+        .subscribe({
+          next: (res) => {
+            this.resetPasswordLoading.set(false);
+            console.log(res);
+            this.redirectToLogin();
+          },
+          error: (err) => {
+            this.resetPasswordLoading.set(false);
+            console.log(err);
+          }
+        })
     }
   }
 
-  // resetPasswordForm: FormGroup = this._fb.group({
-  //   token: [null, [Validators.required]],
-  //   newPassword: [null, [Validators.required]],
-  //   confirmPassword: [null, [Validators.required]]
-  // })
-
-
+  onVerificationStateChanged(newState: string): void {
+    if (newState == 'email') {
+      this.currentState.set(newState)
+    }
+  }
 
   checkUserToken(): void {
     const urlToken = this._activatedRoute.snapshot.queryParamMap.get('token');
