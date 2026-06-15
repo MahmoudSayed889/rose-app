@@ -1,0 +1,57 @@
+{
+    "common": {
+        "actions": {
+            "next": "التالي",
+            "previous": "السابق",
+            "start": "ابدأ",
+            "submite": "إرسال",
+            "save-changes": "حفظ التغييرات",
+            "delete-my-account": "حذف حسابي"
+        },
+        "messages": {},
+        "validation": {
+            "This field is required": "هذا الحقل مطلوب",
+            "Please enter a valid email.": "يرجى إدخال بريد إلكتروني صالح.",
+            "passwordMismatch": "كلمتا المرور غير متطابقتين"
+        }
+    },
+    "auth": {
+        "username": "اسم المستخدم",
+        "password": "كلمة المرور",
+        "email": "البريد الإلكتروني",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "firstName": "الاسم الأول",
+        "lastName": "اسم العائلة",
+        "gender": "الجنس",
+        "male": "ذكر",
+        "female": "أنثى",
+        "login": "تسجيل الدخول",
+        "logout": "تسجيل الخروج",
+        "don\u2019t have an account yet?": "ليس لديك حساب؟",
+        "create one now!": "أنشئ حساباً الآن!",
+        "forgot your password?": "نسيت كلمة المرور؟",
+        "Remember me": "تذكرنى",
+        "register": {
+            "emailTitle": "إنشاء حسابك",
+            "otpTitle": "تأكيد بريدك الإلكتروني",
+            "formTitle": "أكمل ملفك الشخصي",
+            "otpLabel": "رمز التحقق",
+            "otpInvalid": "يرجى إدخال رمز التحقق المكون من 6 أرقام",
+            "selectGender": "اختر الجنس",
+            "submit": "تسجيل",
+            "alreadyHaveAccount": "لديك حساب بالفعل؟"
+        }
+    },
+    "home": {
+        "title": ""
+    },
+    "products": {
+        "title": ""
+    },
+    "cart": {
+        "title": ""
+    },
+    "profile": {
+        "title": ""
+    }
+}

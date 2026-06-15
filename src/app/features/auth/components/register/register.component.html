@@ -1,1 +1,195 @@
-<p>register works!</p>
+<div class="lib-input relative">
+
+  @switch (currentStep()) {
+    @case ('email') {
+      <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
+        {{ 'auth.register.emailTitle' | translate }}
+      </h2>
+    }
+    @case ('otp') {
+      <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
+        {{ 'auth.register.otpTitle' | translate }}
+      </h2>
+    }
+    @case ('register') {
+      <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
+        {{ 'auth.register.formTitle' | translate }}
+      </h2>
+    }
+  }
+
+  <app-sp-line></app-sp-line>
+
+  @if (currentStep() === 'email') {
+    <form class="mt-7" [formGroup]="emailForm" (ngSubmit)="submitEmail()">
+      <div class="mb-4">
+        <lib-input
+          [label]="'auth.email' | translate"
+          type="email"
+          inputId="register-email"
+          placeholder="user@example.com"
+          formControlName="email"
+          [valid]="isFieldInvalid(emailForm, 'email')"
+        ></lib-input>
+      </div>
+
+      <lib-button
+        type="submit"
+        [text]="'common.actions.next' | translate"
+        styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full"
+        [disabled]="emailForm.invalid"
+        [loading]="formSubmited()"
+      ></lib-button>
+    </form>
+  }
+
+  @if (currentStep() === 'otp') {
+    <form class="mt-7" [formGroup]="otpForm" (ngSubmit)="submitOtp()">
+      <div class="mb-4">
+        <label class="lib-input__label dark:text-white! capitalize block mb-2">
+          {{ 'auth.register.otpLabel' | translate }}
+        </label>
+
+        <div class="register-otp" (paste)="onOtpPaste($event)">
+          @for (digit of otpDigits(); track $index) {
+            <input
+              pInputText
+              class="register-otp__digit"
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              [attr.data-otp-index]="$index"
+              [value]="digit"
+              (input)="onOtpInput($index, $event)"
+              (keydown)="onOtpKeydown($index, $event)"
+            />
+          }
+        </div>
+
+        @if (isFieldInvalid(otpForm, 'code')) {
+          <p class="lib-input__error mt-2">
+            {{ 'auth.register.otpInvalid' | translate }}
+          </p>
+        }
+      </div>
+
+      <lib-button
+        type="submit"
+        [text]="'common.actions.next' | translate"
+        styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full"
+        [disabled]="otpForm.invalid"
+        [loading]="formSubmited()"
+      ></lib-button>
+    </form>
+  }
+
+  @if (currentStep() === 'register') {
+    <form class="mt-7" [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+      <div class="mb-4">
+        <lib-input
+          [label]="'auth.email' | translate"
+          type="email"
+          inputId="register-verified-email"
+          formControlName="email"
+          [disabled]="true"
+        ></lib-input>
+      </div>
+
+      <div class="mb-4">
+        <lib-input
+          [label]="'auth.username' | translate"
+          type="text"
+          inputId="register-username"
+          placeholder="user@123"
+          formControlName="username"
+          [valid]="isFieldInvalid(registerForm, 'username')"
+        ></lib-input>
+      </div>
+
+      <div class="mb-4">
+        <lib-input
+          [label]="'auth.password' | translate"
+          type="password"
+          inputId="register-password"
+          placeholder="********"
+          formControlName="password"
+          [valid]="isFieldInvalid(registerForm, 'password')"
+        ></lib-input>
+      </div>
+
+      <div class="mb-4">
+        <lib-input
+          [label]="'auth.confirmPassword' | translate"
+          type="password"
+          inputId="register-confirm-password"
+          placeholder="********"
+          formControlName="confirmPassword"
+          [valid]="isConfirmPasswordInvalid()"
+        ></lib-input>
+        @if (registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched) {
+          <p class="lib-input__error mt-2">
+            {{ 'common.validation.passwordMismatch' | translate }}
+          </p>
+        }
+      </div>
+
+      <div class="mb-4">
+        <lib-input
+          [label]="'auth.firstName' | translate"
+          type="text"
+          inputId="register-first-name"
+          formControlName="firstName"
+          [valid]="isFieldInvalid(registerForm, 'firstName')"
+        ></lib-input>
+      </div>
+
+      <div class="mb-4">
+        <lib-input
+          [label]="'auth.lastName' | translate"
+          type="text"
+          inputId="register-last-name"
+          formControlName="lastName"
+          [valid]="isFieldInvalid(registerForm, 'lastName')"
+        ></lib-input>
+      </div>
+
+      <div class="mb-4">
+        <label for="register-gender" class="lib-input__label dark:text-white! capitalize">
+          {{ 'auth.gender' | translate }}
+        </label>
+        <select
+          id="register-gender"
+          class="register-select w-full"
+          formControlName="gender"
+        >
+          <option value="" disabled>{{ 'auth.register.selectGender' | translate }}</option>
+          @for (option of genderOptions; track option.value) {
+            <option [value]="option.value">{{ option.label | translate }}</option>
+          }
+        </select>
+        @if (isFieldInvalid(registerForm, 'gender')) {
+          <p class="lib-input__error mt-2">
+            {{ 'common.validation.This field is required' | translate }}
+          </p>
+        }
+      </div>
+
+      <lib-button
+        type="submit"
+        [text]="'auth.register.submit' | translate"
+        styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full"
+        [disabled]="registerForm.invalid"
+        [loading]="formSubmited()"
+      ></lib-button>
+    </form>
+  }
+
+  <div class="mt-7">
+    <app-sp-line></app-sp-line>
+  </div>
+
+  <p class="text-center my-7">
+    {{ 'auth.register.alreadyHaveAccount' | translate }}
+    <a routerLink="/login" class="text-primary font-bold">{{ 'auth.login' | translate }}</a>
+  </p>
+</div>

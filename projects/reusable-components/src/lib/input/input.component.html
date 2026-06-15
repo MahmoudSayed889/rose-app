@@ -1,35 +1,40 @@
-<div class="lib-input relative">
+<div class="lib-input">
   @if (label) {
-    <label [for]="labelForAndInputId" class="lib-input__label capitalize">{{ label }}</label>
+    <label [for]="inputId" class="lib-input__label dark:text-white! capitalize">{{ label }}</label>
   }
 
-  <input
-    pInputText
-    [id]="labelForAndInputId"
-    [class]="styleClass"
-    [type]="inputType == 'password' ? isShow ? 'text' : 'password' : inputType"
-    [placeholder]="placeholder"
-    [value]="value()"
-    [disabled]="isDisabled()"
-    (input)="onInput($event)"
-    (blur)="onBlur()"
-    [style.padding-inline-end]="inputType === 'password' ? '3rem' : null"
-  />
+  <div class="relative">
+    <input
+      pInputText
+      [id]="inputId"
+      class="w-full"
+      [class]="styleClass"
+      [type]="type == 'password' ? isPasswordVisible() ? 'text' : 'password' : type"
+      [placeholder]="placeholder"
+      [value]="value()"
+      [disabled]="isDisabled()"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      [invalid]="valid"
+      variant="filled"
+      [style.padding-inline-end]="type === 'password' ? '3rem' : null"
+    />
 
-  @if (inputType == 'password') {
-    <div>
-      <button type="button" class="btn-show bg-transparent p-2 cursor-pointer" (click)="show()">
-        @if (isShow) {
-          <lucide-angular [name]="icons.Eye" class="opacity-75" strokeWidth="1.5px"></lucide-angular>
-        }
-        @if (!isShow) {
-          <lucide-angular [name]="icons.EyeOff" class="opacity-75" strokeWidth="1.5px"></lucide-angular>
-        }
-      </button>
-    </div>
-  }
+    @if (type == 'password') {
+      <div>
+        <button type="button" class="btn-show bg-transparent p-2 cursor-pointer absolute bottom-0 right-1.75 rtl:right-auto rtl:left-1.75" (click)="togglePasswordVisibility()">
+          @if (isPasswordVisible()) {
+            <lucide-angular [name]="icons.Eye" class="opacity-75" strokeWidth="1.5px"></lucide-angular>
+          }
+          @if (!isPasswordVisible()) {
+            <lucide-angular [name]="icons.EyeOff" class="opacity-75" strokeWidth="1.5px"></lucide-angular>
+          }
+        </button>
+      </div>
+    }
+  </div>
 
   @if (errorMessage) {
-    <p class="lib-input__error">{{ errorMessage }}</p>
+    <p class="lib-input__error">{{ 'common.validation.'+errorMessage | translate }}</p>
   }
 </div>

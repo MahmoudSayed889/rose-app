@@ -1,44 +1,50 @@
+<div class="lib-input relative">
 
 <h2 class="font-edwardian text-center text-primary text-5xl mb-4">Welcome back!</h2>
 <app-sp-line></app-sp-line>
 
-<form class="mt-7">
+<form class="mt-7" [formGroup]="form" (ngSubmit)="login()">
     <div class="mb-4">
         <lib-input
-            label="email"
-            inputType="email"
-            labelForAndInputId="email"
-            placeholder="user@example.com"
+            [label]="'auth.username' | translate"
+            type="text"
+            inputId="username"
+            placeholder="user@123"
+            formControlName="username"
+            [valid]="form.get('username')?.touched! && form.get('username')?.hasError('required')!"
         ></lib-input>
     </div>
 
     <div class="">
         <lib-input
-            label="password"
-            inputType="password"
-            labelForAndInputId="password"
+            [label]="'auth.password' | translate"
+            type="password"
+            inputId="password"
             placeholder="********"
+            formControlName="password"
+            [valid]="form.get('password')?.touched! && form.get('password')?.hasError('required')!"
         ></lib-input>
     </div>
+
+
+    <div class="flex justify-end mt-1">
+        <a routerLink="/forgot-pass" class="text-primary font-bold">{{'auth.forgot your password?' | translate}}</a>
+    </div>
+
+    <div class="flex items-center gap-1">
+        <p-checkbox inputId="rememberMe" name="remember" value="true" checkbox.root.borderRadius="50rem"/>
+        <label for="rememberMe" class="ms-2">{{'auth.Remember me' | translate}}</label>
+    </div>
+
+    <lib-button
+        type="submit"
+        [text]="'auth.login' | translate"
+        styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full"
+        [disabled]="form.invalid"
+        [loading]="formSubmited()"
+    ></lib-button>
+
 </form>
-
-<div class="flex justify-end">
-    <a routerLink="/register" class="text-primary font-bold">Forgot your password?</a>
-</div>
-
-<div class="flex items-center gap-1">
-    <p-checkbox inputId="rememberMe" name="remember" value="true" checkbox.root.borderRadius="50rem"/>
-    <label for="rememberMe" class="ml-2"> Remember me </label>
-</div>
-
-<lib-button
-    type="button"
-    text="login"
-    styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full"
-    [disabled]="false"
-    [loading]="false"
-    (onClick)="login()"
-></lib-button>
 
 
 <div class="mt-7">
@@ -46,6 +52,6 @@
 </div>
 
 <p class="text-center my-7">
-    Don’t have an account yet? 
-    <a routerLink="/register" class="text-primary font-bold">Create one now!</a>
+    {{'auth.don’t have an account yet?' | translate}} 
+    <a routerLink="/register" class="text-primary font-bold">{{'auth.create one now!' | translate}}</a>
 </p>
