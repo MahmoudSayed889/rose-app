@@ -12,6 +12,9 @@
             placeholder="user@123"
             formControlName="username"
             [valid]="form.get('username')?.touched! && form.get('username')?.hasError('required')!"
+            [customErrorMessages]="{
+            required: 'common.validation.USERNAME_REQ_ERROR',
+          }"
         ></lib-input>
     </div>
 
@@ -23,6 +26,9 @@
             placeholder="********"
             formControlName="password"
             [valid]="form.get('password')?.touched! && form.get('password')?.hasError('required')!"
+            [customErrorMessages]="{
+            required: 'common.validation.PASSWORD_REQ_ERROR',
+          }"
         ></lib-input>
     </div>
 

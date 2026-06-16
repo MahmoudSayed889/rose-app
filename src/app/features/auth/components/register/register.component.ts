@@ -37,7 +37,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _router = inject(Router);
 
-  currentStep = signal<RegisterStep>('email');
+  currentStep = signal<RegisterStep>('register');
   verifiedEmail = signal('');
 
   emailForm!: FormGroup;

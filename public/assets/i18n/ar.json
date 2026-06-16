@@ -17,7 +17,13 @@
         "validation": {
             "This field is required": "هذا الحقل مطلوب",
             "Please enter a valid email.": "يرجى إدخال بريد إلكتروني صالح.",
-            "passwordMismatch": "كلمتا المرور غير متطابقتين"
+            "passwordMismatch": "كلمتا المرور غير متطابقتين",
+            "PASSWORD_REQ_ERROR": "كلمة السر مطلوبة",
+            "EMAIL_REQ_ERROR": "البريد الإلكتروني مطلوب",
+            "PASSWORD_PATTERN_ERROR": "يرجى إدخال كلمة مرور صالحة",
+            "USERNAME_REQ_ERROR": "اسم المستخدم مطلوب",
+            "FN_REQ_ERROR": "الاسم الأول مطلوب",
+            "LN_REQ_ERROR": "الاسم الأخير مطلوب"
         }
     },
     "auth": {

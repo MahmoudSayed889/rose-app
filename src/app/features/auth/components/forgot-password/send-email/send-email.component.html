@@ -16,6 +16,10 @@
         inputId="email"
         placeholder="user@example.com"
         formControlName="email"
+        [customErrorMessages]="{
+          required: 'common.validation.EMAIL_REQ_ERROR',
+          email: 'common.validation.Please enter a valid email.'
+        }"
       ></lib-input>
     </div>
     <div class="">

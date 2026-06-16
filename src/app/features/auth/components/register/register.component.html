@@ -30,6 +30,10 @@
           placeholder="user@example.com"
           formControlName="email"
           [valid]="isFieldInvalid(emailForm, 'email')"
+          [customErrorMessages]="{
+            required: 'common.validation.EMAIL_REQ_ERROR',
+            email: 'common.validation.Please enter a valid email.'
+          }"
         ></lib-input>
       </div>
 
@@ -103,6 +107,9 @@
           placeholder="user@123"
           formControlName="username"
           [valid]="isFieldInvalid(registerForm, 'username')"
+          [customErrorMessages]="{
+            required: 'common.validation.USERNAME_REQ_ERROR',
+          }"
         ></lib-input>
       </div>
 
@@ -114,6 +121,9 @@
           placeholder="********"
           formControlName="password"
           [valid]="isFieldInvalid(registerForm, 'password')"
+          [customErrorMessages]="{
+            required: 'common.validation.PASSWORD_PATTERN_ERROR',
+          }"
         ></lib-input>
       </div>
 
@@ -125,6 +135,9 @@
           placeholder="********"
           formControlName="confirmPassword"
           [valid]="isConfirmPasswordInvalid()"
+          [customErrorMessages]="{
+            required: 'common.validation.CPASSWORD_REQ_ERROR',
+          }"
         ></lib-input>
         @if (registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched) {
           <p class="lib-input__error mt-2">
@@ -140,6 +153,9 @@
           inputId="register-first-name"
           formControlName="firstName"
           [valid]="isFieldInvalid(registerForm, 'firstName')"
+          [customErrorMessages]="{
+            required: 'common.validation.FN_REQ_ERROR',
+          }"
         ></lib-input>
       </div>
 
@@ -150,6 +166,9 @@
           inputId="register-last-name"
           formControlName="lastName"
           [valid]="isFieldInvalid(registerForm, 'lastName')"
+          [customErrorMessages]="{
+            required: 'common.validation.LN_REQ_ERROR',
+          }"
         ></lib-input>
       </div>
 

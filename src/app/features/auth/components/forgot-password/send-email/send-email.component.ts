@@ -24,16 +24,6 @@ export class SendEmailComponent {
   get emailControl() {
     return this.sendEmailForm.get('email');
   }
-  get emailError(): string {
-    const control = this.emailControl;
-    if (control?.hasError('required') && control?.touched) {
-      return 'Email is required';
-    }
-    if (control?.hasError('email') && control?.touched) {
-      return 'Please enter a valid email address';
-    }
-    return '';
-  }
 
   onSubmit(): void {
     if (this.sendEmailForm.valid && this.emailControl?.value) {
