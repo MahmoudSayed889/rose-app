@@ -107,9 +107,8 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
         this.currentStep.set('otp');
         this.resetOtpDigits();
       },
-      error: (err) => {
+      error: () => {
         this.formSubmited.set(false);
-        this.toaster('error', err.error?.message ?? err.message);
       },
     });
   }
@@ -131,9 +130,8 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
         this.registerForm.patchValue({ email: this.verifiedEmail() });
         this.currentStep.set('register');
       },
-      error: (err) => {
+      error: () => {
         this.formSubmited.set(false);
-        this.toaster('error', err.error?.message ?? err.message);
       },
     });
   }
@@ -160,12 +158,11 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
       next: (res) => {
         this.formSubmited.set(false);
         localStorage.setItem('user', JSON.stringify(res));
-        this.toaster('success', 'Registration successful');
+        this._toastService.toaster('success', 'Registration successful');
         this._router.navigate(['/login']);
       },
-      error: (err) => {
+      error: () => {
         this.formSubmited.set(false);
-        this.toaster('error', err.error?.message ?? err.message);
       },
     });
   }

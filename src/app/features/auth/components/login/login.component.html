@@ -32,7 +32,7 @@
     </div>
 
     <div class="flex items-center gap-1">
-        <p-checkbox inputId="rememberMe" name="remember" value="true" checkbox.root.borderRadius="50rem"/>
+        <p-checkbox inputId="rememberMe" formControlName="rememberMe" [binary]="true" checkbox.root.borderRadius="50rem"/>
         <label for="rememberMe" class="ms-2">{{'auth.Remember me' | translate}}</label>
     </div>
 

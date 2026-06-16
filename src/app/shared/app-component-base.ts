@@ -1,22 +1,14 @@
 import { inject, signal } from "@angular/core";
-import { MessageService } from "primeng/api";
+import { CookieService } from "ngx-cookie-service";
+import { ToastService } from "./services/toast.service";
 
 
 export abstract class AppComponentBase {
 
-  private _messageService = inject(MessageService);
+  _toastService = inject(ToastService)
+  _cookieService = inject(CookieService);
 
-  currentUser = JSON.parse(localStorage.getItem('user')!)?.user
+  currentUser = signal( this._cookieService.get('user') ? JSON.parse(this._cookieService.get('user')) : null )
   formSubmited = signal<boolean>(false);
   errorsMsg = signal<any>('');
-
-  toaster(
-    severity: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast',
-    title?: string
-  ) {
-    this._messageService.add({
-      severity: severity,
-      detail: title
-    });
-  }
 }

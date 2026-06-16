@@ -24,7 +24,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class LoginComponent extends AppComponentBase implements OnInit {
 
-  private _authService = inject(AuthService)
+  private readonly _authService = inject(AuthService)
   private fb = inject(FormBuilder)
   private _router = inject(Router)
 
@@ -38,11 +38,11 @@ export class LoginComponent extends AppComponentBase implements OnInit {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      rememberMe: [false],
     })
   }
 
   login() {
-    // console.log(this.form.value);
     this.formSubmited.set(true)
 
     const dataToSend = {
@@ -52,16 +52,20 @@ export class LoginComponent extends AppComponentBase implements OnInit {
 
     this._authService.Login(dataToSend).subscribe({
       next: (res) => {
-        // console.log(res);
 
         this.formSubmited.set(false)
         this._router.navigate(['/home'])
-        localStorage.setItem('user', JSON.stringify(res))
-        this.toaster('success', 'Login Successfully')
-      }, error: (err) => {
-        console.log(err);
+
+        if (this.form.value.rememberMe) {
+          this._cookieService.set('user', JSON.stringify(res), 90)
+        } else {
+          this._cookieService.set('user', JSON.stringify(res))
+        }
+
+        this._toastService.toaster('success', 'Login Successfully')
+
+      }, error: () => {
         this.formSubmited.set(false)
-        this.toaster('error', err.error.message)
       }
     })
   }
