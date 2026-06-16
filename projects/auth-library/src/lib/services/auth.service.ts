@@ -59,7 +59,7 @@ export class AuthService implements AuthAPI {
     );
   }
 
-  Login(data: LoginREQ): Observable<LoginRES | string> {
+  Login(data: LoginREQ): Observable<LoginRES> {
     return this._httpClient
       .post<BLogin>(this._authEndPoints.Login, data)
       .pipe(map((res: BLogin) => this._authAdapt.LoginAdapt(res)));

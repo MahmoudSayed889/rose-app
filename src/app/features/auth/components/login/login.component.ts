@@ -57,9 +57,11 @@ export class LoginComponent extends AppComponentBase implements OnInit {
         this._router.navigate(['/home'])
 
         if (this.form.value.rememberMe) {
-          this._cookieService.set('user', JSON.stringify(res), 90)
+          this._cookieService.set('user', JSON.stringify(res.token), 90)
         } else {
-          this._cookieService.set('user', JSON.stringify(res))
+          this._cookieService.set('user', JSON.stringify(res.token))
+          console.log(res);
+          
         }
 
         this._toastService.toaster('success', 'Login Successfully')
