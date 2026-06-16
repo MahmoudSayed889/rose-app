@@ -1,0 +1,13 @@
+.bg-dark {
+    background: #27272A;
+}
+
+.dark {
+    .bg-dark {
+        background: #18181B !important;
+    }
+}
+
+*:disabled {
+    border-color: transparent !important;
+}
