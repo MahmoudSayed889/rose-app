@@ -40,14 +40,12 @@ export class ForgotPasswordComponent implements OnInit {
       this._authService.RequestPasswordReset(data)
         .pipe(takeUntilDestroyed(this._destoryRef))
         .subscribe({
-          next: (res) => {
+          next: () => {
             this.sendEmailLoading.set(false);
-            console.log(res);
             this.currentState.set('verification');
           },
-          error: (err) => {
+          error: () => {
             this.sendEmailLoading.set(false);
-            console.log(err);
           }
         })
     }
@@ -70,14 +68,12 @@ export class ForgotPasswordComponent implements OnInit {
       this._authService.ResetPassword(data)
         .pipe(takeUntilDestroyed(this._destoryRef))
         .subscribe({
-          next: (res) => {
+          next: () => {
             this.resetPasswordLoading.set(false);
-            console.log(res);
             this.redirectToLogin();
           },
-          error: (err) => {
+          error: () => {
             this.resetPasswordLoading.set(false);
-            console.log(err);
           }
         })
     }
