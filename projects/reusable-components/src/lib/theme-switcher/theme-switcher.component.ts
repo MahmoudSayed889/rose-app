@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ThemeSwitcherService } from './services/theme-switcher.service';
 
 @Component({
   selector: 'lib-theme-switcher',
@@ -8,21 +9,15 @@ import { Component, OnInit, signal } from '@angular/core';
 })
 export class ThemeSwitcherComponent implements OnInit { 
 
-  currentTheme = signal<'light' | 'dark'>('light')
+  private readonly _themeSwitcherService = inject(ThemeSwitcherService)
+
+  currentTheme = this._themeSwitcherService.currentTheme
 
   ngOnInit(): void {
-    this.currentTheme.set(localStorage.getItem('theme') as 'light' | 'dark')
-    document.documentElement.setAttribute('class', this.currentTheme());
+    this._themeSwitcherService.initTheme()
   }
 
   toggleTheme() {
-    const currentTheme = localStorage.getItem('theme') || 'light'
-    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-    localStorage.setItem('theme', nextTheme);
-
-    document.documentElement.setAttribute('class', nextTheme);
-
-    this.currentTheme.set(nextTheme)
+    this._themeSwitcherService.toggleTheme()
   }
 }

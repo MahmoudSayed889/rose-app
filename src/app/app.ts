@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
@@ -15,11 +16,12 @@ export class App {
   protected readonly title = signal('rose-app');
 
   private readonly _translateService = inject(TranslateService)
+  private readonly _cookieService = inject(CookieService);
 
   constructor() {
     this._translateService.addLangs(['ar', 'en']);
-    this._translateService.setFallbackLang(localStorage.getItem('lang') || 'en');
-    this._translateService.use(localStorage.getItem('lang') || 'en');
+    this._translateService.setFallbackLang(this._cookieService.get('lang') || 'en');
+    this._translateService.use(this._cookieService.get('lang') || 'en');
 
     const root = document.documentElement
     root.setAttribute('lang', this._translateService.getCurrentLang()!)

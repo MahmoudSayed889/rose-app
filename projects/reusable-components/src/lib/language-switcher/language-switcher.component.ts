@@ -1,10 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { TranslateService } from "@ngx-translate/core";
-
-interface langConfig {
-  name: string,
-  code: string
-}
+import { Component, inject, OnInit } from '@angular/core';
+import { LanguageSwitcherService } from './services/language-switcher.service';
 
 @Component({
   selector: 'lib-language-switcher',
@@ -14,37 +9,14 @@ interface langConfig {
 })
 export class LanguageSwitcherComponent implements OnInit {
 
-  private readonly _translateService = inject(TranslateService);
-  
-  languages = signal<langConfig[]>([])
-  selectedLanguage = signal<langConfig | null>(null)
+  private readonly _languageSwitcherService = inject(LanguageSwitcherService);
+  selectedLanguage = this._languageSwitcherService.selectedLanguage
 
   ngOnInit(): void {
-    this.languages.set([
-      {
-        name: 'العربية',
-        code: 'ar',
-      },
-      {
-        name: 'English',
-        code: 'en',
-      }
-    ]);
-
-    this.selectedLanguage.update(val => this._translateService.getCurrentLang() === 'en' ? val = this.languages()[0] : val = this.languages()[1])
+    this._languageSwitcherService.initLanguage()
   }
 
   toggleLanguage() {
-    const currentLang = this._translateService.getCurrentLang();
-    const nextLang = currentLang === 'en' ? 'ar' : 'en';
-
-    this._translateService.use(nextLang);
-
-    localStorage.setItem('lang', nextLang);
-
-    document.documentElement.setAttribute('lang', nextLang);
-    document.documentElement.setAttribute('dir', nextLang === 'ar' ? 'rtl' : 'ltr');
-
-    this.selectedLanguage.set(nextLang === 'en' ? this.languages()[0] : this.languages()[1]);
+    this._languageSwitcherService.toggleLanguage()
   }
 }

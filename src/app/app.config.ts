@@ -10,10 +10,14 @@ import { AUTH_API_URL } from 'auth-library';
 import {provideTranslateService} from "@ngx-translate/core";
 import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
 
+import { CookieService } from 'ngx-cookie-service';
+
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
+    CookieService,
     provideRouter(routes),
     providePrimeNG({
       theme: {
