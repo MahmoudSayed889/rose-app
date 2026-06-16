@@ -1,24 +1,26 @@
-import { inject, Service, signal } from '@angular/core';
+import { DOCUMENT, inject, Service, signal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { ThemeType } from '../models/theme-config';
 
 @Service()
 export class ThemeSwitcherService {
 
     private readonly _cookieService = inject(CookieService);
+    private readonly document = inject(DOCUMENT);
 
-    currentTheme = signal<'light' | 'dark'>('light')
+    currentTheme = signal<ThemeType>('light')
 
     initTheme() {
-        this.currentTheme.set(this._cookieService.get('theme') as 'light' | 'dark' || 'light')
-        document.documentElement.setAttribute('class', this.currentTheme());
+        this.currentTheme.set(this._cookieService.get('theme') as ThemeType || 'light')
+        this.document.documentElement.setAttribute('class', this.currentTheme());
     }
 
     toggleTheme() {
-        this.currentTheme.set(this._cookieService.get('theme') as 'light' | 'dark' || 'light')
-        const nextTheme = signal<'light' | 'dark'>(this.currentTheme() === 'light' ? 'dark' : 'light')
+        this.currentTheme.set(this._cookieService.get('theme') as ThemeType || 'light')
+        const nextTheme = signal<ThemeType>(this.currentTheme() === 'light' ? 'dark' : 'light')
 
         this._cookieService.set('theme', nextTheme(), 90, '/')
-        document.documentElement.setAttribute('class', nextTheme());
+        this.document.documentElement.setAttribute('class', nextTheme());
 
         this.currentTheme.set(nextTheme())
     }
