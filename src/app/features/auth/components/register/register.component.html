@@ -1,24 +1,26 @@
 <div class="lib-input relative">
 
-  @switch (currentStep()) {
-    @case ('email') {
-      <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
-        {{ 'auth.register.emailTitle' | translate }}
-      </h2>
+  @if (!inPoppup()) {
+    @switch (currentStep()) {
+      @case ('email') {
+        <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
+          {{ 'auth.register.emailTitle' | translate }}
+        </h2>
+      }
+      @case ('otp') {
+        <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
+          {{ 'auth.register.otpTitle' | translate }}
+        </h2>
+      }
+      @case ('register') {
+        <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
+          {{ 'auth.register.formTitle' | translate }}
+        </h2>
+      }
     }
-    @case ('otp') {
-      <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
-        {{ 'auth.register.otpTitle' | translate }}
-      </h2>
-    }
-    @case ('register') {
-      <h2 class="font-edwardian text-center text-primary text-5xl mb-4">
-        {{ 'auth.register.formTitle' | translate }}
-      </h2>
-    }
-  }
 
-  <app-sp-line></app-sp-line>
+    <app-sp-line></app-sp-line>
+  }
 
   @if (currentStep() === 'email') {
     <form class="mt-7" [formGroup]="emailForm" (ngSubmit)="submitEmail()">
@@ -203,12 +205,15 @@
     </form>
   }
 
-  <div class="mt-7">
-    <app-sp-line></app-sp-line>
-  </div>
 
-  <p class="text-center my-7">
-    {{ 'auth.register.alreadyHaveAccount' | translate }}
-    <a routerLink="/login" class="text-primary font-bold">{{ 'auth.login' | translate }}</a>
-  </p>
+  @if (!inPoppup()) {
+    <div class="mt-7">
+      <app-sp-line></app-sp-line>
+    </div>
+
+    <p class="text-center my-7">
+      {{ 'auth.register.alreadyHaveAccount' | translate }}
+      <a routerLink="/login" class="text-primary font-bold">{{ 'auth.login' | translate }}</a>
+    </p>
+  }
 </div>

@@ -1,7 +1,9 @@
 <div class="lib-input relative">
 
-<h2 class="font-edwardian text-center text-primary text-5xl mb-4">Welcome back!</h2>
-<app-sp-line></app-sp-line>
+@if (!inPoppup()) {
+    <h2 class="font-edwardian text-center text-primary text-5xl mb-4">Welcome back!</h2>
+    <app-sp-line></app-sp-line>
+}
 
 <form class="mt-7" [formGroup]="form" (ngSubmit)="login()">
     <div class="mb-4">
@@ -45,19 +47,20 @@
     <lib-button
         type="submit"
         [text]="'auth.login' | translate"
-        styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full"
+        styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full dark:text-zinc-900"
         [disabled]="form.invalid"
         [loading]="formSubmited()"
     ></lib-button>
 
 </form>
 
+@if (!inPoppup()) {
+    <div class="mt-7">
+        <app-sp-line></app-sp-line>
+    </div>
 
-<div class="mt-7">
-    <app-sp-line></app-sp-line>
-</div>
-
-<p class="text-center my-7">
-    {{'auth.don’t have an account yet?' | translate}} 
-    <a routerLink="/register" class="text-primary font-bold">{{'auth.create one now!' | translate}}</a>
-</p>
+    <p class="text-center my-7">
+        {{'auth.don’t have an account yet?' | translate}} 
+        <a routerLink="/register" class="text-primary font-bold">{{'auth.create one now!' | translate}}</a>
+    </p>
+}

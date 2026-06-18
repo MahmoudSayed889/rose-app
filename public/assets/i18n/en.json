@@ -13,7 +13,9 @@
         "or": "or",
         "Need help?": "Need help?",
         "Contact us": "Contact us",
-        "messages": {},
+        "messages": {
+            "What awesome gift are you looking for?": "What awesome gift are you looking for?"
+        },
         "validation": {
             "This field is required": "This field is required",
             "Please enter a valid email.": "Please enter a valid email.",
@@ -38,6 +40,7 @@
         "male": "Male",
         "female": "Female",
         "login": "Login",
+        "register now": "Register",
         "logout": "Logout",
         "don\u2019t have an account yet?": "Don't have an account yet?",
         "create one now!": "Create one now!",
@@ -68,10 +71,22 @@
         }
     },
     "home": {
-        "title": ""
+        "title": "home"
     },
     "products": {
-        "title": ""
+        "title": "products"
+    },
+    "categories": {
+        "title": "categories"
+    },
+    "occasions": {
+        "title": "occasions"
+    },
+    "contact": {
+        "title": "contact"
+    },
+    "about": {
+        "title": "about"
     },
     "cart": {
         "title": ""

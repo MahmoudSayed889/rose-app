@@ -1,9 +1,21 @@
 import { NgClass } from '@angular/common';
 import { Component, input, output } from '@angular/core';
+import { LucideAngularModule, LucideIconData } from 'lucide-angular';
+
+
+interface LucideIconConfig {
+  name: LucideIconData;
+  class?: string;
+  strokeWidth?: number;
+  size?: string
+}
 
 @Component({
   selector: 'lib-button',
-  imports: [NgClass],
+  imports: [
+    NgClass,
+    LucideAngularModule
+  ],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
 })
@@ -14,6 +26,9 @@ export class ButtonComponent {
   styleClass = input<string>('')
   disabled = input<boolean>(false)
   loading = input<boolean>(false)
+
+  iconPrimeNg = input<string>('')
+  iconLucide = input<LucideIconConfig>()
 
   onClick = output<void>()
 

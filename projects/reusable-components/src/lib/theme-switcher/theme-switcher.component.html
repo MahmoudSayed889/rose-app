@@ -1,4 +1,4 @@
-<button (click)="toggleTheme()" class="p-3 cursor-pointer">
+<button (click)="toggleTheme()" class="p-1 cursor-pointer hover:text-primary transition-all flex items-center" [class]="styleClass()">
     @if (currentTheme() == 'dark') {
         <i class="pi pi-sun"></i>
     }

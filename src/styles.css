@@ -41,12 +41,20 @@ body {
   overflow-x: hidden !important;
 }
 
-html[lang="en"] body {
+html[lang="ar"] body {
   font-family: "Zain", sans-serif;
 }
 
-html[lang="ar"] body {
+html[lang="en"] body {
   font-family: "Sarabun", sans-serif;
+}
+
+html[lang="ar"] .lang-switcher {
+  font-family: "Sarabun", sans-serif;
+}
+
+html[lang="en"] .lang-switcher {
+  font-family: "Zain", sans-serif;
 }
 
 @font-face {

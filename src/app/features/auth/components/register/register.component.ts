@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -45,6 +45,8 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
   registerForm!: FormGroup;
 
   otpDigits = signal<string[]>(['', '', '', '', '', '']);
+
+  inPoppup = input<boolean>(false)
 
   genderOptions = [
     { label: 'auth.male', value: 'MALE' },

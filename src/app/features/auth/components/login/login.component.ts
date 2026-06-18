@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { Router, RouterLink } from "@angular/router";
 import { CheckboxModule } from 'primeng/checkbox';
@@ -27,6 +27,8 @@ export class LoginComponent extends AppComponentBase implements OnInit {
   private readonly _authService = inject(AuthService)
   private fb = inject(FormBuilder)
   private _router = inject(Router)
+
+  inPoppup = input<boolean>(false)
 
   form!: FormGroup
 
