@@ -1,0 +1,38 @@
+<section>
+  <header class="mb-6">
+    <h1 class="text-2xl font-semibold text-zinc-800 mb-1 dark:text-zinc-50">
+      {{ 'auth.forgot-password.Forgot Password?' | translate }}
+    </h1>
+    <p class="text-zinc-800 mb-4 dark:text-zinc-50">
+      {{'auth.forgot-password.Worry not, we’ll send you instructions to help you reset it.'|translate}}
+    </p>
+    <app-sp-line></app-sp-line>
+  </header>
+  <form [formGroup]="sendEmailForm" (ngSubmit)="onSubmit()" class="space-y-9">
+    <div class="">
+      <lib-input
+        [label]="'auth.email'|translate"
+        type="email"
+        inputId="email"
+        placeholder="user@example.com"
+        formControlName="email"
+      ></lib-input>
+    </div>
+    <div class="">
+      <lib-button
+        type="submit"
+        [text]="'common.actions.continue'|translate"
+        styleClass="bg-primary w-full text-white py-3.5 px-4 rounded-[10px] font-medium cursor-pointer"
+        [disabled]="sendEmailForm.invalid"
+        [loading]="isLoading()"
+      ></lib-button>
+    </div>
+    <div class="text-center">
+      <app-sp-line></app-sp-line>
+      <p class="text-zinc-800 text-sm font-medium mt-5 dark:text-zinc-50">
+        {{'auth.don\u2019t have an account yet?'|translate}}
+        <a routerLink="/register" class="font-bold text-primary">{{'auth.create one now!'|translate}}</a>
+      </p>
+    </div>
+  </form>
+</section>

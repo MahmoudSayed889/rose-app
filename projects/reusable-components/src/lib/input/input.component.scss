@@ -1,0 +1,31 @@
+.lib-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--lib-font-family, system-ui, -apple-system, sans-serif);
+}
+
+.lib-input__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lib-color-label, #333);
+}
+
+.lib-input__field {
+  padding: var(--lib-spacing-input, 0.5rem 0.75rem);
+  border: 1px solid var(--lib-color-border, #ccc);
+  border-radius: var(--lib-border-radius, 0.25rem);
+  font-size: 1rem;
+  font-family: inherit;
+
+  &:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+  }
+}
+
+.lib-input__error {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--lib-color-error, #d32f2f);
+}

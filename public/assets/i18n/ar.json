@@ -1,0 +1,75 @@
+{
+    "common": {
+        "actions": {
+            "edit": "تعديل",
+            "continue": "استمر",
+            "next": "التالي",
+            "previous": "السابق",
+            "start": "ابدأ",
+            "submite": "إرسال",
+            "save-changes": "حفظ التغييرات",
+            "delete-my-account": "حذف حسابي"
+        },
+        "or": "أو",
+        "Need help?": "بحاجة الى مساعدة؟",
+        "Contact us": "تواصل معنا",
+        "messages": {},
+        "validation": {
+            "This field is required": "هذا الحقل مطلوب",
+            "Please enter a valid email.": "يرجى إدخال بريد إلكتروني صالح.",
+            "passwordMismatch": "كلمتا المرور غير متطابقتين"
+        }
+    },
+    "auth": {
+        "username": "اسم المستخدم",
+        "password": "كلمة المرور",
+        "email": "البريد الإلكتروني",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "firstName": "الاسم الأول",
+        "lastName": "اسم العائلة",
+        "gender": "الجنس",
+        "male": "ذكر",
+        "female": "أنثى",
+        "login": "تسجيل الدخول",
+        "logout": "تسجيل الخروج",
+        "don\u2019t have an account yet?": "ليس لديك حساب؟",
+        "create one now!": "أنشئ حساباً الآن!",
+        "Create yours": "أنشئ حسابك",
+        "forgot your password?": "نسيت كلمة المرور؟",
+        "Remember me": "تذكرنى",
+        "register": {
+            "emailTitle": "إنشاء حسابك",
+            "otpTitle": "تأكيد بريدك الإلكتروني",
+            "formTitle": "أكمل ملفك الشخصي",
+            "otpLabel": "رمز التحقق",
+            "otpInvalid": "يرجى إدخال رمز التحقق المكون من 6 أرقام",
+            "selectGender": "اختر الجنس",
+            "submit": "تسجيل",
+            "alreadyHaveAccount": "لديك حساب بالفعل؟"
+        },
+        "forgot-password": {
+            "Forgot Password?": "نسيت كلمة المرور؟",
+            "Worry not, we’ll send you instructions to help you reset it.": "لا تقلق، سنرسل لك التعليمات لمساعدتك في إعادة تعيينها.",
+            "Password Reset Sent": "تم إرسال رابط إعادة تعيين كلمة المرور",
+            "We have sent a password reset link to": "لقد قمنا بإرسال رابط إعادة تعيين كلمة المرور إلى:",
+            "Please check your inbox and follow the instructions to reset your password": "يرجى التحقق من صندوق البريد الوارد الخاص بك واتباع التعليمات لإعادة تعيين كلمة المرور.",
+            "If you don’t see the email within a few minutes, check your spam or junk folder": "إذا لم تجد البريد الإلكتروني خلال بضع دقائق، يرجى التحقق من مجلد الرسائل غير المرغوب فيها (Spam).",
+            "Send a new link": "إرسال رابط جديد",
+            "Create a new password": "قم بإنشاء كلمة مرور جديدة",
+            "Set a strong password to secure your account.": "قم بتعيين كلمة مرور قوية لتأمين حسابك.",
+            "resetPassword": "إعادة تعيين كلمة المرور"
+        }
+    },
+    "home": {
+        "title": ""
+    },
+    "products": {
+        "title": ""
+    },
+    "cart": {
+        "title": ""
+    },
+    "profile": {
+        "title": ""
+    }
+}
