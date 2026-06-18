@@ -16,7 +16,7 @@ import { InputComponent, ButtonComponent } from 'reusable-components';
 import { SpLineComponent } from '../../../../shared/components/sp-line/sp-line.component';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 
-type RegisterStep = 'email' | 'otp' | 'register';
+type RegisterStep = 1 | 2 | 3;
 
 @Component({
   selector: 'app-register',
@@ -37,7 +37,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _router = inject(Router);
 
-  currentStep = signal<RegisterStep>('register');
+  currentStep = signal<RegisterStep>(1);
   verifiedEmail = signal('');
 
   emailForm!: FormGroup;
@@ -106,11 +106,12 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
       next: () => {
         this.formSubmited.set(false);
         this.verifiedEmail.set(email);
-        this.currentStep.set('otp');
+        this.currentStep.set(2);
         this.resetOtpDigits();
       },
-      error: () => {
+      error: (err) => {
         this.formSubmited.set(false);
+        this._toastService.toaster('error', err.error?.message ?? err.message);
       },
     });
   }
@@ -130,10 +131,11 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
       next: () => {
         this.formSubmited.set(false);
         this.registerForm.patchValue({ email: this.verifiedEmail() });
-        this.currentStep.set('register');
+        this.currentStep.set(3);
       },
-      error: () => {
+      error: (err) => {
         this.formSubmited.set(false);
+        this._toastService.toaster('error', err.error?.message ?? err.message);
       },
     });
   }
@@ -163,8 +165,9 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
         this._toastService.toaster('success', 'Registration successful');
         this._router.navigate(['/login']);
       },
-      error: () => {
+      error: (err) => {
         this.formSubmited.set(false);
+        this._toastService.toaster('error', err.error?.message ?? err.message);
       },
     });
   }
