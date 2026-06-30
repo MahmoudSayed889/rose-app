@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { ThemeSwitcherService } from './services/theme-switcher.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { ThemeSwitcherService } from './services/theme-switcher.service';
 export class ThemeSwitcherComponent implements OnInit { 
 
   private readonly _themeSwitcherService = inject(ThemeSwitcherService)
+
+  styleClass = input<string>('')
 
   currentTheme = this._themeSwitcherService.currentTheme
 

@@ -27,6 +27,9 @@
   --maroon-700:#741C21;
   --maroon-400:#D75458;
   --soft-pink:#FF668B;
+  --p-rating-icon-color: #FBA707 !important;
+  --p-rating-icon-active-color: #FBA707 !important;
+
   --p-toast-text-gap: 0rem !important;
 }
 
@@ -48,12 +51,20 @@ body {
   overflow-x: hidden !important;
 }
 
-html[lang="en"] body {
+html[lang="ar"] body {
   font-family: "Zain", sans-serif;
 }
 
-html[lang="ar"] body {
+html[lang="en"] body {
   font-family: "Sarabun", sans-serif;
+}
+
+html[lang="ar"] .lang-switcher {
+  font-family: "Sarabun", sans-serif;
+}
+
+html[lang="en"] .lang-switcher {
+  font-family: "Zain", sans-serif;
 }
 
 @font-face {

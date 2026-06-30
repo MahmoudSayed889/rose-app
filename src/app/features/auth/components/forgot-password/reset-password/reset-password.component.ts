@@ -18,27 +18,28 @@ export class ResetPasswordComponent {
   isLoading = input<boolean>(false);
   passwordChanged = output<FormGroup>();
 
-  rePasswordValidation: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const password: string = control.get('newPassword')?.value
-    const rePassword: string = control.get('confirmPassword')?.value
-    return (password == rePassword) ? null : { passwordMatch: true }
+  rePasswordValidation: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+  const password = group.get('newPassword')?.value;
+  const confirmControl = group.get('confirmPassword');
+
+  if (password && confirmControl?.value && password !== confirmControl.value) {
+    confirmControl.setErrors({ ...confirmControl.errors, passwordMatch: true });
+    return { passwordMatch: true };
   }
+
+  if (confirmControl?.hasError('passwordMatch')) {
+    const errors = { ...confirmControl.errors };
+    delete errors['passwordMatch'];
+    confirmControl.setErrors(Object.keys(errors).length ? errors : null);
+  }
+
+  return null;
+}
 
   resetPasswordForm = this._fb.group({
     newPassword: ['', [Validators.required, Validators.pattern(PASSWORD_REGEX)]],
     confirmPassword: ['', [Validators.required]]
   }, { validators: this.rePasswordValidation })
-
-  get passwordError(): string {
-    const control = this.resetPasswordForm.get('newPassword');
-    if (control?.hasError('required') && control?.touched) {
-      return 'Password is required';
-    }
-    if (control?.hasError('pattern') && control?.touched) {
-      return 'Password must include uppercase, lowercase, number, and special character.';
-    }
-    return '';
-  }
 
   onSubmit(): void {
     if (this.resetPasswordForm.valid) {

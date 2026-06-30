@@ -13,11 +13,19 @@
         "or": "أو",
         "Need help?": "بحاجة الى مساعدة؟",
         "Contact us": "تواصل معنا",
-        "messages": {},
+        "messages": {
+            "What awesome gift are you looking for?": "ما هي الهدية الرائعة التي تبحث عنها؟"
+        },
         "validation": {
             "This field is required": "هذا الحقل مطلوب",
             "Please enter a valid email.": "يرجى إدخال بريد إلكتروني صالح.",
-            "passwordMismatch": "كلمتا المرور غير متطابقتين"
+            "passwordMismatch": "كلمتا المرور غير متطابقتين",
+            "PASSWORD_REQ_ERROR": "كلمة السر مطلوبة",
+            "EMAIL_REQ_ERROR": "البريد الإلكتروني مطلوب",
+            "PASSWORD_PATTERN_ERROR": "يرجى إدخال كلمة مرور صالحة",
+            "USERNAME_REQ_ERROR": "اسم المستخدم مطلوب",
+            "FN_REQ_ERROR": "الاسم الأول مطلوب",
+            "LN_REQ_ERROR": "الاسم الأخير مطلوب"
         }
     },
     "auth": {
@@ -31,6 +39,7 @@
         "male": "ذكر",
         "female": "أنثى",
         "login": "تسجيل الدخول",
+        "register now": "انشاء حساب",
         "logout": "تسجيل الخروج",
         "don\u2019t have an account yet?": "ليس لديك حساب؟",
         "create one now!": "أنشئ حساباً الآن!",
@@ -61,10 +70,22 @@
         }
     },
     "home": {
-        "title": ""
+        "title": "الرئيسية"
     },
     "products": {
-        "title": ""
+        "title": "المنتجات"
+    },
+    "categories": {
+        "title": "الفئات"
+    },
+    "occasions": {
+        "title": "المناسبات"
+    },
+    "contact": {
+        "title": "اتصل بنا"
+    },
+    "about": {
+        "title": "نبذة عنا"
     },
     "cart": {
         "title": ""

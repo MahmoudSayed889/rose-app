@@ -1,0 +1,26 @@
+.my-custom-search-bar {
+    background-color: #52525B !important;
+    border-radius: 9999px !important;
+    padding: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    border: none !important;
+
+    .p-inputtext {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: white !important;
+        outline: none !important;
+        
+    }
+
+    .p-button {
+        
+        border-radius: 9999px !important;
+        background-color: #FBEAEA !important;
+        color: #741C21 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+}

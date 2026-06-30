@@ -1,0 +1,139 @@
+<header class="py-2.5 px-7 md:px-7 w-full flex items-center justify-between ">
+
+    <div class="flex items-center relative shrink-0">
+        <img src="assets/imgs/logo.png" alt="Rose Logo" class="h-17 w-auto object-contain" />
+    </div>
+
+    <div class="flex-1 max-w-3xl mx-4 relative">
+        <div class="w-full relative">
+            <i class="pi pi-search absolute left-4 rtl:left-auto rtl:right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+            <input type="text" [placeholder]="'common.messages.What awesome gift are you looking for?' | translate"
+                class="w-full placeholder-gray-400 ps-12 p-3.5 rounded-xl border border-gray-200 dark:border-zinc-600 focus:outline-none focus:border-primary transition-colors text-sm" />
+        </div>
+    </div>
+
+    <div class="flex items-center gap-5 shrink-0 font-medium">
+
+        <a (click)="showDialog('login')"
+            class="flex items-center gap-1.5 hover:text-primary transition-colors cursor-pointer">
+            <lucide-angular 
+                [name]="icons.User" 
+                class="opacity-90" 
+                size="24px">
+            </lucide-angular>
+            <span>{{ 'auth.login' | translate }}</span>
+        </a>
+
+        <span class="h-9 w-px bg-gray-200 dark:bg-zinc-500 hidden md:block"></span>
+
+        <lib-button
+            styleClass="hover:text-primary gap-0! p-1"
+            [iconLucide]="{
+                name: icons.Heart,
+                class: 'opacity-75',
+                size: '20px'
+            }"
+        ></lib-button>
+
+        <lib-button
+            styleClass="hover:text-primary gap-0! p-1"
+            [iconLucide]="{
+                name: icons.ShoppingCart,
+                class: 'opacity-75',
+                size: '20px'
+            }"
+        ></lib-button>
+
+        <div class="relative">
+            <lib-button
+                styleClass="hover:text-primary gap-0! p-1"
+                [iconLucide]="{
+                    name: icons.Bell,
+                    class: 'opacity-75',
+                    size: '20px'
+                }"
+            ></lib-button>
+            <p-menu #notiMenu [model]="notificationItems" [popup]="true"></p-menu>
+        </div>
+
+        <lib-theme-switcher></lib-theme-switcher>
+
+        <span class="h-9 w-px bg-gray-200 dark:bg-zinc-500"></span>
+
+        <lib-language-switcher></lib-language-switcher>
+    </div>
+</header>
+
+<p-dialog 
+    [(visible)]="visible" 
+    [modal]="true" 
+    [style]="{ width: '30rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '95vw' }" 
+    [draggable]="false" 
+    [resizable]="false"
+    dismissableMask="true"
+    styleClass="border-0!"
+>
+    <ng-template pTemplate="header">
+        <div class="flex w-full overflow-hidden rounded-t-xl border-b border-gray-200 dark:border-zinc-700">
+            <button 
+                (click)="activeTap = 'login'" 
+                [ngClass]="
+                    activeTap === 'login'
+                    ? 'bg-primary text-white dark:text-zinc-900'
+                    : 'hover:bg-gray-100 dark:hover:bg-zinc-950'
+                "       
+                class="flex-1 py-3 text-center font-medium text-sm transition-colors border-none cursor-pointer">
+                {{ 'auth.login' | translate }}
+            </button>
+
+            <button 
+                (click)="activeTap = 'register'" 
+                [ngClass]="
+                    activeTap === 'register'
+                    ? 'bg-primary text-white dark:text-zinc-900'
+                    : 'hover:bg-gray-100 dark:hover:bg-zinc-950'
+                " 
+                class="flex-1 py-3 text-center font-medium text-sm transition-colors border-none cursor-pointer">
+                {{ 'auth.register now' | translate }}
+            </button>
+        </div>
+    </ng-template>
+
+    <div class="pt-4">
+
+        @if (activeTap === 'login') {
+            <app-login [inPoppup]="true"></app-login>
+        } @else {
+            <app-register [inPoppup]="true"></app-register>
+        }
+    </div>
+</p-dialog>
+
+
+<!-- second navbar -->
+<div class="w-full">
+    <div class="w-full bg-[#741C21] dark:bg-primary flex justify-center items-center px-8 shadow-md">
+        <div class="flex items-center justify-center gap-6 md:gap-8">
+            @for (item of secondNavbarItems; track item.label) {
+                <a 
+                    [routerLink]="[item.routerLink]"
+                    routerLinkActive="text-rose-300! border-rose-300! dark:text-[#741C21]! dark:border-[#741C21]!" 
+                    class="flex items-end gap-2 text-white dark:text-zinc-900 px-1 py-4 pb-3 transition-all hover:text-rose-300 hover:border-rose-300
+                    dark:hover:text-[#741C21] dark:hover:border-[#741C21]
+                    border-b-2 border-transparent cursor-pointer font-medium"
+                >
+                    
+                    @if (item.icon) {
+                        <lucide-angular 
+                            [name]="item.icon" 
+                            class="opacity-90" 
+                            size="24px">
+                        </lucide-angular>
+                    }
+                    <span class="capitalize">{{ item.label | translate }}</span>
+                </a>
+            }
+        </div>
+    </div>
+</div>
