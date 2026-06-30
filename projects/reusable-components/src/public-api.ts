@@ -9,3 +9,4 @@ export * from './lib/language-switcher/language-switcher.component';
 export * from './lib/language-switcher/services/language-switcher.service';
 export * from './lib/theme-switcher/theme-switcher.component';
 export * from './lib/theme-switcher/services/theme-switcher.service';
+export * from './lib/product-card/product-card.component';

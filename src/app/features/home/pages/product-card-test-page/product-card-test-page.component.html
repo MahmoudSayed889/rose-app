@@ -1,0 +1,23 @@
+<section class="product-card-test-page">
+  <div class="product-card-test-page__header">
+    <h1>Product Card Test Page</h1>
+    <p>Temporary preview grid for verifying card layout and output events.</p>
+  </div>
+
+  <div class="product-card-test-page__grid">
+    @for (product of products; track product.productId) {
+      <lib-product-card
+        [productId]="product.productId"
+        [imageUrl]="product.imageUrl"
+        [title]="product.title"
+        [price]="product.price"
+        [rating]="product.rating"
+        [badge]="product.badge"
+        [isFavorite]="product.isFavorite"
+        (favoriteToggle)="logFavoriteToggle($event)"
+        (addToCart)="logAddToCart($event)"
+        (cardClick)="logCardClick($event)"
+      />
+    }
+  </div>
+</section>
