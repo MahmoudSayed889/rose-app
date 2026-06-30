@@ -20,6 +20,9 @@
   --p-checkbox-border-color: #A6252A !important;
   --p-checkbox-hover-border-color: #A6252A !important;
 
+  --p-rating-icon-color: #FBA707 !important;
+  --p-rating-icon-active-color: #FBA707 !important;
+
   --p-toast-text-gap: 0rem !important;
 }
 
