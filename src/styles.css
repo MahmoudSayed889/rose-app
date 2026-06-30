@@ -20,6 +20,13 @@
   --p-checkbox-border-color: #A6252A !important;
   --p-checkbox-hover-border-color: #A6252A !important;
 
+  --zink-50: #FAFAFA;
+  --zinc-400:#A1A1AA;
+  --zinc-500:#71717A;
+  --zinc-800:#27272A;
+  --maroon-700:#741C21;
+  --maroon-400:#D75458;
+  --soft-pink:#FF668B;
   --p-toast-text-gap: 0rem !important;
 }
 

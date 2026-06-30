@@ -1,0 +1,244 @@
+.about-us {
+  width: 100%;
+  padding: 2.5rem 0;
+
+  &__container {
+    width: 100%;
+    // max-width: 1280px;
+    margin: 0 auto;
+    padding-inline: 1.25rem;
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__media {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 2rem;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--soft-pink);
+  }
+
+  &__heading {
+    max-width: 80%;
+    margin-bottom: 0.5rem;
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--maroon-700);
+    .switch-color {
+      color: var(--soft-pink)
+    }
+  }
+
+  &__description {
+    max-width: 40rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--zinc-500);
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 2rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--p-primary-color);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      // background: var(--primary-dark-color);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--p-primary-color);
+      outline-offset: 3px;
+    }
+  }
+
+  &__checklist {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  &__checklist-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--zink-800);
+  }
+
+  &__check-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    color: var(--maroon-700);
+  }
+
+  /* =========================
+     Responsive
+  ========================== */
+
+  @media (min-width: 640px) {
+    &__container {
+      padding-inline: 2rem;
+    }
+
+    &__heading {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 3.5rem 0;
+
+    &__layout {
+      gap: 2.5rem;
+    }
+
+    &__label {
+      margin-bottom: 1rem;
+    }
+
+    &__description {
+      margin-bottom: 2rem;
+    }
+
+    &__cta {
+      margin-bottom: 2.5rem;
+    }
+
+    &__checklist {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1.5rem;
+      row-gap: 1rem;
+    }
+
+    &__media {
+      border-radius: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    padding: 5rem 0;
+
+    &__container {
+      padding-inline: 3rem;
+    }
+
+    &__layout {
+      grid-template-columns: 45% 55%;
+      gap: 3.5rem;
+    }
+
+    &__heading {
+      font-size: 2.75rem;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    &__description {
+      margin-bottom: 2rem;
+      font-size: 1.125rem;
+    }
+
+    &__cta {
+      margin-bottom: 2.5rem;
+    }
+
+    &__media {
+      border-radius: 3rem;
+    }
+
+    &__checklist {
+      column-gap: 2.5rem;
+    }
+  }
+
+  html.dark {
+    &__label {
+      color: var(--maroon-400);
+    }
+
+    &__heading {
+      color: var(--p-primary-color);
+      .switch-color {
+        color: var(--maroon-400);
+      }
+    }
+
+    &__description {
+      color: var(--zinc-400);
+    }
+
+    &__checklist-item {
+      color: var(--zink-50);
+    }
+    &__check-icon { 
+      color: var(--soft-pink);
+    }
+    &__cta {
+      color: var(--zink-800)
+    }
+  }
+}
