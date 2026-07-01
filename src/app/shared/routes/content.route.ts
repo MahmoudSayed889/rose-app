@@ -6,6 +6,10 @@ export const ContentRoutes: Routes = [
         loadComponent: () => import('../../features/home/pages/home-page/home-page.component').then((C) => C.HomePageComponent),
     },
     {
+        path: 'products',
+        loadChildren: () => import('../../features/products/products.route').then((R) => R.ProductsRoutes),
+    },
+    {
         path: 'product-card-test',
         loadComponent: () => import('../../features/home/pages/product-card-test-page/product-card-test-page.component').then((C) => C.ProductCardTestPageComponent),
     }

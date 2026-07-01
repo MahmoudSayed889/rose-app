@@ -11,4 +11,11 @@ export abstract class AppComponentBase {
   currentUser = signal( this._cookieService.get('user') ? JSON.parse(this._cookieService.get('user')) : null )
   formSubmited = signal<boolean>(false);
   errorsMsg = signal<any>('');
+
+  paginator = signal({
+    page: 1,
+    limit: 20,
+    total: 0,
+    totalPages: 0,
+  })
 }

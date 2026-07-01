@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +15,10 @@ export type ProductCardStarState = 'filled' | 'empty';
 
 @Component({
   selector: 'lib-product-card',
-  imports: [LucideAngularModule],
+  imports: [
+    LucideAngularModule,
+    CurrencyPipe
+  ],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +29,8 @@ export class ProductCardComponent {
   @Input({ required: true }) imageUrl!: string;
   @Input({ required: true }) title!: string;
   @Input({ required: true }) price!: number;
+  @Input({ required: true }) discountType!: string;
+  @Input({ required: true }) discountValue!: string;
   @Input() badge: ProductCardBadge | null = null;
   @Input() isFavorite = false;
 
@@ -41,6 +47,23 @@ export class ProductCardComponent {
 
   get rating(): number {
     return this._rating();
+  }
+
+  get finalPrice(): number {
+    if (!this.discountValue) {
+      return this.price;
+    }
+
+    switch (this.discountType) {
+      case 'PERCENT':
+        return this.price - (this.price * Number(this.discountValue)) / 100;
+
+      case 'FIXED':
+        return Math.max(this.price - Number(this.discountValue), 0);
+
+      default:
+        return this.price;
+    }
   }
 
   readonly starStates = computed<ProductCardStarState[]>(() =>

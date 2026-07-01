@@ -73,7 +73,7 @@
 
     <img
       class="product-card__image"
-      [src]="imageUrl"
+      [src]="['png', 'jpg', 'jpeg', 'webp'].some(ext => imageUrl?.toLowerCase()!.includes(ext)) ? imageUrl : 'https://placehold.co/600'"
       [alt]="title"
       loading="lazy"
     />
@@ -95,7 +95,21 @@
   </div>
 
   <div class="product-card__footer">
-    <span class="product-card__price">{{ price }}</span>
+    <!-- <span class="product-card__price">{{ price | currency : 'EGP' }}</span> -->
+
+    @if (discountValue > '0') {
+      <div class="flex items-center gap-1">
+        <span class="product-card__price">
+          {{ finalPrice | currency : 'EGP' }}
+        </span>
+
+        <span class="text-gray-400 line-through">
+          {{ price | currency : 'EGP' }}
+        </span>
+      </div>
+    } @else {
+      <span>{{ price | currency : 'EGP' }}</span>
+    }
 
     <button
       type="button"
@@ -107,6 +121,8 @@
       <lucide-angular
         [name]="icons.ShoppingCart"
         class="product-card__cart-icon"
+        size="16px"
+        strokeWidth="1.5px"
       ></lucide-angular>
     </button>
   </div>
