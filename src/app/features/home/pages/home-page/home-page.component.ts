@@ -3,6 +3,7 @@ import { GallerySectionComponent } from '../../components/gallery-section/galler
 import { TestimonialsSectionComponent } from '../../components/testimonials-section/testimonials-section.component';
 import { ServiceSectionComponent } from '../../components/Service Highlights-section/service-section/service-section.component';
 import { AboutUsComponent } from '../../components/about-us/about-us.component';
+import { TrustedByComponent } from '../../components/trusted-by-section/trusted-by/trusted-by.component';
 
 @Component({
   selector: 'app-home-page',
@@ -11,6 +12,7 @@ import { AboutUsComponent } from '../../components/about-us/about-us.component';
     TestimonialsSectionComponent,
     ServiceSectionComponent,
     AboutUsComponent,
+    TrustedByComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
