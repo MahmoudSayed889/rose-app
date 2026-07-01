@@ -1,0 +1,54 @@
+:host {
+  --icon-circle-bg: #a6252a;
+  --icon-color: #ffffff;
+  --title-color: #a6252a;
+  --subtitle-color: #71717a;
+}
+
+:host-context(.dark) {
+  --icon-circle-bg: #ffc2d0;
+  --icon-color: #000;
+  --title-color: #ffc2d0;
+  --subtitle-color: #d9d9d9;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon-dev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: var(--icon-circle-bg);
+}
+
+.icon {
+  color: var(--icon-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.icon-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--title-color);
+}
+
+.sub-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--subtitle-color);
+}
