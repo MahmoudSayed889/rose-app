@@ -6,6 +6,7 @@ import { Product, ProductsList } from '../../models/product';
 import { ProductCardComponent } from 'reusable-components';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { AppComponentBase } from '../../../../shared/app-component-base';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { AppComponentBase } from '../../../../shared/app-component-base';
 export class ProductsComponent extends AppComponentBase implements OnInit {
 
   private _productsService = inject(ProductsService)
+  private _router = inject(Router)
 
   products = signal<Product[]>([])
 
@@ -58,6 +60,7 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
 
   logCardClick(productId: string | number): void {
     console.log('cardClick', productId);
+    this._router.navigate(['/product-details', productId])
   }
 
   onPageChange(event: PaginatorState) {

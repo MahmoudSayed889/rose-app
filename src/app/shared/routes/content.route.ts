@@ -12,5 +12,9 @@ export const ContentRoutes: Routes = [
     {
         path: 'product-card-test',
         loadComponent: () => import('../../features/home/pages/product-card-test-page/product-card-test-page.component').then((C) => C.ProductCardTestPageComponent),
+    },
+    {
+        path: 'product-details/:id',
+        loadComponent: () => import('../../features/product-details/product-details.component').then((C) => C.ProductDetailsComponent),
     }
 ];
