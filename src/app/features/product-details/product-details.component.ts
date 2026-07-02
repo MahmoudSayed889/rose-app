@@ -1,9 +1,10 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
 import { SpLineComponent } from "../../shared/components/sp-line/sp-line.component";
 import { GalleriaComponent } from "./components/galleria/galleria.component";
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../products/services/products.service';
 import { Product } from '../products/models/product';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export interface GalleryImage {
   itemImageSrc: string;
@@ -19,20 +20,23 @@ export interface GalleryImage {
 export class ProductDetailsComponent {
   private _route = inject(ActivatedRoute);
   private _productsService = inject(ProductsService);
+  private _destroyRef = inject(DestroyRef);
+
   productId!: string | null;
   productDetails: WritableSignal<Product | null> = signal(null);
   productImages: WritableSignal<GalleryImage[] | null> = signal(null);
 
   getProductDetails(): void {
-    this._productsService.getProduct(this.productId!).subscribe({
-      next: (res) => {
-        this.productDetails.set(res.payload.product);
-        this.transformProductGallery(this.productDetails()!);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    this._productsService.getProduct(this.productId!)
+      .pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+        next: (res) => {
+          this.productDetails.set(res.payload.product);
+          this.transformProductGallery(this.productDetails()!);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      })
   }
 
   transformProductGallery(product: Product): void {
@@ -51,6 +55,17 @@ export class ProductDetailsComponent {
     } catch (error) {
       console.error('Error parsing gallery:', error);
     }
+  }
+
+  getPrice(): number {
+    if (this.productDetails()?.discountType == 'PERCENT') {
+      const discountValue = (Number(this.productDetails()?.price) * Number(this.productDetails()?.discountValue)) / 100;
+      return this.productDetails()?.price! - discountValue;
+    }
+    if (this.productDetails()?.discountType == 'VALUE') {
+      return (Number(this.productDetails()?.price) - Number(this.productDetails()?.discountValue));
+    }
+    return this.productDetails()?.price!
   }
 
   ngOnInit() {
