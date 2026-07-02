@@ -93,5 +93,10 @@
     },
     "profile": {
         "title": ""
+    },
+    "trustedBy": {
+        "prefix": "Trusted by over",
+        "count": "4.5k",
+        "suffix": "companies"
     }
 }

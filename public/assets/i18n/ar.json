@@ -92,5 +92,10 @@
     },
     "profile": {
         "title": ""
+    },
+    "trustedBy": {
+        "prefix": "موثوق به من أكثر من",
+        "count": "4.5k",
+        "suffix": "شركة"
     }
 }
