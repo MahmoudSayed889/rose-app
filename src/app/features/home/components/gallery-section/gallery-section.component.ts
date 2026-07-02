@@ -1,10 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { TitleComponent } from 'reusable-components';
 
 @Component({
   selector: 'app-gallery-section',
   imports: [
-    NgClass
+    NgClass,
+    TitleComponent
   ],
   templateUrl: './gallery-section.component.html',
   styleUrl: './gallery-section.component.scss',
