@@ -1,0 +1,27 @@
+h2 {
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        inset-inline-start: 0;
+        width: 25%;
+        height: 2px;
+        background: var(--title-after-background);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        inset-inline-start: 0;
+        width: 75%;
+        height: 16px;
+        background: var(--title-before-background);
+        border-start-end-radius: 5px;
+        border-end-end-radius: 5px;
+        z-index: -1;
+    }
+}
