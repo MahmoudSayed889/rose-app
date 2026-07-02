@@ -40,6 +40,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() styleClass = '';
   @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
   @Input() valid: boolean = false;
+  @Input() customErrorMessages: Record<string, string> = {};
 
   @Input() set disabled(value: boolean) {
     this.isDisabled.set(value);
@@ -67,20 +68,40 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
 
+  // get errorMessage(): string | null {
+  //   const ctrl = this.ngControl?.control;
+  //   if (!ctrl || !ctrl.invalid || !ctrl.touched) return null;
+
+  //   if (ctrl.errors?.['required']) return 'This field is required';
+  //   if (ctrl.errors?.['email']) return 'Please enter a valid email.';
+  //   if (ctrl.errors?.['minlength']) {
+  //     return `Minimum ${ctrl.errors['minlength'].requiredLength} characters.`;
+  //   }
+
+  //   const firstKey = Object.keys(ctrl.errors ?? {})[0];
+  //   return firstKey ?? 'Invalid value.';
+  // }
+
   get errorMessage(): string | null {
     const ctrl = this.ngControl?.control;
     if (!ctrl || !ctrl.invalid || !ctrl.touched) return null;
 
-    if (ctrl.errors?.['required']) return 'This field is required';
-    if (ctrl.errors?.['email']) return 'Please enter a valid email.';
-    if (ctrl.errors?.['minlength']) {
-      return `Minimum ${ctrl.errors['minlength'].requiredLength} characters.`;
+    const firstErrorKey = Object.keys(ctrl.errors ?? {})[0];
+    if (!firstErrorKey) return null;
+
+    // 2. لو الأب باعت Translation Key مخصص للخطأ ده، نرجعه فوراً
+    if (this.customErrorMessages && this.customErrorMessages[firstErrorKey]) {
+      return this.customErrorMessages[firstErrorKey];
     }
 
-    const firstKey = Object.keys(ctrl.errors ?? {})[0];
-    return firstKey ?? 'Invalid value.';
-  }
+    // 3. لو مفيش رسالة مخصصة، نرجع Translation Keys الافتراضية
+    if (firstErrorKey === 'required') return 'common.validation.required';
+    if (firstErrorKey === 'email') return 'common.validation.email';
+    if (firstErrorKey === 'minlength') return 'common.validation.minlength';
 
+    // 4. Fallback لأي خطأ غير متوقع
+    return `common.validation.${firstErrorKey}`;
+  }
 
   private onChange: (value: string) => void = () => { };
   private onTouched: () => void = () => { };

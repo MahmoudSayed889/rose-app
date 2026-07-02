@@ -1,0 +1,72 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { FilterComponent } from '../../components/filter/filter.component';
+import { ProductsService } from '../../services/products.service';
+import { ExternalParams } from '../../../../shared/models/external-params';
+import { Product, ProductsList } from '../../models/product';
+import { ProductCardComponent } from 'reusable-components';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { AppComponentBase } from '../../../../shared/app-component-base';
+
+
+@Component({
+  selector: 'app-products',
+  imports: [
+    FilterComponent,
+    ProductCardComponent,
+    PaginatorModule
+  ],
+  templateUrl: './products.component.html',
+  styleUrl: './products.component.scss',
+})
+export class ProductsComponent extends AppComponentBase implements OnInit {
+
+  private _productsService = inject(ProductsService)
+
+  products = signal<Product[]>([])
+
+  ngOnInit(): void {
+    this.getProducts()
+  }
+
+  getProducts() {
+    const params = {
+      page: this.paginator().page,
+      limit: this.paginator().limit
+    } as ExternalParams
+
+    this._productsService.getProducts(params).subscribe({
+      next: (res: ProductsList) => {
+        this.products.set(res.payload.data)
+
+        this.paginator.set({
+          page: res.payload.metadata.page,
+          limit: res.payload.metadata.limit,
+          total: res.payload.metadata.total,
+          totalPages: res.payload.metadata.totalPages,
+        })
+      }
+    })
+  }
+
+  logFavoriteToggle(productId: string | number): void {
+    console.log('favoriteToggle', productId);
+  }
+
+  logAddToCart(productId: string | number): void {
+    console.log('addToCart', productId);
+  }
+
+  logCardClick(productId: string | number): void {
+    console.log('cardClick', productId);
+  }
+
+  onPageChange(event: PaginatorState) {
+    this.paginator.update(p => ({
+      ...p,
+      page: (event.page ?? 0) + 1,
+      limit: event.rows ?? p.limit
+    }));
+
+    this.getProducts();
+  }
+}

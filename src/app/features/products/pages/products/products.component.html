@@ -1,0 +1,44 @@
+<div class="container m-auto my-20 mb-40 px-7 lg:px-0">
+    <div class=" grid grid-cols-12 gap-7">
+
+
+        <!-- filter -->
+        <div class="col-span-12 lg:col-span-3">
+            <app-filter></app-filter>
+        </div>
+
+
+        <!-- all Products -->
+        <div class="col-span-12 lg:col-span-9">
+            <div class=" grid grid-cols-2 lg:grid-cols-3 gap-7">
+                @for (product of products(); track product.id) {
+                    <lib-product-card
+                        [productId]="product.id"
+                        [imageUrl]="product.cover"
+                        [title]="product.title"
+                        [price]="product.price"
+                        [discountType]="product.discountType"
+                        [discountValue]="product.discountValue"
+                        [rating]="product.rating"
+                        [badge]="'new'"
+                        [isFavorite]="true"
+                        (favoriteToggle)="logFavoriteToggle($event)"
+                        (addToCart)="logAddToCart($event)"
+                        (cardClick)="logCardClick($event)"
+                    />
+                }
+            </div>
+
+
+            <!-- paginator -->
+            <div class="flex justify-center mt-20">
+                <p-paginator
+                    [first]="(paginator().page - 1) * paginator().limit"
+                    [rows]="paginator().limit"
+                    [totalRecords]="paginator().total"
+                    (onPageChange)="onPageChange($event)"
+                ></p-paginator>
+            </div>
+        </div>
+    </div>
+</div>

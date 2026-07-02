@@ -11,3 +11,11 @@
 *:disabled {
     border-color: transparent !important;
 }
+
+.p-dialog-header {
+    padding: 0 !important;
+
+    .p-dialog-header-actions{
+        display: none;
+    }
+}

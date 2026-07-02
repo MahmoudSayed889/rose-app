@@ -1,0 +1,129 @@
+<article class="product-card cursor-pointer" (click)="onCardBodyClick()">
+  <div class="product-card__image-container">
+    <button
+      type="button"
+      class="product-card__favorite"
+      [attr.aria-pressed]="isFavorite"
+      aria-label="Toggle favorite"
+      (click)="onFavoriteClick($event)"
+    >
+      <lucide-angular
+        [name]="icons.Heart"
+        class="product-card__favorite-icon"
+        [class.product-card__favorite-icon--active]="isFavorite"
+        size="18px"
+        strokeWidth="1.5px"
+      ></lucide-angular>
+    </button>
+
+    @if (badge !== null) {
+      <span
+        class="product-card__badge"
+        [class.product-card__badge--new]="badge === 'new'"
+        [class.product-card__badge--hot]="badge === 'hot'"
+        [class.product-card__badge--out-of-stock]="badge === 'out-of-stock'"
+      >
+        @switch (badge) {
+          @case ('new') {
+            New
+          }
+          @case ('hot') {
+            Hot
+          }
+          @case ('out-of-stock') {
+            Out of Stock
+          }
+        }
+      </span>
+    }
+
+    <div class="product-card__overlay" aria-hidden="true">
+      <div class="product-card__overlay-actions">
+        <button
+          type="button"
+          class="product-card__overlay-action"
+          [attr.aria-pressed]="isFavorite"
+          aria-label="Toggle favorite"
+          (click)="onFavoriteClick($event)"
+        >
+          <lucide-angular
+            [name]="icons.Heart"
+            class="product-card__overlay-icon"
+            [class.product-card__overlay-icon--active]="isFavorite"
+            size="24px"
+            strokeWidth="1.5px"
+          ></lucide-angular>
+        </button>
+
+        <button
+          type="button"
+          class="product-card__overlay-action"
+          aria-label="Preview product"
+          (click)="onPreviewClick($event)"
+        >
+          <lucide-angular
+            [name]="icons.Eye"
+            class="product-card__overlay-icon"
+            size="24px"
+            strokeWidth="1.5px"
+          ></lucide-angular>
+        </button>
+      </div>
+    </div>
+
+    <img
+      class="product-card__image"
+      [src]="['png', 'jpg', 'jpeg', 'webp'].some(ext => imageUrl?.toLowerCase()!.includes(ext)) ? imageUrl : 'https://placehold.co/600'"
+      [alt]="title"
+      loading="lazy"
+    />
+  </div>
+
+  <h3 class="product-card__title">{{ title }}</h3>
+
+  <div class="product-card__rating" aria-label="Rating">
+    @for (star of starStates(); track $index) {
+      <lucide-angular
+        [name]="icons.Star"
+        class="product-card__star"
+        [class.product-card__star--filled]="star === 'filled'"
+        [class.product-card__star--empty]="star === 'empty'"
+        size="16px"
+        strokeWidth="1.5px"
+      ></lucide-angular>
+    }
+  </div>
+
+  <div class="product-card__footer">
+    <!-- <span class="product-card__price">{{ price | currency : 'EGP' }}</span> -->
+
+    @if (discountValue > '0') {
+      <div class="flex items-center gap-1">
+        <span class="product-card__price">
+          {{ finalPrice | currency : 'EGP' }}
+        </span>
+
+        <span class="text-gray-400 line-through">
+          {{ price | currency : 'EGP' }}
+        </span>
+      </div>
+    } @else {
+      <span>{{ price | currency : 'EGP' }}</span>
+    }
+
+    <button
+      type="button"
+      class="product-card__cart"
+      [disabled]="badge === 'out-of-stock'"
+      aria-label="Add to cart"
+      (click)="onAddToCartClick($event)"
+    >
+      <lucide-angular
+        [name]="icons.ShoppingCart"
+        class="product-card__cart-icon"
+        size="16px"
+        strokeWidth="1.5px"
+      ></lucide-angular>
+    </button>
+  </div>
+</article>

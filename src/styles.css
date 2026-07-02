@@ -20,7 +20,22 @@
   --p-checkbox-border-color: #A6252A !important;
   --p-checkbox-hover-border-color: #A6252A !important;
 
+  --zink-50: #FAFAFA;
+  --zinc-400: #A1A1AA;
+  --zinc-500: #71717A;
+  --zinc-800: #27272A;
+  --maroon-700: #741C21;
+  --maroon-400: #D75458;
+  --soft-pink: #FF668B;
+  --p-rating-icon-color: #FBA707 !important;
+  --p-rating-icon-active-color: #FBA707 !important;
+
   --p-toast-text-gap: 0rem !important;
+
+  --p-paginator-nav-button-border-radius: 12px !important;
+  --p-paginator-nav-button-color: #000 !important;
+  --p-paginator-nav-button-selected-color: #fff !important;
+  --p-paginator-nav-button-selected-background: #A6252A !important;
 }
 
 .dark {
@@ -34,6 +49,12 @@
   --p-checkbox-border-color: #FFA3B9 !important;
   --p-checkbox-hover-border-color: #FFA3B9 !important;
 
+  --p-paginator-background: transparent !important;
+  --p-paginator-nav-button-color: #fff !important;
+  --p-paginator-nav-button-background: #3F3F46 !important;
+  --p-paginator-nav-button-selected-color: #000 !important;
+  --p-paginator-nav-button-selected-background: #FFA3B9 !important;
+
   background: #27272A;
 }
 
@@ -41,12 +62,20 @@ body {
   overflow-x: hidden !important;
 }
 
-html[lang="en"] body {
+html[lang="ar"] body {
   font-family: "Zain", sans-serif;
 }
 
-html[lang="ar"] body {
+html[lang="en"] body {
   font-family: "Sarabun", sans-serif;
+}
+
+html[lang="ar"] .lang-switcher {
+  font-family: "Sarabun", sans-serif;
+}
+
+html[lang="en"] .lang-switcher {
+  font-family: "Zain", sans-serif;
 }
 
 @font-face {

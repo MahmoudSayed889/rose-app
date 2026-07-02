@@ -5,7 +5,22 @@
     [disabled]="disabled()"
     (click)="handleClick()"
 >
-    <span>{{text()}}</span>
+    @if (text()) {
+        <span>{{text()}}</span>
+    }
+
+    @if (iconLucide()) {
+        <lucide-angular 
+            [name]="iconLucide()?.name" 
+            [class]="iconLucide()?.class" 
+            [strokeWidth]="iconLucide()?.strokeWidth"
+            [size]="iconLucide()?.size ?? '24px'">
+        </lucide-angular>
+    }
+
+    @if (iconPrimeNg()) {
+        <i [class]="'pi ' + iconPrimeNg()"></i>
+    }
 
     <i class="pi" style="font-size: .9rem;" [ngClass]="{
         'pi-spin pi-spinner': loading(),

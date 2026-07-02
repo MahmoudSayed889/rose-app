@@ -1,0 +1,70 @@
+<section class="about-us" aria-labelledby="about-us-heading">
+  <div class="about-us__container">
+    <div class="about-us__layout">
+      <figure class="about-us__media">
+        <img
+          class="about-us__image"
+          src="assets/imgs/about-us.png"
+          alt="Curated gift boxes with elegant ribbons and festive packaging"
+          width="640"
+          height="720"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="about-us__content">
+        <p class="about-us__label">About</p>
+
+        <h2 id="about-us-heading" class="about-us__heading">
+          Delivering the
+          <span class="switch-color">Finest</span>
+          Gift Boxes for Your
+          <span class="switch-color">Special</span> Moments
+        </h2>
+
+        <p class="about-us__description">
+          Make every moment memorable with our premium gift boxes. 
+          Carefully curated and beautifully packaged, 
+          each box is filled with handpicked items designed to impress. 
+          Whether it's for a birthday, wedding, or a simple “thank you,”
+          our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.
+        </p>
+
+        <button type="button" class="about-us__cta">
+          Discover
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+
+        <div class="about-us__checklist" aria-label="Why choose us">
+          <ul class="about-us__checklist-column">
+            @for (item of leftChecklist; track item.id) {
+              <li class="about-us__checklist-item">
+                <lucide-angular
+                  [name]="icons.Check"
+                  class="about-us__check-icon"
+                  strokeWidth="2.5px"
+                  aria-hidden="true"
+                ></lucide-angular>
+                <span>{{ item.label }}</span>
+              </li>
+            }
+          </ul>
+
+          <ul class="about-us__checklist-column">
+            @for (item of rightChecklist; track item.id) {
+              <li class="about-us__checklist-item">
+                <lucide-angular
+                  [name]="icons.Check"
+                  class="about-us__check-icon"
+                  strokeWidth="2.5px"
+                  aria-hidden="true"
+                ></lucide-angular>
+                <span>{{ item.label }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

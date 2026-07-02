@@ -1,0 +1,22 @@
+.product-card-test-page {
+  padding: 2rem;
+}
+
+.product-card-test-page__header {
+  margin-bottom: 1.5rem;
+}
+
+.product-card-test-page__header h1 {
+  margin: 0 0 0.5rem;
+}
+
+.product-card-test-page__header p {
+  margin: 0;
+  color: #52525b;
+}
+
+.product-card-test-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}

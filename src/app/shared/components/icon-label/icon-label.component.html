@@ -1,0 +1,17 @@
+<div class="flex-row gap-1">
+  <div class="icon-dev">
+    @if (iconType() === 'prime') {
+      <i [class]="'icon ' + icon()"></i>
+    } @else {
+      <lucide-angular class="icon" [name]="icon()"></lucide-angular>
+    }
+  </div>
+  <div class="icon-label">
+    <div class="title">
+      {{ title() }}
+    </div>
+    <div class="sub-title">
+      {{ subTitle() }}
+    </div>
+  </div>
+</div>
