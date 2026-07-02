@@ -3,10 +3,10 @@ import { FilterComponent } from '../../components/filter/filter.component';
 import { ProductsService } from '../../services/products.service';
 import { ExternalParams } from '../../../../shared/models/external-params';
 import { Product, ProductsList } from '../../models/product';
-import { ProductCardComponent } from 'reusable-components';
-import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { PaginatorComponent, ProductCardComponent } from 'reusable-components';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { Router } from '@angular/router';
+import { PaginatorState } from 'primeng/types/paginator';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   imports: [
     FilterComponent,
     ProductCardComponent,
-    PaginatorModule
+    PaginatorComponent
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',

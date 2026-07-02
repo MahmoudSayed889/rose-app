@@ -32,12 +32,10 @@
 
             <!-- paginator -->
             <div class="flex justify-center mt-20">
-                <p-paginator
-                    [first]="(paginator().page - 1) * paginator().limit"
-                    [rows]="paginator().limit"
-                    [totalRecords]="paginator().total"
-                    (onPageChange)="onPageChange($event)"
-                ></p-paginator>
+                <lib-paginator
+                    [pagination]="paginator()"
+                    (pageChange)="onPageChange($event)"
+                ></lib-paginator>
             </div>
         </div>
     </div>

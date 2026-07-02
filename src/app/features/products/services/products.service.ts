@@ -20,16 +20,4 @@ export class ProductsService {
     getProduct(id: string): Observable<SingleProduct> {
         return this._httpClient.get<SingleProduct>(`${this.baseUrl}/api/products/${id}`)
     }
-
-    createProduct(data: CreateProductRequest): Observable<SingleProduct> {
-        return this._httpClient.post<SingleProduct>(`${this.baseUrl}/api/products`, data)
-    }
-
-    updateProduct(id: string, data: CreateProductRequest): Observable<SingleProduct> {
-        return this._httpClient.put<SingleProduct>(`${this.baseUrl}/api/products/${id}`, data)
-    }
-
-    deleteProduct(id: string): Observable<DeleteProductResponse> {
-        return this._httpClient.delete<DeleteProductResponse>(`${this.baseUrl}/api/products/${id}`)
-    }
 }
