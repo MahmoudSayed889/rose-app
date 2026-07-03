@@ -92,5 +92,19 @@
     },
     "profile": {
         "title": ""
+    },
+    "productDetails": {
+        "left in stock": "متبقي في المخزون",
+        "rating": "التقييم",
+        "ratings": "تقييمات",
+        "Product Reviews": "مراجعات المنتج",
+        "General rating": "التقييم العام",
+        "Your rating": "تقييمك",
+        "Review": "المراجعة",
+        "Title": "العنوان",
+        "enter review title": "أدخل عنوان المراجعة",
+        "what do you think of this product?": "ما رأيك في هذا المنتج؟",
+        "Add Review": "إضافة مراجعة",
+        "Add to Cart": "إضافة إلى السلة"
     }
 }

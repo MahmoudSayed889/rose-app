@@ -93,5 +93,19 @@
     },
     "profile": {
         "title": ""
+    },
+    "productDetails": {
+        "left in stock": "left in stock",
+        "rating": "rating",
+        "ratings": "ratings",
+        "Product Reviews": "Product Reviews",
+        "General rating": "General rating",
+        "Your rating": "Your rating",
+        "Review": "Review",
+        "Title": "Title",
+        "enter review title": "Enter review title",
+        "what do you think of this product?": "What do you think of this product?",
+        "Add Review": "Add Review",
+        "Add to Cart": "Add to Cart"
     }
 }

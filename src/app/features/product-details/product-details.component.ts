@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../products/services/products.service';
 import { Product } from '../products/models/product';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProductReviewsComponent } from "./components/product-reviews/product-reviews.component";
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface GalleryImage {
   itemImageSrc: string;
@@ -13,7 +15,7 @@ export interface GalleryImage {
 
 @Component({
   selector: 'app-product-details',
-  imports: [SpLineComponent, GalleriaComponent],
+  imports: [SpLineComponent, GalleriaComponent, ProductReviewsComponent, TranslatePipe],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })

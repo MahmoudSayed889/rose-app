@@ -26,7 +26,9 @@
                             <polyline points="3.29 7 12 12 20.71 7" />
                             <path d="m7.5 4.27 9 5.15" />
                         </svg>
-                        <span class="text-zinc-800 dark:text-zinc-50 font-medium text-sm">{{this.productDetails()?.stock}} left in stock</span>
+                        <span
+                            class="text-zinc-800 dark:text-zinc-50 font-medium text-sm">{{this.productDetails()?.stock}}
+                            {{'productDetails.left in stock' | translate}}</span>
                     </div>
                 </div>
             </div>
@@ -42,13 +44,14 @@
                             clip-rule="evenodd" />
                     </svg>
                 </span>
-                <span class="">Rating: {{this.productDetails()?.rating}}/5</span>
-                <span class="text-blue-600 dark:text-blue-400 font-medium">({{this.productDetails()?.ratings}} ratings)</span>
+                <span class="">{{'productDetails.rating' | translate}}: {{this.productDetails()?.rating?.toFixed(1)}}/5</span>
+                <span class="text-blue-600 dark:text-blue-400 font-medium">({{this.productDetails()?.ratings}}
+                    {{'productDetails.ratings' | translate}})</span>
             </div>
             <div>
                 <app-sp-line></app-sp-line>
             </div>
-            <div class="grow dark:text-zinc-400 overflow-y-auto wrap-break-word min-h-0">
+            <div class="grow dark:text-zinc-400 overflow-y-auto wrap-break-word max-h-75 min-h-0">
                 {{this.productDetails()?.description}}
             </div>
             <div class="flex items-center gap-2.5">
@@ -72,10 +75,15 @@
                         <circle cx="19" cy="21" r="1" />
                         <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
                     </svg>
-                    Add to Cart
+                    {{'productDetails.Add to Cart' | translate}}
                 </button>
             </div>
         </div>
     </section>
+    @if(productDetails()) {
+    <div>
+        <app-product-reviews [productDetails]="productDetails()!"></app-product-reviews>
+    </div>
+    }
     <section></section>
 </section>
