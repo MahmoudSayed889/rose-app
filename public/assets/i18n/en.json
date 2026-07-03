@@ -1,102 +1,142 @@
 {
-    "common": {
-        "actions": {
-            "continue": "Continue",
-            "edit": "Edit",
-            "next": "Next",
-            "previous": "Previous",
-            "start": "Start",
-            "submite": "Submit",
-            "save-changes": "Save Changes",
-            "delete-my-account": "Delete My Account"
-        },
-        "or": "or",
-        "Need help?": "Need help?",
-        "Contact us": "Contact us",
-        "messages": {
-            "What awesome gift are you looking for?": "What awesome gift are you looking for?"
-        },
-        "validation": {
-            "This field is required": "This field is required",
-            "Please enter a valid email.": "Please enter a valid email.",
-            "passwordMismatch": "Passwords do not match",
-            "PASSWORD_REQ_ERROR": "Password is required",
-            "CPASSWORD_REQ_ERROR": "Confirm password is required",
-            "EMAIL_REQ_ERROR": "Email is required",
-            "PASSWORD_PATTERN_ERROR": "Please enter a valid password",
-            "USERNAME_REQ_ERROR": "Username is required",
-            "FN_REQ_ERROR": "First Name is required",
-            "LN_REQ_ERROR": "Last Name is required"
-        }
+  "common": {
+    "actions": {
+      "continue": "Continue",
+      "edit": "Edit",
+      "next": "Next",
+      "previous": "Previous",
+      "start": "Start",
+      "submite": "Submit",
+      "save-changes": "Save Changes",
+      "delete-my-account": "Delete My Account"
     },
-    "auth": {
-        "username": "Username",
-        "password": "Password",
-        "email": "Email",
-        "confirmPassword": "Confirm Password",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "gender": "Gender",
-        "male": "Male",
-        "female": "Female",
-        "login": "Login",
-        "register now": "Register",
-        "logout": "Logout",
-        "don\u2019t have an account yet?": "Don't have an account yet?",
-        "create one now!": "Create one now!",
-        "Create yours": "Create yours",
-        "forgot your password?": "Forgot your password?",
-        "Remember me": "Remember Me",
-        "register": {
-            "emailTitle": "Create your account",
-            "otpTitle": "Verify your email",
-            "formTitle": "Complete your profile",
-            "otpLabel": "Verification code",
-            "otpInvalid": "Please enter the 6-digit verification code",
-            "selectGender": "Select gender",
-            "submit": "Register",
-            "alreadyHaveAccount": "Already have an account?"
-        },
-        "forgot-password": {
-            "Forgot Password?": "Forgot Password?",
-            "Worry not, we’ll send you instructions to help you reset it.": "Worry not, we’ll send you instructions to help you reset it.",
-            "Password Reset Sent": "Password Reset Sent",
-            "We have sent a password reset link to": "We have sent a password reset link to:",
-            "Please check your inbox and follow the instructions to reset your password": "Please check your inbox and follow the instructions to reset your password.",
-            "If you don’t see the email within a few minutes, check your spam or junk folder": "If you don’t see the email within a few minutes, check your spam or junk folder.",
-            "Send a new link": "Send a new link",
-            "Create a new password": "Create a new password",
-            "Set a strong password to secure your account.": "Set a strong password to secure your account.",
-            "resetPassword": "Reset Password"
-        }
+    "or": "or",
+    "Need help?": "Need help?",
+    "Contact us": "Contact us",
+    "messages": {
+      "What awesome gift are you looking for?": "What awesome gift are you looking for?"
     },
-    "home": {
-        "title": "home"
-    },
-    "products": {
-        "title": "products"
-    },
-    "categories": {
-        "title": "categories"
-    },
-    "occasions": {
-        "title": "occasions"
-    },
-    "contact": {
-        "title": "contact"
-    },
-    "about": {
-        "title": "about"
-    },
-    "cart": {
-        "title": ""
-    },
-    "profile": {
-        "title": ""
-    },
-    "trustedBy": {
-        "prefix": "Trusted by over",
-        "count": "4.5k",
-        "suffix": "companies"
+    "validation": {
+      "This field is required": "This field is required",
+      "Please enter a valid email.": "Please enter a valid email.",
+      "passwordMismatch": "Passwords do not match",
+      "PASSWORD_REQ_ERROR": "Password is required",
+      "CPASSWORD_REQ_ERROR": "Confirm password is required",
+      "EMAIL_REQ_ERROR": "Email is required",
+      "PASSWORD_PATTERN_ERROR": "Please enter a valid password",
+      "USERNAME_REQ_ERROR": "Username is required",
+      "FN_REQ_ERROR": "First Name is required",
+      "LN_REQ_ERROR": "Last Name is required"
     }
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "login": "Login",
+    "register now": "Register",
+    "logout": "Logout",
+    "don\u2019t have an account yet?": "Don't have an account yet?",
+    "create one now!": "Create one now!",
+    "Create yours": "Create yours",
+    "forgot your password?": "Forgot your password?",
+    "Remember me": "Remember Me",
+    "register": {
+      "emailTitle": "Create your account",
+      "otpTitle": "Verify your email",
+      "formTitle": "Complete your profile",
+      "otpLabel": "Verification code",
+      "otpInvalid": "Please enter the 6-digit verification code",
+      "selectGender": "Select gender",
+      "submit": "Register",
+      "alreadyHaveAccount": "Already have an account?"
+    },
+    "forgot-password": {
+      "Forgot Password?": "Forgot Password?",
+      "Worry not, we’ll send you instructions to help you reset it.": "Worry not, we’ll send you instructions to help you reset it.",
+      "Password Reset Sent": "Password Reset Sent",
+      "We have sent a password reset link to": "We have sent a password reset link to:",
+      "Please check your inbox and follow the instructions to reset your password": "Please check your inbox and follow the instructions to reset your password.",
+      "If you don’t see the email within a few minutes, check your spam or junk folder": "If you don’t see the email within a few minutes, check your spam or junk folder.",
+      "Send a new link": "Send a new link",
+      "Create a new password": "Create a new password",
+      "Set a strong password to secure your account.": "Set a strong password to secure your account.",
+      "resetPassword": "Reset Password"
+    }
+  },
+  "home": {
+    "title": "home"
+  },
+  "products": {
+    "title": "products"
+  },
+  "categories": {
+    "title": "categories"
+  },
+  "occasions": {
+    "title": "occasions"
+  },
+  "contact": {
+    "title": "contact"
+  },
+  "about": {
+    "title": "about"
+  },
+  "cart": {
+    "title": ""
+  },
+  "profile": {
+    "title": ""
+  },
+  "trustedBy": {
+    "prefix": "Trusted by over",
+    "count": "4.5k",
+    "suffix": "companies"
+  },
+  "specialGifts": {
+    "static": {
+      "badge": "Starting from 10.99 EGP",
+      "overlayText": "Special Gifts For The People You Love",
+      "buttonLabel": "Shop Now"
+    },
+    "shopNow": "Shop Now",
+    "imBuying": "I'm buying!",
+    "carousel": {
+      "slide1": {
+        "badge": "NEW",
+        "title": "Say It with Flowers",
+        "overlayText": "Elegant gifts for every special moment."
+      },
+      "slide2": {
+        "overlayText": "Say It with Flowers"
+      },
+      "slide3": {
+        "badge": "SALE",
+        "overlayText": "Luxury Experiences"
+      },
+      "slide4": {
+        "overlayText": "Exclusive Collection"
+      }
+    },
+    "row2": {
+      "wedding": {
+        "badge": "Wedding",
+        "overlayText": "Celebrate Her Forever with a Gift She'll Always Remember"
+      },
+      "engagement": {
+        "badge": "Engagement",
+        "overlayText": "Honor the Beginning of a Beautiful Journey Together"
+      },
+      "anniversary": {
+        "badge": "Anniversary",
+        "overlayText": "Mark Every Year of Love with a Meaningful Surprise"
+      }
+    }
+  }
 }
