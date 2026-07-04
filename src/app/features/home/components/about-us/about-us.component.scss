@@ -234,11 +234,24 @@
     &__checklist-item {
       color: var(--zink-50);
     }
-    &__check-icon { 
+    &__check-icon {
       color: var(--soft-pink);
     }
     &__cta {
       color: var(--zink-800)
+    }
+  }
+}
+
+// RTL Support
+:host-context([dir="rtl"]) {
+  .about-us {
+    &__cta {
+      // Arrow flips to point left in RTL
+      span[aria-hidden] {
+        transform: scaleX(-1);
+        display: inline-block;
+      }
     }
   }
 }
