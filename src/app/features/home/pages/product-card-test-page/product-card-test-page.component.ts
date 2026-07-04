@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  ProductCardBadge,
-  ProductCardComponent,
-} from 'reusable-components';
+import { ProductCardBadge, ProductCardComponent } from 'reusable-components';
 
 interface ProductCardTestItem {
   productId: string | number;
@@ -16,7 +13,7 @@ interface ProductCardTestItem {
 
 @Component({
   selector: 'app-product-card-test-page',
-  imports: [ProductCardComponent],
+  imports: [],
   templateUrl: './product-card-test-page.component.html',
   styleUrl: './product-card-test-page.component.scss',
 })
@@ -25,8 +22,7 @@ export class ProductCardTestPageComponent {
     {
       productId: 1,
       imageUrl: '/assets/imgs/product1.jpg',
-      title:
-        'Wireless Bluetooth Headphones with Extra Long Product Name to Test Truncation',
+      title: 'Wireless Bluetooth Headphones with Extra Long Product Name to Test Truncation',
       price: 299,
       rating: 4.5,
       badge: null,

@@ -1,0 +1,81 @@
+<section class="space-y-12.5 py-15">
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-17.5">
+        <div>
+            <app-galleria [images]="productImages()!"></app-galleria>
+        </div>
+        <div class="flex flex-col gap-4">
+            <div class="space-y-2">
+                <h2 class="text-zinc-800 text-3xl font-semibold dark:text-zinc-50">Dreamy White Roses Bouquet</h2>
+                <div class="flex items-center gap-3.5">
+                    <div class="space-x-1.5">
+                        <span class="text-zinc-300 dark:text-zinc-500 text-3xl font-bold line-through">320</span>
+                        <span class="text-zinc-800 dark:text-zinc-50 text-3xl font-bold">199.50 <span
+                                class="font-semibold text-xl">EGP</span></span>
+                    </div>
+                    <div class="rounded-full px-3 py-1.5 bg-zinc-100 dark:bg-zinc-700 flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-package-icon lucide-package text-zinc-400">
+                            <path
+                                d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+                            <path d="M12 22V12" />
+                            <polyline points="3.29 7 12 12 20.71 7" />
+                            <path d="m7.5 4.27 9 5.15" />
+                        </svg>
+                        <span class="text-zinc-800 dark:text-zinc-50 font-medium text-sm">265 left in stock</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <app-sp-line></app-sp-line>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="size-6 text-[#FFA508]">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <span class="">Rating: 4.5/5</span>
+                <span class="text-blue-600 dark:text-blue-400 font-medium">(8 ratings)</span>
+            </div>
+            <div>
+                <app-sp-line></app-sp-line>
+            </div>
+            <div class="grow dark:text-zinc-400">
+                Elevate any celebration with our luxury rose bouquet. This exquisite arrangement features pristine white
+                roses wrapped in a sophisticated dark teal wrap, creating a stunning visual contrast. Perfect for
+                celebrations, anniversaries, or as a heartfelt gift, this bouquet combines timeless elegance with modern
+                style. Make a memorable impression with this luxurious floral arrangement. Buy now to delight your loved
+                ones with the beauty and grace of these premium roses.
+            </div>
+            <div class="flex items-center gap-2.5">
+                <button
+                    class="bg-zinc-100 dark:bg-zinc-800 dark:border dark:border-zinc-500 py-2.5 px-3 rounded-[10px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-heart-plus-icon lucide-heart-plus">
+                        <path
+                            d="m14.479 19.374-.971.939a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5a5.2 5.2 0 0 1-.219 1.49" />
+                        <path d="M15 15h6" />
+                        <path d="M18 12v6" />
+                    </svg>
+                </button>
+                <button
+                    class="flex items-center gap-2.5 py-2.5 px-3 rounded-[10px] bg-primary text-white dark:text-zinc-800 grow justify-center font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-shopping-cart-icon lucide-shopping-cart">
+                        <circle cx="8" cy="21" r="1" />
+                        <circle cx="19" cy="21" r="1" />
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                    </svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </section>
+    <section></section>
+</section>
