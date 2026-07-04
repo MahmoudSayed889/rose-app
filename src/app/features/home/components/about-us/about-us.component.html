@@ -5,7 +5,7 @@
         <img
           class="about-us__image"
           src="assets/imgs/about-us.png"
-          alt="Curated gift boxes with elegant ribbons and festive packaging"
+          [attr.alt]="'home.aboutUs.imageAlt' | translate"
           width="640"
           height="720"
           loading="lazy"
@@ -13,29 +13,22 @@
       </figure>
 
       <div class="about-us__content">
-        <p class="about-us__label">About</p>
+        <p class="about-us__label">{{ 'home.aboutUs.label' | translate }}</p>
 
-        <h2 id="about-us-heading" class="about-us__heading">
-          Delivering the
-          <span class="switch-color">Finest</span>
-          Gift Boxes for Your
-          <span class="switch-color">Special</span> Moments
+        <h2 id="about-us-heading" class="about-us__heading"
+            [innerHTML]="'home.aboutUs.heading' | translate">
         </h2>
 
         <p class="about-us__description">
-          Make every moment memorable with our premium gift boxes. 
-          Carefully curated and beautifully packaged, 
-          each box is filled with handpicked items designed to impress. 
-          Whether it's for a birthday, wedding, or a simple “thank you,”
-          our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.
+          {{ 'home.aboutUs.description' | translate }}
         </p>
 
         <button type="button" class="about-us__cta">
-          Discover
+          {{ 'home.aboutUs.cta' | translate }}
           <span aria-hidden="true">&rarr;</span>
         </button>
 
-        <div class="about-us__checklist" aria-label="Why choose us">
+        <div class="about-us__checklist" [attr.aria-label]="'home.aboutUs.checklistLabel' | translate">
           <ul class="about-us__checklist-column">
             @for (item of leftChecklist; track item.id) {
               <li class="about-us__checklist-item">
@@ -45,7 +38,7 @@
                   strokeWidth="2.5px"
                   aria-hidden="true"
                 ></lucide-angular>
-                <span>{{ item.label }}</span>
+                <span>{{ item.labelKey | translate }}</span>
               </li>
             }
           </ul>
@@ -59,7 +52,7 @@
                   strokeWidth="2.5px"
                   aria-hidden="true"
                 ></lucide-angular>
-                <span>{{ item.label }}</span>
+                <span>{{ item.labelKey | translate }}</span>
               </li>
             }
           </ul>
