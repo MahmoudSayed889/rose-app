@@ -97,6 +97,11 @@
             }
         }
     },
+    "productDetails": {
+        "relatedProducts": {
+            "title": "Related Products"
+        }
+    },
     "products": {
         "title": "products"
     },

@@ -1,6 +1,7 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { SpLineComponent } from "../../shared/components/sp-line/sp-line.component";
 import { GalleriaComponent } from "./components/galleria/galleria.component";
+import { RelatedProductsComponent } from "./components/related-products/related-products.component";
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../products/services/products.service';
 import { Product } from '../products/models/product';
@@ -12,7 +13,7 @@ export interface GalleryImage {
 
 @Component({
   selector: 'app-product-details',
-  imports: [SpLineComponent, GalleriaComponent],
+  imports: [SpLineComponent, GalleriaComponent, RelatedProductsComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })

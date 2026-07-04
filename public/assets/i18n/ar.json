@@ -96,6 +96,11 @@
             }
         }
     },
+    "productDetails": {
+        "relatedProducts": {
+            "title": "منتجات ذات صلة"
+        }
+    },
     "products": {
         "title": "المنتجات"
     },
