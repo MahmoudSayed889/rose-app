@@ -35,6 +35,7 @@ export interface Product {
     subCategory?: SubCategory
     occasions: any[]
     _count: Count
+    tags?: string[]
 }
 
 export interface Category {

@@ -13,6 +13,7 @@ import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 import { CookieService } from 'ngx-cookie-service';
 import { errorInterceptor } from './core/interceptors/error/error.interceptor';
 import { MessageService } from 'primeng/api';
+import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(
       withInterceptors([
+        tokenInterceptor,
         errorInterceptor
       ])
     ),
