@@ -8,7 +8,8 @@
             "start": "Start",
             "submite": "Submit",
             "save-changes": "Save Changes",
-            "delete-my-account": "Delete My Account"
+            "delete-my-account": "Delete My Account",
+            "retry": "Retry"
         },
         "or": "or",
         "Need help?": "Need help?",
@@ -71,7 +72,30 @@
         }
     },
     "home": {
-        "title": "home"
+        "title": "home",
+        "mostPopular": {
+            "title": "Most Popular",
+            "subtitle": "Discover our best-selling products",
+            "viewMore": "View More",
+            "noProducts": "No products available in this category",
+            "loading": "Loading products...",
+            "errorCategories": "Failed to load categories. Please try again.",
+            "errorProducts": "Failed to load products. Please try again."
+        },
+        "aboutUs": {
+            "label": "About",
+            "imageAlt": "Curated gift boxes with elegant ribbons and festive packaging",
+            "heading": "Delivering the <span class=\"switch-color\">Finest</span> Gift Boxes for Your <span class=\"switch-color\">Special</span> Moments",
+            "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple \"thank you,\" our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.",
+            "cta": "Discover",
+            "checklistLabel": "Why choose us",
+            "checklist": {
+                "competitivePrices": "Competitive Prices & Easy Shopping",
+                "everyOccasion": "Perfect for Every Occasion",
+                "premiumQuality": "Premium Quality & Elegant Packaging",
+                "fastDelivery": "Fast & Reliable Delivery"
+            }
+        }
     },
     "products": {
         "title": "products"
