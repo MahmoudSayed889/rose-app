@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AUTH_API_URL } from 'auth-library';
 import { HelperService } from '../../../shared/services/helper.service';
-import { CreateProductRequest, DeleteProductResponse, ProductsList, SingleProduct } from '../models/product';
+import { CreateProductRequest, DeleteProductResponse, Product, ProductsList, SingleProduct } from '../models/product';
 import { ExternalParams } from '../../../shared/models/external-params';
 
 @Service()
@@ -14,10 +14,37 @@ export class ProductsService {
     private _helperService = inject(HelperService)
 
     getProducts(params?: ExternalParams): Observable<ProductsList> {
-        return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, {params: this._helperService.createParams(params)})
+        return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, { params: this._helperService.createParams(params) })
     }
 
     getProduct(id: string): Observable<SingleProduct> {
         return this._httpClient.get<SingleProduct>(`${this.baseUrl}/api/products/${id}`)
+    }
+
+    getBestSellingProducts(params?: ExternalParams): Observable<Product[]> {
+        return this.getProducts(params).pipe(
+            map(response => ([...response.payload.data]
+                .sort((a, b) => b._count.cartItems - a._count.cartItems)
+            ))
+        );
+    }
+
+    getProductsTags(product: Product): string[] {
+        const today = new Date();
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(today.getMonth() - 6);
+        const tags: string[] = [];
+        
+        if (product.rating >= 4) {
+            tags.push('hot');
+        }
+        if (product.stock === 0) { 
+            tags.push('out of stock');
+        }
+        const productDate = new Date(product.createdAt);
+        if (productDate >= sixMonthsAgo && productDate <= today) {
+            tags.push('new');
+        }
+        return tags;
     }
 }

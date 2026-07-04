@@ -28,7 +28,7 @@
             <app-sp-line></app-sp-line>
         </div>
         <div class="max-h-90 grid md:grid-cols-3 gap-5">
-            <div class="md:col-span-2 p-2 max-h-100 overflow-y-auto">
+            <div class="md:col-span-2 p-2 md:max-h-100 overflow-y-auto">
                 @for (review of productReviews(); track review.id) {
                 <app-review-card [review]="review"></app-review-card>
                 }

@@ -1,0 +1,57 @@
+<section class="">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-9 items-center">
+            <div class="flex flex-col gap-2.5 items-start w-full">
+                <h2 class="font-bold uppercase text-[#FF668B] tracking-[25%]">{{'bestSelling.Best Selling'|translate}}
+                </h2>
+                <div class="grow">
+                    <p class="text-3xl font-bold text-[#741C21] dark:text-[#FFC2D0] mb-2">
+                        <span class="text-[#FF85A2] dark:text-[#D75458]">{{'bestSelling.Check Out'|translate}}</span>
+                        {{'bestSelling.What Everyone’s' |translate }} <span
+                            class="text-[#FF85A2] dark:text-[#D75458]">{{'bestSelling.Buying'|translate}}</span>
+                        {{'bestSelling.Right Now'|translate}}
+                    </p>
+                    <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        {{'bestSelling.Not sure what to choose?'|translate}} <br>
+                        {{'bestSelling.Start with our best sellers'|translate}}
+                    </p>
+                </div>
+                <button
+                    class="py-2.5 px-4 rounded-[10px] bg-primary dark:text-zinc-800 text-white flex items-center gap-2.5">
+                    {{'bestSelling.Explore gifts'|translate}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-arrow-right-icon lucide-arrow-right">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+            <div class="col-span-1 lg:col-span-3 w-full overflow-hidden">
+                <div class="relative">
+                    <p-carousel #bestSellingCarousel [value]="bestSellingProducts()!" [numVisible]="3" [numScroll]="1"
+                        [circular]="true" [responsiveOptions]="carouselResponsiveOptions" [showIndicators]="false"
+                        [showNavigators]="false" spacing="10">
+                        <ng-template #item let-item>
+                            <div class="px-3">
+                                <lib-product-card [productId]="item.id" [imageUrl]="item.cover" [title]="item.title"
+                                    [price]="item.price" [discountType]="item.discountType"
+                                    [discountValue]="item.discountValue" [rating]="item.rating" [badge]="'new'"
+                                    [isFavorite]="true" [badge]="item.tags[0]" (cardClick)="onCardClick($event)" />
+                            </div>
+                        </ng-template>
+                    </p-carousel>
+                    <button (click)="bestSellingCarousel.navBackward($event)" [disabled]="bestSellingCarousel.page == 0"
+                        class="w-9 h-9 rounded-full flex items-center justify-center bg-[#A6252A] text-[#FBEAEA] transition absolute left-0 top-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-60 disabled:cursor-auto">
+                        <i class="pi pi-chevron-left text-sm"></i>
+                    </button>
+                    <button (click)="bestSellingCarousel.navForward($event)"
+                        [disabled]="bestSellingCarousel.page == (bestSellingProducts()?.length! - bestSellingCarousel.numVisible)"
+                        class="w-9 h-9 rounded-full flex items-center justify-center bg-[#A6252A] text-[#FBEAEA] transition absolute right-0 top-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-60 disabled:cursor-auto">
+                        <i class="pi pi-chevron-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

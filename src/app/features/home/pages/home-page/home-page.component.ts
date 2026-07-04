@@ -4,6 +4,7 @@ import { TestimonialsSectionComponent } from '../../components/testimonials-sect
 import { ServiceSectionComponent } from '../../components/Service Highlights-section/service-section/service-section.component';
 import { AboutUsComponent } from '../../components/about-us/about-us.component';
 import { TrustedByComponent } from '../../components/trusted-by-section/trusted-by/trusted-by.component';
+import { BestSellingComponent } from "../../components/best-selling/best-selling.component";
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +14,8 @@ import { TrustedByComponent } from '../../components/trusted-by-section/trusted-
     ServiceSectionComponent,
     AboutUsComponent,
     TrustedByComponent,
-  ],
+    BestSellingComponent
+],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
