@@ -1,0 +1,6 @@
+<p-paginator
+    [first]="(pagination().page - 1) * pagination().limit"
+    [rows]="pagination().limit"
+    [totalRecords]="pagination().total"
+    (onPageChange)="pageChange.emit($event)"
+></p-paginator>

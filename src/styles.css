@@ -23,8 +23,10 @@
   --zink-50: #FAFAFA;
   --zinc-400: #A1A1AA;
   --zinc-500: #71717A;
+  --zinc-700: #3F3F46;
   --zinc-800: #27272A;
   --maroon-700: #741C21;
+  --maroon-600: #A6252A;
   --maroon-400: #D75458;
   --soft-pink: #FF668B;
   --p-rating-icon-color: #FBA707 !important;
@@ -36,6 +38,9 @@
   --p-paginator-nav-button-color: #000 !important;
   --p-paginator-nav-button-selected-color: #fff !important;
   --p-paginator-nav-button-selected-background: #A6252A !important;
+
+  --title-after-background: #FF668B;
+  --title-before-background: #fcd6df;
 }
 
 .dark {
@@ -54,6 +59,9 @@
   --p-paginator-nav-button-background: #3F3F46 !important;
   --p-paginator-nav-button-selected-color: #000 !important;
   --p-paginator-nav-button-selected-background: #FFA3B9 !important;
+
+  --title-after-background: #FF668B;
+  --title-before-background: #3F3F46;
 
   background: #27272A;
 }

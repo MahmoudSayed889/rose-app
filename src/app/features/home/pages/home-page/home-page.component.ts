@@ -5,6 +5,7 @@ import { ServiceSectionComponent } from '../../components/Service Highlights-sec
 import { AboutUsComponent } from '../../components/about-us/about-us.component';
 import { TrustedByComponent } from '../../components/trusted-by-section/trusted-by/trusted-by.component';
 import { SpecialGiftsSectionComponent } from '../../../../shared/components/special-gifts-section/special-gifts-section.component';
+import { MostPopularComponent } from '../../components/most-popular/most-popular.component';
 
 @Component({
   selector: 'app-home-page',
@@ -15,6 +16,7 @@ import { SpecialGiftsSectionComponent } from '../../../../shared/components/spec
     AboutUsComponent,
     TrustedByComponent,
     SpecialGiftsSectionComponent,
+    MostPopularComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
