@@ -7,6 +7,7 @@ import { ProductCardComponent } from "reusable-components";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-best-selling',
@@ -18,6 +19,7 @@ export class BestSellingComponent {
   private readonly _productService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _router = inject(Router);
+  private readonly _ngxSpinner = inject(NgxSpinnerService);
 
   bestSellingProducts: WritableSignal<Product[] | null> = signal(null);
 
@@ -40,15 +42,18 @@ export class BestSellingComponent {
   ];
 
   getBestSelling() {
+    this._ngxSpinner.show();
     this._productService.getBestSellingProducts()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
           this.bestSellingProducts.set(res);
           this.mergeProductTags();
+          this._ngxSpinner.hide();
         },
         error: (err) => {
           console.log(err);
+          this._ngxSpinner.hide();
         }
       });
   }

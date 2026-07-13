@@ -1,0 +1,118 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+::ng-deep .p-carousel {
+  height: 100%;
+  position: relative;
+}
+
+::ng-deep .p-carousel-content-container {
+  height: 100%;
+}
+
+::ng-deep .p-carousel-content {
+  height: 100%;
+}
+
+::ng-deep .p-carousel-viewport {
+  height: 100% !important;
+}
+
+::ng-deep .p-carousel-items-content {
+  height: 100% !important;
+}
+
+::ng-deep .p-carousel-items-container {
+  height: 100%;
+}
+
+::ng-deep .p-carousel-item-list {
+  height: 100%;
+}
+
+::ng-deep .p-carousel-item {
+  height: 100%;
+}
+
+.carousel-controls {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+:host-context([dir="rtl"]) .carousel-controls {
+  right: auto;
+  left: 1rem;
+}
+
+.carousel-controls.rtl {
+  right: auto;
+  left: 1rem;
+  align-items: flex-start;
+}
+
+.carousel-dots {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  align-items: center;
+  order: 1;
+}
+
+.carousel-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  width: 1.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #a6252a;
+}
+
+.carousel-arrows {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  order: 2;
+}
+
+.carousel-arrow {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a6252a;
+  font-size: 0.75rem;
+  transition: background 0.2s ease;
+}
+
+.carousel-arrow:hover {
+  background: #fbeaea;
+}

@@ -5,6 +5,7 @@ import { ServiceSectionComponent } from '../../components/Service Highlights-sec
 import { AboutUsComponent } from '../../components/about-us/about-us.component';
 import { TrustedByComponent } from '../../components/trusted-by-section/trusted-by/trusted-by.component';
 import { BestSellingComponent } from "../../components/best-selling/best-selling.component";
+import { SpecialGiftsSectionComponent } from '../../../../shared/components/special-gifts-section/special-gifts-section.component';
 import { MostPopularComponent } from '../../components/most-popular/most-popular.component';
 
 @Component({
@@ -16,6 +17,8 @@ import { MostPopularComponent } from '../../components/most-popular/most-popular
     AboutUsComponent,
     TrustedByComponent,
     BestSellingComponent,
+    SpecialGiftsSectionComponent,
+    MostPopularComponent,
     MostPopularComponent
   ],
   templateUrl: './home-page.component.html',

@@ -148,5 +148,45 @@
         "prefix": "موثوق به من أكثر من",
         "count": "4.5k",
         "suffix": "شركة"
+    },
+    "specialGifts": {
+        "static": {
+            "badge": "يبدأ من 10.99 جنيه",
+            "overlayText": "هدايا مميزة للأشخاص الذين تحبهم",
+            "buttonLabel": "تسوق الآن"
+        },
+        "shopNow": "تسوق الآن",
+        "imBuying": "سأشتريها!",
+        "carousel": {
+            "slide1": {
+                "badge": "جديد",
+                "title": "قلها بالورود",
+                "overlayText": "مجموعة هدايا مميزة"
+            },
+            "slide2": {
+                "overlayText": "هدايا فاخرة"
+            },
+            "slide3": {
+                "badge": "تخفيض",
+                "overlayText": "مجموعات هدايا"
+            },
+            "slide4": {
+                "overlayText": "مجموعة حصرية"
+            }
+        },
+        "row2": {
+            "wedding": {
+                "badge": "زفاف",
+                "overlayText": "احتفل بها إلى الأبد بهدية لن تنساها أبداً"
+            },
+            "engagement": {
+                "badge": "خطوبة",
+                "overlayText": "كرّم بداية رحلة جميلة معاً"
+            },
+            "anniversary": {
+                "badge": "ذكرى سنوية",
+                "overlayText": "احتفل بكل عام من الحب بمفاجأة ذات معنى"
+            }
+        }
     }
 }

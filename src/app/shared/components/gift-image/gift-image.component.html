@@ -1,0 +1,32 @@
+<div class="gift-image">
+  <div class="gift-image__img-wrapper">
+    <img
+      class="gift-image__image"
+      [src]="imageUrl()"
+      [alt]="overlayText() || badge() || 'Gift image'"
+      loading="lazy"
+    />
+  </div>
+  <div class="gift-image__overlay" [style.background]="overlayBackground()">
+    <div class="gift-image__content">
+      @if (badge()) {
+        <span class="gift-image__badge">{{ badge() }}</span>
+      }
+      @if (title()) {
+        <h3 class="gift-image__heading">{{ title() }}</h3>
+      }
+      @if (overlayText()) {
+        <p class="gift-image__title">{{ overlayText() }}</p>
+      }
+      @if (buttonLabel()) {
+        <button
+          type="button"
+          class="gift-image__button"
+          (click)="onButtonClick()"
+        >
+          {{ buttonLabel() }}
+        </button>
+      }
+    </div>
+  </div>
+</div>
