@@ -97,11 +97,6 @@
             }
         }
     },
-    "productDetails": {
-        "relatedProducts": {
-            "title": "Related Products"
-        }
-    },
     "products": {
         "title": "products"
     },
@@ -135,7 +130,10 @@
         "enter review title": "Enter review title",
         "what do you think of this product?": "What do you think of this product?",
         "Add Review": "Add Review",
-        "Add to Cart": "Add to Cart"
+        "Add to Cart": "Add to Cart",
+        "relatedProducts": {
+            "title": "Related Products"
+        }
     },
     "bestSelling": {
         "Best Selling": "Best Selling",
@@ -145,6 +143,11 @@
         "Right Now": "Right Now",
         "Not sure what to choose?": "Not sure what to choose?",
         "Start with our best sellers": "Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-        "Explore gifts": "Explore gifts"
+        "Explore gifts": "Explore gifts",
+        "trustedBy": {
+            "prefix": "Trusted by over",
+            "count": "4.5k",
+            "suffix": "companies"
+        }
     }
 }

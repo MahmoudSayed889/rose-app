@@ -16,7 +16,7 @@ export interface GalleryImage {
 
 @Component({
   selector: 'app-product-details',
-  imports: [SpLineComponent, GalleriaComponent, ProductReviewsComponent, TranslatePipe],
+  imports: [SpLineComponent, GalleriaComponent, ProductReviewsComponent, RelatedProductsComponent, TranslatePipe],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })

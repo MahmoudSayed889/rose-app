@@ -15,9 +15,8 @@ import { MostPopularComponent } from '../../components/most-popular/most-popular
     ServiceSectionComponent,
     AboutUsComponent,
     TrustedByComponent,
-    BestSellingComponent
-],
-    MostPopularComponent,
+    BestSellingComponent,
+    MostPopularComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
