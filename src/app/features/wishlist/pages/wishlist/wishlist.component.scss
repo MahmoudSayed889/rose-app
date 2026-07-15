@@ -1,0 +1,45 @@
+.container {
+  @media (min-width: 640px) {
+    padding-inline: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-inline: 3rem;
+  }
+}
+
+/* Clear Wishlist button */
+::ng-deep .btn-clear-wishlist {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  background: var(--danger) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.875rem !important;
+  white-space: nowrap;
+
+  @media (max-width: 639px) {
+    span { display: none; }
+    padding: 0.5rem !important;
+  }
+}
+
+/* Continue Shopping button */
+::ng-deep .btn-continue-shopping {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem !important;
+  border-radius: 12px !important;
+  background: var(--maroon-900) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem !important;
+}

@@ -1,0 +1,39 @@
+<div class="container m-auto my-10 mb-40 px-7 lg:px-0">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+
+        <!-- Left: title + count -->
+        <div class="flex items-center gap-3">
+            <span class="text-4xl font-bold text-black">{{ 'wishlist.title' | translate }}</span>
+            <span class="text-sm" style="color: var(--zinc-500)">
+                {{ wishlistItems().length }} {{ 'wishlist.items' | translate }}
+            </span>
+        </div>
+
+        <!-- Right: Clear Wishlist button (static) -->
+        <lib-button
+            iconPrimeNg="pi-trash"
+            [text]="('wishlist.clearWishlist' | translate)"
+            styleClass="btn-clear-wishlist"
+        />
+    </div>
+
+    <!-- Wishlist Items -->
+    <div class="flex flex-col gap-4">
+        @for (item of wishlistItems(); track item.id) {
+            <app-wishlist-card [product]="item.product" />
+        }
+    </div>
+
+    <!-- Continue Shopping -->
+    <div class="flex justify-start mt-14">
+        <lib-button
+            [text]="'wishlist.continueShopping' | translate"
+            [iconPrimeNg]="arrowIcon"
+            styleClass="btn-continue-shopping"
+            (onClick)="navigateToProducts()"
+        />
+    </div>
+
+</div>

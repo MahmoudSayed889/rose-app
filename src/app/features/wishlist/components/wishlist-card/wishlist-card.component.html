@@ -1,0 +1,75 @@
+<div class="wishlist-card">
+
+  <!-- Left: Image -->
+  <div class="card-image">
+    <img [src]="product().cover" [alt]="product().title" />
+  </div>
+
+  <!-- Right: Content -->
+  <div class="card-content">
+
+    <!-- Top row: stock status + delete icon -->
+    <div class="card-header">
+      <div class="header-left">
+        <!-- Stock badge -->
+        <span class="stock-badge" [class.in-stock]="inStock" [class.out-of-stock]="!inStock">
+          {{ (inStock ? 'wishlist.inStock' : 'wishlist.outOfStock') | translate }}
+        </span>
+
+        <!-- Title -->
+        <h3 class="product-title">{{ product().title }}</h3>
+
+        <!-- Rating badge + ratings count -->
+        <div class="rating-row">
+          <div class="rating-badge">
+            <i class="pi pi-star-fill star-icon"></i>
+            <span class="rating-value">{{ product().rating }}/5</span>
+          </div>
+          <span class="ratings-count">
+            ({{ product().ratings }} {{ 'wishlist.ratings' | translate }})
+          </span>
+        </div>
+      </div>
+
+      <!-- Delete button -->
+      <lib-button
+        iconPrimeNg="pi-trash"
+        styleClass="delete-btn"
+        (onClick)="onDelete()"
+      />
+    </div>
+
+    <!-- Footer: price + action button -->
+    <div class="card-footer">
+      <!-- Price -->
+      <div class="price-block">
+        <span class="price-final">
+           {{ finalPrice | number:'1.0-2' }} {{ 'wishlist.egp' | translate }}
+        </span>
+        @if (hasDiscount) {
+          <span class="price-original">
+            {{ originalPrice | number:'1.0-2' }} {{ 'wishlist.egp' | translate }}
+          </span>
+        }
+      </div>
+
+      <!-- Action button -->
+      @if (inStock) {
+        <lib-button
+          [text]="'wishlist.addToCart' | translate"
+          iconPrimeNg="pi-shopping-cart"
+          styleClass="btn-add-cart"
+          (onClick)="onAddToCart()"
+        />
+      } @else {
+        <lib-button
+          [text]="'wishlist.exploreSimilar' | translate"
+          [iconPrimeNg]="arrowIcon"
+          styleClass="btn-explore"
+          (onClick)="onExploreSimilar()"
+        />
+      }
+    </div>
+
+  </div>
+</div>

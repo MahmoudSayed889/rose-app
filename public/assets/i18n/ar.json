@@ -111,6 +111,18 @@
     "about": {
         "title": "نبذة عنا"
     },
+    "wishlist": {
+        "title": "قائمة الأمنيات",
+        "items": "عناصر",
+        "clearWishlist": "مسح القائمة",
+        "continueShopping": "متابعة التسوق",
+        "inStock": "متاح",
+        "outOfStock": "غير متاح",
+        "ratings": "تقييمات",
+        "addToCart": "أضف إلى السلة",
+        "exploreSimilar": "استكشف منتجات مشابهة",
+        "egp": "ج.م"
+    },
     "cart": {
         "title": ""
     },
