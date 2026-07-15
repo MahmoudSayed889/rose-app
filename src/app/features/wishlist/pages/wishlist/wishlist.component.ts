@@ -22,6 +22,8 @@ export class WishlistComponent extends AppComponentBase implements OnInit {
   private readonly _document = inject(DOCUMENT);
 
   wishlistItems = signal<WishlistItem[]>([]);
+  clearingWishlist = signal<boolean>(false);
+  removingItemId = signal<string | null>(null);
 
   isRtl = computed(
     () =>
@@ -42,6 +44,32 @@ export class WishlistComponent extends AppComponentBase implements OnInit {
       },
       error: () => {
         this._ngxSpinner.hide();
+      },
+    });
+  }
+
+  onClearWishlist(): void {
+    this.clearingWishlist.set(true);
+    this._wishlistService.clearWishlist().subscribe({
+      next: () => {
+        this.wishlistItems.set([]);
+        this.clearingWishlist.set(false);
+      },
+      error: () => {
+        this.clearingWishlist.set(false);
+      },
+    });
+  }
+
+  onRemoveItem(wishlistItemId: string): void {
+    this.removingItemId.set(wishlistItemId);
+    this._wishlistService.removeItem(wishlistItemId).subscribe({
+      next: () => {
+        this.wishlistItems.update(items => items.filter(i => i.id !== wishlistItemId));
+        this.removingItemId.set(null);
+      },
+      error: () => {
+        this.removingItemId.set(null);
       },
     });
   }

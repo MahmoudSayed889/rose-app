@@ -16,6 +16,8 @@ export class WishlistCardComponent {
   private readonly _document = inject(DOCUMENT);
 
   product = input.required<WishlistProduct>();
+  wishlistItemId = input.required<string>();
+  deleteLoading = input<boolean>(false);
 
   deleteItem = output<string>();
   addToCart = output<string>();
@@ -56,7 +58,7 @@ export class WishlistCardComponent {
   }
 
   onDelete(): void {
-    this.deleteItem.emit(this.product().id);
+    this.deleteItem.emit(this.wishlistItemId());
   }
 
   onAddToCart(): void {

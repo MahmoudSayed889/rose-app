@@ -35,6 +35,8 @@
       <lib-button
         iconPrimeNg="pi-trash"
         styleClass="delete-btn"
+        [loading]="deleteLoading()"
+        [disabled]="deleteLoading()"
         (onClick)="onDelete()"
       />
     </div>

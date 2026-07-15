@@ -15,6 +15,20 @@ export interface WishlistItem {
     product: WishlistProduct;
 }
 
+export interface ClearWishlistResponse {
+    status: boolean;
+    code: number;
+    message: string;
+    payload?: string;
+}
+
+export interface DeleteWishlistItemResponse {
+    status: boolean;
+    code: number;
+    message: string;
+    payload?: string;
+}
+
 export interface WishlistProduct {
     id: string;
     title: string;

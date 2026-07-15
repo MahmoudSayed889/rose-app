@@ -11,18 +11,26 @@
             </span>
         </div>
 
-        <!-- Right: Clear Wishlist button (static) -->
+        <!-- Right: Clear Wishlist button -->
         <lib-button
             iconPrimeNg="pi-trash"
             [text]="('wishlist.clearWishlist' | translate)"
             styleClass="btn-clear-wishlist"
+            [loading]="clearingWishlist()"
+            [disabled]="clearingWishlist() || wishlistItems().length === 0"
+            (onClick)="onClearWishlist()"
         />
     </div>
 
     <!-- Wishlist Items -->
     <div class="flex flex-col gap-4">
         @for (item of wishlistItems(); track item.id) {
-            <app-wishlist-card [product]="item.product" />
+            <app-wishlist-card
+                [product]="item.product"
+                [wishlistItemId]="item.id"
+                [deleteLoading]="removingItemId() === item.id"
+                (deleteItem)="onRemoveItem($event)"
+            />
         }
     </div>
 
