@@ -96,11 +96,6 @@
             }
         }
     },
-    "productDetails": {
-        "relatedProducts": {
-            "title": "منتجات ذات صلة"
-        }
-    },
     "products": {
         "title": "المنتجات"
     },
@@ -115,6 +110,18 @@
     },
     "about": {
         "title": "نبذة عنا"
+    },
+    "wishlist": {
+        "title": "قائمة الأمنيات",
+        "items": "عناصر",
+        "clearWishlist": "مسح القائمة",
+        "continueShopping": "متابعة التسوق",
+        "inStock": "متاح",
+        "outOfStock": "غير متاح",
+        "ratings": "تقييمات",
+        "addToCart": "أضف إلى السلة",
+        "exploreSimilar": "استكشف منتجات مشابهة",
+        "egp": "ج.م"
     },
     "cart": {
         "title": ""
@@ -134,16 +141,64 @@
         "enter review title": "أدخل عنوان المراجعة",
         "what do you think of this product?": "ما رأيك في هذا المنتج؟",
         "Add Review": "إضافة مراجعة",
-        "Add to Cart": "إضافة إلى السلة"
+        "Add to Cart": "إضافة إلى السلة",
+        "relatedProducts": {
+            "title": "منتجات ذات صلة"
+        }
     },
     "bestSelling": {
-    "Best Selling": "الأكثر مبيعاً",
-    "Check Out": "تصفح الآن",
-    "What Everyone’s": "ما يشتريه",
-    "Buying": "الجميع",
-    "Right Now": "في الوقت الحالي",
-    "Not sure what to choose?": "لست متأكداً مما تختار؟",
-    "Start with our best sellers": "ابدأ بالمنتجات الأكثر مبيعاً لدينا، هذه هي الهدايا التي يستمر عملاؤنا في العودة لشرائها. سواء كنت تحتفل بعيد ميلاد، أو ذكرى سنوية، أو حفل زفاف، فنحن نضمن لك أن خياراتنا المميزة ستترك انطباعاً يدوم دائماً.",
-    "Explore gifts": "استكشف الهدايا"
-}
+        "Best Selling": "الأكثر مبيعاً",
+        "Check Out": "تصفح الآن",
+        "What Everyone’s": "ما يشتريه",
+        "Buying": "الجميع",
+        "Right Now": "في الوقت الحالي",
+        "Not sure what to choose?": "لست متأكداً مما تختار؟",
+        "Start with our best sellers": "ابدأ بالمنتجات الأكثر مبيعاً لدينا، هذه هي الهدايا التي يستمر عملاؤنا في العودة لشرائها. سواء كنت تحتفل بعيد ميلاد، أو ذكرى سنوية، أو حفل زفاف، فنحن نضمن لك أن خياراتنا المميزة ستترك انطباعاً يدوم دائماً.",
+        "Explore gifts": "استكشف الهدايا"
+    },
+    "trustedBy": {
+        "prefix": "موثوق به من أكثر من",
+        "count": "4.5k",
+        "suffix": "شركة"
+    },
+    "specialGifts": {
+        "static": {
+            "badge": "يبدأ من 10.99 جنيه",
+            "overlayText": "هدايا مميزة للأشخاص الذين تحبهم",
+            "buttonLabel": "تسوق الآن"
+        },
+        "shopNow": "تسوق الآن",
+        "imBuying": "سأشتريها!",
+        "carousel": {
+            "slide1": {
+                "badge": "جديد",
+                "title": "قلها بالورود",
+                "overlayText": "مجموعة هدايا مميزة"
+            },
+            "slide2": {
+                "overlayText": "هدايا فاخرة"
+            },
+            "slide3": {
+                "badge": "تخفيض",
+                "overlayText": "مجموعات هدايا"
+            },
+            "slide4": {
+                "overlayText": "مجموعة حصرية"
+            }
+        },
+        "row2": {
+            "wedding": {
+                "badge": "زفاف",
+                "overlayText": "احتفل بها إلى الأبد بهدية لن تنساها أبداً"
+            },
+            "engagement": {
+                "badge": "خطوبة",
+                "overlayText": "كرّم بداية رحلة جميلة معاً"
+            },
+            "anniversary": {
+                "badge": "ذكرى سنوية",
+                "overlayText": "احتفل بكل عام من الحب بمفاجأة ذات معنى"
+            }
+        }
+    }
 }

@@ -1,0 +1,32 @@
+<section class="special-gifts">
+  <div class="special-gifts__row-1">
+    <div class="special-gifts__static-image">
+      <app-gift-image
+        imageUrl="/temp-images/static.png"
+        [badge]="'specialGifts.static.badge' | translate"
+        [overlayText]="'specialGifts.static.overlayText' | translate"
+        [buttonLabel]="'specialGifts.static.buttonLabel' | translate"
+        overlayType="dark-solid"
+      ></app-gift-image>
+    </div>
+    <div class="special-gifts__carousel">
+      <app-gifts-carousel
+        [gifts]="carouselGifts()"
+        (giftAction)="onGiftAction($event)"
+      ></app-gifts-carousel>
+    </div>
+  </div>
+
+  <div class="special-gifts__row-2">
+    @for (item of rowTwoImages(); track item.id) {
+      <div class="special-gifts__row-2-item">
+        <app-gift-image
+          [imageUrl]="item.imageUrl"
+          [badge]="item.badge ? (item.badge | translate) : ''"
+          [overlayText]="item.overlayText ? (item.overlayText | translate) : ''"
+          overlayType="gradient-bottom"
+        ></app-gift-image>
+      </div>
+    }
+  </div>
+</section>

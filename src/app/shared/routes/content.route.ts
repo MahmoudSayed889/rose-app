@@ -16,5 +16,9 @@ export const ContentRoutes: Routes = [
     {
         path: 'product-details/:id',
         loadComponent: () => import('../../features/product-details/product-details.component').then((C) => C.ProductDetailsComponent),
-    }
+    },
+    {
+        path: 'wishlist',
+        loadComponent: () => import('../../features/wishlist/pages/wishlist/wishlist.component').then((C) => C.WishlistComponent),
+    },
 ];

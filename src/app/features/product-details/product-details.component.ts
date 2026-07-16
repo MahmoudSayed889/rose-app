@@ -8,6 +8,7 @@ import { Product } from '../products/models/product';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductReviewsComponent } from "./components/product-reviews/product-reviews.component";
 import { TranslatePipe } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface GalleryImage {
   itemImageSrc: string;
@@ -16,7 +17,7 @@ export interface GalleryImage {
 
 @Component({
   selector: 'app-product-details',
-  imports: [SpLineComponent, GalleriaComponent, ProductReviewsComponent, TranslatePipe],
+  imports: [SpLineComponent, GalleriaComponent, ProductReviewsComponent, RelatedProductsComponent, TranslatePipe],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -24,20 +25,24 @@ export class ProductDetailsComponent {
   private _route = inject(ActivatedRoute);
   private _productsService = inject(ProductsService);
   private _destroyRef = inject(DestroyRef);
+  private readonly _ngxSpinner = inject(NgxSpinnerService);
 
   productId!: string | null;
   productDetails: WritableSignal<Product | null> = signal(null);
   productImages: WritableSignal<GalleryImage[] | null> = signal(null);
 
   getProductDetails(): void {
+    this._ngxSpinner.show();
     this._productsService.getProduct(this.productId!)
       .pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
         next: (res) => {
           this.productDetails.set(res.payload.product);
           this.transformProductGallery(this.productDetails()!);
+          this._ngxSpinner.hide();
         },
         error: (err) => {
           console.log(err);
+          this._ngxSpinner.hide();
         }
       })
   }

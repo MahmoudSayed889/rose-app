@@ -1,150 +1,210 @@
 {
-    "common": {
-        "actions": {
-            "continue": "Continue",
-            "edit": "Edit",
-            "next": "Next",
-            "previous": "Previous",
-            "start": "Start",
-            "submite": "Submit",
-            "save-changes": "Save Changes",
-            "delete-my-account": "Delete My Account",
-            "retry": "Retry"
-        },
-        "or": "or",
-        "Need help?": "Need help?",
-        "Contact us": "Contact us",
-        "messages": {
-            "What awesome gift are you looking for?": "What awesome gift are you looking for?"
-        },
-        "validation": {
-            "This field is required": "This field is required",
-            "Please enter a valid email.": "Please enter a valid email.",
-            "passwordMismatch": "Passwords do not match",
-            "PASSWORD_REQ_ERROR": "Password is required",
-            "CPASSWORD_REQ_ERROR": "Confirm password is required",
-            "EMAIL_REQ_ERROR": "Email is required",
-            "PASSWORD_PATTERN_ERROR": "Please enter a valid password",
-            "USERNAME_REQ_ERROR": "Username is required",
-            "FN_REQ_ERROR": "First Name is required",
-            "LN_REQ_ERROR": "Last Name is required"
-        }
+  "common": {
+    "actions": {
+      "continue": "Continue",
+      "edit": "Edit",
+      "next": "Next",
+      "previous": "Previous",
+      "start": "Start",
+      "submite": "Submit",
+      "save-changes": "Save Changes",
+      "delete-my-account": "Delete My Account",
+      "retry": "Retry"
     },
-    "auth": {
-        "username": "Username",
-        "password": "Password",
-        "email": "Email",
-        "confirmPassword": "Confirm Password",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "gender": "Gender",
-        "male": "Male",
-        "female": "Female",
-        "login": "Login",
-        "register now": "Register",
-        "logout": "Logout",
-        "don\u2019t have an account yet?": "Don't have an account yet?",
-        "create one now!": "Create one now!",
-        "Create yours": "Create yours",
-        "forgot your password?": "Forgot your password?",
-        "Remember me": "Remember Me",
-        "register": {
-            "emailTitle": "Create your account",
-            "otpTitle": "Verify your email",
-            "formTitle": "Complete your profile",
-            "otpLabel": "Verification code",
-            "otpInvalid": "Please enter the 6-digit verification code",
-            "selectGender": "Select gender",
-            "submit": "Register",
-            "alreadyHaveAccount": "Already have an account?"
-        },
-        "forgot-password": {
-            "Forgot Password?": "Forgot Password?",
-            "Worry not, we’ll send you instructions to help you reset it.": "Worry not, we’ll send you instructions to help you reset it.",
-            "Password Reset Sent": "Password Reset Sent",
-            "We have sent a password reset link to": "We have sent a password reset link to:",
-            "Please check your inbox and follow the instructions to reset your password": "Please check your inbox and follow the instructions to reset your password.",
-            "If you don’t see the email within a few minutes, check your spam or junk folder": "If you don’t see the email within a few minutes, check your spam or junk folder.",
-            "Send a new link": "Send a new link",
-            "Create a new password": "Create a new password",
-            "Set a strong password to secure your account.": "Set a strong password to secure your account.",
-            "resetPassword": "Reset Password"
-        }
+    "or": "or",
+    "Need help?": "Need help?",
+    "Contact us": "Contact us",
+    "messages": {
+      "What awesome gift are you looking for?": "What awesome gift are you looking for?"
     },
-    "home": {
-        "title": "home",
-        "mostPopular": {
-            "title": "Most Popular",
-            "subtitle": "Discover our best-selling products",
-            "viewMore": "View More",
-            "noProducts": "No products available in this category",
-            "loading": "Loading products...",
-            "errorCategories": "Failed to load categories. Please try again.",
-            "errorProducts": "Failed to load products. Please try again."
-        },
-        "aboutUs": {
-            "label": "About",
-            "imageAlt": "Curated gift boxes with elegant ribbons and festive packaging",
-            "heading": "Delivering the <span class=\"switch-color\">Finest</span> Gift Boxes for Your <span class=\"switch-color\">Special</span> Moments",
-            "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple \"thank you,\" our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.",
-            "cta": "Discover",
-            "checklistLabel": "Why choose us",
-            "checklist": {
-                "competitivePrices": "Competitive Prices & Easy Shopping",
-                "everyOccasion": "Perfect for Every Occasion",
-                "premiumQuality": "Premium Quality & Elegant Packaging",
-                "fastDelivery": "Fast & Reliable Delivery"
-            }
-        }
-    },
-    "productDetails": {
-        "relatedProducts": {
-            "title": "Related Products"
-        }
-    },
-    "products": {
-        "title": "products"
-    },
-    "categories": {
-        "title": "categories"
-    },
-    "occasions": {
-        "title": "occasions"
-    },
-    "contact": {
-        "title": "contact"
-    },
-    "about": {
-        "title": "about"
-    },
-    "cart": {
-        "title": ""
-    },
-    "profile": {
-        "title": ""
-    },
-    "productDetails": {
-        "left in stock": "left in stock",
-        "rating": "rating",
-        "ratings": "ratings",
-        "Product Reviews": "Product Reviews",
-        "General rating": "General rating",
-        "Your rating": "Your rating",
-        "Review": "Review",
-        "Title": "Title",
-        "enter review title": "Enter review title",
-        "what do you think of this product?": "What do you think of this product?",
-        "Add Review": "Add Review",
-        "Add to Cart": "Add to Cart"
-    },
-    "bestSelling": {
-        "Best Selling": "Best Selling",
-        "Check Out": "Check Out",
-        "What Everyone’s": "What Everyone’s",
-        "Buying": "Buying",
-        "Right Now": "Right Now",
-        "Not sure what to choose?": "Not sure what to choose?",
-        "Start with our best sellers": "Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-        "Explore gifts": "Explore gifts"
+    "validation": {
+      "This field is required": "This field is required",
+      "Please enter a valid email.": "Please enter a valid email.",
+      "passwordMismatch": "Passwords do not match",
+      "PASSWORD_REQ_ERROR": "Password is required",
+      "CPASSWORD_REQ_ERROR": "Confirm password is required",
+      "EMAIL_REQ_ERROR": "Email is required",
+      "PASSWORD_PATTERN_ERROR": "Please enter a valid password",
+      "USERNAME_REQ_ERROR": "Username is required",
+      "FN_REQ_ERROR": "First Name is required",
+      "LN_REQ_ERROR": "Last Name is required"
     }
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "login": "Login",
+    "register now": "Register",
+    "logout": "Logout",
+    "don\u2019t have an account yet?": "Don't have an account yet?",
+    "create one now!": "Create one now!",
+    "Create yours": "Create yours",
+    "forgot your password?": "Forgot your password?",
+    "Remember me": "Remember Me",
+    "register": {
+      "emailTitle": "Create your account",
+      "otpTitle": "Verify your email",
+      "formTitle": "Complete your profile",
+      "otpLabel": "Verification code",
+      "otpInvalid": "Please enter the 6-digit verification code",
+      "selectGender": "Select gender",
+      "submit": "Register",
+      "alreadyHaveAccount": "Already have an account?"
+    }
+  },
+  "home": {
+    "title": "home",
+    "mostPopular": {
+      "title": "Most Popular",
+      "subtitle": "Discover our best-selling products",
+      "viewMore": "View More",
+      "noProducts": "No products available in this category",
+      "loading": "Loading products...",
+      "errorCategories": "Failed to load categories. Please try again.",
+      "errorProducts": "Failed to load products. Please try again."
+    },
+    "aboutUs": {
+      "label": "About",
+      "imageAlt": "Curated gift boxes with elegant ribbons and festive packaging",
+      "heading": "Delivering the <span class=\"switch-color\">Finest</span> Gift Boxes for Your <span class=\"switch-color\">Special</span> Moments",
+      "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple \"thank you,\" our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.",
+      "cta": "Discover",
+      "checklistLabel": "Why choose us",
+      "checklist": {
+        "competitivePrices": "Competitive Prices & Easy Shopping",
+        "everyOccasion": "Perfect for Every Occasion",
+        "premiumQuality": "Premium Quality & Elegant Packaging",
+        "fastDelivery": "Fast & Reliable Delivery"
+      }
+    }
+  },
+  "products": {
+    "title": "products"
+  },
+  "categories": {
+    "title": "categories"
+  },
+  "occasions": {
+    "title": "occasions"
+  },
+  "contact": {
+    "title": "contact"
+  },
+  "about": {
+    "title": "about"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "items": "items",
+    "clearWishlist": "Clear Wishlist",
+    "continueShopping": "Continue Shopping",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "Ratings",
+    "addToCart": "Add to Cart",
+    "exploreSimilar": "Explore Similar Products",
+    "egp": "EGP"
+  },
+  "cart": {
+    "title": ""
+  },
+  "profile": {
+    "title": ""
+  },
+  "productDetails": {
+    "left in stock": "left in stock",
+    "rating": "rating",
+    "ratings": "ratings",
+    "Product Reviews": "Product Reviews",
+    "General rating": "General rating",
+    "Your rating": "Your rating",
+    "Review": "Review",
+    "Title": "Title",
+    "enter review title": "Enter review title",
+    "what do you think of this product?": "What do you think of this product?",
+    "Add Review": "Add Review",
+    "Add to Cart": "Add to Cart",
+    "relatedProducts": {
+      "title": "Related Products"
+    }
+  },
+  "bestSelling": {
+    "Best Selling": "Best Selling",
+    "Check Out": "Check Out",
+    "What Everyone’s": "What Everyone’s",
+    "Buying": "Buying",
+    "Right Now": "Right Now",
+    "Not sure what to choose?": "Not sure what to choose?",
+    "Start with our best sellers": "Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+    "Explore gifts": "Explore gifts",
+    "trustedBy": {
+      "prefix": "Trusted by over",
+      "count": "4.5k",
+      "suffix": "companies"
+    },
+    "forgot-password": {
+      "Forgot Password?": "Forgot Password?",
+      "Worry not, we’ll send you instructions to help you reset it.": "Worry not, we’ll send you instructions to help you reset it.",
+      "Password Reset Sent": "Password Reset Sent",
+      "We have sent a password reset link to": "We have sent a password reset link to:",
+      "Please check your inbox and follow the instructions to reset your password": "Please check your inbox and follow the instructions to reset your password.",
+      "If you don’t see the email within a few minutes, check your spam or junk folder": "If you don’t see the email within a few minutes, check your spam or junk folder.",
+      "Send a new link": "Send a new link",
+      "Create a new password": "Create a new password",
+      "Set a strong password to secure your account.": "Set a strong password to secure your account.",
+      "resetPassword": "Reset Password"
+    }
+  },
+  "trustedBy": {
+    "prefix": "Trusted by over",
+    "count": "4.5k",
+    "suffix": "companies"
+  },
+  "specialGifts": {
+    "static": {
+      "badge": "Starting from 10.99 EGP",
+      "overlayText": "Special Gifts For The People You Love",
+      "buttonLabel": "Shop Now"
+    },
+    "shopNow": "Shop Now",
+    "imBuying": "I'm buying!",
+    "carousel": {
+      "slide1": {
+        "badge": "NEW",
+        "title": "Say It with Flowers",
+        "overlayText": "Elegant gifts for every special moment."
+      },
+      "slide2": {
+        "overlayText": "Say It with Flowers"
+      },
+      "slide3": {
+        "badge": "SALE",
+        "overlayText": "Luxury Experiences"
+      },
+      "slide4": {
+        "overlayText": "Exclusive Collection"
+      }
+    },
+    "row2": {
+      "wedding": {
+        "badge": "Wedding",
+        "overlayText": "Celebrate Her Forever with a Gift She'll Always Remember"
+      },
+      "engagement": {
+        "badge": "Engagement",
+        "overlayText": "Honor the Beginning of a Beautiful Journey Together"
+      },
+      "anniversary": {
+        "badge": "Anniversary",
+        "overlayText": "Mark Every Year of Love with a Meaningful Surprise"
+      }
+    }
+  }
 }
