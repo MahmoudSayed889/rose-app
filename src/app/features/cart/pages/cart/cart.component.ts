@@ -4,7 +4,6 @@ import { CartService } from '../../services/cart/cart.service';
 import { CartItem } from '../../models/cart.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { InputComponent } from "reusable-components";
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { RouterLink } from "@angular/router";
@@ -19,15 +18,13 @@ import { finalize } from 'rxjs';
 export class CartComponent implements OnInit {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _spinner = inject(NgxSpinnerService);
 
   cartItems: WritableSignal<CartItem[]> = signal([]);
   removeLoading: WritableSignal<string | null> = signal(null);
 
   getCartItems(): void {
-    this._spinner.show();
     this._cartService.getCartItems()
-      .pipe(finalize(() => this._spinner.hide()), takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => this.cartItems.set(res.payload.cartItems),
         error: () => {

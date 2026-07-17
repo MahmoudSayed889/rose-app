@@ -1,0 +1,29 @@
+::ng-deep {
+    .p-galleria {
+        border: 0;
+        border-radius: 0;
+    }
+
+    .p-galleria-item,
+    .p-galleria-thumbnail {
+        border-radius: .5rem;
+        overflow: hidden;
+    }
+
+
+    .p-galleria-thumbnail {
+        border: 2px transparent;
+    }
+
+    .p-galleria-thumbnail-item-current {
+        .p-galleria-thumbnail {
+
+            border: 2px solid var(--p-primary-color);
+            transition: all .2s;
+        }
+    }
+
+    .p-galleria-thumbnail-nav-button {
+        display: none;
+    }
+}

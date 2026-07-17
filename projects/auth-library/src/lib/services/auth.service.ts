@@ -1,4 +1,4 @@
-import { inject, Injectable, Service } from '@angular/core';
+import { computed, inject, Injectable, Service, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { AuthEndPoints } from '../enums/AuthEndPoints';
@@ -17,12 +17,19 @@ import { LoginREQ, LoginRES } from '../interfaces/login';
 import { BLogin } from '../interfaces/back-interfaces/b-login';
 import { RequestPasswordResetREQ, ForgotPasswordRES, ResetPasswordREQ } from '../interfaces/forgotpass';
 import { BForgotpass } from '../interfaces/back-interfaces/b-forgotpass';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Service()
 export class AuthService implements AuthAPI {
   private readonly _httpClient = inject(HttpClient);
   private readonly _authAdapt = inject(AuthAdapt);
   private readonly _authEndPoints = inject(AuthEndPoints);
+  private readonly _cookieService = inject(CookieService);
+
+  get isAuthenticated(): boolean {
+    return this._cookieService.check('user');
+  }
 
   sendEmailVerification(email: string): Observable<SendOtpToEmailRES> {
     return this.SendOtpToEmail({ email });
@@ -85,5 +92,9 @@ export class AuthService implements AuthAPI {
       throw { error: { message: res.message } };
     }
     return adapt(res);
+  }
+
+  logout(): void {
+    this._cookieService.delete('user');
   }
 }

@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { errorInterceptor } from './core/interceptors/error/error.interceptor';
 import { MessageService } from 'primeng/api';
 import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
+import { ngxSpinnerInterceptor } from './core/interceptors/ngx-spinner/ngx-spinner.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -22,7 +23,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([
         tokenInterceptor,
-        errorInterceptor
+        errorInterceptor,
+        ngxSpinnerInterceptor
       ])
     ),
     provideRouter(routes, withInMemoryScrolling({

@@ -62,8 +62,6 @@ export class LoginComponent extends AppComponentBase implements OnInit {
           this._cookieService.set('user', JSON.stringify(res.token), 90)
         } else {
           this._cookieService.set('user', JSON.stringify(res.token))
-          console.log(res);
-          
         }
 
         this._toastService.toaster('success', 'Login Successfully')

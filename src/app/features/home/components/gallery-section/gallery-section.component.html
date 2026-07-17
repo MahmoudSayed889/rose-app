@@ -1,8 +1,8 @@
-<section class="container m-auto text-center my-5 px-3 lg:px-0">
-    <h3 class="uppercase tracking-widest font-bold text-[#FF668B] dark:text-[#741C21]">Gallery</h3>
+<section class="container m-auto text-center my-16 px-3 lg:px-0">
+    <h3 class="uppercase tracking-widest font-bold text-[#FF668B] dark:text-[#741C21]">{{isDirRtl() ? 'معرض' : 'Gallery'}}</h3>
 
     <!-- head title -->
-    <lib-title title="Check Out our Wonderful Gallery"></lib-title>
+    <lib-title [title]="isDirRtl() ? 'تصفح معرضنا الرائع' : 'Out our Wonderful Gallery'"></lib-title>
 
     <div class="grid grid-cols-2 lg:grid-cols-3 grid-rows-12 gap-3 mt-5 h-[90vh]">
         @for (item of galleryItems(); track $index) {
