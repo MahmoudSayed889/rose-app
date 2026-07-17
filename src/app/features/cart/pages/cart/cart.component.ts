@@ -27,15 +27,10 @@ export class CartComponent implements OnInit {
   getCartItems(): void {
     this._spinner.show();
     this._cartService.getCartItems()
-      .pipe(finalize(()=> this._spinner.hide()) ,takeUntilDestroyed(this._destroyRef))
+      .pipe(finalize(() => this._spinner.hide()), takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => this.cartItems.set(res.payload.cartItems),
-        //   {
-
-        //   this._spinner.hide();
-        // },
-        error: (err) => {
-          console.log(err);
+        error: () => {
         }
       })
   }
@@ -43,15 +38,12 @@ export class CartComponent implements OnInit {
   removeCartItem(id: string): void {
     this.removeLoading.set(id);
     this._cartService.removeCartItem(id)
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(finalize(() => this.removeLoading.set(null)), takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: (res) => {
-          this.removeLoading.set(null);
+        next: () => {
           this.getCartItems();
         },
-        error: (err) => {
-          console.log(err);
-          this.removeLoading.set(null);
+        error: () => {
         }
       })
   }

@@ -47,7 +47,7 @@
   <div class="flex shrink-0 flex-col items-end justify-between gap-4">
     <lib-button
       type="button"
-      text="Remove"
+      [text]="'common.actions.Remove'|translate"
       iconPrimeNg="pi-trash"
       (onClick)="onRemove()"
       [disabled]="removeDisabled()"
