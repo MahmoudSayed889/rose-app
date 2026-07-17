@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { InputComponent } from "reusable-components";
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { RouterLink } from "@angular/router";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -21,20 +22,36 @@ export class CartComponent implements OnInit {
   private readonly _spinner = inject(NgxSpinnerService);
 
   cartItems: WritableSignal<CartItem[]> = signal([]);
+  removeLoading: WritableSignal<string | null> = signal(null);
 
   getCartItems(): void {
     this._spinner.show();
     this._cartService.getCartItems()
+      .pipe(finalize(()=> this._spinner.hide()) ,takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: (res) => this.cartItems.set(res.payload.cartItems),
+        //   {
+
+        //   this._spinner.hide();
+        // },
+        error: (err) => {
+          console.log(err);
+        }
+      })
+  }
+
+  removeCartItem(id: string): void {
+    this.removeLoading.set(id);
+    this._cartService.removeCartItem(id)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
-          this.cartItems.set(res.payload.cartItems);
-          console.log(this.cartItems());
-          this._spinner.hide();
+          this.removeLoading.set(null);
+          this.getCartItems();
         },
         error: (err) => {
           console.log(err);
-          this._spinner.hide();
+          this.removeLoading.set(null);
         }
       })
   }
@@ -42,8 +59,8 @@ export class CartComponent implements OnInit {
   readonly subtotal = 250;
   readonly total = 125;
 
-  onRemoveItem(itemId: number): void {
-    console.log('Remove item:', itemId);
+  onRemoveItem(itemId: string): void {
+    this.removeCartItem(itemId);
   }
 
   onIncreaseQuantity(itemId: string): void {

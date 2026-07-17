@@ -2,14 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { CartEndPoints } from '../../models/CartEndPoints';
 import { Observable } from 'rxjs';
-import { GetCartItemsResponse } from '../../models/cart.interface';
+import { GetCartItemsRES, RemoveCartItemsRES } from '../../models/cart.interface';
 
 @Service()
 export class CartService {
     private readonly _httpClient = inject(HttpClient);
     private readonly _CartEndPoints = inject(CartEndPoints);
 
-    getCartItems(): Observable<GetCartItemsResponse> {
-        return this._httpClient.get<GetCartItemsResponse>(this._CartEndPoints.GetCartItems);
+    getCartItems(): Observable<GetCartItemsRES> {
+        return this._httpClient.get<GetCartItemsRES>(this._CartEndPoints.GetCartItems);
+    }
+
+    removeCartItem(id: string): Observable<RemoveCartItemsRES> {
+        return this._httpClient.delete<RemoveCartItemsRES>(this._CartEndPoints.RemoveItemFromCart(id));
     }
 }

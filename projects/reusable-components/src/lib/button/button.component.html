@@ -9,17 +9,19 @@
         <span>{{text()}}</span>
     }
 
-    @if (iconLucide()) {
-        <lucide-angular 
-            [name]="iconLucide()?.name" 
-            [class]="iconLucide()?.class" 
-            [strokeWidth]="iconLucide()?.strokeWidth"
-            [size]="iconLucide()?.size ?? '24px'">
-        </lucide-angular>
-    }
-
-    @if (iconPrimeNg()) {
-        <i [class]="'pi ' + iconPrimeNg()"></i>
+    @if(!loading()) {
+        @if (iconLucide()) {
+            <lucide-angular 
+                [name]="iconLucide()?.name" 
+                [class]="iconLucide()?.class" 
+                [strokeWidth]="iconLucide()?.strokeWidth"
+                [size]="iconLucide()?.size ?? '24px'">
+            </lucide-angular>
+        }
+    
+        @if (iconPrimeNg()) {
+            <i [class]="'pi ' + iconPrimeNg()"></i>
+        }
     }
 
     <i class="pi" style="font-size: .9rem;" [ngClass]="{

@@ -8,10 +8,5 @@ import { Component, input } from '@angular/core';
 })
 export class SpLineComponent {
   lightColor = input<string>('border-gray-200');
-  darkColor = input<string>('dark:border-zinc-900');
-
-  ngOnInit() {
-    console.log(this.lightColor());
-    
-  }
+  darkColor = input<string>('border-zinc-900');
 }

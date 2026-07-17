@@ -2,24 +2,25 @@ import { DecimalPipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { CartItem } from '../../models/cart.interface';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ButtonComponent } from "reusable-components";
 
 @Component({
   selector: 'app-cart-item-card',
-  imports: [DecimalPipe, TranslatePipe],
+  imports: [DecimalPipe, TranslatePipe, ButtonComponent],
   templateUrl: './cart-item-card.component.html',
   styleUrl: './cart-item-card.component.scss',
 })
 export class CartItemCardComponent {
   item = input.required<CartItem>();
-  isLast = input<boolean>(false);
   removeLoading = input<boolean>(false);
+  removeDisabled = input<boolean>(false);
 
-  remove = output<number>();
+  remove = output<string>();
   increaseQuantity = output<string>();
   decreaseQuantity = output<string>();
 
   onRemove(): void {
-    // this.remove.emit(this.item().id);
+    this.remove.emit(this.item().id);
   }
 
   onIncreaseQuantity(): void {

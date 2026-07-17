@@ -11,6 +11,6 @@ export class CartEndPoints {
   readonly GetCartItems = `${this._baseURL}/api/cart`;
   readonly AddItemToCart = `${this._baseURL}/api/cart`;
   readonly ClearCart = `${this._baseURL}/api/cart`;
-  readonly UpdateCartItemQuantity = `${this._baseURL}/api/cart/{id}`;
-  readonly DeleteItemFromCart = `${this._baseURL}/api/cart/{id}`;
+  readonly UpdateCartItemQuantity = (id: string) => `${this._baseURL}/api/cart/${id}`;
+  readonly RemoveItemFromCart = (id: string) => `${this._baseURL}/api/cart/${id}`;
 }

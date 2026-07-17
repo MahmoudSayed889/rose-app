@@ -1,4 +1,4 @@
-export interface GetCartItemsResponse {
+export interface GetCartItemsRES {
   status: boolean;
   code: number;
   payload: Payload;
@@ -43,4 +43,10 @@ export interface Product {
 export interface Category {
   id: string;
   title: string;
+}
+
+export interface RemoveCartItemsRES {
+  status: boolean,
+  code: number,
+  message: string
 }
