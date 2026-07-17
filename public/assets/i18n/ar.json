@@ -9,7 +9,8 @@
             "submite": "إرسال",
             "save-changes": "حفظ التغييرات",
             "delete-my-account": "حذف حسابي",
-            "retry": "إعادة المحاولة"
+            "retry": "إعادة المحاولة",
+            "Remove": "حذف"
         },
         "or": "أو",
         "Need help?": "بحاجة الى مساعدة؟",
@@ -124,7 +125,10 @@
         "egp": "ج.م"
     },
     "cart": {
-        "title": ""
+        "Cart": "سلة المشتريات",
+        "products": "منتجات",
+        "Continue Shopping": "أكمل التسوق",
+        "Clear Cart":"أفرغ سلة المشتريات"
     },
     "profile": {
         "title": ""
