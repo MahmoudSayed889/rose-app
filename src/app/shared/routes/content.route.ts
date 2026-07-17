@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '../../core/guards/auth.guard';
 
 export const ContentRoutes: Routes = [
     {
@@ -24,5 +25,6 @@ export const ContentRoutes: Routes = [
     {
         path: 'cart',
         loadComponent: () => import('../../features/cart/pages/cart/cart.component').then((C) => C.CartComponent),
+        canActivate: [authGuard]
     },
 ];
