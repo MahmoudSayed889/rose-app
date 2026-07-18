@@ -89,8 +89,8 @@
       </div>
     </div>
 
-    <aside class="h-fit xl:sticky xl:top-8">
-      <h2 class="mb-6 text-2xl font-bold text-zinc-800">Summary</h2>
+    <aside class="h-fit xl:sticky xl:top-8 space-y-6">
+      <h2 class="text-2xl font-bold text-zinc-800">{{'cart.Summary'|translate}}</h2>
       <div class="bg-zinc-50 dark:bg-zinc-700 p-4 rounded-lg">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <lib-input placeholder="Coupon Code"></lib-input>
@@ -117,7 +117,7 @@
               <path d="m15 9-6 6" />
               <path d="M15 15h.01" />
             </svg>
-            Apply Coupon
+            {{'cart.Apply Coupon'|translate}}
           </button>
         </div>
 
@@ -129,44 +129,27 @@
 
         <div class="p-2.5 space-y-4">
           <div class="flex items-center justify-between text-base">
-            <span class="text-zinc-800 dark:text-zinc-50 font-medium text-lg">Subtotal</span>
+            <span class="text-zinc-800 dark:text-zinc-50 font-medium text-lg">{{'cart.Subtotal'|translate}}</span>
             <span class="font-semibold text-xl text-zinc-800 dark:text-zinc-50"
-              >{{ subtotal }} EGP</span
+              >{{ subtotal() }} EGP</span
             >
           </div>
           <div>
             <app-sp-line lightColor="border-zinc-300" darkColor="border-zinc-500"></app-sp-line>
           </div>
           <div class="flex items-center justify-between text-lg">
-            <span class="font-bold text-primary text-2xl">Total</span>
-            <span class="font-bold text-primary text-2xl">{{ total }} EGP</span>
+            <span class="font-bold text-primary text-2xl">{{'cart.Total'|translate}}</span>
+            <span class="font-bold text-primary text-2xl">{{ total() }} EGP</span>
           </div>
         </div>
       </div>
 
-      <!-- Checkout -->
-      <button
+      <lib-button
         type="button"
-        class="mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-base font-semibold text-white dark:text-zinc-900 transition-opacity hover:opacity-90"
-      >
-        Checkout
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-arrow-right"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
-      </button>
+        [text]="'cart.Checkout'|translate"
+        iconPrimeNg="pi-arrow-right"
+        styleClass="bg-primary text-white dark:text-zinc-900 w-full rounded-[10px] text-xl font-medium py-2.5 px-4"
+      ></lib-button>
     </aside>
   </div>
 </div>

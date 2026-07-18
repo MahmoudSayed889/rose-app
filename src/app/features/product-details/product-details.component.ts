@@ -60,17 +60,6 @@ export class ProductDetailsComponent {
     }
   }
 
-  getPrice(): number {
-    if (this.productDetails()?.discountType == 'PERCENT') {
-      const discountValue = (Number(this.productDetails()?.price) * Number(this.productDetails()?.discountValue)) / 100;
-      return this.productDetails()?.price! - discountValue;
-    }
-    if (this.productDetails()?.discountType == 'VALUE') {
-      return (Number(this.productDetails()?.price) - Number(this.productDetails()?.discountValue));
-    }
-    return this.productDetails()?.price!
-  }
-
   ngOnInit() {
     this._route.paramMap.subscribe(params => {
       this.productId = params.get('id');

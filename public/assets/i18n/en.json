@@ -117,7 +117,12 @@
     "Cart": "Cart",
     "products": "products",
     "Continue Shopping": "Continue Shopping",
-    "Clear Cart":"Clear Cart"
+    "Clear Cart": "Clear Cart",
+    "Summary": "Summary",
+    "Subtotal": "Subtotal",
+    "Total": "Total",
+    "Checkout": "Checkout",
+    "Apply Coupon": "Apply Coupon"
   },
   "profile": {
     "title": ""
