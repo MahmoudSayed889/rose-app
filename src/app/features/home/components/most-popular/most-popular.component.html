@@ -48,8 +48,9 @@
       [discountType]="product.discountType"
       [discountValue]="product.discountValue"
       [rating]="product.rating"
-      [badge]="product.stock === 0 ? 'out-of-stock' : null"
-      (cardClick)="onProductClick($event)" />
+      [badge]="product.tags||[]"
+      (cardClick)="onProductClick($event)"
+      (addToCart)="addToCart(product.id)" />
   </div>
 
   <!-- Products Loading Skeleton -->

@@ -21,6 +21,8 @@ import { HomeService } from '../../services/home.service';
 import { Category, CategoryResponse } from './models/category';
 import { Product, ProductsList } from '../../../products/models/product';
 import { icons } from 'lucide-angular';
+import { AddToCartREQ } from '../../../cart/models/cart.interface';
+import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
 
 @Component({
   selector: 'app-most-popular',
@@ -42,6 +44,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   private _router = inject(Router);
   private _translateService = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
+  private _cartFacad = inject(CartFacadeService);
 
   // State signals
   categories = signal<Category[]>([]);
@@ -57,6 +60,14 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
     this.loadProducts()
+  }
+
+  addToCart(productId: string): void {
+    const data: AddToCartREQ = {
+      productId,
+      quantity: 1
+    }
+    this._cartFacad.addToCart(data)
   }
 
   loadCategories(): void {

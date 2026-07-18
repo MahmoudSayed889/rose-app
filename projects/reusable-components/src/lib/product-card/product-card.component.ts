@@ -1,16 +1,19 @@
 import { CurrencyPipe } from '@angular/common';
+import { AuthService } from "auth-library";
+
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
   EventEmitter,
+  inject,
   Input,
   Output,
   signal,
 } from '@angular/core';
 import { LucideAngularModule, icons } from 'lucide-angular';
 
-export type ProductCardBadge = 'new' | 'hot' | 'out-of-stock';
+export type ProductCardBadge = 'new' | 'hot' | 'out of stock';
 export type ProductCardStarState = 'filled' | 'empty';
 
 @Component({
@@ -24,18 +27,21 @@ export type ProductCardStarState = 'filled' | 'empty';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
+  readonly authService = inject(AuthService);
+
   readonly icons = icons;
-  @Input({ required: true }) productId!: string | number;
+  @Input({ required: true }) productId!: string;
   @Input({ required: true }) imageUrl!: string;
   @Input({ required: true }) title!: string;
   @Input({ required: true }) price!: number;
   @Input({ required: true }) discountType!: string;
   @Input({ required: true }) discountValue!: string;
-  @Input() badge: ProductCardBadge | null = null;
+  // @Input() badge: ProductCardBadge | null = null;
+  @Input() badge: ProductCardBadge[] = [];
   @Input() isFavorite = false;
 
   @Output() favoriteToggle = new EventEmitter<string | number>();
-  @Output() addToCart = new EventEmitter<string | number>();
+  @Output() addToCart = new EventEmitter<string>();
   @Output() cardClick = new EventEmitter<string | number>();
 
   private readonly _rating = signal(0);
@@ -79,7 +85,8 @@ export class ProductCardComponent {
 
   onAddToCartClick(event: Event): void {
     event.stopPropagation();
-    if (this.badge !== 'out-of-stock') {
+    
+    if (!this.badge.includes('out of stock')) {      
       this.addToCart.emit(this.productId);
     }
   }
@@ -90,6 +97,6 @@ export class ProductCardComponent {
   }
 
   onCardBodyClick(): void {
-    this.cardClick.emit(this.productId);
+    this.cardClick.emit(this.productId);    
   }
 }
