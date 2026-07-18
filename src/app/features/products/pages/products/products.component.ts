@@ -7,8 +7,6 @@ import { PaginatorComponent, ProductCardComponent } from 'reusable-components';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { Router } from '@angular/router';
 import { PaginatorState } from 'primeng/types/paginator';
-import { NgxSpinnerService } from 'ngx-spinner';
-
 
 @Component({
   selector: 'app-products',
@@ -24,7 +22,6 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
 
   private _productsService = inject(ProductsService)
   private _router = inject(Router)
-  private readonly _ngxSpinner = inject(NgxSpinnerService);
 
   products = signal<Product[]>([])
 
@@ -37,10 +34,8 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
       page: this.paginator().page,
       limit: this.paginator().limit
     } as ExternalParams
-    this._ngxSpinner.show();
     this._productsService.getProducts(params).subscribe({
       next: (res: ProductsList) => {
-        this._ngxSpinner.hide();
         this.products.set(res.payload.data)
 
         this.paginator.set({

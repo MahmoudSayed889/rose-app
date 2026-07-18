@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IconLabelComponent } from '../../../../../shared/components/icon-label/icon-label.component';
 import { LucideAngularModule } from 'lucide-angular';
+import { AppComponentBase } from '../../../../../shared/app-component-base';
 
 @Component({
   selector: 'app-service-section',
@@ -8,4 +9,4 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './service-section.component.html',
   styleUrl: './service-section.component.scss',
 })
-export class ServiceSectionComponent {}
+export class ServiceSectionComponent extends AppComponentBase {}
