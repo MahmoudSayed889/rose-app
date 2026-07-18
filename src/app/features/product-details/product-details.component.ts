@@ -38,10 +38,10 @@ export class ProductDetailsComponent {
         next: (res) => {
           this.productDetails.set(res.payload.product);
           this.transformProductGallery(this.productDetails()!);
+          this._productsService.getPrice(res.payload.product);
           this._ngxSpinner.hide();
         },
-        error: (err) => {
-          console.log(err);
+        error: () => {
           this._ngxSpinner.hide();
         }
       })
@@ -63,17 +63,6 @@ export class ProductDetailsComponent {
     } catch (error) {
       console.error('Error parsing gallery:', error);
     }
-  }
-
-  getPrice(): number {
-    if (this.productDetails()?.discountType == 'PERCENT') {
-      const discountValue = (Number(this.productDetails()?.price) * Number(this.productDetails()?.discountValue)) / 100;
-      return this.productDetails()?.price! - discountValue;
-    }
-    if (this.productDetails()?.discountType == 'VALUE') {
-      return (Number(this.productDetails()?.price) - Number(this.productDetails()?.discountValue));
-    }
-    return this.productDetails()?.price!
   }
 
   ngOnInit() {
