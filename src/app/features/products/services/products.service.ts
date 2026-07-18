@@ -34,11 +34,11 @@ export class ProductsService {
         const sixMonthsAgo = new Date();
         sixMonthsAgo.setMonth(today.getMonth() - 6);
         const tags: string[] = [];
-        
+
         if (product.rating >= 4) {
             tags.push('hot');
         }
-        if (product.stock === 0) { 
+        if (product.stock === 0) {
             tags.push('out of stock');
         }
         const productDate = new Date(product.createdAt);
@@ -46,5 +46,18 @@ export class ProductsService {
             tags.push('new');
         }
         return tags;
+    }
+
+    getPrice(product: Product): void {
+        if (product.discountType === "PERCENT") {
+            const discountValue = (Number(product.price) * Number(product.discountValue)) / 100;
+            product.priceWithDiscount = Number(product.price) - Number(discountValue);
+        }
+        else if (product.discountType == 'VALUE') {
+            product.priceWithDiscount = Number(product.price) - Number(product.discountValue);
+        }
+        else {
+            product.priceWithDiscount = Number(product.price);
+        }
     }
 }

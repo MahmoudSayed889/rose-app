@@ -1,6 +1,4 @@
-<div
-  class="flex gap-5 px-5 py-5 sm:px-6 sm:py-6"
->
+<div class="flex gap-5 px-5 py-5 sm:px-6 sm:py-6">
   <div class="shrink-0">
     <img
       [src]="item().product.cover"
@@ -11,7 +9,7 @@
 
   <div class="flex min-w-0 flex-1 flex-col justify-between gap-3">
     <div class="space-y-2">
-      <h2 class="truncate text-lg font-semibold text-[#741C21] dark:text-[#FFC2D0]">
+      <h2 class="truncate text-lg font-semibold text-primary">
         {{ item().product.title }}
       </h2>
 
@@ -30,29 +28,35 @@
           />
         </svg>
         <span class="text-zinc-800 dark:text-zinc-100"
-          >Rating: {{ item().product.rating | number: '1.1-1' }}/5</span
+          >{{isDirRtl()? 'التقييم':'Rating'}}: {{ item().product.rating | number: '1.1-1' }}/5</span
         >
         <a href="#" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
-          ({{ item().product.ratings }} ratings)
+          ({{ item().product.ratings }} {{isDirRtl()? 'تقييمات':'ratings'}})
         </a>
       </div>
     </div>
 
-    <p class="text-lg font-bold text-zinc-800 dark:text-zinc-100">
-      <span class="mr-1 text-sm font-semibold text-primary"> (x{{ item().quantity }}) </span>
-      {{ item().product.price | number: '1.2-2' }} <span class="text-sm">EGP</span>
-    </p>
+    <div class="">
+      <span class="text-sm font-medium text-primary">(x{{ item().quantity }}) </span>
+      <span class="text-xl font-bold text-zinc-400 dark:text-zinc-300 line-through">
+        {{ item().product.price | number: '1.2-2' }}</span
+      >
+      <span class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
+        {{ item().product.priceWithDiscount | number: '1.2-2' }}</span
+      >
+      <span class="font-medium"> EGP</span>
+    </div>
   </div>
 
   <div class="flex shrink-0 flex-col items-end justify-between gap-4">
     <lib-button
       type="button"
-      [text]="'common.actions.Remove'|translate"
+      [text]="isDirRtl()? 'حذف':'Remove'"
       iconPrimeNg="pi-trash"
       (onClick)="onRemove()"
       [disabled]="removeDisabled()"
       [loading]="removeLoading()"
-      styleClass="flex-row-reverse gap-1.5! bg-red-600 dark:bg-red-900 dark:text-red-100 p-2.5 rounded-[10px] text-sm font-medium text-white hover:bg-red-700"
+      styleClass="`flex-row-reverse gap-1.5! bg-red-600 dark:bg-red-900 dark:text-red-100 p-2.5 rounded-[10px] text-sm font-medium text-white hover:bg-red-700`"
     ></lib-button>
 
     <div class="flex items-center gap-2">

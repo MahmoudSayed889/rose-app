@@ -24,7 +24,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class LoginComponent extends AppComponentBase implements OnInit {
 
-  private readonly _authService = inject(AuthService)
   private fb = inject(FormBuilder)
   private _router = inject(Router)
 
@@ -60,10 +59,10 @@ export class LoginComponent extends AppComponentBase implements OnInit {
 
         if (this.form.value.rememberMe) {
           this._cookieService.set('user', JSON.stringify(res.token), 90)
+          this._authService.isAuthenticated.set(true);
         } else {
           this._cookieService.set('user', JSON.stringify(res.token))
-          console.log(res);
-          
+          this._authService.isAuthenticated.set(true);
         }
 
         this._toastService.toaster('success', 'Login Successfully')

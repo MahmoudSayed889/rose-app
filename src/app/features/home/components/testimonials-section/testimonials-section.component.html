@@ -1,22 +1,27 @@
 <section class="text-center my-32">
-    <h3 class="uppercase tracking-widest font-bold text-[#FF668B] dark:text-[#741C21]">Testimonials</h3>
+    <h3 class="uppercase tracking-widest font-bold text-[#FF668B] dark:text-[#741C21]">{{isDirRtl() ? 'شهادات العملاء' : 'Testimonials'}}</h3>
 
     <!-- head title -->
-    <lib-title title="Real Words from Happy Customers"></lib-title>
+    <lib-title [title]="isDirRtl() ? 'كلمات حقيقية من عملاء سعداء' : 'Real Words from Happy Customers'"></lib-title>
 
-    <div class="bg-rose-100 dark:bg-zinc-900 py-20 mt-9 grid grid-cols-1 lg:grid-cols-3 gap-9 px-3 lg:px-7">
-        @for (item of testimonials(); track $index) {
-            <div class="card bg-white dark:bg-zinc-800 p-5 pt-14 rounded-2xl relative">
-                <img class="absolute rounded-full top-0 left-[50%] translate-[-50%] border-4 border-white dark:border-zinc-800" [src]="item.image ? item.image : 'https://placehold.co/100'" alt="">
+    <div class="bg-rose-100 dark:bg-zinc-900 py-20 pt-28 mt-9 px-3 lg:px-7">
+        <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-9 gap-y-24">
+            @for (item of testimonials(); track $index) {
+                <div class="card bg-white dark:bg-zinc-800 p-5 pt-14 rounded-2xl relative">
+                    <div class="absolute w-25 h-25 rounded-full top-0 left-[50%] translate-[-50%] border-4 border-white dark:border-zinc-800 overflow-hidden">
+                        <img class="" [src]="item.image ? item.image : 'https://placehold.co/100'" alt="">
+                    </div>
 
-                <h4 class=" mb-9">{{item.name}}</h4>
+                    <h4 class=" mb-9">{{item.name}}</h4>
 
-                <p-rating [ngModel]="item.rating" stars="5" [readonly]="true"/>
+                    <p-rating [ngModel]="item.rating" stars="5" [readonly]="true"/>
 
-                <p>{{item.content}}</p>
+                    <p>{{item.content}}</p>
 
-                <p class="text-muted-color opacity-50 mt-5 text-sm">{{item.createdAt | date: 'MMMM d, y'}}</p>
-            </div>
-        }
+                    <p class="text-muted-color opacity-50 mt-5 text-sm">{{item.createdAt | date: 'MMMM d, y'}}</p>
+                </div>
+            }
+        </div>
+        
     </div>
 </section>

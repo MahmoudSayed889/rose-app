@@ -1,5 +1,5 @@
-<section class="space-12.5 p-15">
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-17.5">
+<section class="space-12.5 px-3 lg:px-0">
+    <section class="container mx-auto my-10 grid grid-cols-1 lg:grid-cols-2 gap-17.5">
         <div>
             <app-galleria [images]="productImages()!"></app-galleria>
         </div>
@@ -13,7 +13,7 @@
                         <span
                             class="text-zinc-300 dark:text-zinc-500 text-3xl font-bold line-through">{{productDetails()?.price}}</span>
                         <span class="text-zinc-800 dark:text-zinc-50 text-3xl font-bold">
-                            {{getPrice()}}
+                            {{productDetails()?.priceWithDiscount!}}
                             <span class="font-semibold text-xl">EGP</span></span>
                     </div>
                     <div class="rounded-full px-3 py-1.5 bg-zinc-100 dark:bg-zinc-700 flex items-center gap-1.5">
