@@ -18,7 +18,7 @@ import { BLogin } from '../interfaces/back-interfaces/b-login';
 import { RequestPasswordResetREQ, ForgotPasswordRES, ResetPasswordREQ } from '../interfaces/forgotpass';
 import { BForgotpass } from '../interfaces/back-interfaces/b-forgotpass';
 import { CookieService } from 'ngx-cookie-service';
-
+import { Router } from "@angular/router";
 
 @Service()
 export class AuthService implements AuthAPI {
@@ -26,6 +26,7 @@ export class AuthService implements AuthAPI {
   private readonly _authAdapt = inject(AuthAdapt);
   private readonly _authEndPoints = inject(AuthEndPoints);
   private readonly _cookieService = inject(CookieService);
+  private readonly _router = inject(Router);
 
   readonly isAuthenticated = signal(
     this._cookieService.check('user')
@@ -97,5 +98,6 @@ export class AuthService implements AuthAPI {
   logout(): void {
     this._cookieService.delete('user');
     this.isAuthenticated.set(false);
+    this._router.navigate(['/login']);
   }
 }

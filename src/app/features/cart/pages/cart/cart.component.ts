@@ -3,13 +3,13 @@ import { CartItemCardComponent } from '../../components/cart-item-card/cart-item
 import { CartService } from '../../services/cart/cart.service';
 import { CartItem } from '../../models/cart.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { InputComponent, ButtonComponent, LucideIconConfig } from "reusable-components";
+import { InputComponent, ButtonComponent } from "reusable-components";
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { RouterLink } from "@angular/router";
 import { finalize } from 'rxjs';
 import { ProductsService } from '../../../products/services/products.service';
 import { AppComponentBase } from '../../../../shared/app-component-base';
-import { Brush, BrushCleaning, LucideIconData } from 'lucide-angular';
+import { icons } from 'lucide-angular';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -29,10 +29,7 @@ export class CartComponent extends AppComponentBase implements OnInit {
   subtotal: WritableSignal<number> = signal(0);
   total: WritableSignal<number> = signal(0);
 
-  iconname: LucideIconData = BrushCleaning
-  clearCartIcon: LucideIconConfig = {
-    name: this.iconname
-  }
+  icons = icons
 
   getCartItems(): void {
     this._cartService.getCartItems()

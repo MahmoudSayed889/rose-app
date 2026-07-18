@@ -12,7 +12,10 @@
         </div>
 
         @if (cartItems().length !== 0) {
-        <lib-button [text]="isDirRtl()? 'أفرغ سلة المشتريات':'Clear Cart'" [iconLucide]="clearCartIcon"
+        <lib-button [text]="isDirRtl()? 'أفرغ سلة المشتريات':'Clear Cart'" [iconLucide]="{
+          name: icons.BrushCleaning,
+          size: '20px'
+        }"
         styleClass="inline-flex items-center gap-1.5 shrink-0 rounded-[10px] bg-[#FBEAEA] dark:bg-zinc-700 px-4 py-2.5 text-sm font-medium text-primary transition cursor-pointer hover:opacity-85"
         (onClick)="clearCart()"
         ></lib-button>

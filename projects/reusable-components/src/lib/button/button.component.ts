@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
-export interface LucideIconConfig {
+interface LucideIconConfig {
   name: LucideIconData;
   class?: string;
   strokeWidth?: number;
