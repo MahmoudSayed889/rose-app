@@ -125,15 +125,6 @@
         "egp": "ج.م"
     },
     "cart": {
-        "Cart": "سلة المشتريات",
-        "products": "منتجات",
-        "Continue Shopping": "أكمل التسوق",
-        "Clear Cart": "أفرغ سلة المشتريات",
-        "Summary": "ملخص",
-        "Subtotal": "المجموع قبل الخصم",
-        "Total": "الإجمالي",
-        "Checkout":"ادفع",
-        "Apply Coupon": "استخدم القسيمة"
     },
     "profile": {
         "title": ""

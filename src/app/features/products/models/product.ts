@@ -21,7 +21,7 @@ export interface Product {
     rating: number
     ratings: number
     stock: number
-    price: number | string
+    price: number
     priceWithDiscount?: number
     discountType: string
     discountValue: string

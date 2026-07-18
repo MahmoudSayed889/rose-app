@@ -3,20 +3,22 @@ import { CartItemCardComponent } from '../../components/cart-item-card/cart-item
 import { CartService } from '../../services/cart/cart.service';
 import { CartItem } from '../../models/cart.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TranslatePipe } from '@ngx-translate/core';
-import { InputComponent, ButtonComponent } from "reusable-components";
+import { InputComponent, ButtonComponent, LucideIconConfig } from "reusable-components";
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { RouterLink } from "@angular/router";
 import { finalize } from 'rxjs';
 import { ProductsService } from '../../../products/services/products.service';
+import { AppComponentBase } from '../../../../shared/app-component-base';
+import { Brush, BrushCleaning, LucideIconData } from 'lucide-angular';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
-  imports: [CartItemCardComponent, TranslatePipe, InputComponent, SpLineComponent, RouterLink, ButtonComponent],
+  imports: [CartItemCardComponent, InputComponent, SpLineComponent, RouterLink, ButtonComponent, DecimalPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
-export class CartComponent implements OnInit {
+export class CartComponent extends AppComponentBase implements OnInit {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _productsService = inject(ProductsService);
@@ -26,6 +28,11 @@ export class CartComponent implements OnInit {
 
   subtotal: WritableSignal<number> = signal(0);
   total: WritableSignal<number> = signal(0);
+
+  iconname: LucideIconData = BrushCleaning
+  clearCartIcon: LucideIconConfig = {
+    name: this.iconname
+  }
 
   getCartItems(): void {
     this._cartService.getCartItems()
@@ -48,10 +55,15 @@ export class CartComponent implements OnInit {
   }
 
   handleTotals(cartItems: CartItem[]): void {
-    cartItems.map((item) => {
-      this.subtotal.update((value) => value + Number(item.product.price));
-      this.total.update((value) => value + Number(item.product.priceWithDiscount));
-    })
+    if (cartItems.length === 0) {
+      this.subtotal.set(0);
+      this.total.set(0);
+    } else {
+      cartItems.map((item) => {
+        this.subtotal.update((value) => value + Number(item.product.price));
+        this.total.update((value) => value + Number(item.product.priceWithDiscount));
+      })
+    }
   }
 
   removeCartItem(id: string): void {
@@ -64,6 +76,17 @@ export class CartComponent implements OnInit {
         },
         error: () => {
         }
+      })
+  }
+
+  clearCart(): void {
+    this._cartService.clearCart()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: () => {
+          this.getCartItems();
+        },
+        error: (err) => console.log(err)
       })
   }
 

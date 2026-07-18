@@ -16,4 +16,8 @@ export class CartService {
     removeCartItem(id: string): Observable<RemoveCartItemsRES> {
         return this._httpClient.delete<RemoveCartItemsRES>(this._CartEndPoints.RemoveItemFromCart(id));
     }
+    
+    clearCart(): Observable<RemoveCartItemsRES> {
+        return this._httpClient.delete<RemoveCartItemsRES>(this._CartEndPoints.ClearCart);
+    }
 }
