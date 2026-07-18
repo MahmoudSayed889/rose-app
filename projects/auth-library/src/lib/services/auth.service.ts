@@ -27,9 +27,9 @@ export class AuthService implements AuthAPI {
   private readonly _authEndPoints = inject(AuthEndPoints);
   private readonly _cookieService = inject(CookieService);
 
-  get isAuthenticated(): boolean {
-    return this._cookieService.check('user');
-  }
+  readonly isAuthenticated = signal(
+    this._cookieService.check('user')
+  );
 
   sendEmailVerification(email: string): Observable<SendOtpToEmailRES> {
     return this.SendOtpToEmail({ email });
@@ -96,5 +96,6 @@ export class AuthService implements AuthAPI {
 
   logout(): void {
     this._cookieService.delete('user');
+    this.isAuthenticated.set(false);
   }
 }

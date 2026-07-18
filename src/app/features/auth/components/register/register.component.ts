@@ -11,7 +11,6 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
-import { AuthService } from 'auth-library';
 import { InputComponent, ButtonComponent } from 'reusable-components';
 import { SpLineComponent } from '../../../../shared/components/sp-line/sp-line.component';
 import { AppComponentBase } from '../../../../shared/app-component-base';
@@ -33,7 +32,6 @@ type RegisterStep = 1 | 2 | 3;
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent extends AppComponentBase implements OnInit {
-  private readonly _authService = inject(AuthService);
   private readonly _fb = inject(FormBuilder);
   private readonly _router = inject(Router);
 
