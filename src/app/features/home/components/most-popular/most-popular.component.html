@@ -57,9 +57,11 @@
       [discountType]="product.discountType"
       [discountValue]="product.discountValue"
       [rating]="product.rating"
-      [badge]="product.stock === 0 ? 'out-of-stock' : null"
       (cardClick)="onProductClick($event)"
-      (favoriteToggle)="onFavoriteToggle($event)" />
+      [badge]="product.tags?.[0] || null"
+      (favoriteToggle)="onFavoriteToggle($event)"
+      (addToCart)="addToCart(product.id)"  />
+/>
   </div>
 
   <!-- Products Loading Skeleton -->

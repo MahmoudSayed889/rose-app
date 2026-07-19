@@ -25,3 +25,18 @@ export interface RemoveCartItemsRES {
   code: number,
   message: string
 }
+
+export interface AddToCartREQ {
+  productId: string,
+  quantity: number
+}
+
+export interface AddToCartRES {
+  status: boolean;
+  code: number;
+  payload: AddToCartPayload;
+}
+
+export interface AddToCartPayload {
+  cartItem: CartItem;
+}

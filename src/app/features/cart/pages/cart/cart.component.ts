@@ -38,6 +38,8 @@ export class CartComponent extends AppComponentBase implements OnInit {
         next: (res) => {
           this.cartItems.set(res.payload.cartItems);
           this.handlepriceWithDiscount(this.cartItems());
+          this.subtotal.set(0);
+          this.total.set(0);
           this.handleTotals(this.cartItems());
         },
         error: () => {
