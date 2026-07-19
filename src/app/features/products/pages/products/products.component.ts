@@ -7,6 +7,8 @@ import { PaginatorComponent, ProductCardComponent } from 'reusable-components';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { Router } from '@angular/router';
 import { PaginatorState } from 'primeng/types/paginator';
+import { AddToCartREQ } from '../../../cart/models/cart.interface';
+import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
 
 @Component({
   selector: 'app-products',
@@ -21,6 +23,7 @@ import { PaginatorState } from 'primeng/types/paginator';
 export class ProductsComponent extends AppComponentBase implements OnInit {
 
   private _productsService = inject(ProductsService)
+  private _cartFacad = inject(CartFacadeService)
   private _router = inject(Router)
 
   products = signal<Product[]>([])
@@ -48,12 +51,16 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
     })
   }
 
-  logFavoriteToggle(productId: string | number): void {
-    console.log('favoriteToggle', productId);
+  addToCart(productId: string): void {
+    const data: AddToCartREQ = {
+      productId,
+      quantity: 1
+    }
+    this._cartFacad.addToCart(data)
   }
 
-  logAddToCart(productId: string | number): void {
-    console.log('addToCart', productId);
+  logFavoriteToggle(productId: string | number): void {
+    console.log('favoriteToggle', productId);
   }
 
   logCardClick(productId: string | number): void {

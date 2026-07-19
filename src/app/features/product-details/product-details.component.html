@@ -54,6 +54,7 @@
             <div class="grow dark:text-zinc-400 overflow-y-auto wrap-break-word max-h-75 min-h-0">
                 {{this.productDetails()?.description}}
             </div>
+            
             <div class="flex items-center gap-2.5">
                 <button
                     class="bg-zinc-100 dark:bg-zinc-800 dark:border dark:border-zinc-500 py-2.5 px-3 rounded-[10px]">
@@ -66,7 +67,15 @@
                         <path d="M18 12v6" />
                     </svg>
                 </button>
-                <button
+                <div class="w-full">
+                    <lib-button
+                    [text]="'productDetails.Add to Cart' | translate"
+                    iconPrimeNg="pi-shopping-cart"
+                    styleClass="w-full py-2.5 px-3 rounded-[10px] bg-primary text-white dark:text-zinc-800 grow justify-center font-medium hover:opacity-90"
+                    (onClick)="addToCart()"
+                ></lib-button>
+                </div>
+                <!-- <button
                     class="flex items-center gap-2.5 py-2.5 px-3 rounded-[10px] bg-primary text-white dark:text-zinc-800 grow justify-center font-medium">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -75,8 +84,8 @@
                         <circle cx="19" cy="21" r="1" />
                         <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
                     </svg>
-                    {{'productDetails.Add to Cart' | translate}}
-                </button>
+                    {{}}
+                </button> -->
             </div>
         </div>
     </section>

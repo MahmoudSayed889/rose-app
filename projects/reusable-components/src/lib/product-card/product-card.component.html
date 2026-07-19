@@ -19,18 +19,18 @@
     @if (badge !== null) {
       <span
         class="product-card__badge"
-        [class.product-card__badge--new]="badge === 'new'"
-        [class.product-card__badge--hot]="badge === 'hot'"
-        [class.product-card__badge--out-of-stock]="badge === 'out-of-stock'"
+        [class.product-card__badge--new]="badge[0] === 'new'"
+        [class.product-card__badge--hot]="badge[0] === 'hot'"
+        [class.product-card__badge--out-of-stock]="badge[0] === 'out of stock'"
       >
-        @switch (badge) {
+        @switch (badge[0]) {
           @case ('new') {
             New
           }
           @case ('hot') {
             Hot
           }
-          @case ('out-of-stock') {
+          @case ('out of stock') {
             Out of Stock
           }
         }
@@ -114,7 +114,7 @@
     <button
       type="button"
       class="product-card__cart"
-      [disabled]="badge === 'out-of-stock'"
+      [disabled]="badge.includes('out of stock')  || !authService.isAuthenticated()"
       aria-label="Add to cart"
       (click)="onAddToCartClick($event)"
     >

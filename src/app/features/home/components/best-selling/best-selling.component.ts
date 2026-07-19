@@ -3,10 +3,12 @@ import { CarouselModule } from 'primeng/carousel';
 import { CommonModule } from '@angular/common';
 import { ProductsService } from '../../../products/services/products.service';
 import { Product } from '../../../products/models/product';
-import { ProductCardComponent } from "reusable-components";
+import { ProductCardBadge, ProductCardComponent } from "reusable-components";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { AddToCartREQ } from '../../../cart/models/cart.interface';
+import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
 
 @Component({
   selector: 'app-best-selling',
@@ -18,6 +20,7 @@ export class BestSellingComponent {
   private readonly _productService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _router = inject(Router);
+  private readonly _cartFacad = inject(CartFacadeService);
 
   bestSellingProducts: WritableSignal<Product[] | null> = signal(null);
 
@@ -39,6 +42,14 @@ export class BestSellingComponent {
     }
   ];
 
+  addToCart(productId: string): void {
+    const data: AddToCartREQ = {
+      productId,
+      quantity: 1
+    }
+    this._cartFacad.addToCart(data)
+  }
+
   getBestSelling() {
     this._productService.getBestSellingProducts()
       .pipe(takeUntilDestroyed(this._destroyRef))
@@ -53,7 +64,7 @@ export class BestSellingComponent {
       });
   }
 
-  getProductTags(product: Product): string[] {
+  getProductTags(product: Product): ProductCardBadge[] {
     return this._productService.getProductsTags(product);
   }
 
