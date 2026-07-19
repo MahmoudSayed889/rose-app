@@ -8,6 +8,8 @@ import { AppComponentBase } from '../../../../shared/app-component-base';
 import { Router } from '@angular/router';
 import { PaginatorState } from 'primeng/types/paginator';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TranslateService } from '@ngx-translate/core';
+import { WishlistService } from '../../../wishlist/services/wishlist.service';
 
 
 @Component({
@@ -25,6 +27,8 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
   private _productsService = inject(ProductsService)
   private _router = inject(Router)
   private readonly _ngxSpinner = inject(NgxSpinnerService);
+  private readonly _wishlistService = inject(WishlistService);
+  private readonly _translateService = inject(TranslateService);
 
   products = signal<Product[]>([])
 
@@ -53,8 +57,15 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
     })
   }
 
-  logFavoriteToggle(productId: string | number): void {
-    console.log('favoriteToggle', productId);
+  onFavoriteToggle(productId: string | number): void {
+    this._wishlistService.addToWishlist(String(productId)).subscribe({
+      next: () => {
+        this._toastService.toaster('success', this._translateService.instant('wishlist.addedToWishlist'));
+      },
+      error: () => {
+        this._toastService.toaster('error', this._translateService.instant('wishlist.addToWishlistError'));
+      },
+    });
   }
 
   logAddToCart(productId: string | number): void {

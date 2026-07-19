@@ -121,7 +121,9 @@
         "ratings": "تقييمات",
         "addToCart": "أضف إلى السلة",
         "exploreSimilar": "استكشف منتجات مشابهة",
-        "egp": "ج.م"
+        "egp": "ج.م",
+        "addedToWishlist": "تمت الإضافة إلى قائمة الأمنيات",
+        "addToWishlistError": "فشل إضافة المنتج إلى قائمة الأمنيات"
     },
     "cart": {
         "title": ""

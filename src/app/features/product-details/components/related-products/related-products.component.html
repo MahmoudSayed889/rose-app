@@ -11,6 +11,7 @@
         [discountType]="product.discountType"
         [discountValue]="product.discountValue"
         [rating]="product.rating"
+        (favoriteToggle)="onFavoriteToggle($event)"
       ></lib-product-card>
     }
   </div>

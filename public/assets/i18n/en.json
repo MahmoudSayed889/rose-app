@@ -110,7 +110,9 @@
     "ratings": "Ratings",
     "addToCart": "Add to Cart",
     "exploreSimilar": "Explore Similar Products",
-    "egp": "EGP"
+    "egp": "EGP",
+    "addedToWishlist": "Added to wishlist",
+    "addToWishlistError": "Failed to add item to wishlist"
   },
   "cart": {
     "title": ""

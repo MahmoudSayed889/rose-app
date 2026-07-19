@@ -37,7 +37,8 @@
                                 <lib-product-card [productId]="item.id" [imageUrl]="item.cover" [title]="item.title"
                                     [price]="item.price" [discountType]="item.discountType"
                                     [discountValue]="item.discountValue" [rating]="item.rating" [badge]="'new'"
-                                    [isFavorite]="true" [badge]="item.tags[0]" (cardClick)="onCardClick($event)" />
+                                    [isFavorite]="true" [badge]="item.tags[0]" (cardClick)="onCardClick($event)"
+                                    (favoriteToggle)="onFavoriteToggle($event)" />
                             </div>
                         </ng-template>
                     </p-carousel>

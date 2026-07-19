@@ -5,9 +5,11 @@ import { ProductsService } from '../../../products/services/products.service';
 import { Product } from '../../../products/models/product';
 import { ProductCardComponent } from "reusable-components";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { WishlistService } from '../../../wishlist/services/wishlist.service';
+import { ToastService } from '../../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-best-selling',
@@ -20,6 +22,9 @@ export class BestSellingComponent {
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _router = inject(Router);
   private readonly _ngxSpinner = inject(NgxSpinnerService);
+  private readonly _wishlistService = inject(WishlistService);
+  private readonly _toastService = inject(ToastService);
+  private readonly _translateService = inject(TranslateService);
 
   bestSellingProducts: WritableSignal<Product[] | null> = signal(null);
 
@@ -71,6 +76,17 @@ export class BestSellingComponent {
 
   onCardClick(productId: string | number): void {
     this._router.navigate(['/product-details', productId])
+  }
+
+  onFavoriteToggle(productId: string | number): void {
+    this._wishlistService.addToWishlist(String(productId)).subscribe({
+      next: () => {
+        this._toastService.toaster('success', this._translateService.instant('wishlist.addedToWishlist'));
+      },
+      error: () => {
+        this._toastService.toaster('error', this._translateService.instant('wishlist.addToWishlistError'));
+      },
+    });
   }
 
   ngOnInit() {

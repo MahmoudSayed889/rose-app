@@ -20,6 +20,7 @@ import { AppComponentBase } from '../../../../shared/app-component-base';
 import { HomeService } from '../../services/home.service';
 import { Category, CategoryResponse } from './models/category';
 import { Product, ProductsList } from '../../../products/models/product';
+import { WishlistService } from '../../../wishlist/services/wishlist.service';
 
 @Component({
   selector: 'app-most-popular',
@@ -41,6 +42,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   private _router = inject(Router);
   private _translateService = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
+  private _wishlistService = inject(WishlistService);
 
   // State signals
   categories = signal<Category[]>([]);
@@ -114,6 +116,17 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
 
   onProductClick(productId: string | number): void {
     this._router.navigate(['/product-details', productId]);
+  }
+
+  onFavoriteToggle(productId: string | number): void {
+    this._wishlistService.addToWishlist(String(productId)).subscribe({
+      next: () => {
+        this._toastService.toaster('success', this._translateService.instant('wishlist.addedToWishlist'));
+      },
+      error: () => {
+        this._toastService.toaster('error', this._translateService.instant('wishlist.addToWishlistError'));
+      },
+    });
   }
 
   onSeeMoreClick(): void {
