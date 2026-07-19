@@ -59,8 +59,8 @@ export class CartComponent extends AppComponentBase implements OnInit {
       this.total.set(0);
     } else {
       cartItems.map((item) => {
-        this.subtotal.update((value) => value + Number(item.product.price));
-        this.total.update((value) => value + Number(item.product.priceWithDiscount));
+        this.subtotal.update((value) => value + Number(item.product.price) * Number(item.quantity));
+        this.total.update((value) => value + Number(item.product.priceWithDiscount) * Number(item.quantity));
       })
     }
   }
