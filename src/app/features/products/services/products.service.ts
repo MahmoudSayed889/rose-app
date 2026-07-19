@@ -5,6 +5,7 @@ import { AUTH_API_URL } from 'auth-library';
 import { HelperService } from '../../../shared/services/helper.service';
 import { CreateProductRequest, DeleteProductResponse, Product, ProductsList, SingleProduct } from '../models/product';
 import { ExternalParams } from '../../../shared/models/external-params';
+import { ProductCardBadge } from 'reusable-components';
 
 @Service()
 export class ProductsService {
@@ -15,6 +16,18 @@ export class ProductsService {
 
     getProducts(params?: ExternalParams): Observable<ProductsList> {
         return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, { params: this._helperService.createParams(params) })
+            .pipe(
+                map(res => {
+                    res.payload.data = res.payload.data.map(product => {
+                        return {
+                            ...product,
+                            tags: this.getProductsTags(product)
+                        }
+                    })
+                    return res
+                }
+                )
+            )
     }
 
     getProduct(id: string): Observable<SingleProduct> {
@@ -29,11 +42,11 @@ export class ProductsService {
         );
     }
 
-    getProductsTags(product: Product): string[] {
+    getProductsTags(product: Product): ProductCardBadge[] {
         const today = new Date();
         const sixMonthsAgo = new Date();
         sixMonthsAgo.setMonth(today.getMonth() - 6);
-        const tags: string[] = [];
+        const tags: ProductCardBadge[] = [];
 
         if (product.rating >= 4) {
             tags.push('hot');

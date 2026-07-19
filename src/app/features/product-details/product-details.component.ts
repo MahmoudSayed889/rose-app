@@ -8,6 +8,9 @@ import { Product } from '../products/models/product';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductReviewsComponent } from "./components/product-reviews/product-reviews.component";
 import { TranslatePipe } from '@ngx-translate/core';
+import { CartFacadeService } from '../cart/services/cart/cart-facade.service';
+import { AddToCartREQ } from '../cart/models/cart.interface';
+import { ButtonComponent } from "reusable-components";
 
 export interface GalleryImage {
   itemImageSrc: string;
@@ -16,7 +19,7 @@ export interface GalleryImage {
 
 @Component({
   selector: 'app-product-details',
-  imports: [SpLineComponent, GalleriaComponent, ProductReviewsComponent, RelatedProductsComponent, TranslatePipe],
+  imports: [SpLineComponent, GalleriaComponent, ProductReviewsComponent, RelatedProductsComponent, TranslatePipe, ButtonComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -24,6 +27,7 @@ export class ProductDetailsComponent {
   private _route = inject(ActivatedRoute);
   private _productsService = inject(ProductsService);
   private _destroyRef = inject(DestroyRef);
+  private _cartFacad = inject(CartFacadeService);
 
   productId!: string | null;
   productDetails: WritableSignal<Product | null> = signal(null);
@@ -58,6 +62,14 @@ export class ProductDetailsComponent {
     } catch (error) {
       console.error('Error parsing gallery:', error);
     }
+  }
+
+  addToCart(): void {
+    const data: AddToCartREQ = {
+      productId: this.productDetails()?.id!,
+      quantity: 1
+    }
+    this._cartFacad.addToCart(data)
   }
 
   ngOnInit() {

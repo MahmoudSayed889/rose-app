@@ -1,3 +1,4 @@
+import { ProductCardBadge } from "reusable-components"
 import { MainResponse } from "../../../shared/models/main-response"
 import { Metadata } from "../../../shared/models/metadata"
 
@@ -37,7 +38,7 @@ export interface Product {
     subCategory?: SubCategory
     occasions: any[]
     _count: Count
-    tags?: string[]
+    tags?: ProductCardBadge[]
 }
 
 export interface Category {
