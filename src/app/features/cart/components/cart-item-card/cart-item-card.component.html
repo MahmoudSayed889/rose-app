@@ -28,10 +28,11 @@
           />
         </svg>
         <span class="text-zinc-800 dark:text-zinc-100"
-          >{{isDirRtl()? 'التقييم':'Rating'}}: {{ item().product.rating | number: '1.1-1' }}/5</span
+          >{{ isDirRtl() ? 'التقييم' : 'Rating' }}:
+          {{ item().product.rating | number: '1.1-1' }}/5</span
         >
         <a href="#" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
-          ({{ item().product.ratings }} {{isDirRtl()? 'تقييمات':'ratings'}})
+          ({{ item().product.ratings }} {{ isDirRtl() ? 'تقييمات' : 'ratings' }})
         </a>
       </div>
     </div>
@@ -51,7 +52,7 @@
   <div class="flex shrink-0 flex-col items-end justify-between gap-4">
     <lib-button
       type="button"
-      [text]="isDirRtl()? 'حذف':'Remove'"
+      [text]="isDirRtl() ? 'حذف' : 'Remove'"
       iconPrimeNg="pi-trash"
       (onClick)="onRemove()"
       [disabled]="removeDisabled()"
@@ -60,27 +61,13 @@
     ></lib-button>
 
     <div class="flex items-center gap-2">
-      <button
+      <lib-button
+        iconPrimeNg="pi-minus"
+        styleClass="h-10 w-10 rounded-[10px] bg-[#FBEAEA] dark:bg-zinc-700 text-primary hover:scale-110 transition disabled:opacity-80 disabled:hover:scale-100"
         type="button"
-        class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#FBEAEA] dark:bg-zinc-700 text-xl font-medium leading-none text-primary transition hover:scale-110 cursor-pointer"
-        aria-label="Decrease quantity"
-        (click)="onDecreaseQuantity()"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-minus-icon lucide-minus"
-        >
-          <path d="M5 12h14" />
-        </svg>
-      </button>
+        (onClick)="onDecreaseQuantity()"
+        [disabled]="item().quantity === 1"
+      ></lib-button>
 
       <input
         type="text"
@@ -90,7 +77,14 @@
         aria-label="Quantity"
       />
 
-      <button
+      <lib-button
+        iconPrimeNg="pi-plus"
+        styleClass="h-10 w-10 rounded-[10px] bg-[#FBEAEA] dark:bg-zinc-700 text-primary hover:scale-110 transition disabled:opacity-80 disabled:hover:scale-100"
+        type="button"
+        (onClick)="onIncreaseQuantity()"
+        [disabled]="item().quantity === item().product.stock"
+      ></lib-button>
+      <!-- <button
         type="button"
         class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#FBEAEA] dark:bg-zinc-700 text-xl font-medium leading-none text-primary transition-opacity hover:scale-110 cursor-pointer"
         aria-label="Increase quantity"
@@ -111,7 +105,7 @@
           <path d="M5 12h14" />
           <path d="M12 5v14" />
         </svg>
-      </button>
+      </button> -->
     </div>
   </div>
 </div>
