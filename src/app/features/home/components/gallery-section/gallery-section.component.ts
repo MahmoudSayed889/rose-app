@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { TitleComponent } from 'reusable-components';
+import { AppComponentBase } from '../../../../shared/app-component-base';
 
 @Component({
   selector: 'app-gallery-section',
@@ -11,7 +12,7 @@ import { TitleComponent } from 'reusable-components';
   templateUrl: './gallery-section.component.html',
   styleUrl: './gallery-section.component.scss',
 })
-export class GallerySectionComponent {
+export class GallerySectionComponent extends AppComponentBase {
 
   galleryItems = signal([
     {

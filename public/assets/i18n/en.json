@@ -9,7 +9,8 @@
       "submite": "Submit",
       "save-changes": "Save Changes",
       "delete-my-account": "Delete My Account",
-      "retry": "Retry"
+      "retry": "Retry",
+      "Remove": "Remove"
     },
     "or": "or",
     "Need help?": "Need help?",
@@ -115,7 +116,6 @@
     "addToWishlistError": "Failed to add item to wishlist"
   },
   "cart": {
-    "title": ""
   },
   "profile": {
     "title": ""

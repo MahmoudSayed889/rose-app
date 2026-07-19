@@ -1,6 +1,5 @@
 .most-popular-section {
   padding: 3rem 1rem;
-  max-width: 1400px;
   margin: 0 auto;
 
   @media (min-width: 768px) {
@@ -8,7 +7,7 @@
   }
 
   @media (min-width: 1024px) {
-    padding: 5rem 3rem;
+    padding: 0 !important;
   }
 }
 

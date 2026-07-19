@@ -21,6 +21,7 @@ import { HomeService } from '../../services/home.service';
 import { Category, CategoryResponse } from './models/category';
 import { Product, ProductsList } from '../../../products/models/product';
 import { WishlistService } from '../../../wishlist/services/wishlist.service';
+import { icons } from 'lucide-angular';
 
 @Component({
   selector: 'app-most-popular',
@@ -53,8 +54,11 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   errorCategories = signal<string | null>(null);
   errorProducts = signal<string | null>(null);
 
+  icons = icons
+
   ngOnInit(): void {
     this.loadCategories();
+    this.loadProducts()
   }
 
   loadCategories(): void {
@@ -70,7 +74,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
           if (response.payload?.data && response.payload.data.length > 0) {
             this.categories.set(response.payload.data.filter(cate => cate._count?.products > 0))
             // Auto-select first category
-            this.onCategorySelect(this.categories()[0]);
+            // this.onCategorySelect(this.categories()[0]);
           }
         },
         error: (error) => {
@@ -85,7 +89,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
       });
   }
 
-  loadProducts(categoryId: string): void {
+  loadProducts(categoryId?: string): void {
     this.loadingProducts.set(true);
     this.errorProducts.set(null);
 

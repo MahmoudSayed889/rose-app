@@ -41,10 +41,8 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
       page: this.paginator().page,
       limit: this.paginator().limit
     } as ExternalParams
-    this._ngxSpinner.show();
     this._productsService.getProducts(params).subscribe({
       next: (res: ProductsList) => {
-        this._ngxSpinner.hide();
         this.products.set(res.payload.data)
 
         this.paginator.set({

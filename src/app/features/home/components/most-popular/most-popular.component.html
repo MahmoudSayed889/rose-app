@@ -1,4 +1,4 @@
-<section class="most-popular-section">
+<section class="container most-popular-section">
   <!-- Header -->
   <div class="section-header">
     <lib-title [title]="'home.mostPopular.title' | translate" />
@@ -82,6 +82,10 @@
   <!-- See More Button -->
   <div class="see-more-container" *ngIf="products().length > 0 && !loadingProducts()">
     <lib-button
+      styleClass="p-0"
+      [iconLucide]="{
+        name: icons.MoveRight
+      }"  
       [text]="'home.mostPopular.viewMore' | translate"
       styleClass="see-more-btn"
       (onClick)="onSeeMoreClick()" />

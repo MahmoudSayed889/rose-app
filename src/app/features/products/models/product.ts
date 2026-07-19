@@ -22,6 +22,7 @@ export interface Product {
     ratings: number
     stock: number
     price: number
+    priceWithDiscount?: number
     discountType: string
     discountValue: string
     cover: string
@@ -29,8 +30,9 @@ export interface Product {
     categoryId: string
     subCategoryId?: string
     immutable: boolean
-    createdAt: string
-    updatedAt: string
+    createdAt: string | Date
+    updatedAt: string | Date
+    deletedAt?: string | Date
     category: Category
     subCategory?: SubCategory
     occasions: any[]

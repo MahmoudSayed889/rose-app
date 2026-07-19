@@ -21,7 +21,7 @@ export class HomeService {
   }
 
   getProductsByCategory(
-    categoryId: string,
+    categoryId?: string,
     params?: ExternalParams
   ): Observable<ProductsList> {
     const queryParams = { ...params, categoryId };

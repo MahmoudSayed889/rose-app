@@ -9,7 +9,8 @@
             "submite": "إرسال",
             "save-changes": "حفظ التغييرات",
             "delete-my-account": "حذف حسابي",
-            "retry": "إعادة المحاولة"
+            "retry": "إعادة المحاولة",
+            "Remove": "حذف"
         },
         "or": "أو",
         "Need help?": "بحاجة الى مساعدة؟",
@@ -126,7 +127,6 @@
         "addToWishlistError": "فشل إضافة المنتج إلى قائمة الأمنيات"
     },
     "cart": {
-        "title": ""
     },
     "profile": {
         "title": ""

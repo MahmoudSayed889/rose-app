@@ -47,18 +47,15 @@ export class BestSellingComponent {
   ];
 
   getBestSelling() {
-    this._ngxSpinner.show();
     this._productService.getBestSellingProducts()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
           this.bestSellingProducts.set(res);
           this.mergeProductTags();
-          this._ngxSpinner.hide();
         },
         error: (err) => {
           console.log(err);
-          this._ngxSpinner.hide();
         }
       });
   }
