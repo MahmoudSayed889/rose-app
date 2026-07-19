@@ -52,7 +52,7 @@ export class ProductsService {
             tags.push('hot');
         }
         if (product.stock === 0) {
-            tags.push('out of stock');
+            tags.push('out-of-stock');
         }
         const productDate = new Date(product.createdAt);
         if (productDate >= sixMonthsAgo && productDate <= today) {
