@@ -52,7 +52,7 @@ export class ProductCardTestPageComponent {
       title: 'Mechanical Keyboard',
       price: 399,
       rating: 4,
-      badge: 'out of stock',
+      badge: 'out-of-stock',
       isFavorite: false,
     },
     {
