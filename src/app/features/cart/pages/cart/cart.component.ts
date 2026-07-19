@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { CartItemCardComponent } from '../../components/cart-item-card/cart-item-card.component';
 import { CartService } from '../../services/cart/cart.service';
-import { CartItem } from '../../models/cart.interface';
+import { CartItem, UpdateCartItemQuantityREQ } from '../../models/cart.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InputComponent, ButtonComponent } from "reusable-components";
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
@@ -59,8 +59,8 @@ export class CartComponent extends AppComponentBase implements OnInit {
       this.total.set(0);
     } else {
       cartItems.map((item) => {
-        this.subtotal.update((value) => value + Number(item.product.price));
-        this.total.update((value) => value + Number(item.product.priceWithDiscount));
+        this.subtotal.update((value) => value + Number(item.product.price) * Number(item.quantity));
+        this.total.update((value) => value + Number(item.product.priceWithDiscount) * Number(item.quantity));
       })
     }
   }
@@ -89,16 +89,41 @@ export class CartComponent extends AppComponentBase implements OnInit {
       })
   }
 
+  UpdateCartItemQuantity(id: string, quantity: UpdateCartItemQuantityREQ): void {
+    this._cartService.UpdateCartItemQuantity(id, quantity)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: () => {
+          this.getCartItems();
+        }
+      })
+  }
+
   onRemoveItem(itemId: string): void {
     this.removeCartItem(itemId);
   }
 
+  getItemQuantity(itemId: string): number {
+    let quantity = 0;
+    this.cartItems().map(item => {
+      if (item.id === itemId)
+        quantity = item.quantity
+    })
+    return quantity;
+  }
+
   onIncreaseQuantity(itemId: string): void {
-    console.log('Increase quantity:', itemId);
+    const quantity = {
+      quantity: this.getItemQuantity(itemId) + 1
+    };
+    this.UpdateCartItemQuantity(itemId, quantity);
   }
 
   onDecreaseQuantity(itemId: string): void {
-    console.log('Decrease quantity:', itemId);
+    const quantity = {
+      quantity: this.getItemQuantity(itemId) - 1
+    };
+    this.UpdateCartItemQuantity(itemId, quantity);
   }
 
   ngOnInit(): void {
