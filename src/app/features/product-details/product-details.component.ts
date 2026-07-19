@@ -41,7 +41,7 @@ export class ProductDetailsComponent {
 
   transformProductGallery(product: Product): void {
     try {
-      const galleryArray: string[] = JSON.parse(product.gallery);
+      const galleryArray: string[] = JSON.parse(product.gallery ?? '[]');
       const allImages = [product.cover, ...galleryArray];
 
       const galleriaImages: GalleryImage[] = allImages.map((url, index) => ({
@@ -58,14 +58,15 @@ export class ProductDetailsComponent {
   }
 
   getPrice(): number {
+    const price = Number(this.productDetails()?.price);
     if (this.productDetails()?.discountType == 'PERCENT') {
-      const discountValue = (Number(this.productDetails()?.price) * Number(this.productDetails()?.discountValue)) / 100;
-      return this.productDetails()?.price! - discountValue;
+      const discountValue = (price * Number(this.productDetails()?.discountValue)) / 100;
+      return price - discountValue;
     }
     if (this.productDetails()?.discountType == 'VALUE') {
-      return (Number(this.productDetails()?.price) - Number(this.productDetails()?.discountValue));
+      return price - Number(this.productDetails()?.discountValue);
     }
-    return this.productDetails()?.price!
+    return price;
   }
 
   ngOnInit() {

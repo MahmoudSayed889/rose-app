@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  cursor: pointer;
+  --occasion-overlay: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1375) 0%,
+    rgba(166, 37, 42, 0.55) 100%
+  );
+}
+
+:host-context(.dark) {
+  --occasion-overlay: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1375) 0%,
+    rgba(255, 163, 185, 0.55) 100%
+  );
+}
+
+/* Not selected overrides overlay to dark gradient in both themes */
+:host(:not(.selected)) {
+  --occasion-overlay: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+/* Selected in dark restores the dark-selected gradient */
+:host-context(.dark):host(.selected) {
+  --occasion-overlay: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1375) 0%,
+    rgba(255, 163, 185, 0.55) 100%
+  );
+}
+
+.occasion-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.occasion-card:hover {
+  transform: scale(1.03);
+}
+
+:host(.selected) .occasion-card {
+  transform: scale(1.03);
+  box-shadow: 0 0 0 2px #a6252a;
+}
+
+:host-context(.dark):host(.selected) .occasion-card {
+  box-shadow: 0 0 0 2px #ffa3b9;
+}
+
+.occasion-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.occasion-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--occasion-overlay);
+  transition: background 0.2s ease;
+}
+
+.occasion-card__title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 0.25rem;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.6),
+    0 1px 3px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.02em;
+  z-index: 1;
+}
