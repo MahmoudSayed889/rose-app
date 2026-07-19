@@ -48,7 +48,7 @@
       [discountType]="product.discountType"
       [discountValue]="product.discountValue"
       [rating]="product.rating"
-      [badge]="product.tags||[]"
+      [badge]="product.tags?.[0] || null"
       (cardClick)="onProductClick($event)"
       (favoriteToggle)="onFavoriteToggle($event)"
       (addToCart)="addToCart(product.id)" />
