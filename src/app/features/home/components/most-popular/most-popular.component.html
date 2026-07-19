@@ -7,7 +7,16 @@
     <div class="category-tabs-wrapper">
       <!-- Category Tabs -->
       <div class="category-tabs" *ngIf="!loadingCategories() && !errorCategories()">
-        <button 
+        <button
+          [class.active]="!selectedCategory()"
+          (click)="onAllSelect()"
+          [attr.aria-label]="'home.mostPopular.all' | translate"
+          [attr.aria-pressed]="!selectedCategory()"
+          type="button"
+          class="category-tab">
+          {{ 'home.mostPopular.all' | translate }}
+        </button>
+        <button
           *ngFor="let category of categories(); trackBy: trackByCategory"
           [class.active]="selectedCategory()?.id === category.id"
           (click)="onCategorySelect(category)"
@@ -67,7 +76,7 @@
   </div>
 
   <!-- Empty State -->
-  <div class="empty-state" *ngIf="!loadingProducts() && products().length === 0 && !errorProducts() && selectedCategory()">
+  <div class="empty-state" *ngIf="!loadingProducts() && products().length === 0 && !errorProducts() && productsLoaded()">
     <p class="empty-message">{{ 'home.mostPopular.noProducts' | translate }}</p>
   </div>
 

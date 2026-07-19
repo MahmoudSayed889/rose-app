@@ -53,6 +53,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   loadingProducts = signal<boolean>(false);
   errorCategories = signal<string | null>(null);
   errorProducts = signal<string | null>(null);
+  productsLoaded = signal<boolean>(false);
 
   icons = icons
 
@@ -94,11 +95,12 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
     this.errorProducts.set(null);
 
     this._homeService
-      .getProductsByCategory(categoryId, { page: 1, limit: 20 })
+      .getProducts({ page: 1, limit: 20 }, categoryId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response: ProductsList) => {
           this.loadingProducts.set(false);
+          this.productsLoaded.set(true);
           this.products.set(response.payload?.data || []);
         },
         error: (error) => {
@@ -116,6 +118,11 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   onCategorySelect(category: Category): void {
     this.selectedCategory.set(category);
     this.loadProducts(category.id);
+  }
+
+  onAllSelect(): void {
+    this.selectedCategory.set(null);
+    this.loadProducts();
   }
 
   onProductClick(productId: string | number): void {
@@ -142,10 +149,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   }
 
   onRetryProducts(): void {
-    const category = this.selectedCategory();
-    if (category) {
-      this.loadProducts(category.id);
-    }
+    this.loadProducts(this.selectedCategory()?.id);
   }
 
   // TrackBy functions for performance

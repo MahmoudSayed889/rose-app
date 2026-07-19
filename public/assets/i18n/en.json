@@ -64,6 +64,7 @@
     "title": "home",
     "mostPopular": {
       "title": "Most Popular",
+      "all": "All",
       "subtitle": "Discover our best-selling products",
       "viewMore": "View More",
       "noProducts": "No products available in this category",
