@@ -10,25 +10,23 @@ import { finalize } from 'rxjs';
 import { ProductsService } from '../../../products/services/products.service';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { icons } from 'lucide-angular';
-import { CartSummaryComponent } from "../../../../shared/components/cart-summary/cart-summary.component";
-import { ProductsYouMayLikeComponent } from "../../../../shared/components/products-you-may-like/products-you-may-like.component";
+import { CartFacadeService } from '../../services/cart/cart-facade.service';
+import { CheckoutFacadeService } from '../../services/cart/checkout-facade.service';
 
 @Component({
   selector: 'app-cart',
-  imports: [CartItemCardComponent, SpLineComponent, RouterLink, ButtonComponent, CartSummaryComponent, ProductsYouMayLikeComponent],
+  imports: [CartItemCardComponent, SpLineComponent, RouterLink, ButtonComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
 export class CartComponent extends AppComponentBase implements OnInit {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _productsService = inject(ProductsService);
+  private readonly _cartFacadeService = inject(CartFacadeService);
+  private readonly _checkoutFacadeService = inject(CheckoutFacadeService);
 
-  cartItems: WritableSignal<CartItem[]> = signal([]);
+  cartItems = this._cartFacadeService.cartItems;
   removeLoading: WritableSignal<string | null> = signal(null);
-
-  subtotal: WritableSignal<number> = signal(0);
-  total: WritableSignal<number> = signal(0);
 
   icons = icons
 
@@ -37,33 +35,14 @@ export class CartComponent extends AppComponentBase implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
-          this.cartItems.set(res.payload.cartItems);
-          this.handlepriceWithDiscount(this.cartItems());
-          this.subtotal.set(0);
-          this.total.set(0);
-          this.handleTotals(this.cartItems());
+          this._cartFacadeService.cartItems.set(res.payload.cartItems);
+
+          this._cartFacadeService.handlepriceWithDiscount(this.cartItems());
+          this._cartFacadeService.handleTotals(this.cartItems());
         },
         error: () => {
         }
       })
-  }
-
-  handlepriceWithDiscount(cartItems: CartItem[]): void {
-    cartItems.map((item) => {
-      this._productsService.getPrice(item.product)
-    })
-  }
-
-  handleTotals(cartItems: CartItem[]): void {
-    if (cartItems.length === 0) {
-      this.subtotal.set(0);
-      this.total.set(0);
-    } else {
-      cartItems.map((item) => {
-        this.subtotal.update((value) => value + Number(item.product.price) * Number(item.quantity));
-        this.total.update((value) => value + Number(item.product.priceWithDiscount) * Number(item.quantity));
-      })
-    }
   }
 
   removeCartItem(id: string): void {
@@ -129,5 +108,6 @@ export class CartComponent extends AppComponentBase implements OnInit {
 
   ngOnInit(): void {
     this.getCartItems();
+    this._checkoutFacadeService.currentStep.set(0)
   }
 }
