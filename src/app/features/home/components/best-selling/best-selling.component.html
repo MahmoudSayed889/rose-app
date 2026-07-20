@@ -34,10 +34,20 @@
                         [showNavigators]="false" spacing="10">
                         <ng-template #item let-item>
                             <div class="px-3">
-                                <lib-product-card [productId]="item.id" [imageUrl]="item.cover" [title]="item.title"
-                                    [price]="item.price" [discountType]="item.discountType"
-                                    [discountValue]="item.discountValue" [rating]="item.rating" [badge]="item.tags"
-                                    [isFavorite]="true" (addToCart)="addToCart(item.id)" (cardClick)="onCardClick($event)" />
+                                <lib-product-card
+                                [productId]="item.id"
+                                [imageUrl]="item.cover"
+                                [title]="item.title"
+                                [price]="item.price"
+                                [discountType]="item.discountType"
+                                [discountValue]="item.discountValue"
+                                [rating]="item.rating"
+                                [badge]="item.tags[0]"
+                                [isFavorite]="true"
+                                (addToCart)="addToCart(item.id)"
+                                (cardClick)="onCardClick($event)"
+                                (favoriteToggle)="onFavoriteToggle($event)"
+                              />
                             </div>
                         </ng-template>
                     </p-carousel>

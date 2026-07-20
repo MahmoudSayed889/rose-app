@@ -59,6 +59,16 @@
         }
 
         <span class="h-9 w-px bg-gray-200 dark:bg-zinc-500 hidden md:block"></span>
+        <a routerLink="/wishlist" class="flex items-center gap-1.5 hover:text-primary transition-colors">
+            <lib-button
+            styleClass="hover:text-primary gap-0! p-1"
+            [iconLucide]="{
+                name: icons.Heart,
+                class: 'opacity-75',
+                size: '20px'
+            }"
+            ></lib-button>
+        </a>
 
         <a routerLink="/cart" class="hover:text-primary gap-0 p-1 opacity-75">
             <i class="pi pi-shopping-cart"></i>
