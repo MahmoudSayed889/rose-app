@@ -11,10 +11,11 @@ import { ProductsService } from '../../../products/services/products.service';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { icons } from 'lucide-angular';
 import { CartSummaryComponent } from "../../../../shared/components/cart-summary/cart-summary.component";
+import { ProductsYouMayLikeComponent } from "../../../../shared/components/products-you-may-like/products-you-may-like.component";
 
 @Component({
   selector: 'app-cart',
-  imports: [CartItemCardComponent, SpLineComponent, RouterLink, ButtonComponent, CartSummaryComponent],
+  imports: [CartItemCardComponent, SpLineComponent, RouterLink, ButtonComponent, CartSummaryComponent, ProductsYouMayLikeComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })

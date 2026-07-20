@@ -40,9 +40,9 @@ export class ProductCardComponent {
   @Input() badge: ProductCardBadge[] = [];
   @Input() isFavorite = false;
 
-  @Output() favoriteToggle = new EventEmitter<string | number>();
+  @Output() favoriteToggle = new EventEmitter<string>();
   @Output() addToCart = new EventEmitter<string>();
-  @Output() cardClick = new EventEmitter<string | number>();
+  @Output() cardClick = new EventEmitter<string>();
 
   private readonly _rating = signal(0);
 

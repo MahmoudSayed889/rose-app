@@ -7,7 +7,6 @@ import { ProductCardBadge, ProductCardComponent } from "reusable-components";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { WishlistService } from '../../../wishlist/services/wishlist.service';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { AddToCartREQ } from '../../../cart/models/cart.interface';
@@ -23,7 +22,6 @@ export class BestSellingComponent {
   private readonly _productService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _router = inject(Router);
-  private readonly _ngxSpinner = inject(NgxSpinnerService);
   private readonly _wishlistService = inject(WishlistService);
   private readonly _toastService = inject(ToastService);
   private readonly _translateService = inject(TranslateService);
