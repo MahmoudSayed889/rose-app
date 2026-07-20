@@ -42,7 +42,7 @@
                                 [discountType]="item.discountType"
                                 [discountValue]="item.discountValue"
                                 [rating]="item.rating"
-                                [badge]="item.tags[0]"
+                                [badge]="item.tags || []"
                                 [isFavorite]="true"
                                 (addToCart)="addToCart(item.id)"
                                 (cardClick)="onCardClick($event)"
