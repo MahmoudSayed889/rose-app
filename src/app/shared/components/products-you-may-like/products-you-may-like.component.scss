@@ -1,0 +1,15 @@
+:host ::ng-deep .p-carousel-item {
+  max-width: 33.333% !important;
+}
+
+@media (max-width: 992px) {
+  :host ::ng-deep .p-carousel-item {
+    max-width: 50% !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :host ::ng-deep .p-carousel-item {
+    max-width: 100% !important;
+  }
+}

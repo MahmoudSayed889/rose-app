@@ -20,11 +20,11 @@ export class HomeService {
     );
   }
 
-  getProductsByCategory(
-    categoryId?: string,
-    params?: ExternalParams
+  getProducts(
+    params?: ExternalParams,
+    categoryId?: string
   ): Observable<ProductsList> {
-    const queryParams = { ...params, categoryId };
+    const queryParams = categoryId ? { ...params, categoryId } : params;
     return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, {
       params: this._helperService.createParams(queryParams),
     });

@@ -15,6 +15,16 @@ export interface WishlistItem {
     product: WishlistProduct;
 }
 
+export interface AddToWishlistRequest {
+    productId: string;
+}
+
+export interface AddToWishlistResponse {
+    status: boolean;
+    code: number;
+    payload: WishlistItem;
+}
+
 export interface ClearWishlistResponse {
     status: boolean;
     code: number;

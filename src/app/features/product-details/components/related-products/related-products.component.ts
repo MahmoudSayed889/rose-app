@@ -1,8 +1,10 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ProductCardComponent, TitleComponent } from 'reusable-components';
 import { ProductsService } from '../../../products/services/products.service';
 import { Product } from '../../../products/models/product';
+import { WishlistService } from '../../../wishlist/services/wishlist.service';
+import { ToastService } from '../../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-related-products',
@@ -12,6 +14,9 @@ import { Product } from '../../../products/models/product';
 })
 export class RelatedProductsComponent implements OnInit {
   private _productsService = inject(ProductsService);
+  private _wishlistService = inject(WishlistService);
+  private _toastService = inject(ToastService);
+  private _translateService = inject(TranslateService);
 
   products: WritableSignal<Product[]> = signal([]);
 
@@ -22,6 +27,17 @@ export class RelatedProductsComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
+      },
+    });
+  }
+
+  onFavoriteToggle(productId: string | number): void {
+    this._wishlistService.addToWishlist(String(productId)).subscribe({
+      next: () => {
+        this._toastService.toaster('success', this._translateService.instant('wishlist.addedToWishlist'));
+      },
+      error: () => {
+        this._toastService.toaster('error', this._translateService.instant('wishlist.addToWishlistError'));
       },
     });
   }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AUTH_API_URL } from 'auth-library';
-import { ClearWishlistResponse, DeleteWishlistItemResponse, WishlistResponse } from '../models/wishlist';
+import { AddToWishlistRequest, AddToWishlistResponse, ClearWishlistResponse, DeleteWishlistItemResponse, WishlistResponse } from '../models/wishlist';
 
 @Service()
 export class WishlistService {
@@ -12,6 +12,11 @@ export class WishlistService {
 
     getWishlist(): Observable<WishlistResponse> {
         return this._httpClient.get<WishlistResponse>(`${this.baseUrl}/api/wishlist`);
+    }
+
+    addToWishlist(productId: string): Observable<AddToWishlistResponse> {
+        const body: AddToWishlistRequest = { productId };
+        return this._httpClient.post<AddToWishlistResponse>(`${this.baseUrl}/api/wishlist`, body);
     }
 
     clearWishlist(): Observable<ClearWishlistResponse> {

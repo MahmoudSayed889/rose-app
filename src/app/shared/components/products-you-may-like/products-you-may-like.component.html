@@ -1,0 +1,54 @@
+<section class="p-2.5 space-y-6">
+  <div class="">
+    <lib-title title="Products You May Like"></lib-title>
+  </div>
+  <div>
+    <div class="relative">
+      <p-carousel
+        #Carousel
+        [value]="products()"
+        [numVisible]="3"
+        [numScroll]="1"
+        [circular]="true"
+        [responsiveOptions]="carouselResponsiveOptions"
+        [showIndicators]="false"
+        [showNavigators]="false"
+        spacing="10"
+      >
+        <ng-template #item let-item>
+          <div class="px-3">
+            <lib-product-card
+              [productId]="item.id"
+              [imageUrl]="item.cover"
+              [title]="item.title"
+              [price]="item.price"
+              [discountType]="item.discountType"
+              [discountValue]="item.discountValue"
+              [rating]="item.rating"
+              [badge]="item.tags || []"
+              [isFavorite]="true"
+              (addToCart)="addToCart(item.id)"
+              (cardClick)="onCardClick($event)"
+            />
+          </div>
+        </ng-template>
+      </p-carousel>
+      @if (products()?.length > 3) {
+        <button
+          (click)="Carousel.navBackward($event)"
+          [disabled]="Carousel.page == 0"
+          class="w-9 h-9 rounded-full flex items-center justify-center bg-[#A6252A] text-[#FBEAEA] transition absolute left-0 top-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-60 disabled:cursor-auto"
+        >
+          <i class="pi pi-chevron-left text-sm"></i>
+        </button>
+        <button
+          (click)="Carousel.navForward($event)"
+          [disabled]="Carousel.page == (products()?.length! - Carousel.numVisible)"
+          class="w-9 h-9 rounded-full flex items-center justify-center bg-[#A6252A] text-[#FBEAEA] transition absolute right-0 top-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-60 disabled:cursor-auto"
+        >
+          <i class="pi pi-chevron-right text-sm"></i>
+        </button>
+      }
+    </div>
+  </div>
+</section>

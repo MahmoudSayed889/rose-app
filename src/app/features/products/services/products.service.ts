@@ -73,4 +73,11 @@ export class ProductsService {
             product.priceWithDiscount = Number(product.price);
         }
     }
+
+    getProductsYouMayLike(): Observable<Product[]> {
+        return this.getProducts().pipe(
+            map(res =>
+                res.payload.data.filter(item => item.tags?.includes('hot'))
+            ));
+    }
 }

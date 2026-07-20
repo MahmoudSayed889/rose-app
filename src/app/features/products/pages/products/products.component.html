@@ -20,10 +20,10 @@
                         [discountType]="product.discountType"
                         [discountValue]="product.discountValue"
                         [rating]="product.rating"
-                        [badge]="product.tags||[]"
+                        [badge]="product.tags || []"
                         [isFavorite]="true"
-                        (favoriteToggle)="logFavoriteToggle($event)"
-                        (addToCart)="addToCart($event)"
+                        (favoriteToggle)="onFavoriteToggle($event)"
+                        (addToCart)="addToCart($event.toString())"
                         (cardClick)="logCardClick($event)"
                     />
                 }

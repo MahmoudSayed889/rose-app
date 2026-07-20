@@ -23,8 +23,8 @@ export const ContentRoutes: Routes = [
         loadComponent: () => import('../../features/wishlist/pages/wishlist/wishlist.component').then((C) => C.WishlistComponent),
     },
     {
-        path: 'cart',
-        loadComponent: () => import('../../features/cart/pages/cart/cart.component').then((C) => C.CartComponent),
+        path: 'purchase',
+        loadChildren: () => import('../../features/cart/cart.route').then((C) => C.CartRoutes),
         canActivate: [authGuard]
     },
 ];
