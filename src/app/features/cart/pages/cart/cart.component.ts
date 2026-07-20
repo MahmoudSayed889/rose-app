@@ -3,18 +3,18 @@ import { CartItemCardComponent } from '../../components/cart-item-card/cart-item
 import { CartService } from '../../services/cart/cart.service';
 import { CartItem, UpdateCartItemQuantityREQ } from '../../models/cart.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { InputComponent, ButtonComponent } from "reusable-components";
+import { ButtonComponent } from "reusable-components";
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { RouterLink } from "@angular/router";
 import { finalize } from 'rxjs';
 import { ProductsService } from '../../../products/services/products.service';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { icons } from 'lucide-angular';
-import { DecimalPipe } from '@angular/common';
+import { CartSummaryComponent } from "../../../../shared/components/cart-summary/cart-summary.component";
 
 @Component({
   selector: 'app-cart',
-  imports: [CartItemCardComponent, InputComponent, SpLineComponent, RouterLink, ButtonComponent, DecimalPipe],
+  imports: [CartItemCardComponent, SpLineComponent, RouterLink, ButtonComponent, CartSummaryComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
