@@ -5,10 +5,15 @@ import { ProductsService } from '../../../products/services/products.service';
 import { Product } from '../../../products/models/product';
 import { ProductCardBadge, ProductCardComponent } from "reusable-components";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+<<<<<<< HEAD
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { WishlistService } from '../../../wishlist/services/wishlist.service';
 import { ToastService } from '../../../../shared/services/toast.service';
+=======
+import { TranslatePipe } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+>>>>>>> 1c8b478 (feat: product filters)
 import { AddToCartREQ } from '../../../cart/models/cart.interface';
 import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
 
@@ -22,9 +27,12 @@ export class BestSellingComponent {
   private readonly _productService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _router = inject(Router);
+<<<<<<< HEAD
   private readonly _wishlistService = inject(WishlistService);
   private readonly _toastService = inject(ToastService);
   private readonly _translateService = inject(TranslateService);
+=======
+>>>>>>> 1c8b478 (feat: product filters)
   private readonly _cartFacad = inject(CartFacadeService);
 
   bestSellingProducts: WritableSignal<Product[] | null> = signal(null);
@@ -60,7 +68,12 @@ export class BestSellingComponent {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
+<<<<<<< HEAD
           this.bestSellingProducts.set(res);          
+=======
+          this.bestSellingProducts.set(res);
+          this.mergeProductTags();
+>>>>>>> 1c8b478 (feat: product filters)
         },
         error: (err) => {
           console.log(err);
@@ -72,6 +85,7 @@ export class BestSellingComponent {
     return this._productService.getProductsTags(product);
   }
 
+<<<<<<< HEAD
   onCardClick(productId: string | number): void {
     this._router.navigate(['/product-details', productId])
   }
@@ -85,6 +99,17 @@ export class BestSellingComponent {
         this._toastService.toaster('error', this._translateService.instant('wishlist.addToWishlistError'));
       },
     });
+=======
+  mergeProductTags(): void {
+    this.bestSellingProducts()?.map((product) => {
+      const tags = this.getProductTags(product);
+      product.tags = tags;
+    })
+  }
+
+  onCardClick(productId: string | number): void {
+    this._router.navigate(['/product-details', productId])
+>>>>>>> 1c8b478 (feat: product filters)
   }
 
   ngOnInit() {

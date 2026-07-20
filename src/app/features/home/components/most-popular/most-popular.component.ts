@@ -20,7 +20,10 @@ import { AppComponentBase } from '../../../../shared/app-component-base';
 import { HomeService } from '../../services/home.service';
 import { Category, CategoryResponse } from './models/category';
 import { Product, ProductsList } from '../../../products/models/product';
+<<<<<<< HEAD
 import { WishlistService } from '../../../wishlist/services/wishlist.service';
+=======
+>>>>>>> 1c8b478 (feat: product filters)
 import { icons } from 'lucide-angular';
 import { AddToCartREQ } from '../../../cart/models/cart.interface';
 import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
@@ -45,7 +48,10 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   private _router = inject(Router);
   private _translateService = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
+<<<<<<< HEAD
   private _wishlistService = inject(WishlistService);
+=======
+>>>>>>> 1c8b478 (feat: product filters)
   private _cartFacad = inject(CartFacadeService);
 
   // State signals
@@ -56,7 +62,10 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   loadingProducts = signal<boolean>(false);
   errorCategories = signal<string | null>(null);
   errorProducts = signal<string | null>(null);
+<<<<<<< HEAD
   productsLoaded = signal<boolean>(false);
+=======
+>>>>>>> 1c8b478 (feat: product filters)
 
   icons = icons
 
@@ -106,12 +115,19 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
     this.errorProducts.set(null);
 
     this._homeService
+<<<<<<< HEAD
       .getProducts({ page: 1, limit: 20 }, categoryId)
+=======
+      .getProductsByCategory(categoryId, { page: 1, limit: 20 })
+>>>>>>> 1c8b478 (feat: product filters)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response: ProductsList) => {
           this.loadingProducts.set(false);
+<<<<<<< HEAD
           this.productsLoaded.set(true);
+=======
+>>>>>>> 1c8b478 (feat: product filters)
           this.products.set(response.payload?.data || []);
         },
         error: (error) => {
@@ -131,15 +147,19 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
     this.loadProducts(category.id);
   }
 
+<<<<<<< HEAD
   onAllSelect(): void {
     this.selectedCategory.set(null);
     this.loadProducts();
   }
 
+=======
+>>>>>>> 1c8b478 (feat: product filters)
   onProductClick(productId: string | number): void {
     this._router.navigate(['/product-details', productId]);
   }
 
+<<<<<<< HEAD
   onFavoriteToggle(productId: string | number): void {
     this._wishlistService.addToWishlist(String(productId)).subscribe({
       next: () => {
@@ -151,6 +171,8 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
     });
   }
 
+=======
+>>>>>>> 1c8b478 (feat: product filters)
   onSeeMoreClick(): void {
     this._router.navigate(['/products']);
   }
@@ -160,7 +182,14 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   }
 
   onRetryProducts(): void {
+<<<<<<< HEAD
     this.loadProducts(this.selectedCategory()?.id);
+=======
+    const category = this.selectedCategory();
+    if (category) {
+      this.loadProducts(category.id);
+    }
+>>>>>>> 1c8b478 (feat: product filters)
   }
 
   // TrackBy functions for performance

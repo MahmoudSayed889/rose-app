@@ -1,10 +1,17 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+<<<<<<< HEAD
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ProductCardComponent, TitleComponent } from 'reusable-components';
 import { ProductsService } from '../../../products/services/products.service';
 import { Product } from '../../../products/models/product';
 import { WishlistService } from '../../../wishlist/services/wishlist.service';
 import { ToastService } from '../../../../shared/services/toast.service';
+=======
+import { TranslatePipe } from '@ngx-translate/core';
+import { ProductCardComponent, TitleComponent } from 'reusable-components';
+import { ProductsService } from '../../../products/services/products.service';
+import { Product } from '../../../products/models/product';
+>>>>>>> 1c8b478 (feat: product filters)
 
 @Component({
   selector: 'app-related-products',
@@ -14,9 +21,12 @@ import { ToastService } from '../../../../shared/services/toast.service';
 })
 export class RelatedProductsComponent implements OnInit {
   private _productsService = inject(ProductsService);
+<<<<<<< HEAD
   private _wishlistService = inject(WishlistService);
   private _toastService = inject(ToastService);
   private _translateService = inject(TranslateService);
+=======
+>>>>>>> 1c8b478 (feat: product filters)
 
   products: WritableSignal<Product[]> = signal([]);
 
@@ -30,6 +40,7 @@ export class RelatedProductsComponent implements OnInit {
       },
     });
   }
+<<<<<<< HEAD
 
   onFavoriteToggle(productId: string | number): void {
     this._wishlistService.addToWishlist(String(productId)).subscribe({
@@ -41,4 +52,6 @@ export class RelatedProductsComponent implements OnInit {
       },
     });
   }
+=======
+>>>>>>> 1c8b478 (feat: product filters)
 }

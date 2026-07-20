@@ -3,19 +3,31 @@ import { CartItemCardComponent } from '../../components/cart-item-card/cart-item
 import { CartService } from '../../services/cart/cart.service';
 import { CartItem, UpdateCartItemQuantityREQ } from '../../models/cart.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+<<<<<<< HEAD
 import { ButtonComponent } from "reusable-components";
+=======
+import { InputComponent, ButtonComponent } from "reusable-components";
+>>>>>>> 1c8b478 (feat: product filters)
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { RouterLink } from "@angular/router";
 import { finalize } from 'rxjs';
 import { ProductsService } from '../../../products/services/products.service';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { icons } from 'lucide-angular';
+<<<<<<< HEAD
 import { CartSummaryComponent } from "../../../../shared/components/cart-summary/cart-summary.component";
 import { ProductsYouMayLikeComponent } from "../../../../shared/components/products-you-may-like/products-you-may-like.component";
 
 @Component({
   selector: 'app-cart',
   imports: [CartItemCardComponent, SpLineComponent, RouterLink, ButtonComponent, CartSummaryComponent, ProductsYouMayLikeComponent],
+=======
+import { DecimalPipe } from '@angular/common';
+
+@Component({
+  selector: 'app-cart',
+  imports: [CartItemCardComponent, InputComponent, SpLineComponent, RouterLink, ButtonComponent, DecimalPipe],
+>>>>>>> 1c8b478 (feat: product filters)
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
@@ -60,8 +72,13 @@ export class CartComponent extends AppComponentBase implements OnInit {
       this.total.set(0);
     } else {
       cartItems.map((item) => {
+<<<<<<< HEAD
         this.subtotal.update((value) => value + Number(item.product.price) * Number(item.quantity));
         this.total.update((value) => value + Number(item.product.priceWithDiscount) * Number(item.quantity));
+=======
+        this.subtotal.update((value) => value + Number(item.product.price));
+        this.total.update((value) => value + Number(item.product.priceWithDiscount));
+>>>>>>> 1c8b478 (feat: product filters)
       })
     }
   }
