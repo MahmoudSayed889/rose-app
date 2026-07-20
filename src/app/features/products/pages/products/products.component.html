@@ -20,7 +20,7 @@
                         [discountType]="product.discountType"
                         [discountValue]="product.discountValue"
                         [rating]="product.rating"
-                        [badge]="product.tags?.[0] ?? null"
+                        [badge]="product.tags || []"
                         [isFavorite]="true"
                         (favoriteToggle)="onFavoriteToggle($event)"
                         (addToCart)="addToCart($event.toString())"
