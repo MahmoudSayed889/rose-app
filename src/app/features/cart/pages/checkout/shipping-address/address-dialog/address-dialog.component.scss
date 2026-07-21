@@ -1,6 +1,57 @@
 :host ::ng-deep {
+    --p-stepper-step-number-background: var(--color-gray-300);
+    --p-stepper-step-number-active-background: var(--p-primary-color);
+    --p-stepper-step-number-border-color: var(--p-gray-300);
+    --p-stepper-step-number-active-border-color: var(--p-primary-color);
+    --p-stepper-step-number-color: var(--color-gray-700);
+    --p-stepper-step-number-active-color: var(--color-gray-100);
+
+    .p-steplist {
+        justify-content: space-around;
+
+        .p-disabled {
+            opacity: 1;
+        }
+    }
+
+    .p-step {
+        flex: none;
+        padding: 0;
+
+        &:has(~ .p-step-active) .p-step-number {
+            color: var(--color-gray-100);
+            background: var(--p-primary-color);
+            border-color: var(--p-primary-color);
+        }
+    }
+
+    .p-stepper-separator,
+    .p-step-title {
+        display: none;
+    }
+
+    .stepper-separator {
+        position: absolute;
+        width: 100%;
+        height: 6px;
+        top: 50%;
+        inset-inline-start: 0;
+        z-index: -1;
+        transform: translateY(-50%);
+
+        .progress {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            inset-inline-start: 0;
+            transition: all 1s ease;
+        }
+    }
+}
+
+:host ::ng-deep {
     .p-listbox {
-        background: transparent !important;
+        background: transparent;
 
         .p-listbox-list-container {
             max-height: none !important;
@@ -94,4 +145,17 @@
             }
         }
     }
+}
+
+.lib-input__error {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--lib-color-error, #d32f2f);
+}
+
+.map-container {
+    width: 100%;
+    height: 50vh;
+    border-radius: .5rem;
+    overflow: hidden;
 }

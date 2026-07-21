@@ -5,7 +5,7 @@ import { DecimalPipe } from '@angular/common';
 import { SpLineComponent } from "../sp-line/sp-line.component";
 import { CartFacadeService } from '../../../features/cart/services/cart/cart-facade.service';
 import { RouterLink } from "@angular/router";
-import { CheckoutFacadeService } from '../../../features/cart/services/cart/checkout-facade.service';
+import { CheckoutFacadeService } from '../../../features/cart/services/checkout/checkout-facade.service';
 
 @Component({
   selector: 'app-cart-summary',

@@ -10,7 +10,9 @@
       "save-changes": "Save Changes",
       "delete-my-account": "Delete My Account",
       "retry": "Retry",
-      "Remove": "Remove"
+      "Remove": "Remove",
+      "Add Address": "Add Address",
+      "Update Address": "Update Address"
     },
     "or": "or",
     "Need help?": "Need help?",
@@ -19,6 +21,7 @@
       "What awesome gift are you looking for?": "What awesome gift are you looking for?"
     },
     "validation": {
+      "required": "This field is required",
       "This field is required": "This field is required",
       "Please enter a valid email.": "Please enter a valid email.",
       "passwordMismatch": "Passwords do not match",

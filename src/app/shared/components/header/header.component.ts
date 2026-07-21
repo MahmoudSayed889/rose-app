@@ -14,6 +14,9 @@ import { NavbarItem } from './models/navbar-item';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { AppComponentBase } from '../../app-component-base';
+import { AddressDialogComponent } from '../../../features/cart/pages/checkout/shipping-address/address-dialog/address-dialog.component';
+import { AddressService } from '../../../features/cart/services/checkout/address.service';
+import { Address } from '../../../features/cart/models/checkout/addresses';
 
 @Component({
   selector: 'app-header',
@@ -30,22 +33,26 @@ import { AppComponentBase } from '../../app-component-base';
     ButtonComponent,
     LucideAngularModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    AddressDialogComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent extends AppComponentBase {
 
+  private readonly _addressService = inject(AddressService)
   private readonly _userService = inject(UserService)
 
   user = signal<User | null>(null)
+  address = signal<Address | null>(null)
 
   userMenuItems: MenuItem[] = [];
   notificationItems: MenuItem[] = [];
   secondNavbarItems: NavbarItem[] = [];
 
   visible = signal<boolean>(false)
+  visibleAddressDialog = signal<boolean>(false)
   activeTap: 'login' | 'register' = 'login';
 
   icons = icons
@@ -60,6 +67,14 @@ export class HeaderComponent extends AppComponentBase {
 
       if (!this.isAuthenticated()) {
         this.user.set(null);
+      }
+    });
+
+    effect(() => {
+      if (this.user()) {
+        this.address.set(
+          this._addressService.addresses().find(address => address.isPrimary) ?? null
+        )
       }
     });
   }
@@ -94,7 +109,7 @@ export class HeaderComponent extends AppComponentBase {
           { label: 'Orders', icon: 'pi pi-shopping-bag' },
           { label: 'Dashboard', icon: 'pi pi-cog' },
           { separator: true },
-          { label: 'Log out', icon: 'pi pi-sign-out', command: () => {this._authService.logout()} }
+          { label: 'Log out', icon: 'pi pi-sign-out', command: () => { this._authService.logout() } }
         ];
       }
     })
@@ -103,5 +118,9 @@ export class HeaderComponent extends AppComponentBase {
   showDialog(tab: 'login' | 'register' = 'login') {
     this.activeTap = tab;
     this.visible.set(true);
+  }
+
+  showAddressDialog() {
+    this.visibleAddressDialog.set(true);
   }
 }

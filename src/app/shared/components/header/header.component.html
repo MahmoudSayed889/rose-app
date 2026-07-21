@@ -5,7 +5,7 @@
     </div>
 
     @if (true) {
-        <div class="flex flex-col items-start leading-2.5">
+        <button (click)="showAddressDialog()" class="flex flex-col items-start leading-2.5 cursor-pointer">
             <span class="opacity-60 text-sm">{{isDirRtl() ? 'التسليم إلى:' : 'Deliver to:'}}</span>
 
             <div class="flex items-center gap-1">
@@ -14,9 +14,9 @@
                     class="text-primary" 
                     size="18px">
                 </lucide-angular>
-                <span class="text-primary font-medium">Cairo</span>
+                <span class="text-primary font-medium">{{address()?.city || ''}}</span>
             </div>
-        </div>
+        </button>
     }
 
     <div class="flex-1 max-w-3xl mx-4 relative">
@@ -70,8 +70,15 @@
             ></lib-button>
         </a>
 
-        <a routerLink="/purchase" class="hover:text-primary gap-0 p-1 opacity-75">
-            <i class="pi pi-shopping-cart"></i>
+        <a routerLink="/purchase" class="hover:text-primary">
+            <lib-button
+                styleClass="gap-0! p-1"
+                [iconLucide]="{
+                    name: icons.ShoppingCart,
+                    class: 'opacity-75',
+                    size: '20px'
+                }"
+            ></lib-button>
         </a>
 
         <div class="relative">
@@ -167,3 +174,8 @@
         </div>
     </div>
 </div>
+
+
+<app-address-dialog
+    [(visible)]="visibleAddressDialog">
+</app-address-dialog>

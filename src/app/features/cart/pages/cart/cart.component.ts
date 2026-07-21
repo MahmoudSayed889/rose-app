@@ -11,7 +11,7 @@ import { ProductsService } from '../../../products/services/products.service';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { icons } from 'lucide-angular';
 import { CartFacadeService } from '../../services/cart/cart-facade.service';
-import { CheckoutFacadeService } from '../../services/cart/checkout-facade.service';
+import { CheckoutFacadeService } from '../../services/checkout/checkout-facade.service';
 
 @Component({
   selector: 'app-cart',

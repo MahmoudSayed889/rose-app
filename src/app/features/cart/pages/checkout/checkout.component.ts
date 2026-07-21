@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { StepperModule } from 'primeng/stepper';
-import { CheckoutFacadeService } from '../../services/cart/checkout-facade.service';
+import { CheckoutFacadeService } from '../../services/checkout/checkout-facade.service';
 import { NgClass } from '@angular/common';
 
 @Component({

@@ -1,0 +1,229 @@
+<p-dialog 
+    [(visible)]="visible"
+    [modal]="true" 
+    [style]="{ width: '60rem', maxHeight: '80vh' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '95vw' }" 
+    [draggable]="false" 
+    [resizable]="false"
+    dismissableMask="true"
+    styleClass="border-0!"
+>
+    <ng-template pTemplate="header">
+        @if (!visibleForm()) {
+            <div class="flex justify-between items-center w-full overflow-hidden rounded-t-xl border-b border-gray-200 dark:border-zinc-700 p-4">
+                <h3 class="font-bold text-2xl">{{isDirRtl() ? 'عناويني' : 'My Addresses'}}</h3>
+                <lib-button
+                    [text]="isDirRtl() ? 'إضافة عنوان جديد' : 'Add a New Address'"
+                    styleClass="w-full rounded-[10px] bg-[#FBEAEA] dark:bg-zinc-700 px-4 py-2.5 text-sm font-medium text-primary"
+                    (onClick)="visibleForm.set(true)"
+                ></lib-button>
+            </div>
+        } @else {
+            <div class="w-full border-b border-gray-200 dark:border-zinc-700 p-4">
+                <h3 class="font-bold text-2xl">
+                    @if (address() == null) {
+                        {{isDirRtl() ? 'إضافة عنوان جديد' : 'Add a New Address'}}
+                    } @else {
+                        {{isDirRtl() ? 'تحديث معلومات العنوان' : 'Update Address Info'}}
+                    }
+                </h3>
+            </div>
+        }
+    </ng-template>
+
+    @if(!visibleForm()) {
+        <div class="modal p-4 pt-8">
+            <p-listbox 
+                [options]="addresses()" 
+                [(ngModel)]="selectedAddress"
+                optionLabel="city" 
+                dataKey="id"
+                class="w-full border-0!"
+            >
+                <ng-template #item let-address>
+                    <div class="flex flex-col gap-2 w-full p-2 pt-4 relative">
+                        <h5 class="title text-primary font-bold text-xl bg-white dark:bg-[#18181b] px-2 absolute top-0 translate-y-[-75%]">{{address.title}}</h5>
+
+                        <div class="flex justify-between items-center w-full">
+                            <div class="flex items-center gap-2">
+                                <div class="text-white bg-[#00BC7D] rounded-full p-1.5">
+                                    <lucide-angular [name]="icons.MapPin" size="18px" strokeWidth="2px"></lucide-angular>
+                                </div>
+                                <h4 class="text-xl font-bold">{{address.city}}</h4>
+                            </div>
+                            <div class="flex items-center gap-3 pe-7">
+                                <div class="icon text-white bg-primary rounded-full p-1.5">
+                                    <lucide-angular [name]="icons.Phone" size="18px" strokeWidth="2px"></lucide-angular>
+                                </div>
+                                <span>{{address.phone}}</span>
+                            </div>
+                        </div>
+                        <p class="street bg-gray-100 dark:bg-gray-950 dark:text-white px-3 rounded-full w-fit">{{address.street}}</p>
+
+                        <div class="absolute right-0 rtl:right-auto rtl:left-0 translate-x-[70%] rtl:translate-x-[-70%] h-full top-0 flex flex-col items-center justify-around gap-2 z-50">
+                            <lib-button
+                                [iconLucide]="{
+                                    name: icons.PenLine,
+                                    size: '16px',
+                                }"
+                                styleClass="rounded-full p-2 bg-white dark:bg-[#27272A] border border-gray-300"
+                                (onClick)="getAddress(address.id)"
+                            ></lib-button>
+
+                            <lib-button
+                                [iconLucide]="{
+                                    name: icons.Trash2,
+                                    size: '16px',
+                                }"
+                                styleClass="rounded-full p-2 bg-red-600 border border-red-600 text-white"
+                                (onClick)="deleteAddress(address.id)"
+                            ></lib-button>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-listbox>
+            
+        </div>
+    } @else {
+        <div class="pt-4">
+            <p-stepper [value]="currentStep()" class="basis-160">
+                <div class="relative">
+                    <p-step-list>
+                        <p-step [value]="1" [disabled]="true"></p-step>
+                        <p-step [value]="2" [disabled]="true"></p-step>
+                    </p-step-list>
+                    <div class="stepper-separator rounded overflow-hidden bg-gray-300">
+                        <div class="progress bg-primary!" [ngClass]="{
+                            'w-[50%]!': currentStep() == 1,
+                            'w-full!': currentStep() == 2,
+                        }"></div>
+                    </div>
+                </div>
+
+                <p-step-panels>
+                    <p-step-panel [value]="currentStep()">
+                        <ng-template #content let-activateCallback="activateCallback">
+                            <form [formGroup]="form">
+                                <div class="flex items-center gap-3 text-primary text-2xl border-b border-gray-200 pb-3 mb-3">
+                                    @if (currentStep() == 1) {
+                                        <lib-button
+                                            [iconLucide]="{
+                                                name: isDirRtl() ? icons.ArrowRight : icons.ArrowLeft,
+                                                size: '20px',
+                                            }"
+                                            styleClass="rounded-full text-white dark:text-black bg-primary p-2"
+                                            (onClick)="visibleForm.set(false)"
+                                        ></lib-button>
+                                        <h5>{{isDirRtl() ? 'أدخل تفاصيل العنوان' : 'Enter address details'}}</h5>
+                                    } @else {
+                                        <lib-button
+                                            [iconLucide]="{
+                                                name: isDirRtl() ? icons.ArrowRight : icons.ArrowLeft,
+                                                size: '20px',
+                                            }"
+                                            styleClass="rounded-full text-white dark:text-black bg-primary p-2"
+                                            (onClick)="currentStep.set(1)"
+                                        ></lib-button>
+                                        <h5>{{isDirRtl() ? 'حدد موقعك' : 'Find Your Location'}}</h5>
+                                    }
+                                </div>
+
+                                @if (currentStep() == 1) {
+                                    <div class=" lg:flex lg:gap-6 w-full">
+                                        <div class="w-full mb-4">
+                                            <lib-input
+                                                styleClass="bg-transparent!"
+                                                [label]="isDirRtl() ? 'اسم العنوان' : 'title'"
+                                                type="text"
+                                                inputId="title"
+                                                [placeholder]="isDirRtl() ? 'ادخل اسم للعنوان' : 'Enter name for address'"
+                                                formControlName="title"
+                                                [valid]="form.get('title')?.touched! && form.get('title')?.hasError('required')!"
+                                            ></lib-input>
+                                        </div>
+
+                                        <div class="w-full mb-4">
+                                            <lib-input
+                                                styleClass="bg-transparent!"
+                                                [label]="isDirRtl() ? 'المدينة' : 'city'"
+                                                type="text"
+                                                inputId="city"
+                                                [placeholder]="isDirRtl() ? 'أدخل اسم المدينة' : 'Enter city name'"
+                                                formControlName="city"
+                                                [valid]="form.get('city')?.touched! && form.get('city')?.hasError('required')!"
+                                            ></lib-input>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block mb-1" for="street">{{isDirRtl() ? 'العنوان' : 'Address'}}</label>
+                                        <textarea 
+                                            id="street"
+                                            class="w-full bg-transparent!"
+                                            rows="5"
+                                            pTextarea 
+                                            formControlName="street" 
+                                            [placeholder]="isDirRtl() ? 'أدخل عنوانك بالكامل' : 'Enter your full address'"
+                                            [invalid]="form.get('street')?.touched! && form.get('street')?.hasError('required')!"
+                                            variant="filled">
+                                        </textarea>
+                                        @if (form.get('street')?.touched! && form.get('street')?.hasError('required')!) {
+                                            <p class="lib-input__error">{{ 'common.validation.required' | translate }}</p>
+                                        }
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <lib-input
+                                            styleClass="bg-transparent!"
+                                            [label]="isDirRtl() ? 'رقم الهاتف' : 'phone'"
+                                            type="text"
+                                            inputId="phone"
+                                            [placeholder]="isDirRtl() ? 'ادخل رقم الهاتف' : 'Enter Phone number'"
+                                            formControlName="phone"
+                                            [valid]="form.get('phone')?.touched! && form.get('phone')?.hasError('required')!"
+                                        ></lib-input>
+                                    </div>
+
+                                    <div class="flex items-center gap-1">
+                                        <p-checkbox inputId="isPrimary" formControlName="isPrimary" [binary]="true" checkbox.root.borderRadius="50rem"/>
+                                        <label for="isPrimary" class="ms-2">{{isDirRtl() ? 'العنوان الاساسي' : 'Primary address'}}</label>
+                                    </div>
+                                } @else if (currentStep() == 2) {
+
+                                    <div class="map-container">
+                                        <google-map 
+                                            height="100%" 
+                                            width="100%" 
+                                            [center]="center" 
+                                            (mapClick)="onMapClick($event)">
+                                            
+                                            <!-- Optional: Add a map marker -->
+                                            <map-marker [position]="markerPosition"></map-marker>
+                                        </google-map>
+                                    </div>
+                                }
+
+
+                                <lib-button
+                                    [text]="(currentStep() == 1 ? 'common.actions.next' : addressId() ? 'common.actions.Update Address' : 'common.actions.Add Address') | translate"
+                                    styleClass="bg-primary mt-7 rounded-lg p-2 text-white w-full dark:text-zinc-900"
+                                    [disabled]="form.invalid"
+                                    [loading]="formSubmited()"
+                                    (onClick)="currentStep() == 1 ? currentStep.set(2) : createOrUpdateAddress()"
+                                ></lib-button>
+                            </form>
+                        </ng-template>
+                    </p-step-panel>
+                </p-step-panels>
+            </p-stepper>
+        </div>
+    }
+    
+
+</p-dialog>
+
+<p-confirmdialog 
+    [style]="{ width: '500px', height: '250px' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '95vw' }" 
+    styleClass="confirmdialog-address pt-7"
+/>

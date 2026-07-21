@@ -10,7 +10,9 @@
             "save-changes": "حفظ التغييرات",
             "delete-my-account": "حذف حسابي",
             "retry": "إعادة المحاولة",
-            "Remove": "حذف"
+            "Remove": "حذف",
+            "Add Address": "إضافة العنوان",
+            "Update Address": "تحديث العنوان"
         },
         "or": "أو",
         "Need help?": "بحاجة الى مساعدة؟",
@@ -19,6 +21,7 @@
             "What awesome gift are you looking for?": "ما هي الهدية الرائعة التي تبحث عنها؟"
         },
         "validation": {
+            "required": "هذا الحقل مطلوب",
             "This field is required": "هذا الحقل مطلوب",
             "Please enter a valid email.": "يرجى إدخال بريد إلكتروني صالح.",
             "passwordMismatch": "كلمتا المرور غير متطابقتين",
