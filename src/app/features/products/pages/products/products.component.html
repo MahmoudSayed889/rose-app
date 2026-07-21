@@ -20,10 +20,10 @@
                         [discountType]="product.discountType"
                         [discountValue]="product.discountValue"
                         [rating]="product.rating"
-                        [badge]="'new'"
+                        [badge]="product.tags || []"
                         [isFavorite]="true"
-                        (favoriteToggle)="logFavoriteToggle($event)"
-                        (addToCart)="logAddToCart($event)"
+                        (favoriteToggle)="onFavoriteToggle($event)"
+                        (addToCart)="addToCart($event.toString())"
                         (cardClick)="logCardClick($event)"
                     />
                 }
@@ -32,12 +32,10 @@
 
             <!-- paginator -->
             <div class="flex justify-center mt-20">
-                <p-paginator
-                    [first]="(paginator().page - 1) * paginator().limit"
-                    [rows]="paginator().limit"
-                    [totalRecords]="paginator().total"
-                    (onPageChange)="onPageChange($event)"
-                ></p-paginator>
+                <lib-paginator
+                    [pagination]="paginator()"
+                    (pageChange)="onPageChange($event)"
+                ></lib-paginator>
             </div>
         </div>
     </div>

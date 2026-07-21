@@ -9,20 +9,22 @@
         <span>{{text()}}</span>
     }
 
-    @if (iconLucide()) {
-        <lucide-angular 
-            [name]="iconLucide()?.name" 
-            [class]="iconLucide()?.class" 
-            [strokeWidth]="iconLucide()?.strokeWidth"
-            [size]="iconLucide()?.size ?? '24px'">
-        </lucide-angular>
+    @if(!loading()) {
+        @if (iconLucide()) {
+            <lucide-angular 
+                [name]="iconLucide()?.name" 
+                [class]="iconLucide()?.class" 
+                [strokeWidth]="iconLucide()?.strokeWidth"
+                [size]="iconLucide()?.size ?? '24px'">
+            </lucide-angular>
+        }
+    
+        @if (iconPrimeNg()) {
+            <i [class]="'pi ' + iconPrimeNg()"></i>
+        }
     }
 
-    @if (iconPrimeNg()) {
-        <i [class]="'pi ' + iconPrimeNg()"></i>
+    @if (loading()) {
+        <i class="pi pi-spin pi-spinner" style="font-size: .9rem;"></i>
     }
-
-    <i class="pi" style="font-size: .9rem;" [ngClass]="{
-        'pi-spin pi-spinner': loading(),
-    }"></i>
 </button>

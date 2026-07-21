@@ -1,0 +1,32 @@
+.special-gifts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 5rem;
+}
+
+.special-gifts__row-1 {
+  display: flex;
+  gap: 1rem;
+  height: 500px;
+}
+
+.special-gifts__static-image {
+  flex: 0 0 20%;
+  height: 100%;
+}
+
+.special-gifts__carousel {
+  flex: 1;
+  height: 100%;
+}
+
+.special-gifts__row-2 {
+  display: flex;
+  gap: 1rem;
+  height: 280px;
+}
+
+.special-gifts__row-2-item {
+  flex: 1;
+}

@@ -3,18 +3,23 @@ import { FilterComponent } from '../../components/filter/filter.component';
 import { ProductsService } from '../../services/products.service';
 import { ExternalParams } from '../../../../shared/models/external-params';
 import { Product, ProductsList } from '../../models/product';
-import { ProductCardComponent } from 'reusable-components';
-import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { PaginatorComponent, ProductCardComponent } from 'reusable-components';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { Router } from '@angular/router';
+import { PaginatorState } from 'primeng/types/paginator';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { TranslateService } from '@ngx-translate/core';
+import { WishlistService } from '../../../wishlist/services/wishlist.service';
 
+import { AddToCartREQ } from '../../../cart/models/cart.interface';
+import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
 
 @Component({
   selector: 'app-products',
   imports: [
     FilterComponent,
     ProductCardComponent,
-    PaginatorModule
+    PaginatorComponent
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -22,7 +27,11 @@ import { Router } from '@angular/router';
 export class ProductsComponent extends AppComponentBase implements OnInit {
 
   private _productsService = inject(ProductsService)
+  private _cartFacad = inject(CartFacadeService)
   private _router = inject(Router)
+  private readonly _ngxSpinner = inject(NgxSpinnerService);
+  private readonly _wishlistService = inject(WishlistService);
+  private readonly _translateService = inject(TranslateService);
 
   products = signal<Product[]>([])
 
@@ -35,7 +44,6 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
       page: this.paginator().page,
       limit: this.paginator().limit
     } as ExternalParams
-
     this._productsService.getProducts(params).subscribe({
       next: (res: ProductsList) => {
         this.products.set(res.payload.data)
@@ -50,12 +58,34 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
     })
   }
 
-  logFavoriteToggle(productId: string | number): void {
-    console.log('favoriteToggle', productId);
+  onFavoriteToggle(productId: string | number): void {
+    this._wishlistService.addToWishlist(String(productId)).subscribe({
+      next: () => {
+        this._toastService.toaster(
+          'success',
+          this._translateService.instant('wishlist.addedToWishlist')
+        );
+      },
+      error: () => {
+        this._toastService.toaster(
+          'error',
+          this._translateService.instant('wishlist.addToWishlistError')
+        );
+      },
+    });
+  }
+  
+  addToCart(productId: string): void {
+    const data: AddToCartREQ = {
+      productId,
+      quantity: 1,
+    };
+  
+    this._cartFacad.addToCart(data);
   }
 
-  logAddToCart(productId: string | number): void {
-    console.log('addToCart', productId);
+  logFavoriteToggle(productId: string | number): void {
+    console.log('favoriteToggle', productId);
   }
 
   logCardClick(productId: string | number): void {

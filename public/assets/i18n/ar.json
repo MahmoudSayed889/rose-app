@@ -8,7 +8,9 @@
             "start": "ابدأ",
             "submite": "إرسال",
             "save-changes": "حفظ التغييرات",
-            "delete-my-account": "حذف حسابي"
+            "delete-my-account": "حذف حسابي",
+            "retry": "إعادة المحاولة",
+            "Remove": "حذف"
         },
         "or": "أو",
         "Need help?": "بحاجة الى مساعدة؟",
@@ -70,7 +72,31 @@
         }
     },
     "home": {
-        "title": "الرئيسية"
+        "title": "الرئيسية",
+        "mostPopular": {
+            "title": "الأكثر شعبية",
+            "all": "الكل",
+            "subtitle": "اكتشف منتجاتنا الأكثر مبيعاً",
+            "viewMore": "عرض المزيد",
+            "noProducts": "لا توجد منتجات متاحة في هذه الفئة",
+            "loading": "جاري تحميل المنتجات...",
+            "errorCategories": "فشل تحميل الفئات. يرجى المحاولة مرة أخرى.",
+            "errorProducts": "فشل تحميل المنتجات. يرجى المحاولة مرة أخرى."
+        },
+        "aboutUs": {
+            "label": "عن الشركة",
+            "imageAlt": "صناديق هدايا مُعدّة بعناية مع أشرطة أنيقة وتغليف احتفالي",
+            "heading": "نُقدّم أرقى <span class=\"switch-color\">صناديق الهدايا</span> لأجمل <span class=\"switch-color\">لحظاتك</span> الخاصة",
+            "description": "اجعل كل لحظة لا تُنسى مع صناديق الهدايا الفاخرة لدينا. مُختارة بعناية ومُغلَّفة بأناقة، تحتوي كل صندوق على مقتنيات مختارة يدوياً لتُبهر من تُحبّهم. سواء كانت لعيد ميلاد أو زفاف أو مجرد \"شكراً لك\"، صُمِّمت هداياهم لتترك أثراً دائماً — لأن الإهداء الحقيقي يبدأ من هنا.",
+            "cta": "اكتشف",
+            "checklistLabel": "لماذا تختارنا",
+            "checklist": {
+                "competitivePrices": "أسعار تنافسية وتسوّق سهل",
+                "everyOccasion": "مثالية لكل مناسبة",
+                "premiumQuality": "جودة عالية وتغليف أنيق",
+                "fastDelivery": "توصيل سريع وموثوق"
+            }
+        }
     },
     "products": {
         "title": "المنتجات"
@@ -87,10 +113,95 @@
     "about": {
         "title": "نبذة عنا"
     },
+    "wishlist": {
+        "title": "قائمة الأمنيات",
+        "items": "عناصر",
+        "clearWishlist": "مسح القائمة",
+        "continueShopping": "متابعة التسوق",
+        "inStock": "متاح",
+        "outOfStock": "غير متاح",
+        "ratings": "تقييمات",
+        "addToCart": "أضف إلى السلة",
+        "exploreSimilar": "استكشف منتجات مشابهة",
+        "egp": "ج.م",
+        "addedToWishlist": "تمت الإضافة إلى قائمة الأمنيات",
+        "addToWishlistError": "فشل إضافة المنتج إلى قائمة الأمنيات"
+    },
     "cart": {
-        "title": ""
     },
     "profile": {
         "title": ""
+    },
+    "productDetails": {
+        "left in stock": "متبقي في المخزون",
+        "rating": "التقييم",
+        "ratings": "تقييمات",
+        "Product Reviews": "مراجعات المنتج",
+        "General rating": "التقييم العام",
+        "Your rating": "تقييمك",
+        "Review": "المراجعة",
+        "Title": "العنوان",
+        "enter review title": "أدخل عنوان المراجعة",
+        "what do you think of this product?": "ما رأيك في هذا المنتج؟",
+        "Add Review": "إضافة مراجعة",
+        "Add to Cart": "إضافة إلى السلة",
+        "relatedProducts": {
+            "title": "منتجات ذات صلة"
+        }
+    },
+    "bestSelling": {
+        "Best Selling": "الأكثر مبيعاً",
+        "Check Out": "تصفح الآن",
+        "What Everyone’s": "ما يشتريه",
+        "Buying": "الجميع",
+        "Right Now": "في الوقت الحالي",
+        "Not sure what to choose?": "لست متأكداً مما تختار؟",
+        "Start with our best sellers": "ابدأ بالمنتجات الأكثر مبيعاً لدينا، هذه هي الهدايا التي يستمر عملاؤنا في العودة لشرائها. سواء كنت تحتفل بعيد ميلاد، أو ذكرى سنوية، أو حفل زفاف، فنحن نضمن لك أن خياراتنا المميزة ستترك انطباعاً يدوم دائماً.",
+        "Explore gifts": "استكشف الهدايا"
+    },
+    "trustedBy": {
+        "prefix": "موثوق به من أكثر من",
+        "count": "4.5k",
+        "suffix": "شركة"
+    },
+    "specialGifts": {
+        "static": {
+            "badge": "يبدأ من 10.99 جنيه",
+            "overlayText": "هدايا مميزة للأشخاص الذين تحبهم",
+            "buttonLabel": "تسوق الآن"
+        },
+        "shopNow": "تسوق الآن",
+        "imBuying": "سأشتريها!",
+        "carousel": {
+            "slide1": {
+                "badge": "جديد",
+                "title": "قلها بالورود",
+                "overlayText": "مجموعة هدايا مميزة"
+            },
+            "slide2": {
+                "overlayText": "هدايا فاخرة"
+            },
+            "slide3": {
+                "badge": "تخفيض",
+                "overlayText": "مجموعات هدايا"
+            },
+            "slide4": {
+                "overlayText": "مجموعة حصرية"
+            }
+        },
+        "row2": {
+            "wedding": {
+                "badge": "زفاف",
+                "overlayText": "احتفل بها إلى الأبد بهدية لن تنساها أبداً"
+            },
+            "engagement": {
+                "badge": "خطوبة",
+                "overlayText": "كرّم بداية رحلة جميلة معاً"
+            },
+            "anniversary": {
+                "badge": "ذكرى سنوية",
+                "overlayText": "احتفل بكل عام من الحب بمفاجأة ذات معنى"
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
@@ -13,6 +13,8 @@ import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 import { CookieService } from 'ngx-cookie-service';
 import { errorInterceptor } from './core/interceptors/error/error.interceptor';
 import { MessageService } from 'primeng/api';
+import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
+import { ngxSpinnerInterceptor } from './core/interceptors/ngx-spinner/ngx-spinner.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -20,10 +22,15 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(
       withInterceptors([
-        errorInterceptor
+        tokenInterceptor,
+        errorInterceptor,
+        ngxSpinnerInterceptor
       ])
     ),
-    provideRouter(routes),
+    provideRouter(routes, withInMemoryScrolling({
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled'
+    })),
     providePrimeNG({
       theme: {
         preset: Aura,

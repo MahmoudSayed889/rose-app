@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
@@ -11,7 +10,7 @@ interface LucideIconConfig {
 
 @Component({
   selector: 'lib-button',
-  imports: [NgClass, LucideAngularModule],
+  imports: [LucideAngularModule],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
 })

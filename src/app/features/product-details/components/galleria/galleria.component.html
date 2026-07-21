@@ -1,11 +1,11 @@
-<div class="card">
+<div class="">
     <p-galleria [value]="images()"
-        [numVisible]="5">
+        [numVisible]="6">
         <ng-template #item let-item>
             <img class="w-full h-100 object-cover" [src]="item.itemImageSrc" />
         </ng-template>
         <ng-template #thumbnail let-item>
-            <img class="w-full h-25 object-cover" [src]="item.itemImageSrc" />
+            <img class="w-full h-25 object-cover" [src]="item.itemImageSrc" style="width: 100%; display: block;"/>
         </ng-template>
     </p-galleria>
 </div>

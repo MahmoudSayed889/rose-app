@@ -5,18 +5,21 @@ import { Testimonial, TestimonialsList } from './models/testimonial';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { TitleComponent } from 'reusable-components';
+import { AppComponentBase } from '../../../../shared/app-component-base';
 
 @Component({
   selector: 'app-testimonials-section',
   imports: [
     RatingModule,
     FormsModule,
-    DatePipe
+    DatePipe,
+    TitleComponent
   ],
   templateUrl: './testimonials-section.component.html',
   styleUrl: './testimonials-section.component.scss',
 })
-export class TestimonialsSectionComponent implements OnInit {
+export class TestimonialsSectionComponent extends AppComponentBase implements OnInit {
 
   private _testimonialsService = inject(TestimonialsService)
 

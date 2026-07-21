@@ -3,12 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastModule } from 'primeng/toast';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet, 
-    ToastModule
+    ToastModule,
+    NgxSpinnerModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

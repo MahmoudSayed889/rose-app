@@ -1,0 +1,48 @@
+<div class="carousel-wrapper">
+  <p-carousel
+    #carousel
+    [value]="gifts()"
+    [numVisible]="1"
+    [numScroll]="1"
+    [circular]="true"
+    [autoplayInterval]="3000"
+    [showNavigators]="false"
+    [showIndicators]="false"
+    (onPage)="onPageChange($event)"
+  >
+    <ng-template pTemplate="item" let-gift>
+      <app-gift-image
+        [imageUrl]="gift.imageUrl"
+        [badge]="gift.badge ? (gift.badge | translate) : ''"
+        [title]="gift.title ? (gift.title | translate) : ''"
+        [overlayText]="gift.overlayText ? (gift.overlayText | translate) : ''"
+        [buttonLabel]="gift.buttonLabel ? (gift.buttonLabel | translate) : ''"
+        overlayType="gradient-left"
+        (buttonClick)="giftAction.emit(gift.id)"
+      ></app-gift-image>
+    </ng-template>
+  </p-carousel>
+
+  <div class="carousel-controls" [class.rtl]="isRtl()">
+    <div class="carousel-dots">
+      @for (gift of gifts(); track gift.id; let i = $index) {
+        <button
+          type="button"
+          class="carousel-dot"
+          [class.active]="i === activeIndex()"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+        ></button>
+      }
+    </div>
+
+    <div class="carousel-arrows">
+      <button type="button" class="carousel-arrow" (click)="prev()" aria-label="Previous">
+        <i [class]="isRtl() ? 'pi pi-chevron-right' : 'pi pi-chevron-left'"></i>
+      </button>
+      <button type="button" class="carousel-arrow" (click)="next()" aria-label="Next">
+        <i [class]="isRtl() ? 'pi pi-chevron-left' : 'pi pi-chevron-right'"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,21 @@
         <img src="assets/imgs/logo.png" alt="Rose Logo" class="h-17 w-auto object-contain" />
     </div>
 
+    @if (true) {
+        <div class="flex flex-col items-start leading-2.5">
+            <span class="opacity-60 text-sm">{{isDirRtl() ? 'التسليم إلى:' : 'Deliver to:'}}</span>
+
+            <div class="flex items-center gap-1">
+                <lucide-angular 
+                    [name]="icons.MapPinPen" 
+                    class="text-primary" 
+                    size="18px">
+                </lucide-angular>
+                <span class="text-primary font-medium">Cairo</span>
+            </div>
+        </div>
+    }
+
     <div class="flex-1 max-w-3xl mx-4 relative">
         <div class="w-full relative">
             <i class="pi pi-search absolute left-4 rtl:left-auto rtl:right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
@@ -14,35 +29,50 @@
 
     <div class="flex items-center gap-5 shrink-0 font-medium">
 
-        <a (click)="showDialog('login')"
-            class="flex items-center gap-1.5 hover:text-primary transition-colors cursor-pointer">
-            <lucide-angular 
-                [name]="icons.User" 
-                class="opacity-90" 
-                size="24px">
-            </lucide-angular>
-            <span>{{ 'auth.login' | translate }}</span>
-        </a>
+        @if (isAuthenticated()) {
+            <div class="flex justify-center">
+                <p-menu #menu [model]="userMenuItems" [popup]="true"/>
+                <button class=" flex items-end gap-3 cursor-pointer" type="button" pButton (click)="menu.toggle($event)">
+                    <div class="flex flex-col items-start leading-2.5">
+                        <span class="opacity-60 text-sm">{{isDirRtl() ? 'مرحباً' : 'Hello'}}</span>
+                        <span class="text-primary">{{this.user()?.firstName}}</span>
+                    </div>
+                    
+
+                    <lucide-angular 
+                        [name]="icons.ChevronDown" 
+                        class="opacity-75" 
+                        size="18px">
+                    </lucide-angular>
+                </button>
+            </div>
+        } @else {
+            <a (click)="showDialog('login')"
+                class="flex items-center gap-1.5 hover:text-primary transition-colors cursor-pointer">
+                <lucide-angular 
+                    [name]="icons.User" 
+                    class="opacity-90" 
+                    size="24px">
+                </lucide-angular>
+                <span>{{ 'auth.login' | translate }}</span>
+            </a>
+        }
 
         <span class="h-9 w-px bg-gray-200 dark:bg-zinc-500 hidden md:block"></span>
-
-        <lib-button
+        <a routerLink="/wishlist" class="flex items-center gap-1.5 hover:text-primary transition-colors">
+            <lib-button
             styleClass="hover:text-primary gap-0! p-1"
             [iconLucide]="{
                 name: icons.Heart,
                 class: 'opacity-75',
                 size: '20px'
             }"
-        ></lib-button>
+            ></lib-button>
+        </a>
 
-        <lib-button
-            styleClass="hover:text-primary gap-0! p-1"
-            [iconLucide]="{
-                name: icons.ShoppingCart,
-                class: 'opacity-75',
-                size: '20px'
-            }"
-        ></lib-button>
+        <a routerLink="/cart" class="hover:text-primary gap-0 p-1 opacity-75">
+            <i class="pi pi-shopping-cart"></i>
+        </a>
 
         <div class="relative">
             <lib-button

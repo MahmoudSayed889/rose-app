@@ -16,25 +16,29 @@
       ></lucide-angular>
     </button>
 
-    @if (badge !== null) {
-      <span
-        class="product-card__badge"
-        [class.product-card__badge--new]="badge === 'new'"
-        [class.product-card__badge--hot]="badge === 'hot'"
-        [class.product-card__badge--out-of-stock]="badge === 'out-of-stock'"
-      >
-        @switch (badge) {
-          @case ('new') {
-            New
-          }
-          @case ('hot') {
-            Hot
-          }
-          @case ('out-of-stock') {
-            Out of Stock
-          }
+    @if (badge.length > 0) {
+      <div class="absolute top-2.5 right-2.5 flex items-center gap-1.5">
+        @for (tag of badge; track $index) {
+          <span
+            class="product-card__badge"
+            [class.product-card__badge--new]="tag === 'new'"
+            [class.product-card__badge--hot]="tag === 'hot'"
+            [class.product-card__badge--out-of-stock]="tag === 'out of stock'"
+          >
+            @switch (tag) {
+              @case ('new') {
+                New
+              }
+              @case ('hot') {
+                Hot
+              }
+              @case ('out of stock') {
+                Out of Stock
+              }
+            }
+          </span>
         }
-      </span>
+      </div>
     }
 
     <div class="product-card__overlay" aria-hidden="true">
@@ -114,7 +118,7 @@
     <button
       type="button"
       class="product-card__cart"
-      [disabled]="badge === 'out-of-stock'"
+      [disabled]="badge.includes('out of stock')  || !authService.isAuthenticated()"
       aria-label="Add to cart"
       (click)="onAddToCartClick($event)"
     >

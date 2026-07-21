@@ -3,7 +3,7 @@
     @if (iconType() === 'prime') {
       <i [class]="'icon ' + icon()"></i>
     } @else {
-      <lucide-angular class="icon" [name]="icon()"></lucide-angular>
+      <lucide-angular class="icon" [name]="icon()" size="50px" strokeWidth="1.5px"></lucide-angular>
     }
   </div>
   <div class="icon-label">

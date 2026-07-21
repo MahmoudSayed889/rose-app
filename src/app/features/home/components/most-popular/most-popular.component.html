@@ -1,0 +1,118 @@
+<section class="container most-popular-section">
+  <!-- Header -->
+  <div class="section-header">
+    <lib-title [title]="'home.mostPopular.title' | translate" />
+    
+    <!-- Category Tabs Container -->
+    <div class="category-tabs-wrapper">
+      <!-- Category Tabs -->
+      <div class="category-tabs" *ngIf="!loadingCategories() && !errorCategories()">
+<<<<<<< HEAD
+        <button
+          [class.active]="!selectedCategory()"
+          (click)="onAllSelect()"
+          [attr.aria-label]="'home.mostPopular.all' | translate"
+          [attr.aria-pressed]="!selectedCategory()"
+          type="button"
+          class="category-tab">
+          {{ 'home.mostPopular.all' | translate }}
+        </button>
+        <button
+=======
+        <button 
+>>>>>>> 1c8b478 (feat: product filters)
+          *ngFor="let category of categories(); trackBy: trackByCategory"
+          [class.active]="selectedCategory()?.id === category.id"
+          (click)="onCategorySelect(category)"
+          [attr.aria-label]="category.title"
+          [attr.aria-pressed]="selectedCategory()?.id === category.id"
+          type="button"
+          class="category-tab">
+          {{ category.title }}
+        </button>
+      </div>
+      
+      <!-- Category Loading Skeleton -->
+      <div *ngIf="loadingCategories()" class="category-skeleton">
+        <p-skeleton width="100px" height="40px" borderRadius="8px" />
+        <p-skeleton width="120px" height="40px" borderRadius="8px" />
+        <p-skeleton width="90px" height="40px" borderRadius="8px" />
+        <p-skeleton width="110px" height="40px" borderRadius="8px" />
+      </div>
+      
+      <!-- Category Error -->
+      <div *ngIf="errorCategories()" class="error-state">
+        <p class="error-message">{{ errorCategories() }}</p>
+        <button (click)="onRetryCategories()" class="retry-btn" type="button">
+          {{ 'common.actions.retry' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="products-grid" *ngIf="!loadingProducts() && products().length > 0 && !errorProducts()">
+    <lib-product-card
+      *ngFor="let product of products(); trackBy: trackByProduct"
+      [productId]="product.id"
+      [imageUrl]="product.cover"
+      [title]="product.title"
+      [price]="product.price"
+      [discountType]="product.discountType"
+      [discountValue]="product.discountValue"
+      [rating]="product.rating"
+<<<<<<< HEAD
+      (cardClick)="onProductClick($event)"
+      [badge]="product.tags || []"
+      (favoriteToggle)="onFavoriteToggle($event)"
+      (addToCart)="addToCart(product.id)"  />
+/>
+=======
+      [badge]="product.tags||[]"
+      (cardClick)="onProductClick($event)"
+      (addToCart)="addToCart(product.id)" />
+>>>>>>> 1c8b478 (feat: product filters)
+  </div>
+
+  <!-- Products Loading Skeleton -->
+  <div class="products-skeleton" *ngIf="loadingProducts()">
+    <div class="skeleton-card" *ngFor="let i of [1,2,3,4]">
+      <p-skeleton width="100%" height="250px" borderRadius="12px" />
+      <p-skeleton width="80%" height="20px" borderRadius="4px" styleClass="mt-3" />
+      <p-skeleton width="60%" height="20px" borderRadius="4px" styleClass="mt-2" />
+      <div class="skeleton-footer">
+        <p-skeleton width="40%" height="24px" borderRadius="4px" />
+        <p-skeleton width="30%" height="32px" borderRadius="8px" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+<<<<<<< HEAD
+  <div class="empty-state" *ngIf="!loadingProducts() && products().length === 0 && !errorProducts() && productsLoaded()">
+=======
+  <div class="empty-state" *ngIf="!loadingProducts() && products().length === 0 && !errorProducts() && selectedCategory()">
+>>>>>>> 1c8b478 (feat: product filters)
+    <p class="empty-message">{{ 'home.mostPopular.noProducts' | translate }}</p>
+  </div>
+
+  <!-- Products Error -->
+  <div class="error-state" *ngIf="errorProducts()">
+    <p class="error-message">{{ errorProducts() }}</p>
+    <button (click)="onRetryProducts()" class="retry-btn" type="button">
+      {{ 'common.actions.retry' | translate }}
+    </button>
+  </div>
+
+  <!-- See More Button -->
+  <div class="see-more-container" *ngIf="products().length > 0 && !loadingProducts()">
+    <lib-button
+      styleClass="p-0"
+      [iconLucide]="{
+        name: icons.MoveRight
+      }"  
+      [text]="'home.mostPopular.viewMore' | translate"
+      styleClass="see-more-btn"
+      (onClick)="onSeeMoreClick()" />
+  </div>
+</section>
