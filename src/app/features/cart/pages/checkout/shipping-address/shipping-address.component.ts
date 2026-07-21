@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { CheckoutFacadeService } from '../../../services/checkout/checkout-facade.service';
 import { Router } from '@angular/router';
 import { ButtonComponent } from 'reusable-components';
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
 import { AddressService } from '../../../services/checkout/address.service';
 import { AddressDialogComponent } from './address-dialog/address-dialog.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-shipping-address',
@@ -31,6 +32,7 @@ import { AddressDialogComponent } from './address-dialog/address-dialog.componen
 export class ShippingAddressComponent extends AppComponentBase implements OnInit {
 
   private readonly _checkoutFacadeService = inject(CheckoutFacadeService)
+  private readonly _destroyRef = inject(DestroyRef);
   private readonly _addressService = inject(AddressService)
   private readonly _router = inject(Router)
 
@@ -46,7 +48,9 @@ export class ShippingAddressComponent extends AppComponentBase implements OnInit
   }
 
   getAddresses() {
-    this._addressService.getAddresses().subscribe({
+    this._addressService.getAddresses()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
       next: (res) => {
         this._addressService.addresses.set(res.payload.addresses)
       }
