@@ -30,28 +30,13 @@ export class CartComponent extends AppComponentBase implements OnInit {
 
   icons = icons
 
-  getCartItems(): void {
-    this._cartService.getCartItems()
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: (res) => {
-          this._cartFacadeService.cartItems.set(res.payload.cartItems);
-
-          this._cartFacadeService.handlepriceWithDiscount(this.cartItems());
-          this._cartFacadeService.handleTotals(this.cartItems());
-        },
-        error: () => {
-        }
-      })
-  }
-
   removeCartItem(id: string): void {
     this.removeLoading.set(id);
     this._cartService.removeCartItem(id)
       .pipe(finalize(() => this.removeLoading.set(null)), takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
-          this.getCartItems();
+          this._cartFacadeService.getCartItems();
         },
         error: () => {
         }
@@ -63,7 +48,7 @@ export class CartComponent extends AppComponentBase implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
-          this.getCartItems();
+          this._cartFacadeService.getCartItems();
         },
         error: (err) => console.log(err)
       })
@@ -74,7 +59,7 @@ export class CartComponent extends AppComponentBase implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
-          this.getCartItems();
+          this._cartFacadeService.getCartItems();
         }
       })
   }
@@ -107,7 +92,7 @@ export class CartComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCartItems();
+    // this.getCartItems();
     this._checkoutFacadeService.currentStep.set(0)
   }
 }

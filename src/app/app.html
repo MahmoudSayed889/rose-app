@@ -1,4 +1,18 @@
 <p-toast position="bottom-right"/>
 <router-outlet />
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#a6252a" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
-<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner> -->
+
+<ngx-spinner 
+    bdColor = "rgba(0, 0, 0, 0.8)" 
+    size = "medium" 
+    color = "#a6252a" 
+    type = "square-jelly-box" 
+    [fullScreen] = "true" 
+    template="
+    <img
+      src='assets/imgs/logo_animate.gif'
+      alt='Loading'
+      style='width:180px;height:auto;display:block;margin:0 auto;'
+    />"
+>
+    <p style="color: white"> {{'Loading' | translate}} </p>
+</ngx-spinner>

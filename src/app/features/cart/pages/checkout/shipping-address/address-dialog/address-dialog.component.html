@@ -15,7 +15,7 @@
                 <lib-button
                     [text]="isDirRtl() ? 'إضافة عنوان جديد' : 'Add a New Address'"
                     styleClass="w-full rounded-[10px] bg-[#FBEAEA] dark:bg-zinc-700 px-4 py-2.5 text-sm font-medium text-primary"
-                    (onClick)="visibleForm.set(true)"
+                    (onClick)="onClickAddNewAddressBtn()"
                 ></lib-button>
             </div>
         } @else {

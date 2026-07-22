@@ -1,0 +1,16 @@
+:host ::ng-deep {
+    .p-divider-content {
+        background: var(--color-zinc-50) !important;
+    }
+}
+
+:host-context(.dark) ::ng-deep {
+    .p-divider-content {
+        color: var(--color-zinc-500) !important;
+        background: var(--color-zinc-700) !important;
+    }
+
+    .p-divider-horizontal:before {
+        border-color: var(--color-zinc-500) !important;
+    }
+}
