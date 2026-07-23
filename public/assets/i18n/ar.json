@@ -12,6 +12,8 @@
             "delete-my-account": "حذف حسابي",
             "retry": "إعادة المحاولة",
             "Remove": "حذف",
+            "back": "رجوع",
+            "checkout": "دفع",
             "Add Address": "إضافة العنوان",
             "Update Address": "تحديث العنوان"
         },
@@ -131,7 +133,14 @@
         "addedToWishlist": "تمت الإضافة إلى قائمة الأمنيات",
         "addToWishlistError": "فشل إضافة المنتج إلى قائمة الأمنيات"
     },
-    "cart": {
+    "cart": {},
+    "checkout": {
+        "payment-methods": {
+            "Cash on Delivery": "الدفع عند الاستلام",
+            "You’ll pay in cash when your order is delivered": "ستدفع نقداً عند تسليم طلبك.",
+            "Credit Card": "بطاقة إئتمان",
+            "You’ll be securely redirected to Stripe to complete your payment": "سيتم تحويلك بشكل آمن إلى موقع Stripe لإتمام عملية الدفع."
+        }
     },
     "profile": {
         "title": ""

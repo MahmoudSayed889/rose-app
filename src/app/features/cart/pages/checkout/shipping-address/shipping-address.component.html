@@ -1,10 +1,7 @@
-<h2 class="text-3xl font-bold mb-7">{{isDirRtl() ? 'عنوان الشحن' : 'Shipping Address'}}</h2>
-
 @if (addresses().length) {
     <p-listbox 
         [options]="addresses()" 
         [(ngModel)]="selectedAddress"
-        optionLabel="city" 
         dataKey="id"
         class="w-full border-0! mb-7"
     >
@@ -33,19 +30,6 @@
     [text]="isDirRtl() ? 'إضافة عنوان جديد' : 'Add a New Address'"
     styleClass="w-full rounded-[10px] bg-[#FBEAEA] dark:bg-zinc-700 px-4 py-2.5 text-sm font-medium text-primary mb-7"
     (onClick)="showDialog()"
-></lib-button>
-
-<app-sp-line></app-sp-line>
-
-<lib-button
-    [text]="'common.actions.next' | translate"
-    [iconLucide]="{
-        name: isDirRtl() ? icons.MoveLeft : icons.MoveRight,
-        size: '20px',
-    }"
-    styleClass="flex items-center gap-2 rounded-lg text-white dark:text-black bg-primary px-8 py-2.5 text-sm mt-5 ms-auto"
-    [disabled]="selectedAddress == null"
-    (onClick)="next()"
 ></lib-button>
 
 <app-address-dialog

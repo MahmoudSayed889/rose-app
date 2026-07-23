@@ -12,6 +12,8 @@
       "delete-my-account": "Delete My Account",
       "retry": "Retry",
       "Remove": "Remove",
+      "back": "back",
+      "checkout": "checkout",
       "Add Address": "Add Address",
       "Update Address": "Update Address"
     },
@@ -121,6 +123,14 @@
     "addToWishlistError": "Failed to add item to wishlist"
   },
   "cart": {
+  },
+  "checkout": {
+    "payment-methods": {
+      "Cash on Delivery": "Cash on Delivery",
+      "You’ll pay in cash when your order is delivered": "You’ll pay in cash when your order is delivered.",
+      "Credit Card": "Credit Card",
+      "You’ll be securely redirected to Stripe to complete your payment": "You’ll be securely redirected to Stripe to complete your payment."
+    }
   },
   "profile": {
     "title": ""

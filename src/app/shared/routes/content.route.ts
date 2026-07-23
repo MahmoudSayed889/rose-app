@@ -34,4 +34,8 @@ export const ContentRoutes: Routes = [
         loadChildren: () => import('../../features/cart/cart.route').then((C) => C.CartRoutes),
         canActivate: [authGuard]
     },
+    {
+        path: 'orders',
+        loadComponent: () => import('../../features/orders/orders.component').then((C) => C.OrdersComponent),
+    },
 ];

@@ -5,7 +5,7 @@
       <lib-input class="w-full" placeholder="Coupon Code" [(ngModel)]="couponCode" [ngModelOptions]="{standalone: true}"></lib-input>
       <button
         type="button"
-        [disabled]="!couponCode"
+        [disabled]="!couponCode()"
         class="inline-flex h-11 sm:h-auto shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-white dark:text-zinc-800 transition-opacity hover:opacity-90 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
         [class.flex-row-reverse]="isDirRtl()"
         (click)="applyCoupon()"

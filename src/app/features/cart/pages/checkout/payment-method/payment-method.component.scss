@@ -1,0 +1,28 @@
+:host ::ng-deep {
+    .p-listbox-list-container {
+        max-height: none !important;
+
+        .p-listbox-list {
+            flex-direction: row;
+            justify-content: center;
+            gap: 2rem;
+
+            .p-listbox-option {
+                border: 1px solid var(--color-gray-200);
+                border-radius: .7rem;
+            }
+
+            .p-listbox-option-selected {
+                background: var(--p-surface-100) !important;
+
+                .title {
+                    color: var(--p-primary-color);
+                }
+
+                .sub-title {
+                    color: var(--p-text-muted-color);
+                }
+            }
+        }
+    }
+}

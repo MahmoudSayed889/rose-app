@@ -29,7 +29,7 @@ export class CartSummaryComponent extends AppComponentBase implements OnInit {
 
   discount = signal<number>(0)
 
-  couponCode: string = ''
+  couponCode = this._checkoutFacadeService.couponCode;
   allCoupons = signal<Coupon[]>([])
   appliedCoupons = signal<Coupon[]>([])
 
@@ -53,7 +53,7 @@ export class CartSummaryComponent extends AppComponentBase implements OnInit {
 
   applyCoupon() {
     const foundCoupon = this.allCoupons().find(
-      c => c.code.toLowerCase() === this.couponCode.trim().toLowerCase()
+      c => c.code.toLowerCase() === this.couponCode().trim().toLowerCase()
     );
 
     if (!foundCoupon) {
@@ -68,7 +68,7 @@ export class CartSummaryComponent extends AppComponentBase implements OnInit {
 
     this.appliedCoupons.update(coupons => [...coupons, foundCoupon]);
     this.calcTotoalAndDiscount()
-    this.couponCode = '';
+    // this.couponCode.set('')
   }
 
   calcTotoalAndDiscount() {
