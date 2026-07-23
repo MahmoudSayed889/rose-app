@@ -1,0 +1,24 @@
+<p-stepper [value]="currentStep()" class="basis-160">
+    <div class="relative">
+        <p-step-list>
+            <p-step [value]="1" [disabled]="true"></p-step>
+            <p-step [value]="2" [disabled]="true"></p-step>
+        </p-step-list>
+        <div class="stepper-separator rounded overflow-hidden bg-gray-300">
+            <div class="progress bg-primary!" [ngClass]="{
+                'w-[50%]!': currentStep() == 1,
+                'w-full!': currentStep() == 2,
+            }"></div>
+        </div>
+    </div>
+
+    <p-step-panels>
+        <p-step-panel [value]="currentStep()">
+            <ng-template #content let-activateCallback="activateCallback">
+                <div class="w-full">
+                    <router-outlet />
+                </div>
+            </ng-template>
+        </p-step-panel>
+    </p-step-panels>
+</p-stepper>

@@ -1,11 +1,11 @@
 :host {
   --card-favorite-bg: #ffffff;
-  --card-badge-hot-bg: #fbeaea;
-  --card-badge-hot-text: #a6252a;
-  --card-badge-new-bg: #f4f4f5;
-  --card-badge-new-text: #3f3f46;
-  --card-badge-out-of-stock-bg: #f4f4f5;
-  --card-badge-out-of-stock-text: #3f3f46;
+  --card-badge-hot-bg: #FBEAEA;
+  --card-badge-hot-text: #A6252A;
+  --card-badge-new-bg: #F4F4F5;
+  --card-badge-new-text: #3F3F46;
+  --card-badge-out-of-stock-bg: #DC2626;
+  --card-badge-out-of-stock-text: #FFF1F5;
   --card-title-color: #741c21;
   --card-price-color: #741c21;
   --card-star-filled: #fba707;
@@ -69,19 +69,11 @@
 }
 
 .product-card__badge {
-  position: absolute;
-  top: var(--card-image-padding, 16px);
-  right: var(--card-image-padding, 16px);
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 1.75rem;
   padding: 0.25rem 0.625rem;
   border-radius: 999px;
   font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 

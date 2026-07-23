@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { CartEndPoints } from '../../models/CartEndPoints';
 import { Observable } from 'rxjs';
-import { AddToCartREQ, AddToCartRES, GetCartItemsRES, RemoveCartItemsRES } from '../../models/cart.interface';
+import { AddToCartREQ, AddToCartRES, GetCartItemsRES, RemoveCartItemsRES, UpdateCartItemQuantityREQ } from '../../models/cart.interface';
 
 @Service()
 export class CartService {
@@ -23,5 +23,9 @@ export class CartService {
 
     addToCart(data: AddToCartREQ): Observable<AddToCartRES> {
         return this._httpClient.post<AddToCartRES>(this._CartEndPoints.AddItemToCart, data);
+    }
+
+    UpdateCartItemQuantity(id: string, quantity: UpdateCartItemQuantityREQ): Observable<AddToCartRES> {
+        return this._httpClient.patch<AddToCartRES>(this._CartEndPoints.UpdateCartItemQuantity(id), quantity);
     }
 }

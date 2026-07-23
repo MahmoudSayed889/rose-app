@@ -1,0 +1,13 @@
+
+
+<app-sp-line></app-sp-line>
+
+<lib-button
+    [text]="'common.actions.next' | translate"
+    [iconLucide]="{
+        name: isDirRtl() ? icons.MoveLeft : icons.MoveRight,
+        size: '20px',
+    }"
+    styleClass="flex items-center gap-2 rounded-lg text-white bg-primary px-8 py-2.5 text-sm mt-5 ms-auto"
+    (onClick)="next()"
+></lib-button>

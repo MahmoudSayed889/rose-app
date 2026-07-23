@@ -62,8 +62,7 @@ export class BestSellingComponent {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
-          this.bestSellingProducts.set(res);
-          this.mergeProductTags();
+          this.bestSellingProducts.set(res);          
         },
         error: (err) => {
           console.log(err);
@@ -73,13 +72,6 @@ export class BestSellingComponent {
 
   getProductTags(product: Product): ProductCardBadge[] {
     return this._productService.getProductsTags(product);
-  }
-
-  mergeProductTags(): void {
-    this.bestSellingProducts()?.map((product) => {
-      const tags = this.getProductTags(product);
-      product.tags = tags;
-    })
   }
 
   onCardClick(productId: string | number): void {

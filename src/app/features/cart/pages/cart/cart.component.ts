@@ -1,33 +1,32 @@
 import { Component, DestroyRef, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { CartItemCardComponent } from '../../components/cart-item-card/cart-item-card.component';
 import { CartService } from '../../services/cart/cart.service';
-import { CartItem } from '../../models/cart.interface';
+import { CartItem, UpdateCartItemQuantityREQ } from '../../models/cart.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { InputComponent, ButtonComponent } from "reusable-components";
+import { ButtonComponent } from "reusable-components";
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
 import { RouterLink } from "@angular/router";
 import { finalize } from 'rxjs';
 import { ProductsService } from '../../../products/services/products.service';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { icons } from 'lucide-angular';
-import { DecimalPipe } from '@angular/common';
+import { CartFacadeService } from '../../services/cart/cart-facade.service';
+import { CheckoutFacadeService } from '../../services/cart/checkout-facade.service';
 
 @Component({
   selector: 'app-cart',
-  imports: [CartItemCardComponent, InputComponent, SpLineComponent, RouterLink, ButtonComponent, DecimalPipe],
+  imports: [CartItemCardComponent, SpLineComponent, RouterLink, ButtonComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
 export class CartComponent extends AppComponentBase implements OnInit {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _productsService = inject(ProductsService);
+  private readonly _cartFacadeService = inject(CartFacadeService);
+  private readonly _checkoutFacadeService = inject(CheckoutFacadeService);
 
-  cartItems: WritableSignal<CartItem[]> = signal([]);
+  cartItems = this._cartFacadeService.cartItems;
   removeLoading: WritableSignal<string | null> = signal(null);
-
-  subtotal: WritableSignal<number> = signal(0);
-  total: WritableSignal<number> = signal(0);
 
   icons = icons
 
@@ -36,33 +35,14 @@ export class CartComponent extends AppComponentBase implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
-          this.cartItems.set(res.payload.cartItems);
-          this.handlepriceWithDiscount(this.cartItems());
-          this.subtotal.set(0);
-          this.total.set(0);
-          this.handleTotals(this.cartItems());
+          this._cartFacadeService.cartItems.set(res.payload.cartItems);
+
+          this._cartFacadeService.handlepriceWithDiscount(this.cartItems());
+          this._cartFacadeService.handleTotals(this.cartItems());
         },
         error: () => {
         }
       })
-  }
-
-  handlepriceWithDiscount(cartItems: CartItem[]): void {
-    cartItems.map((item) => {
-      this._productsService.getPrice(item.product)
-    })
-  }
-
-  handleTotals(cartItems: CartItem[]): void {
-    if (cartItems.length === 0) {
-      this.subtotal.set(0);
-      this.total.set(0);
-    } else {
-      cartItems.map((item) => {
-        this.subtotal.update((value) => value + Number(item.product.price));
-        this.total.update((value) => value + Number(item.product.priceWithDiscount));
-      })
-    }
   }
 
   removeCartItem(id: string): void {
@@ -89,19 +69,45 @@ export class CartComponent extends AppComponentBase implements OnInit {
       })
   }
 
+  UpdateCartItemQuantity(id: string, quantity: UpdateCartItemQuantityREQ): void {
+    this._cartService.UpdateCartItemQuantity(id, quantity)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: () => {
+          this.getCartItems();
+        }
+      })
+  }
+
   onRemoveItem(itemId: string): void {
     this.removeCartItem(itemId);
   }
 
+  getItemQuantity(itemId: string): number {
+    let quantity = 0;
+    this.cartItems().map(item => {
+      if (item.id === itemId)
+        quantity = item.quantity
+    })
+    return quantity;
+  }
+
   onIncreaseQuantity(itemId: string): void {
-    console.log('Increase quantity:', itemId);
+    const quantity = {
+      quantity: this.getItemQuantity(itemId) + 1
+    };
+    this.UpdateCartItemQuantity(itemId, quantity);
   }
 
   onDecreaseQuantity(itemId: string): void {
-    console.log('Decrease quantity:', itemId);
+    const quantity = {
+      quantity: this.getItemQuantity(itemId) - 1
+    };
+    this.UpdateCartItemQuantity(itemId, quantity);
   }
 
   ngOnInit(): void {
     this.getCartItems();
+    this._checkoutFacadeService.currentStep.set(0)
   }
 }

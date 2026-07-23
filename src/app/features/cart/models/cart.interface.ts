@@ -40,3 +40,7 @@ export interface AddToCartRES {
 export interface AddToCartPayload {
   cartItem: CartItem;
 }
+
+export interface UpdateCartItemQuantityREQ {
+  quantity: number
+}

@@ -58,31 +58,31 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
     })
   }
 
-onFavoriteToggle(productId: string | number): void {
-  this._wishlistService.addToWishlist(String(productId)).subscribe({
-    next: () => {
-      this._toastService.toaster(
-        'success',
-        this._translateService.instant('wishlist.addedToWishlist')
-      );
-    },
-    error: () => {
-      this._toastService.toaster(
-        'error',
-        this._translateService.instant('wishlist.addToWishlistError')
-      );
-    },
-  });
-}
-
-addToCart(productId: string): void {
-  const data: AddToCartREQ = {
-    productId,
-    quantity: 1,
-  };
-
-  this._cartFacad.addToCart(data);
-}
+  onFavoriteToggle(productId: string | number): void {
+    this._wishlistService.addToWishlist(String(productId)).subscribe({
+      next: () => {
+        this._toastService.toaster(
+          'success',
+          this._translateService.instant('wishlist.addedToWishlist')
+        );
+      },
+      error: () => {
+        this._toastService.toaster(
+          'error',
+          this._translateService.instant('wishlist.addToWishlistError')
+        );
+      },
+    });
+  }
+  
+  addToCart(productId: string): void {
+    const data: AddToCartREQ = {
+      productId,
+      quantity: 1,
+    };
+  
+    this._cartFacad.addToCart(data);
+  }
 
   logFavoriteToggle(productId: string | number): void {
     console.log('favoriteToggle', productId);
