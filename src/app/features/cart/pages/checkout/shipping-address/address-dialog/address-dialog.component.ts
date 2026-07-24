@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, model, OnInit, Output, signal } from '@angular/core';
+import { Component, inject, model, OnInit, signal } from '@angular/core';
 import { ButtonComponent, InputComponent } from 'reusable-components';
 import { NgClass } from '@angular/common';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
@@ -62,8 +62,6 @@ export class AddressDialogComponent extends AppComponentBase implements OnInit {
 
   icons = icons
 
-  @Output() saved = new EventEmitter<void>();
-
   ngOnInit(): void {
     this.getAddresses()
     this.createForm()
@@ -126,7 +124,6 @@ export class AddressDialogComponent extends AppComponentBase implements OnInit {
     this.visibleForm.set(false);
     this.createForm()
     this.currentStep.set(1)
-    this.saved.emit();
   }
 
   createOrUpdateAddress() {

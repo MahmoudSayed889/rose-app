@@ -16,10 +16,5 @@ import { CartFacadeService } from '../services/cart/cart-facade.service';
 })
 export class CartLayoutComponent implements OnInit {
 
-  private readonly _cartFacadeService = inject(CartFacadeService);
-
-
-  ngOnInit(): void {
-    this._cartFacadeService.getCartItems()
-  }
+  ngOnInit(): void {}
 }

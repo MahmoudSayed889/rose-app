@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
 import { AddressService } from '../../../services/checkout/address.service';
 import { AddressDialogComponent } from './address-dialog/address-dialog.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-shipping-address',
@@ -26,7 +25,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ShippingAddressComponent extends AppComponentBase implements OnInit {
 
   private readonly _checkoutFacadeService = inject(CheckoutFacadeService)
-  private readonly _destroyRef = inject(DestroyRef);
   private readonly _addressService = inject(AddressService)
 
   addresses = this._addressService.addresses
@@ -37,24 +35,9 @@ export class ShippingAddressComponent extends AppComponentBase implements OnInit
 
   ngOnInit(): void {
     this._checkoutFacadeService.currentStep.set(1)
-    this.getAddresses()
-  }
-
-  getAddresses() {
-    this._addressService.getAddresses()
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: (res) => {
-          this._addressService.addresses.set(res.payload.addresses)
-        }
-      })
   }
 
   showDialog() {
     this.visible.set(true);
-  }
-
-  afterHideDialog() {
-    this.getAddresses()
   }
 }

@@ -11,6 +11,7 @@ import { icons } from 'lucide-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrdersService } from '../../../orders/services/orders.service';
 import { CreateOrderRequest } from '../../../orders/models/orders';
+import { CartFacadeService } from '../../services/cart/cart-facade.service';
 
 @Component({
   selector: 'app-checkout',
@@ -29,6 +30,7 @@ import { CreateOrderRequest } from '../../../orders/models/orders';
 export class CheckoutComponent extends AppComponentBase implements OnInit {
 
   private readonly _checkoutFacadeService = inject(CheckoutFacadeService)
+  private readonly _cartFacadeService = inject(CartFacadeService);
   private readonly _ordersService = inject(OrdersService)
   private readonly _router = inject(Router)
 
@@ -67,6 +69,8 @@ export class CheckoutComponent extends AppComponentBase implements OnInit {
     this._checkoutFacadeService.paymentMethod.set(null)
     this._checkoutFacadeService.couponCode.set('')
     this._checkoutFacadeService.notes.set('')
+
+    this._cartFacadeService.getCartItems();
   }
 
   checkout() {

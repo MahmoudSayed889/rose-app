@@ -33,7 +33,7 @@ export class PaymentMethodComponent extends AppComponentBase implements OnInit {
         imgSrc: 'assets/imgs/cash.png',
         title: 'Cash on Delivery',
         subTitle: 'You’ll pay in cash when your order is delivered',
-        method: 'CASH',
+        method: 'CASH_ON_DELIVERY',
       },
       {
         imgSrc: 'assets/imgs/credit.png',

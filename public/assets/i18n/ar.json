@@ -36,6 +36,15 @@
             "LN_REQ_ERROR": "الاسم الأخير مطلوب"
         }
     },
+    "header": {
+        "userMenuItems": {
+            "Account": "الحساب الشخصي",
+            "Addresses": "العنواين",
+            "Orders": "الاوردرات",
+            "Dashboard": "لوحة التحكم",
+            "Log out": "تسجيل الخروج"
+        }
+    },
     "auth": {
         "username": "اسم المستخدم",
         "password": "كلمة المرور",

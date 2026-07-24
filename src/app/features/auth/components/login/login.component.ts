@@ -55,7 +55,7 @@ export class LoginComponent extends AppComponentBase implements OnInit {
       next: (res) => {
 
         this.formSubmited.set(false)
-        this._router.navigate(['/home'])
+        this._router.navigate([ this._router.url.includes('login') ? '/home' : this._router.url])
 
         if (this.form.value.rememberMe) {
           this._cookieService.set('user', JSON.stringify(res.token), 90)

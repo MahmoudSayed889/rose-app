@@ -37,6 +37,15 @@
       "LN_REQ_ERROR": "Last Name is required"
     }
   },
+  "header": {
+    "userMenuItems": {
+      "Account": "Account",
+      "Addresses": "Addresses",
+      "Orders": "Orders",
+      "Dashboard": "Dashboard",
+      "Log out": "Log out"
+    }
+  },
   "auth": {
     "username": "Username",
     "password": "Password",

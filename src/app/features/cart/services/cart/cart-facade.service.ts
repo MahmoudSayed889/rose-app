@@ -29,6 +29,7 @@ export class CartFacadeService extends AppComponentBase {
     addToCart(data: AddToCartREQ): void {
         this._cartService.addToCart(data).subscribe({
             next: () => {
+                this.getCartItems()
                 this._toastService.toaster('success', 'Added to cart')
             },
         });

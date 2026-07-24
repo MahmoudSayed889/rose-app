@@ -29,6 +29,7 @@
                 [product]="item.product"
                 [wishlistItemId]="item.id"
                 [deleteLoading]="removingItemId() === item.id"
+                (addToCart)="addToCart(item.product.id)"
                 (deleteItem)="onRemoveItem($event)"
             />
         }
