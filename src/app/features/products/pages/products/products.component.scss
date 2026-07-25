@@ -20,6 +20,9 @@
   flex-shrink: 0;
   position: sticky;
   top: 1rem;
+  height: 90vh;
+  overflow: auto;
+  scrollbar-width: none;
   animation: slideInLeft 0.35s ease forwards;
 }
 

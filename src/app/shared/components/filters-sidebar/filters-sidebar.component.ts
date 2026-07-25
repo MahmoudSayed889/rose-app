@@ -32,8 +32,8 @@ export class FiltersSidebarComponent {
     initialValue: [],
   });
 
-  readonly selectedCategoryIds = this.filterState.selectedCategoryIds;
-  readonly selectedOccasionIds = this.filterState.selectedOccasionIds;
+  readonly selectedCategoryIds = this.filterState.selectedCategoryId;
+  readonly selectedOccasionIds = this.filterState.selectedOccasionId;
   readonly minRating = this.filterState.minRating;
   readonly minPrice = this.filterState.minPrice;
   readonly maxPrice = this.filterState.maxPrice;
@@ -54,13 +54,13 @@ export class FiltersSidebarComponent {
     });
   }
 
-  toggleCategory = (id: string) => this.filterState.toggleCategory(id);
+  toggleCategory = (id: string) => this.filterState.selectedCategoryId.set(id);
 
   resetCategories = () => this.filterState.resetCategories();
 
   isCategorySelected = (id: string) => this.filterState.isCategorySelected(id);
 
-  toggleOccasion = (id: string) => this.filterState.toggleOccasion(id);
+  toggleOccasion = (id: string) => this.filterState.selectedOccasionId.set(id);
 
   resetOccasions = () => this.filterState.resetOccasions();
 

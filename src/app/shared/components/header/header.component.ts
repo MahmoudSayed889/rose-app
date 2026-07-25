@@ -72,6 +72,8 @@ export class HeaderComponent extends AppComponentBase {
     effect(() => {
       if (this.isAuthenticated() && !this.user()) {
         this.getUser();
+        this._cartFacadeService.getCartItems();
+        this._wishlistFacadeService.loadWishlist();
       }
 
       if (!this.isAuthenticated()) {
@@ -89,9 +91,6 @@ export class HeaderComponent extends AppComponentBase {
   }
 
   ngOnInit() {
-    this._cartFacadeService.getCartItems();
-    this._wishlistFacadeService.loadWishlist();
-
     this.initSecondNavbarItems()
     this.initNotificationItems()
 

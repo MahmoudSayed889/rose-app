@@ -2,47 +2,35 @@ import { computed, Injectable, Signal, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class FilterStateService {
-  readonly selectedCategoryIds = signal<string[]>([]);
-  readonly selectedOccasionIds = signal<string[]>([]);
+  readonly selectedCategoryId = signal<string>('');
+  readonly selectedOccasionId = signal<string>('');
   readonly minRating = signal<number | null>(null);
   readonly minPrice = signal<number | null>(null);
   readonly maxPrice = signal<number | null>(null);
 
   readonly hasActiveFilters = computed(
     () =>
-      this.selectedCategoryIds().length > 0 ||
-      this.selectedOccasionIds().length > 0 ||
+      this.selectedCategoryId().length > 0 ||
+      this.selectedOccasionId().length > 0 ||
       this.minRating() !== null ||
       this.minPrice() !== null ||
       this.maxPrice() !== null,
   );
 
-  toggleCategory(id: string): void {
-    this.selectedCategoryIds.update((ids) =>
-      ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id],
-    );
-  }
-
   isCategorySelected(id: string): Signal<boolean> {
-    return computed(() => this.selectedCategoryIds().includes(id));
+    return computed(() => this.selectedCategoryId().includes(id));
   }
 
   resetCategories(): void {
-    this.selectedCategoryIds.set([]);
-  }
-
-  toggleOccasion(id: string): void {
-    this.selectedOccasionIds.update((ids) =>
-      ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id],
-    );
+    this.selectedCategoryId.set('');
   }
 
   isOccasionSelected(id: string): Signal<boolean> {
-    return computed(() => this.selectedOccasionIds().includes(id));
+    return computed(() => this.selectedOccasionId().includes(id));
   }
 
   resetOccasions(): void {
-    this.selectedOccasionIds.set([]);
+    this.selectedOccasionId.set('');
   }
 
   setMinRating(rating: number): void {
@@ -68,8 +56,8 @@ export class FilterStateService {
   }
 
   resetAll(): void {
-    this.selectedCategoryIds.set([]);
-    this.selectedOccasionIds.set([]);
+    this.selectedCategoryId.set('');
+    this.selectedOccasionId.set('');
     this.minRating.set(null);
     this.minPrice.set(null);
     this.maxPrice.set(null);

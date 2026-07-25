@@ -13,37 +13,6 @@ export class ProductsService {
   private readonly baseUrl = inject(AUTH_API_URL);
   private readonly _helperService = inject(HelperService);
 
-  getProductsWithFilter(
-    page: number = 1,
-    limit: number = 20,
-  ): Observable<{
-    data: Product[];
-    metadata: {
-      page: number;
-      limit: number;
-      total: number;
-      totalPages: number;
-    };
-  }> {
-    return this._httpClient
-      .get<{
-        status: boolean;
-        code: number;
-        payload: {
-          data: Product[];
-          metadata: {
-            page: number;
-            limit: number;
-            total: number;
-            totalPages: number;
-          };
-        };
-      }>(`${this.baseUrl}/api/products`, {
-        params: this._helperService.createParams({ page, limit }),
-      })
-      .pipe(map((res) => res.payload));
-  }
-
   getProducts(params?: ExternalParams): Observable<ProductsList> {
     return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, { params: this._helperService.createParams(params) })
       .pipe(

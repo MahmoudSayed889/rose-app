@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal, untracked } from '@angular/core';
 import { FilterComponent } from '../../components/filter/filter.component';
 import { ProductsService } from '../../services/products.service';
 import { ExternalParams } from '../../../../shared/models/external-params';
@@ -25,60 +25,66 @@ import { FiltersSidebarComponent } from '../../../../shared/components/filters-s
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent extends AppComponentBase implements OnInit {
-  private readonly productsService = inject(ProductsService);
   private readonly filterState = inject(FilterStateService);
-  private readonly router = inject(Router);
-
-  private _productsService = inject(ProductsService)
-  private _cartFacad = inject(CartFacadeService)
-  private _router = inject(Router)
+  private readonly _productsService = inject(ProductsService)
+  private readonly _cartFacad = inject(CartFacadeService)
+  private readonly _router = inject(Router)
   private readonly _wishlistFacadeService = inject(WishlistFacadeService);
+
+  readonly filters = computed(() => ({
+    categoryId: this.filterState.selectedCategoryId() || undefined,
+    occasionId: this.filterState.selectedOccasionId() || undefined,
+    minRating: this.filterState.minRating() ?? undefined,
+    minPrice: this.filterState.minPrice() ?? undefined,
+    maxPrice: this.filterState.maxPrice() ?? undefined,
+  }));
+
   allProducts = signal<Product[]>([]);
-  currentPage = signal<number>(1);
-  totalPages = signal<number>(1);
-  totalRecords = signal<number>(0);
-  pageLimit = signal<number>(20);
   isLoading = signal<boolean>(false);
 
-  filteredProducts = computed(() => {
-    const selectedCategoryIds = this.filterState.selectedCategoryIds();
-    const selectedOccasionIds = this.filterState.selectedOccasionIds();
-    const minRating = this.filterState.minRating();
-    const minPrice = this.filterState.minPrice();
-    const maxPrice = this.filterState.maxPrice();
+  constructor() {
+    super();
 
-    return this.allProducts().filter((p) => {
-      const categoryMatch =
-        selectedCategoryIds.length === 0 ||
-        selectedCategoryIds.includes(p.categoryId);
+    effect(() => {
+      this.filters();
 
-      const occasionMatch =
-        selectedOccasionIds.length === 0 ||
-        p.occasions.some((o) => selectedOccasionIds.includes(o.occasionId));
+      untracked(() => {
+        this.paginator.update(p => ({
+          ...p,
+          page: 1
+        }));
 
-      const ratingMatch = minRating === null || p.rating >= minRating;
-
-      const productPrice = +p.price;
-      const priceMatch =
-        (minPrice === null || productPrice >= minPrice) &&
-        (maxPrice === null || productPrice <= maxPrice);
-
-      return categoryMatch && occasionMatch && ratingMatch && priceMatch;
+        this.loadProducts();
+      });
     });
-  });
+  }
 
   ngOnInit(): void {
-    this.loadProducts();
+    // this.loadProducts();
+  }
+
+  private getParams(): ExternalParams {
+    return {
+      page: this.paginator().page,
+      limit: this.paginator().limit,
+      ...this.filters(),
+    };
   }
 
   loadProducts(): void {
     this.isLoading.set(true);
-    this.productsService.getProductsWithFilter(this.currentPage(), this.pageLimit()).subscribe({
+
+    this._productsService.getProducts(this.getParams()).subscribe({
       next: (res) => {
-        this.allProducts.set(res.data);
-        this.totalPages.set(res.metadata.totalPages);
-        this.totalRecords.set(res.metadata.total);
-        this.pageLimit.set(res.metadata.limit);
+        this.allProducts.set(res.payload.data);
+
+        this.paginator.set({
+          page: res.payload.metadata.page,
+          limit: res.payload.metadata.limit,
+          total: res.payload.metadata.total,
+          totalPages: res.payload.metadata.totalPages,
+        });
+
         this.isLoading.set(false);
       },
       error: () => this.isLoading.set(false),
@@ -88,28 +94,26 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
   onFavoriteToggle(productId: string | number): void {
     this._wishlistFacadeService.addToWishlist(productId)
   }
-  
+
   addToCart(productId: string): void {
     const data: AddToCartREQ = {
       productId,
       quantity: 1,
     };
-  
     this._cartFacad.addToCart(data);
-  }
-
-  logFavoriteToggle(productId: string | number): void {
-    console.log('favoriteToggle', productId);
   }
 
   logCardClick(productId: string | number): void {
     console.log('cardClick', productId);
-    this.router.navigate(['/product-details', productId]);
+    this._router.navigate(['/product-details', productId]);
   }
 
   onPageChange(event: PaginatorState): void {
-    this.currentPage.set((event.page ?? 0) + 1);
-    this.pageLimit.set(event.rows ?? this.pageLimit());
+    this.paginator.update(p => ({
+      ...p,
+      page: (event.page ?? 0) + 1,
+      limit: event.rows ?? p.limit
+    }));
     this.loadProducts();
   }
 }
