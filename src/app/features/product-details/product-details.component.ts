@@ -11,6 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { CartFacadeService } from '../cart/services/cart/cart-facade.service';
 import { AddToCartREQ } from '../cart/models/cart.interface';
 import { ButtonComponent } from "reusable-components";
+import { WishlistFacadeService } from '../wishlist/services/wishlist-facade.service';
 
 export interface GalleryImage {
   itemImageSrc: string;
@@ -28,6 +29,7 @@ export class ProductDetailsComponent {
   private _productsService = inject(ProductsService);
   private _destroyRef = inject(DestroyRef);
   private _cartFacad = inject(CartFacadeService);
+  private _wishlistFacadeService = inject(WishlistFacadeService);
 
   productId!: string | null;
   productDetails: WritableSignal<Product | null> = signal(null);
@@ -70,6 +72,10 @@ export class ProductDetailsComponent {
       quantity: 1
     }
     this._cartFacad.addToCart(data)
+  }
+
+  onFavoriteToggle(productId: string): void {
+    this._wishlistFacadeService.addToWishlist(productId)
   }
 
   ngOnInit() {

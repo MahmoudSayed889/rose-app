@@ -2,6 +2,13 @@ import { Routes } from '@angular/router';
 import { authGuard } from '../../core/guards/auth.guard';
 
 export const ContentRoutes: Routes = [
+
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+
     {
         path: 'home',
         loadComponent: () => import('../../features/home/pages/home-page/home-page.component').then((C) => C.HomePageComponent),
@@ -26,5 +33,9 @@ export const ContentRoutes: Routes = [
         path: 'purchase',
         loadChildren: () => import('../../features/cart/cart.route').then((C) => C.CartRoutes),
         canActivate: [authGuard]
+    },
+    {
+        path: 'orders',
+        loadComponent: () => import('../../features/orders/orders.component').then((C) => C.OrdersComponent),
     },
 ];

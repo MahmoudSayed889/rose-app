@@ -8,4 +8,5 @@ export interface ExternalParams {
     maxPrice?: number,
     minRating?: number,
     isApproved?: boolean,
+    isActive?: boolean,
 }

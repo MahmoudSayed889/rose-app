@@ -1,4 +1,5 @@
 {
+    "Loading": "جاري التحميل...",
     "common": {
         "actions": {
             "edit": "تعديل",
@@ -10,7 +11,11 @@
             "save-changes": "حفظ التغييرات",
             "delete-my-account": "حذف حسابي",
             "retry": "إعادة المحاولة",
-            "Remove": "حذف"
+            "Remove": "حذف",
+            "back": "رجوع",
+            "checkout": "دفع",
+            "Add Address": "إضافة العنوان",
+            "Update Address": "تحديث العنوان"
         },
         "or": "أو",
         "Need help?": "بحاجة الى مساعدة؟",
@@ -19,6 +24,7 @@
             "What awesome gift are you looking for?": "ما هي الهدية الرائعة التي تبحث عنها؟"
         },
         "validation": {
+            "required": "هذا الحقل مطلوب",
             "This field is required": "هذا الحقل مطلوب",
             "Please enter a valid email.": "يرجى إدخال بريد إلكتروني صالح.",
             "passwordMismatch": "كلمتا المرور غير متطابقتين",
@@ -28,6 +34,15 @@
             "USERNAME_REQ_ERROR": "اسم المستخدم مطلوب",
             "FN_REQ_ERROR": "الاسم الأول مطلوب",
             "LN_REQ_ERROR": "الاسم الأخير مطلوب"
+        }
+    },
+    "header": {
+        "userMenuItems": {
+            "Account": "الحساب الشخصي",
+            "Addresses": "العنواين",
+            "Orders": "الاوردرات",
+            "Dashboard": "لوحة التحكم",
+            "Log out": "تسجيل الخروج"
         }
     },
     "auth": {
@@ -127,7 +142,14 @@
         "addedToWishlist": "تمت الإضافة إلى قائمة الأمنيات",
         "addToWishlistError": "فشل إضافة المنتج إلى قائمة الأمنيات"
     },
-    "cart": {
+    "cart": {},
+    "checkout": {
+        "payment-methods": {
+            "Cash on Delivery": "الدفع عند الاستلام",
+            "You’ll pay in cash when your order is delivered": "ستدفع نقداً عند تسليم طلبك.",
+            "Credit Card": "بطاقة إئتمان",
+            "You’ll be securely redirected to Stripe to complete your payment": "سيتم تحويلك بشكل آمن إلى موقع Stripe لإتمام عملية الدفع."
+        }
     },
     "profile": {
         "title": ""

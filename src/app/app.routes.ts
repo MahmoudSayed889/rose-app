@@ -6,22 +6,22 @@ import { FullRoutes } from './shared/routes/full.route';
 
 export const routes: Routes = [
 
-    // authentication
-    {
-        path: '',
-        loadChildren: () => import('./features/auth/auth.route').then((R) => R.AuthRoutes)
-    },
-
     // main App
     {
         path: '',
         component: ContentComponent,
-        children: ContentRoutes,
+        loadChildren: () => import('./shared/routes/content.route').then((R) => R.ContentRoutes)
     },
 
     {
         path: '',
         component: FullComponent,
-        children: FullRoutes
+        loadChildren: () => import('./shared/routes/full.route').then((R) => R.FullRoutes)
+    },
+
+    // authentication
+    {
+        path: '',
+        loadChildren: () => import('./features/auth/auth.route').then((R) => R.AuthRoutes)
     },
 ];

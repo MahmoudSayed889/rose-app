@@ -1,13 +1,37 @@
+@if (addresses().length) {
+    <p-listbox 
+        [options]="addresses()" 
+        [(ngModel)]="selectedAddress"
+        dataKey="id"
+        class="w-full border-0! mb-7"
+    >
+        <ng-template #item let-address>
+            <div class="flex flex-col gap-2 w-full p-2">
+                <div class="flex justify-between items-center w-full">
+                    <h4 class="text-xl font-bold">{{address.city}}</h4>
+                    <div class="flex items-center gap-3">
+                        <div class="icon text-white bg-primary rounded-full p-1.5">
+                            <lucide-angular [name]="icons.Phone" size="18px" strokeWidth="1.9px"></lucide-angular>
+                        </div>
+                        <span>{{address.phone}}</span>
+                    </div>
+                </div>
+                <p class="street bg-gray-100 dark:bg-gray-950 dark:text-white px-3 rounded-full w-fit">{{address.street}}</p>
+            </div>
+        </ng-template>
+    </p-listbox>
 
-
-<app-sp-line></app-sp-line>
+    <p-divider align="center" type="solid">
+        <code class="uppercase font-bold text-zinc-500 bg-transparent">{{isDirRtl() ? 'او' : 'or'}}</code>
+    </p-divider>
+}
 
 <lib-button
-    [text]="'common.actions.next' | translate"
-    [iconLucide]="{
-        name: isDirRtl() ? icons.MoveLeft : icons.MoveRight,
-        size: '20px',
-    }"
-    styleClass="flex items-center gap-2 rounded-lg text-white bg-primary px-8 py-2.5 text-sm mt-5 ms-auto"
-    (onClick)="next()"
+    [text]="isDirRtl() ? 'إضافة عنوان جديد' : 'Add a New Address'"
+    styleClass="w-full rounded-[10px] bg-[#FBEAEA] dark:bg-zinc-700 px-4 py-2.5 text-sm font-medium text-primary mb-7"
+    (onClick)="showDialog()"
 ></lib-button>
+
+<app-address-dialog
+    [(visible)]="visible">
+</app-address-dialog>

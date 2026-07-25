@@ -4,8 +4,8 @@
         <img src="assets/imgs/logo.png" alt="Rose Logo" class="h-17 w-auto object-contain" />
     </div>
 
-    @if (true) {
-        <div class="flex flex-col items-start leading-2.5">
+    @if (isAuthenticated()) {
+        <button (click)="showAddressDialog()" class="flex flex-col items-start leading-2.5 cursor-pointer">
             <span class="opacity-60 text-sm">{{isDirRtl() ? 'التسليم إلى:' : 'Deliver to:'}}</span>
 
             <div class="flex items-center gap-1">
@@ -14,9 +14,9 @@
                     class="text-primary" 
                     size="18px">
                 </lucide-angular>
-                <span class="text-primary font-medium">Cairo</span>
+                <span class="text-primary font-medium">{{address()?.city || ''}}</span>
             </div>
-        </div>
+        </button>
     }
 
     <div class="flex-1 max-w-3xl mx-4 relative">
@@ -59,7 +59,7 @@
         }
 
         <span class="h-9 w-px bg-gray-200 dark:bg-zinc-500 hidden md:block"></span>
-        <a routerLink="/wishlist" class="flex items-center gap-1.5 hover:text-primary transition-colors">
+        <a routerLink="/wishlist" class="flex items-center gap-1.5 hover:text-primary transition-colors relative">
             <lib-button
             styleClass="hover:text-primary gap-0! p-1"
             [iconLucide]="{
@@ -68,10 +68,27 @@
                 size: '20px'
             }"
             ></lib-button>
+            @if(wishlistItems().length) {
+                <span class="count absolute bg-primary text-white dark:text-black rounded-full text-xs w-4.5 h-4.5 flex justify-center items-center top-1 right-1 translate-x-[50%] translate-y-[-50%] rtl:pt-0.5">
+                    {{wishlistItems().length}}
+                </span>
+            }
         </a>
 
-        <a routerLink="/purchase" class="hover:text-primary gap-0 p-1 opacity-75">
-            <i class="pi pi-shopping-cart"></i>
+        <a routerLink="/purchase" class="hover:text-primary relative">
+            <lib-button
+                styleClass="gap-0! p-1"
+                [iconLucide]="{
+                    name: icons.ShoppingCart,
+                    class: 'opacity-75',
+                    size: '20px'
+                }"
+            ></lib-button>
+            @if(cartItems().length) {
+                <span class="count absolute bg-primary text-white dark:text-black rounded-full text-xs w-4.5 h-4.5 flex justify-center items-center top-1 right-1 translate-x-[50%] translate-y-[-50%] rtl:pt-0.5">
+                    {{cartItems().length}}
+                </span>
+            }
         </a>
 
         <div class="relative">
@@ -167,3 +184,8 @@
         </div>
     </div>
 </div>
+
+
+<app-address-dialog
+    [(visible)]="visibleAddressDialog">
+</app-address-dialog>

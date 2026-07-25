@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -10,7 +10,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
   imports: [
     RouterOutlet, 
     ToastModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TranslatePipe
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

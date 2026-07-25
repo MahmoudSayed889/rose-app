@@ -7,12 +7,10 @@ import { PaginatorComponent, ProductCardComponent } from 'reusable-components';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { Router } from '@angular/router';
 import { PaginatorState } from 'primeng/types/paginator';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { TranslateService } from '@ngx-translate/core';
-import { WishlistService } from '../../../wishlist/services/wishlist.service';
 
 import { AddToCartREQ } from '../../../cart/models/cart.interface';
 import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
+import { WishlistFacadeService } from '../../../wishlist/services/wishlist-facade.service';
 
 @Component({
   selector: 'app-products',
@@ -29,9 +27,7 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
   private _productsService = inject(ProductsService)
   private _cartFacad = inject(CartFacadeService)
   private _router = inject(Router)
-  private readonly _ngxSpinner = inject(NgxSpinnerService);
-  private readonly _wishlistService = inject(WishlistService);
-  private readonly _translateService = inject(TranslateService);
+  private readonly _wishlistFacadeService = inject(WishlistFacadeService);
 
   products = signal<Product[]>([])
 
@@ -59,20 +55,7 @@ export class ProductsComponent extends AppComponentBase implements OnInit {
   }
 
   onFavoriteToggle(productId: string | number): void {
-    this._wishlistService.addToWishlist(String(productId)).subscribe({
-      next: () => {
-        this._toastService.toaster(
-          'success',
-          this._translateService.instant('wishlist.addedToWishlist')
-        );
-      },
-      error: () => {
-        this._toastService.toaster(
-          'error',
-          this._translateService.instant('wishlist.addToWishlistError')
-        );
-      },
-    });
+    this._wishlistFacadeService.addToWishlist(productId)
   }
   
   addToCart(productId: string): void {
