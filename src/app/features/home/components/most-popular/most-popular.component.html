@@ -7,6 +7,7 @@
     <div class="category-tabs-wrapper">
       <!-- Category Tabs -->
       <div class="category-tabs" *ngIf="!loadingCategories() && !errorCategories()">
+<<<<<<< HEAD
         <button
           [class.active]="!selectedCategory()"
           (click)="onAllSelect()"
@@ -17,6 +18,9 @@
           {{ 'home.mostPopular.all' | translate }}
         </button>
         <button
+=======
+        <button 
+>>>>>>> 1c8b478 (feat: product filters)
           *ngFor="let category of categories(); trackBy: trackByCategory"
           [class.active]="selectedCategory()?.id === category.id"
           (click)="onCategorySelect(category)"
@@ -57,11 +61,17 @@
       [discountType]="product.discountType"
       [discountValue]="product.discountValue"
       [rating]="product.rating"
+<<<<<<< HEAD
       (cardClick)="onProductClick($event)"
       [badge]="product.tags || []"
       (favoriteToggle)="onFavoriteToggle($event)"
       (addToCart)="addToCart(product.id)"  />
 />
+=======
+      [badge]="product.tags||[]"
+      (cardClick)="onProductClick($event)"
+      (addToCart)="addToCart(product.id)" />
+>>>>>>> 1c8b478 (feat: product filters)
   </div>
 
   <!-- Products Loading Skeleton -->
@@ -78,7 +88,11 @@
   </div>
 
   <!-- Empty State -->
+<<<<<<< HEAD
   <div class="empty-state" *ngIf="!loadingProducts() && products().length === 0 && !errorProducts() && productsLoaded()">
+=======
+  <div class="empty-state" *ngIf="!loadingProducts() && products().length === 0 && !errorProducts() && selectedCategory()">
+>>>>>>> 1c8b478 (feat: product filters)
     <p class="empty-message">{{ 'home.mostPopular.noProducts' | translate }}</p>
   </div>
 
