@@ -1,0 +1,130 @@
+<div class="filters-sidebar">
+  <!-- Category Section -->
+  <div class="filters-section">
+    <div class="filters-section__header">
+      <span class="filters-section__title">Category</span>
+      @if (selectedCategoryIds().length > 0) {
+        <button
+          class="filters-section__reset"
+          (click)="resetCategories()"
+        >
+          × Reset
+        </button>
+      }
+    </div>
+
+    <div class="filters-section__list">
+      @for (cat of categories(); track cat.id) {
+        <app-category-card
+          [category]="cat"
+          [selected]="isCategorySelected(cat.id)()"
+          (categorySelect)="toggleCategory($event)"
+        ></app-category-card>
+      }
+    </div>
+  </div>
+
+  <!-- Occasion Section -->
+  <div class="filters-section">
+    <div class="filters-section__header">
+      <span class="filters-section__title">Occasion</span>
+      @if (selectedOccasionIds().length > 0) {
+        <button
+          class="filters-section__reset"
+          (click)="resetOccasions()"
+        >
+          × Reset
+        </button>
+      }
+    </div>
+
+    <div class="filters-section__occasions-grid">
+      @for (occ of occasions(); track occ.id) {
+        <app-occasion-card
+          [occasion]="occ"
+          [selected]="isOccasionSelected(occ.id)()"
+          (occasionSelect)="toggleOccasion($event)"
+        ></app-occasion-card>
+      }
+    </div>
+  </div>
+
+  <!-- Rating Section -->
+  <div class="filters-section">
+    <div class="filters-section__header">
+      <span class="filters-section__title">Rating</span>
+      @if (minRating() !== null) {
+        <button
+          class="filters-section__reset"
+          (click)="resetRating()"
+        >
+          × Reset
+        </button>
+      }
+    </div>
+
+    <div class="filters-section__stars">
+      @for (star of stars; track star) {
+        <button
+          class="star-btn"
+          (click)="setMinRating(star)"
+          [attr.aria-label]="star + ' stars and above'"
+        >
+          <i
+            class="pi"
+            [class.pi-star-fill]="minRating() !== null && star <= minRating()!"
+            [class.pi-star]="minRating() === null || star > minRating()!"
+          ></i>
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Price Section -->
+  <div class="filters-section">
+    <div class="filters-section__header">
+      <span class="filters-section__title">Price</span>
+      @if (minPrice() !== null || maxPrice() !== null) {
+        <button
+          class="filters-section__reset"
+          (click)="filterState.resetPrice(); minPriceInput.set(''); maxPriceInput.set('')"
+        >
+          × Reset
+        </button>
+      }
+    </div>
+
+    <div class="filters-section__price">
+      <div class="price-field">
+        <label class="price-field__label">From</label>
+        <input
+          class="price-input"
+          type="number"
+          [value]="minPriceInput()"
+          (input)="minPriceInput.set($any($event.target).value)"
+          (blur)="onPriceBlur()"
+          (keydown)="onPriceKeydown($event)"
+          min="0"
+        />
+      </div>
+      <div class="price-field">
+        <label class="price-field__label">To</label>
+        <input
+          class="price-input"
+          type="number"
+          [value]="maxPriceInput()"
+          (input)="maxPriceInput.set($any($event.target).value)"
+          (blur)="onPriceBlur()"
+          (keydown)="onPriceKeydown($event)"
+          min="0"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Reset All Button - always at the bottom -->
+  <button class="reset-all-btn" (click)="resetAll()">
+    <i class="pi pi-refresh"></i>
+    Reset All
+  </button>
+</div>

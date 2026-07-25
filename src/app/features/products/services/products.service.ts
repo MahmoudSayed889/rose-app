@@ -9,75 +9,109 @@ import { ProductCardBadge } from 'reusable-components';
 
 @Service()
 export class ProductsService {
+  private readonly _httpClient = inject(HttpClient);
+  private readonly baseUrl = inject(AUTH_API_URL);
+  private readonly _helperService = inject(HelperService);
 
-    private _httpClient = inject(HttpClient)
-    private baseUrl = inject(AUTH_API_URL)
-    private _helperService = inject(HelperService)
+  getProductsWithFilter(
+    page: number = 1,
+    limit: number = 20,
+  ): Observable<{
+    data: Product[];
+    metadata: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPages: number;
+    };
+  }> {
+    return this._httpClient
+      .get<{
+        status: boolean;
+        code: number;
+        payload: {
+          data: Product[];
+          metadata: {
+            page: number;
+            limit: number;
+            total: number;
+            totalPages: number;
+          };
+        };
+      }>(`${this.baseUrl}/api/products`, {
+        params: this._helperService.createParams({ page, limit }),
+      })
+      .pipe(map((res) => res.payload));
+  }
 
-    getProducts(params?: ExternalParams): Observable<ProductsList> {
-        return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, { params: this._helperService.createParams(params) })
-            .pipe(
-                map(res => {
-                    res.payload.data = res.payload.data.map(product => {
-                        return {
-                            ...product,
-                            tags: this.getProductsTags(product)
-                        }
-                    })
-                    return res
-                }
-                )
-            )
-    }
-
-    getProduct(id: string): Observable<SingleProduct> {
-        return this._httpClient.get<SingleProduct>(`${this.baseUrl}/api/products/${id}`)
-    }
-
-    getBestSellingProducts(params?: ExternalParams): Observable<Product[]> {
-        return this.getProducts(params).pipe(
-            map(response => ([...response.payload.data]
-                .sort((a, b) => b._count.cartItems - a._count.cartItems)
-            ))
-        );
-    }
-
-    getProductsTags(product: Product): ProductCardBadge[] {
-        const today = new Date();
-        const sixMonthsAgo = new Date();
-        sixMonthsAgo.setMonth(today.getMonth() - 6);
-        const tags: ProductCardBadge[] = [];
-
-        if (product.rating >= 4) {
-            tags.push('hot');
+  getProducts(params?: ExternalParams): Observable<ProductsList> {
+    return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, { params: this._helperService.createParams(params) })
+      .pipe(
+        map(res => {
+          res.payload.data = res.payload.data.map(product => {
+            return {
+              ...product,
+              tags: this.getProductsTags(product)
+            }
+          })
+          return res
         }
-        if (product.stock === 0) {
-            tags.push('out of stock');
-        }
-        const productDate = new Date(product.createdAt);
-        if (productDate >= sixMonthsAgo && productDate <= today) {
-            tags.push('new');
-        }
-        return tags;
-    }
+        )
+      )
+  }
 
-    getPrice(product: Product): void {
-        if (product.discountType === "PERCENT") {
-            const discountValue = (Number(product.price) * Number(product.discountValue)) / 100;
-            product.priceWithDiscount = Number(product.price) - Number(discountValue);
-        }
-        else if (product.discountType == 'VALUE') {
-            product.priceWithDiscount = Number(product.price) - Number(product.discountValue);
-        }
-        else {
-            product.priceWithDiscount = Number(product.price);
-        }
-    }
+  getProduct(id: string): Observable<SingleProduct> {
+    return this._httpClient.get<SingleProduct>(`${this.baseUrl}/api/products/${id}`)
+  }
 
-    getProductsYouMayLike(): Observable<Product[]> {
-        return this.getProducts().pipe(
-            map(res =>
-                res.payload.data.filter(item => item.tags?.includes('hot'))
-            ));
+  createProduct(data: CreateProductRequest): Observable<SingleProduct> {
+    return this._httpClient.post<SingleProduct>(`${this.baseUrl}/api/products`, data);
+  }
+
+  getBestSellingProducts(params?: ExternalParams): Observable<Product[]> {
+    return this.getProducts(params).pipe(
+      map(response => ([...response.payload.data]
+        .sort((a, b) => b._count.cartItems - a._count.cartItems)
+      ))
+    );
+  }
+
+  getProductsTags(product: Product): ProductCardBadge[] {
+    const today = new Date();
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(today.getMonth() - 6);
+    const tags: ProductCardBadge[] = [];
+
+    if (product.rating >= 4) {
+      tags.push('hot');
     }
+    if (product.stock === 0) {
+      tags.push('out of stock');
+    }
+    const productDate = new Date(product.createdAt);
+    if (productDate >= sixMonthsAgo && productDate <= today) {
+      tags.push('new');
+    }
+    return tags;
+  }
+
+  getPrice(product: Product): void {
+    if (product.discountType === "PERCENT") {
+      const discountValue = (Number(product.price) * Number(product.discountValue)) / 100;
+      product.priceWithDiscount = Number(product.price) - Number(discountValue);
+    }
+    else if (product.discountType == 'VALUE') {
+      product.priceWithDiscount = Number(product.price) - Number(product.discountValue);
+    }
+    else {
+      product.priceWithDiscount = Number(product.price);
+    }
+  }
+
+  getProductsYouMayLike(): Observable<Product[]> {
+    return this.getProducts().pipe(
+      map(res =>
+        res.payload.data.filter(item => item.tags?.includes('hot'))
+      ));
+  }
 }

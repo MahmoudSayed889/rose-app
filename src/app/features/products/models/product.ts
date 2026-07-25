@@ -2,17 +2,17 @@ import { ProductCardBadge } from "reusable-components"
 import { MainResponse } from "../../../shared/models/main-response"
 import { Metadata } from "../../../shared/models/metadata"
 
-export type ProductsList = MainResponse<ProductsListPayload>
+export type ProductsList = MainResponse<ProductsListPayload>;
 
 export interface ProductsListPayload {
-    data: Product[]
-    metadata: Metadata
+  data: Product[];
+  metadata: Metadata;
 }
 
-export type SingleProduct = MainResponse<SingleProductPayload>
+export type SingleProduct = MainResponse<SingleProductPayload>;
 
 export interface SingleProductPayload {
-    product: Product
+  product: Product;
 }
 
 export interface Product {
@@ -58,20 +58,20 @@ export interface Count {
 }
 
 export interface CreateProductRequest {
-    title: string
-    description: string
-    stock: number
-    price: number
-    discountType: string
-    discountValue: number
-    categoryId: string
-    cover: string
-    gallery: any[]
+  title: string;
+  description: string;
+  stock: number;
+  price: number;
+  discountType: string;
+  discountValue: number;
+  categoryId: string;
+  cover: string;
+  gallery: any[];
 }
 
 export interface DeleteProductResponse {
-    status: boolean
-    code: number
-    message: string
-    payload: string
+  status: boolean;
+  code: number;
+  message: string;
+  payload: string;
 }

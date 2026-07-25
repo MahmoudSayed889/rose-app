@@ -1,0 +1,13 @@
+<div
+  class="occasion-card"
+  (click)="occasionSelect.emit(occasion().id)"
+>
+  <img
+    class="occasion-card__image"
+    [src]="occasion().image"
+    [alt]="occasion().title"
+    loading="lazy"
+  />
+  <div class="occasion-card__overlay"></div>
+  <span class="occasion-card__title">{{ occasion().title }}</span>
+</div>
