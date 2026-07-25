@@ -20,10 +20,10 @@ import { AppComponentBase } from '../../../../shared/app-component-base';
 import { HomeService } from '../../services/home.service';
 import { Category, CategoryResponse } from './models/category';
 import { Product, ProductsList } from '../../../products/models/product';
-import { WishlistService } from '../../../wishlist/services/wishlist.service';
 import { icons } from 'lucide-angular';
 import { AddToCartREQ } from '../../../cart/models/cart.interface';
 import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
+import { WishlistFacadeService } from '../../../wishlist/services/wishlist-facade.service';
 
 @Component({
   selector: 'app-most-popular',
@@ -45,7 +45,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   private _router = inject(Router);
   private _translateService = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
-  private _wishlistService = inject(WishlistService);
+  private _wishlistFacadeService = inject(WishlistFacadeService);
   private _cartFacad = inject(CartFacadeService);
 
   // State signals
@@ -141,14 +141,7 @@ export class MostPopularComponent extends AppComponentBase implements OnInit {
   }
 
   onFavoriteToggle(productId: string | number): void {
-    this._wishlistService.addToWishlist(String(productId)).subscribe({
-      next: () => {
-        this._toastService.toaster('success', this._translateService.instant('wishlist.addedToWishlist'));
-      },
-      error: () => {
-        this._toastService.toaster('error', this._translateService.instant('wishlist.addToWishlistError'));
-      },
-    });
+    this._wishlistFacadeService.addToWishlist(productId)
   }
 
   onSeeMoreClick(): void {

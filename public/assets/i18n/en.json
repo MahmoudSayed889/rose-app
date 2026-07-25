@@ -1,4 +1,5 @@
 {
+  "Loading": "Loading...",
   "common": {
     "actions": {
       "continue": "Continue",
@@ -10,7 +11,11 @@
       "save-changes": "Save Changes",
       "delete-my-account": "Delete My Account",
       "retry": "Retry",
-      "Remove": "Remove"
+      "Remove": "Remove",
+      "back": "back",
+      "checkout": "checkout",
+      "Add Address": "Add Address",
+      "Update Address": "Update Address"
     },
     "or": "or",
     "Need help?": "Need help?",
@@ -19,6 +24,7 @@
       "What awesome gift are you looking for?": "What awesome gift are you looking for?"
     },
     "validation": {
+      "required": "This field is required",
       "This field is required": "This field is required",
       "Please enter a valid email.": "Please enter a valid email.",
       "passwordMismatch": "Passwords do not match",
@@ -29,6 +35,15 @@
       "USERNAME_REQ_ERROR": "Username is required",
       "FN_REQ_ERROR": "First Name is required",
       "LN_REQ_ERROR": "Last Name is required"
+    }
+  },
+  "header": {
+    "userMenuItems": {
+      "Account": "Account",
+      "Addresses": "Addresses",
+      "Orders": "Orders",
+      "Dashboard": "Dashboard",
+      "Log out": "Log out"
     }
   },
   "auth": {
@@ -117,6 +132,14 @@
     "addToWishlistError": "Failed to add item to wishlist"
   },
   "cart": {
+  },
+  "checkout": {
+    "payment-methods": {
+      "Cash on Delivery": "Cash on Delivery",
+      "You’ll pay in cash when your order is delivered": "You’ll pay in cash when your order is delivered.",
+      "Credit Card": "Credit Card",
+      "You’ll be securely redirected to Stripe to complete your payment": "You’ll be securely redirected to Stripe to complete your payment."
+    }
   },
   "profile": {
     "title": ""

@@ -7,10 +7,10 @@ import { ProductCardBadge, ProductCardComponent } from "reusable-components";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { WishlistService } from '../../../wishlist/services/wishlist.service';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { AddToCartREQ } from '../../../cart/models/cart.interface';
 import { CartFacadeService } from '../../../cart/services/cart/cart-facade.service';
+import { WishlistFacadeService } from '../../../wishlist/services/wishlist-facade.service';
 
 @Component({
   selector: 'app-best-selling',
@@ -22,9 +22,7 @@ export class BestSellingComponent {
   private readonly _productService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _router = inject(Router);
-  private readonly _wishlistService = inject(WishlistService);
-  private readonly _toastService = inject(ToastService);
-  private readonly _translateService = inject(TranslateService);
+  private readonly _wishlistFacadeService = inject(WishlistFacadeService);
   private readonly _cartFacad = inject(CartFacadeService);
 
   bestSellingProducts: WritableSignal<Product[] | null> = signal(null);
@@ -77,14 +75,7 @@ export class BestSellingComponent {
   }
 
   onFavoriteToggle(productId: string | number): void {
-    this._wishlistService.addToWishlist(String(productId)).subscribe({
-      next: () => {
-        this._toastService.toaster('success', this._translateService.instant('wishlist.addedToWishlist'));
-      },
-      error: () => {
-        this._toastService.toaster('error', this._translateService.instant('wishlist.addToWishlistError'));
-      },
-    });
+    this._wishlistFacadeService.addToWishlist(productId)
   }
 
   ngOnInit() {

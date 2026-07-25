@@ -1,6 +1,6 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { LoginComponent } from '../../../features/auth/components/login/login.component';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RegisterComponent } from '../../../features/auth/components/register/register.component';
 import { MenuItem } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
@@ -14,6 +14,11 @@ import { NavbarItem } from './models/navbar-item';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { AppComponentBase } from '../../app-component-base';
+import { AddressDialogComponent } from '../../../features/cart/pages/checkout/shipping-address/address-dialog/address-dialog.component';
+import { AddressService } from '../../../features/cart/services/checkout/address.service';
+import { Address } from '../../../features/cart/models/checkout/addresses';
+import { CartFacadeService } from '../../../features/cart/services/cart/cart-facade.service';
+import { WishlistFacadeService } from '../../../features/wishlist/services/wishlist-facade.service';
 
 @Component({
   selector: 'app-header',
@@ -30,25 +35,36 @@ import { AppComponentBase } from '../../app-component-base';
     ButtonComponent,
     LucideAngularModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    AddressDialogComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent extends AppComponentBase {
 
+  private readonly _addressService = inject(AddressService)
   private readonly _userService = inject(UserService)
+  private readonly _cartFacadeService = inject(CartFacadeService);
+  private readonly _wishlistFacadeService = inject(WishlistFacadeService);
+  private readonly _translateService = inject(TranslateService);
+
 
   user = signal<User | null>(null)
+  address = signal<Address | null>(null)
 
   userMenuItems: MenuItem[] = [];
   notificationItems: MenuItem[] = [];
   secondNavbarItems: NavbarItem[] = [];
 
   visible = signal<boolean>(false)
+  visibleAddressDialog = signal<boolean>(false)
   activeTap: 'login' | 'register' = 'login';
 
   icons = icons
+
+  cartItems = this._cartFacadeService.cartItems;
+  wishlistItems = this._wishlistFacadeService.wishlistItems
 
   constructor() {
     super();
@@ -62,13 +78,55 @@ export class HeaderComponent extends AppComponentBase {
         this.user.set(null);
       }
     });
+
+    effect(() => {
+      if (this.user()) {
+        this.address.set(
+          this._addressService.addresses().find(address => address.isPrimary) ?? null
+        )
+      }
+    });
   }
 
   ngOnInit() {
-    this.notificationItems = [
-      { label: 'Your Order Has Been Shipped', icon: 'pi pi-check-circle' }
-    ];
+    this._cartFacadeService.getCartItems();
+    this._wishlistFacadeService.loadWishlist();
 
+    this.initSecondNavbarItems()
+    this.initNotificationItems()
+
+    if (this.isAuthenticated()) {
+      this._translateService.onLangChange.subscribe(() => {
+        this.initUserMenuItems();
+      });
+    }
+  }
+
+  getUser() {
+    this._userService.getUser().subscribe({
+      next: (res) => {
+        this.user.set(res.payload.user)
+        this.visible.set(false);
+
+        this.initUserMenuItems()
+      }
+    })
+  }
+
+  initUserMenuItems() {
+    this.userMenuItems = [
+      { label: `${this.user()?.firstName} ${this.user()?.lastName}`, linkClass: 'text-primary!' },
+      { separator: true },
+      { label: this._translateService.instant('header.userMenuItems.Account'), icon: 'pi pi-user' },
+      { label: this._translateService.instant('header.userMenuItems.Addresses'), icon: 'pi pi-map-marker' },
+      { label: this._translateService.instant('header.userMenuItems.Orders'), icon: 'pi pi-shopping-bag' },
+      { label: this._translateService.instant('header.userMenuItems.Dashboard'), icon: 'pi pi-cog' },
+      { separator: true },
+      { label: this._translateService.instant('header.userMenuItems.Log out'), icon: 'pi pi-sign-out', command: () => { this._authService.logout() } }
+    ];
+  }
+
+  initSecondNavbarItems() {
     // second navbar
     this.secondNavbarItems = [
       { label: 'home.title', icon: icons.House, routerLink: '/home' },
@@ -80,28 +138,18 @@ export class HeaderComponent extends AppComponentBase {
     ];
   }
 
-  getUser() {
-    this._userService.getUser().subscribe({
-      next: (res) => {
-        this.user.set(res.payload.user)
-        this.visible.set(false);
-
-        this.userMenuItems = [
-          { label: `${this.user()?.firstName} ${this.user()?.lastName}`, linkClass: 'text-primary!' },
-          { separator: true },
-          { label: 'Account', icon: 'pi pi-user' },
-          { label: 'Addresses', icon: 'pi pi-map-marker' },
-          { label: 'Orders', icon: 'pi pi-shopping-bag' },
-          { label: 'Dashboard', icon: 'pi pi-cog' },
-          { separator: true },
-          { label: 'Log out', icon: 'pi pi-sign-out', command: () => {this._authService.logout()} }
-        ];
-      }
-    })
+  initNotificationItems() {
+    this.notificationItems = [
+      { label: 'Your Order Has Been Shipped', icon: 'pi pi-check-circle' }
+    ];
   }
 
   showDialog(tab: 'login' | 'register' = 'login') {
     this.activeTap = tab;
     this.visible.set(true);
+  }
+
+  showAddressDialog() {
+    this.visibleAddressDialog.set(true);
   }
 }

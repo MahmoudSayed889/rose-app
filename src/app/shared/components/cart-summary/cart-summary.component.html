@@ -2,11 +2,13 @@
   <h2 class="text-2xl font-bold text-zinc-800 dark:text-white">{{ isDirRtl() ? 'ملخص' : 'Summary' }}</h2>
   <div class="bg-zinc-50 dark:bg-zinc-700 p-4 rounded-lg">
     <div class="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-      <lib-input class="w-full" placeholder="Coupon Code"></lib-input>
+      <lib-input class="w-full" placeholder="Coupon Code" [(ngModel)]="couponCode" [ngModelOptions]="{standalone: true}"></lib-input>
       <button
         type="button"
-        class="inline-flex h-11 sm:h-auto shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-white dark:text-zinc-800 transition-opacity hover:opacity-90 cursor-pointer"
+        [disabled]="!couponCode()"
+        class="inline-flex h-11 sm:h-auto shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-white dark:text-zinc-800 transition-opacity hover:opacity-90 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
         [class.flex-row-reverse]="isDirRtl()"
+        (click)="applyCoupon()"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,8 +33,21 @@
       </button>
     </div>
 
-    <div class="mt-3 rounded-lg border border-zinc-300 px-4 py-3 text-sm text-zinc-400 h-65 flex justify-center items-center">
-      No coupons applied
+    <div class="mt-3 rounded-lg border border-zinc-300 p-3 text-sm h-65 overflow-auto"
+      [ngClass]="{
+        'flex justify-center items-center': !appliedCoupons().length
+      }">
+      @for (item of appliedCoupons(); track item.id; let i = $index) {
+        <div class="w-full flex justify-center bg-gray-100 dark:bg-zinc-600 h-fit p-3 rounded-lg">
+          <h6>{{item.code}}</h6>
+        </div>
+
+        @if ( i < appliedCoupons().length - 1 ) {
+          <hr class="text-gray-200 dark:text-zinc-600 my-2">
+        }
+      } @empty {
+        <span class="text-zinc-400">No coupons applied</span>
+      }
     </div>
 
     <div class="p-2.5 space-y-4">
@@ -44,9 +59,15 @@
           >{{ subtotal() | number: '1.2-2' }} EGP</span
         >
       </div>
-      <div>
-        <app-sp-line lightColor="border-zinc-300" darkColor="border-zinc-500"></app-sp-line>
-      </div>
+      
+      <p-divider align="center" type="solid">
+        <code class="capitalize font-bold text-zinc-700 dark:text-zinc-100">
+          @if (discount()) {
+            {{ discount()}}% {{isDirRtl() ? 'خصم' : 'discount' }}
+          }
+        </code>
+      </p-divider>
+      
       <div class="flex items-center justify-between text-lg">
         <span class="font-bold text-primary text-2xl">{{ isDirRtl() ? 'الإجمالي' : 'Total' }}</span>
         <span class="font-bold text-primary text-2xl">{{ total() | number: '1.2-2' }} EGP</span>
