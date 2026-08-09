@@ -1,0 +1,55 @@
+<section class="max-w-7xl mx-auto my-10">
+  <h1 class="text-5xl font-bold text-zinc-800 mb-9">Account Settings</h1>
+  <div class="flex gap-9 min-h-180">
+    <div
+      class="max-w-75 w-full flex flex-col justify-between bg-zinc-50 dark:bg-[#121212] border border-zinc-100 p-4 rounded-2xl"
+    >
+      <div class="space-y-2.5">
+        <div>
+          <lib-button
+            (onClick)="changePage('profile')"
+            [isActive]="currentPage() === 'profile'"
+            activeStyle="bg-zinc-800 text-zinc-50"
+            [iconLucide]="{
+              name: icons.UserPen,
+              size: '24px',
+            }"
+            [text]="isDirRtl() ? 'الملف الشخصي' : 'Profile'"
+            styleClass="flex-row-reverse  w-full py-3 px-4 rounded-[8px] font-medium justify-end"
+          ></lib-button>
+        </div>
+        <div>
+          <lib-button
+            (onClick)="changePage('change-password')"
+            [isActive]="currentPage() === 'change-password'"
+            activeStyle="bg-zinc-800 text-zinc-50"
+            [iconLucide]="{
+              name: icons.Lock,
+              size: '24px',
+            }"
+            [text]="isDirRtl() ? 'تغيير كلمة السر' : 'Change Password'"
+            styleClass="flex-row-reverse  w-full py-3 px-4 rounded-[8px] font-medium justify-end"
+          ></lib-button>
+        </div>
+      </div>
+      <div>
+        <lib-button
+          [text]="isDirRtl() ? 'تسجيل الخروج' : 'Logout'"
+          [iconLucide]="{
+            name: icons.LogOut,
+            size: '20px',
+          }"
+          styleClass="flex-row-reverse bg-zinc-100 text-[#CD2E33] w-full py-3 px-4 rounded-[8px] font-medium justify-end"
+        ></lib-button>
+      </div>
+    </div>
+    <div class="max-h-fit grow">
+      @if (currentPage() === 'profile') {
+        <app-profile></app-profile>
+      }
+      @if (currentPage() === 'change-password') {
+        <app-change-password></app-change-password>
+      }
+    </div>
+  </div>
+</section>

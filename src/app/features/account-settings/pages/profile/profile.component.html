@@ -1,0 +1,89 @@
+<form class="space-y-4">
+  <!-- Profile Picture -->
+  <div class="flex items-center gap-4">
+    <div class="w-30 h-30 relative">
+      <img
+        class="w-full h-full object-cover rounded-full"
+        src="temp-images/profile-picture.png"
+        alt=""
+      />
+      <label
+        for="profile-image"
+        class="absolute cursor-pointer right-0 bottom-0 w-8.5 h-8.5 rounded-full border-zinc-200 border bg-zinc-50 dark:bg-zinc-600 flex items-center justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-cloud-upload-icon lucide-cloud-upload"
+        >
+          <path d="M12 13v8" />
+          <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+          <path d="m8 17 4-4 4 4" />
+        </svg>
+        <input id="profile-image" class="hidden" type="file" (input)="onFileSelected($event)" />
+      </label>
+    </div>
+    <div>
+      <p class="mb-4 text-xl font-semibold text-zinc-800 dark:text-zinc-100">
+        {{ isDirRtl() ? 'تحديث الصورة' : 'Upload Photo' }}
+      </p>
+      <p class="mb-4 text-zinc-500 dark:text-zinc-400">
+        {{
+          isDirRtl()
+            ? 'يمكنك تحميل صورة بصيغة .jpg أو .png أو .gif بحجم أقصى يبلغ 5 ميجابايت.'
+            : 'You can upload a .jpg, .png, or .gif photo with max size of 5MB.'
+        }}
+      </p>
+    </div>
+  </div>
+  <!--  -->
+  <div class="flex flex-col gap-2.5">
+    <div class="flex items-center justify-stretch gap-5">
+      <div class="w-full">
+        <lib-input [label]="'auth.firstName' | translate" type="text"></lib-input>
+      </div>
+      <div class="w-full">
+        <lib-input [label]="'auth.lastName' | translate" type="text"></lib-input>
+      </div>
+    </div>
+    <div>
+      <lib-input [label]="'auth.email' | translate" type="email" [isReadonly]="true"></lib-input>
+    </div>
+    <div class="">
+      <lib-phone-input label="Phone"></lib-phone-input>
+    </div>
+    <div>
+      <label for="register-gender" class="block mb-1.5 dark:text-white! capitalize">
+        {{ 'auth.gender' | translate }}
+      </label>
+      <select
+        disabled
+        id="register-gender"
+        class="bg-zinc-100 dark:bg-zinc-700 rounded-[10px] p-4 w-full"
+        formControlName="gender"
+      >
+        <option value="">{{ 'auth.register.selectGender' | translate }}</option>
+        @for (option of genderOptions; track option.value) {
+          <option [value]="option.value">{{ option.label | translate }}</option>
+        }
+      </select>
+    </div>
+    <div class="flex justify-between pt-15">
+      <lib-button
+        [text]="isDirRtl() ? 'حذف حسابي' : 'Delete My Account'"
+        styleClass="text-[#CD2E33] dark:text-[#EF4444]"
+      ></lib-button>
+      <lib-button
+        [text]="isDirRtl() ? 'حفظ التغييرات' : 'Save Changes'"
+        styleClass="bg-primary text-white py-3.5 px-10 rounded-[10px] dark:text-zinc-900 font-medium"
+      ></lib-button>
+    </div>
+  </div>
+</form>

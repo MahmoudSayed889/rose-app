@@ -38,4 +38,10 @@ export const ContentRoutes: Routes = [
         path: 'orders',
         loadComponent: () => import('../../features/orders/orders.component').then((C) => C.OrdersComponent),
     },
+    {
+        path: 'account-settings',
+        loadComponent: () => import('../../features/account-settings/account-settings-layout/account-settings-layout.component')
+            .then((c) => c.AccountSettingsLayoutComponent),
+        canActivate: [authGuard]
+    }
 ];
