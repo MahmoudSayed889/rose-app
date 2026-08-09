@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, HostListener, inject, signal } from '@angular/core';
 import { LoginComponent } from '../../../features/auth/components/login/login.component';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RegisterComponent } from '../../../features/auth/components/register/register.component';
@@ -19,6 +19,10 @@ import { AddressService } from '../../../features/cart/services/checkout/address
 import { Address } from '../../../features/cart/models/checkout/addresses';
 import { CartFacadeService } from '../../../features/cart/services/cart/cart-facade.service';
 import { WishlistFacadeService } from '../../../features/wishlist/services/wishlist-facade.service';
+import { SearchDialogComponent } from "../search-dialog/search-dialog.component";
+import { FormsModule } from "@angular/forms";
+import { Popover } from 'primeng/popover';
+import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -36,13 +40,14 @@ import { WishlistFacadeService } from '../../../features/wishlist/services/wishl
     LucideAngularModule,
     RouterLink,
     RouterLinkActive,
-    AddressDialogComponent
+    AddressDialogComponent,
+    SearchDialogComponent,
+    FormsModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent extends AppComponentBase {
-
   private readonly _addressService = inject(AddressService)
   private readonly _userService = inject(UserService)
   private readonly _cartFacadeService = inject(CartFacadeService);
@@ -65,6 +70,9 @@ export class HeaderComponent extends AppComponentBase {
 
   cartItems = this._cartFacadeService.cartItems;
   wishlistItems = this._wishlistFacadeService.wishlistItems
+
+  searchVal = signal<string>('')
+  visibleSearchDialog = signal<boolean>(false)
 
   constructor() {
     super();
@@ -150,5 +158,15 @@ export class HeaderComponent extends AppComponentBase {
 
   showAddressDialog() {
     this.visibleAddressDialog.set(true);
+  }
+
+  onFocus() {
+    this.visibleSearchDialog.update(val => val = true)
+  }
+
+  onBlur() {
+    setTimeout(() => {
+      this.visibleSearchDialog.update(val => val = false)
+    }, 500)
   }
 }
