@@ -129,7 +129,7 @@ export class HeaderComponent extends AppComponentBase {
         label: this._translateService.instant('header.userMenuItems.Account'),
         icon: 'pi pi-user',
         command: () => {
-          this._router.navigate(['/account']);
+          this._router.navigate(['/account-settings']);
         }
       },
       { label: this._translateService.instant('header.userMenuItems.Addresses'), icon: 'pi pi-map-marker' },
@@ -174,6 +174,6 @@ export class HeaderComponent extends AppComponentBase {
   onBlur() {
     setTimeout(() => {
       this.visibleSearchDialog.update(val => val = false)
-    }, 500)
+    }, 100)
   }
 }

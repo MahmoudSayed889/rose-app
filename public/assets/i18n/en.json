@@ -132,8 +132,7 @@
     "addedToWishlist": "Added to wishlist",
     "addToWishlistError": "Failed to add item to wishlist"
   },
-  "cart": {
-  },
+  "cart": {},
   "checkout": {
     "payment-methods": {
       "Cash on Delivery": "Cash on Delivery",
@@ -143,7 +142,12 @@
     }
   },
   "profile": {
-    "title": ""
+    "title": "",
+    "change_password": {
+      "current password": "current password",
+      "new password": "new password",
+      "confirm new password": "confirm new password"
+    }
   },
   "productDetails": {
     "left in stock": "left in stock",
