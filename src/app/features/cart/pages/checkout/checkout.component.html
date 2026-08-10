@@ -1,59 +1,63 @@
 <p-stepper [value]="currentStep()" class="basis-160">
-    <div class="relative">
-        <p-step-list>
-            <p-step [value]="1" [disabled]="true"></p-step>
-            <p-step [value]="2" [disabled]="true"></p-step>
-        </p-step-list>
-        <div class="stepper-separator rounded overflow-hidden bg-gray-300">
-            <div class="progress bg-primary!" [ngClass]="{
-                'w-[50%]!': currentStep() == 1,
-                'w-full!': currentStep() == 2,
-            }"></div>
+  <div class="relative">
+    <p-step-list>
+      <p-step [value]="1" [disabled]="true"></p-step>
+      <p-step [value]="2" [disabled]="true"></p-step>
+    </p-step-list>
+    <div class="stepper-separator rounded overflow-hidden bg-gray-300">
+      <div
+        class="progress bg-primary!"
+        [ngClass]="{
+          'w-[50%]!': currentStep() == 1,
+          'w-full!': currentStep() == 2,
+        }"
+      ></div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3 mt-3">
+    @if (currentStep() == 2) {
+      <lib-button
+        [text]="'common.actions.back' | translate"
+        [iconLucide]="{
+          name: isDirRtl() ? icons.ArrowRight : icons.ArrowLeft,
+          size: '20px',
+        }"
+        styleClass="text-gray-800 bg-gray-100 dark:text-white dark:bg-zinc-700 p-2.5 text-sm font-medium rounded-[10px] flex-row-reverse gap-2!"
+        (onClick)="back()"
+      >
+      </lib-button>
+    }
+
+    <h2 class="text-3xl font-bold">
+      @if (currentStep() == 1) {
+        {{ isDirRtl() ? 'عنوان الشحن' : 'Shipping Address' }}
+      } @else if (currentStep() == 2) {
+        {{ isDirRtl() ? 'طريقة الدفع' : 'Payment Method' }}
+      }
+    </h2>
+  </div>
+
+  <p-step-panels>
+    <p-step-panel [value]="currentStep()">
+      <ng-template #content let-activateCallback="activateCallback">
+        <div class="w-full">
+          <router-outlet />
         </div>
-    </div>
-
-    <div class="flex items-center gap-3 mt-3">
-        @if (currentStep() == 2) {
-            <lib-button 
-                [text]="'common.actions.back' | translate"
-                [iconLucide]="{
-                    name: isDirRtl() ? icons.ArrowRight : icons.ArrowLeft,
-                    size: '20px',
-                }"
-                styleClass="text-gray-800 bg-gray-100 dark:text-white dark:bg-zinc-700 p-2.5 text-sm font-medium rounded-[10px] flex-row-reverse gap-2!"
-                (onClick)="back()">
-            </lib-button>
-        }
-
-        <h2 class="text-3xl font-bold">
-            @if (currentStep() == 1) {
-                {{isDirRtl() ? 'عنوان الشحن' : 'Shipping Address'}}
-            } @else if (currentStep() == 2) {
-                {{isDirRtl() ? 'طريقة الدفع' : 'Payment Method'}}
-            }
-        </h2>
-    </div>
-
-    <p-step-panels>
-        <p-step-panel [value]="currentStep()">
-            <ng-template #content let-activateCallback="activateCallback">
-                <div class="w-full">
-                    <router-outlet />
-                </div>
-            </ng-template>
-        </p-step-panel>
-    </p-step-panels>
+      </ng-template>
+    </p-step-panel>
+  </p-step-panels>
 </p-stepper>
 
 <app-sp-line></app-sp-line>
 
 <lib-button
-    [text]="(currentStep() == 1 ? 'common.actions.next' : 'common.actions.checkout') | translate"
-    [iconLucide]="{
-        name: isDirRtl() ? icons.MoveLeft : icons.MoveRight,
-        size: '20px',
-    }"
-    styleClass="flex items-center gap-2 rounded-lg text-white dark:text-black bg-primary px-8 py-2.5 text-sm mt-5 ms-auto"
-    [disabled]="inValidData()"
-    (onClick)="currentStep() == 1 ? next() : checkout()"
+  [text]="(currentStep() == 1 ? 'common.actions.next' : 'common.actions.checkout') | translate"
+  [iconLucide]="{
+    name: isDirRtl() ? icons.MoveLeft : icons.MoveRight,
+    size: '20px',
+  }"
+  styleClass="flex items-center gap-2 rounded-lg text-white dark:text-black bg-primary px-8 py-2.5 text-sm mt-5 ms-auto"
+  [disabled]="inValidData() || isProcessing()"
+  (onClick)="currentStep() == 1 ? next() : checkout()"
 ></lib-button>

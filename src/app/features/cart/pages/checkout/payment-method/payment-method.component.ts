@@ -9,24 +9,21 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-method',
-  imports: [
-    ListboxModule,
-    FormsModule,
-    TranslatePipe
-  ],
+  imports: [ListboxModule, FormsModule, TranslatePipe],
   templateUrl: './payment-method.component.html',
   styleUrl: './payment-method.component.scss',
 })
 export class PaymentMethodComponent extends AppComponentBase implements OnInit {
+  private readonly _checkoutFacadeService = inject(CheckoutFacadeService);
 
-  private readonly _checkoutFacadeService = inject(CheckoutFacadeService)
-
-  paymentMethods = signal<PaymentMethod[]>([])
+  paymentMethods = signal<PaymentMethod[]>([]);
   selectedPaymentMethod = this._checkoutFacadeService.paymentMethod;
 
-
   ngOnInit(): void {
-    this._checkoutFacadeService.currentStep.set(2)
+    this._checkoutFacadeService.currentStep.set(2);
+
+    // TODO: Integrate Stripe card entry here and set checkoutFacade.paymentMethodId when a real
+    // payment method is created by the Stripe SDK.
 
     this.paymentMethods.set([
       {
@@ -41,6 +38,6 @@ export class PaymentMethodComponent extends AppComponentBase implements OnInit {
         subTitle: 'You’ll be securely redirected to Stripe to complete your payment',
         method: 'CREDIT_CARD',
       },
-    ])
+    ]);
   }
 }
