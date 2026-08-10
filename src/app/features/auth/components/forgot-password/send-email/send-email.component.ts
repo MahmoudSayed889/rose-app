@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputComponent, ButtonComponent } from "reusable-components";
 import { RouterLink } from "@angular/router";
 import { TranslatePipe } from '@ngx-translate/core';
+import { VALIDATION_PATTERNS } from '../../../../../shared/validators/patterns';
 
 @Component({
   selector: 'app-send-email',

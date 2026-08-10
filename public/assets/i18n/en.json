@@ -35,7 +35,14 @@
       "PASSWORD_PATTERN_ERROR": "Please enter a valid password",
       "USERNAME_REQ_ERROR": "Username is required",
       "FN_REQ_ERROR": "First Name is required",
-      "LN_REQ_ERROR": "Last Name is required"
+      "LN_REQ_ERROR": "Last Name is required",
+      "PASSWORD_PATTERN_ERRORS": {
+        "8 or more characters": "8 or more characters",
+        "At least one uppercase letter A-Z": "At least one uppercase letter A-Z",
+        "At least one lowercase letter a-z": "At least one lowercase letter a-z",
+        "At least one number 0-9": "At least one number 0-9",
+        "At least one special character like": "At least one special character like #@&-"
+      }
     }
   },
   "header": {

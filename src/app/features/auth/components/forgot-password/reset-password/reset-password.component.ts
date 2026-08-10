@@ -5,6 +5,7 @@ import { SpLineComponent } from "../../../../../shared/components/sp-line/sp-lin
 import { InputComponent, ButtonComponent } from "reusable-components";
 import { PASSWORD_REGEX } from 'auth-library'
 import { TranslatePipe } from '@ngx-translate/core';
+import { VALIDATION_PATTERNS } from '../../../../../shared/validators/patterns';
 
 @Component({
   selector: 'app-reset-password',
@@ -37,7 +38,7 @@ export class ResetPasswordComponent {
 }
 
   resetPasswordForm = this._fb.group({
-    newPassword: ['', [Validators.required, Validators.pattern(PASSWORD_REGEX)]],
+    newPassword: ['', [Validators.required, Validators.pattern(VALIDATION_PATTERNS.password)]],
     confirmPassword: ['', [Validators.required]]
   }, { validators: this.rePasswordValidation })
 
