@@ -1,0 +1,364 @@
+.order-card {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--p-surface-border, #e5e7eb);
+  background: #fff;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Header ──────────────────────────────── */
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 1.25rem;
+  background: var(--maroon-600);
+  color: #fff;
+}
+
+.order-number {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.order-date {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* ── Body ──────────────────────────────── */
+.order-body {
+  padding: 1.25rem;
+  background: var(--zinc-100, #f4f4f5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.order-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.order-row-top {
+  justify-content: space-between;
+}
+
+.total-price,
+.order-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--zinc-700);
+}
+
+.total-price .value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--zinc-800);
+}
+
+.info-row {
+  justify-content: flex-start;
+}
+
+.info-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: var(--zinc-800);
+
+  i {
+    font-size: 0.9rem;
+  }
+}
+
+.delivery-pending {
+  color: #d97706;
+}
+
+.delivery-shipped {
+  color: #155dfc;
+}
+
+.delivery-success {
+  color: #00bc7d;
+}
+
+.delivery-danger {
+  color: var(--danger, #dc2626);
+}
+
+/* ── Badges ──────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: #00bc7d;
+}
+
+.badge-progress {
+  background: #dbeafe;
+  color: #155dfc;
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.badge-danger {
+  background: var(--light-pink, #fee2e2);
+  color: var(--danger, #dc2626);
+}
+
+.badge-neutral {
+  background: var(--zinc-200, #e4e4e7);
+  color: var(--zinc-700, #3f3f46);
+}
+
+/* ── Order items ──────────────────────────────── */
+.order-items-label {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--zinc-700);
+}
+
+.items-grid {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  background-color: #fff;;
+}
+
+.item-card {
+  display: flex;
+  gap: 0.75rem;
+  background: var(--zink-50);
+  border-radius: 10px;
+  // padding: 0.6rem;
+  min-width: 0;
+}
+
+.item-image {
+  width: 100px;
+  height: 150px;
+  flex-shrink: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.item-name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--zinc-800);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+
+  .pi-star-fill {
+    color: #facc15;
+  }
+}
+
+.item-rating-value {
+  color: var(--zinc-700);
+}
+
+.item-ratings-count {
+  color: #155dfc;
+}
+
+.item-footer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  margin-top: 2rem;
+}
+
+.item-qty {
+  color: var(--zinc-500);
+}
+
+.item-price {
+  font-weight: 600;
+  color: var(--zinc-800);
+  font-size: 1.1rem;
+}
+
+/* ── Show All / Show Less peek ──────────────────────────────── */
+.items-peek {
+  position: relative;
+  margin-top: -0.5rem;
+}
+
+.peek-grid {
+  max-height: 55px;
+  overflow: hidden;
+}
+
+.peek-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(244, 244, 245, 0.4), var(--zinc-100, #f4f4f5) 85%);
+}
+
+.toggle-button-wrapper {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 0.35rem;
+  padding: 0.4rem 1.1rem;
+  color: var(--maroon-800, #7a1f2b);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+  .pi {
+    display: block;
+    text-align: center;
+  }
+}
+
+.toggle-wrapper {
+  // display: flex;
+  // justify-content: center;
+  margin-top: 0.25rem;
+  color: var(--maroon-800, #7a1f2b);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  .pi {
+    display: block;
+    text-align: center;
+  }
+}
+
+.toggle-wrapper .toggle-btn {
+  position: static;
+  transform: none;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 640px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .order-row-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .items-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .peek-grid {
+    max-height: 90px;
+  }
+}
+
+/* ── Dark mode ──────────────────────────────── */
+:host-context(.dark) {
+  .order-card {
+    background: var(--zinc-800, #27272a);
+    border-color: var(--zinc-700, #3f3f46);
+  }
+
+  .order-body {
+    background: var(--zinc-900, #18181b);
+  }
+
+  .label,
+  .order-items-label {
+    color: var(--zinc-400);
+  }
+
+  .total-price .value,
+  .item-name,
+  .item-price,
+  .info-value {
+    color: var(--zinc-100);
+  }
+
+  .item-card {
+    background: var(--zinc-800, #27272a);
+  }
+
+  .peek-fade {
+    background: linear-gradient(to bottom, rgba(24, 24, 27, 0.4), var(--zinc-900, #18181b) 85%);
+  }
+
+  .toggle-btn {
+    background: var(--zinc-800, #27272a);
+    border-color: var(--zinc-700, #3f3f46);
+    color: #fff;
+  }
+}

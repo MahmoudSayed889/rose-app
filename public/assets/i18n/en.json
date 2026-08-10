@@ -134,6 +134,57 @@
   },
   "cart": {
   },
+  "orders": {
+    "title": "Orders",
+    "orderNumber": "Order #",
+    "createdIn": "Created in:",
+    "totalPrice": "Total Price:",
+    "status": "Status:",
+    "paymentMethod": "Payment Method:",
+    "deliveryStatus": "Delivery Status:",
+    "orderItems": "Order Items:",
+    "showAll": "Show All",
+    "showLess": "Show Less",
+    "rating": "Rating",
+    "ratings": "ratings",
+    "egp": "EGP",
+    "noOrders": "You have no orders yet",
+    "loadError": "Failed to load orders. Please try again.",
+    "statuses": {
+      "PENDING": "Pending",
+      "IN_PROGRESS": "In Progress",
+      "PROCESSING": "In Progress",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "COMPLETED": "Completed",
+      "CANCELED": "Canceled",
+      "CANCELLED": "Canceled"
+    },
+    "deliveryStatuses": {
+      "PENDING": "Pending",
+      "IN_PROGRESS": "Pending",
+      "PROCESSING": "Pending",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "COMPLETED": "Delivered",
+      "CANCELED": "Canceled",
+      "CANCELLED": "Canceled"
+    },
+    "paymentStatuses": {
+      "PAID": "Paid",
+      "PENDING": "Pending",
+      "UNPAID": "Unpaid",
+      "FAILED": "Failed",
+      "REFUNDED": "Refunded"
+    },
+    "paymentMethods": {
+      "CASH": "Cash",
+      "CASH_ON_DELIVERY": "Cash",
+      "CARD": "Credit Card",
+      "CREDIT_CARD": "Credit Card",
+      "STRIPE": "Credit Card"
+    }
+  },
   "checkout": {
     "payment-methods": {
       "Cash on Delivery": "Cash on Delivery",
