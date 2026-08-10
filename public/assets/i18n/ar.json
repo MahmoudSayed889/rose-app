@@ -1,5 +1,4 @@
 {
-    "Loading": "جاري التحميل...",
     "common": {
         "actions": {
             "edit": "تعديل",
@@ -21,7 +20,9 @@
         "Need help?": "بحاجة الى مساعدة؟",
         "Contact us": "تواصل معنا",
         "messages": {
-            "What awesome gift are you looking for?": "ما هي الهدية الرائعة التي تبحث عنها؟"
+            "Loading": "جاري التحميل...",
+            "What awesome gift are you looking for?": "ما هي الهدية الرائعة التي تبحث عنها؟",
+            "no products found": "لم يتم العثور على منتجات"
         },
         "validation": {
             "required": "هذا الحقل مطلوب",

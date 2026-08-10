@@ -7,7 +7,7 @@
     @if (allProducts().length) {
       <div class="products-content">
         @if (isLoading()) {
-          <div class="loading">Loading...</div>
+          <div class="loading">{{'common.messages.Loading' | translate}}</div>
         } @else {
           <div class="products-grid">
             @for (product of allProducts(); track product.id) {
@@ -38,7 +38,7 @@
         }
       </div>
     } @else {
-      <p class=" text-center text-2xl w-full">{{isDirRtl() ? 'لا يوجد منتجات' : 'No products found'}}</p>
+      <p class=" text-center text-2xl w-full">{{'common.messages.no products found' | translate}}</p>
     }
 
 

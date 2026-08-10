@@ -1,5 +1,4 @@
 {
-  "Loading": "Loading...",
   "common": {
     "actions": {
       "continue": "Continue",
@@ -21,7 +20,9 @@
     "Need help?": "Need help?",
     "Contact us": "Contact us",
     "messages": {
-      "What awesome gift are you looking for?": "What awesome gift are you looking for?"
+      "Loading": "Loading...",
+      "What awesome gift are you looking for?": "What awesome gift are you looking for?",
+      "no products found": "no products found"
     },
     "validation": {
       "required": "This field is required",

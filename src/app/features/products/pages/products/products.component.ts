@@ -13,13 +13,15 @@ import { CartFacadeService } from '../../../cart/services/cart/cart-facade.servi
 import { WishlistFacadeService } from '../../../wishlist/services/wishlist-facade.service';
 import { FilterStateService } from '../../../../core/services/filter-state.service';
 import { FiltersSidebarComponent } from '../../../../shared/components/filters-sidebar/filters-sidebar.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
   imports: [
     ProductCardComponent,
     PaginatorComponent,
-    FiltersSidebarComponent
+    FiltersSidebarComponent,
+    TranslatePipe
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',

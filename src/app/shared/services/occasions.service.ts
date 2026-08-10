@@ -3,6 +3,7 @@ import { inject, Service } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AUTH_API_URL } from 'auth-library';
 import { HelperService } from './helper.service';
+import { Occasion } from '../../features/products/models/product';
 
 @Service()
 export class OccasionsService {
@@ -16,7 +17,7 @@ export class OccasionsService {
         status: boolean;
         code: number;
         payload: {
-          data: any[];
+          data: Occasion[];
           metadata: unknown;
         };
       }>(`${this.baseUrl}/api/occasions`, {
