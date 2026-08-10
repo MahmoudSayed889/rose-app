@@ -151,6 +151,7 @@
   "profile": {
     "title": "",
     "change_password": {
+      "change password": "change password",
       "current password": "current password",
       "new password": "new password",
       "confirm new password": "confirm new password"
