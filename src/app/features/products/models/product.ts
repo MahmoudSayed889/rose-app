@@ -16,45 +16,63 @@ export interface SingleProductPayload {
 }
 
 export interface Product {
-    id: string
-    title: string
-    description: string
-    rating: number
-    ratings: number
-    stock: number
-    price: number
-    priceWithDiscount?: number
-    discountType: string
-    discountValue: string
-    cover: string
-    gallery: string
-    categoryId: string
-    subCategoryId?: string
-    immutable: boolean
-    createdAt: string | Date
-    updatedAt: string | Date
-    deletedAt?: string | Date
-    category: Category
-    subCategory?: SubCategory
-    occasions: any[]
-    _count: Count
-    tags?: ProductCardBadge[]
+  id: string
+  title: string
+  description: string
+  rating: number
+  ratings: number
+  stock: number
+  price: number
+  priceWithDiscount?: number
+  discountType: string
+  discountValue: string
+  cover: string
+  gallery: string
+  categoryId: string
+  subCategoryId?: string
+  immutable: boolean
+  createdAt: string | Date
+  updatedAt: string | Date
+  deletedAt?: string | Date
+  category: Category
+  subCategory?: SubCategory
+  occasions: Occasions[]
+  _count: Count
+  tags?: ProductCardBadge[]
 }
 
 export interface Category {
-    id: string
-    title: string
+  id: string
+  title: string
 }
 
 export interface SubCategory {
-    id: string
-    title: string
+  id: string
+  title: string
+}
+
+export interface Occasions {
+  id: string
+  productId: string
+  occasionId: string
+  createdAt: string
+  occasion: Occasion
+}
+
+export interface Occasion {
+  id: string
+  title: string
+  description: string
+  image: string
+  immutable: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export interface Count {
-    reviews: number
-    cartItems: number
-    wishlistItems: number
+  reviews: number
+  cartItems: number
+  wishlistItems: number
 }
 
 export interface CreateProductRequest {
