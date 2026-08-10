@@ -3,7 +3,6 @@ import { PasswordModule } from 'primeng/password';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { SpLineComponent } from "../../../../../shared/components/sp-line/sp-line.component";
 import { InputComponent, ButtonComponent } from "reusable-components";
-import { PASSWORD_REGEX } from 'auth-library'
 import { TranslatePipe } from '@ngx-translate/core';
 import { VALIDATION_PATTERNS } from '../../../../../shared/validators/patterns';
 
