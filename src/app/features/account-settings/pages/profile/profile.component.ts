@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { InputComponent, PhoneInputComponent, ButtonComponent } from 'reusable-components';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ import {
   UpdateProfileREQ,
 } from '../../models/profile-interface';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile',
@@ -36,6 +37,7 @@ export class ProfileComponent extends AppComponentBase implements OnInit {
   private readonly imageService = inject(ImageService);
   private readonly profileService = inject(ProfileService);
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   profileData: WritableSignal<ProfileUser | null> = signal(null);
   isFormValid: WritableSignal<boolean> = signal(false);
@@ -68,15 +70,18 @@ export class ProfileComponent extends AppComponentBase implements OnInit {
   uploadImage(): void {
     if (!this.selectedFile) return;
 
-    this.imageService.uploadImage(this.selectedFile).subscribe({
-      next: (res) => {
-        const newUrl = res.payload.url;
-        this.profileForm.patchValue({ photo: newUrl });
-        this.prepareData();
-        this._toastService.toaster('success', 'Image uploaded successfully');
-      },
-      error: (err) => console.error('خطأ أثناء الرفع:', err),
-    });
+    this.imageService
+      .uploadImage(this.selectedFile)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          const newUrl = res.payload.url;
+          this.profileForm.patchValue({ photo: newUrl });
+          this.prepareData();
+          this._toastService.toaster('success', 'Image uploaded successfully');
+        },
+        error: (err) => console.error('خطأ أثناء الرفع:', err),
+      });
   }
 
   updateForm(): void {
@@ -96,15 +101,18 @@ export class ProfileComponent extends AppComponentBase implements OnInit {
   }
 
   getUserProfile(): void {
-    this.profileService.getUserProfile().subscribe({
-      next: (res) => {
-        this.profileData.set(res.payload.user);
-        this.updateForm();
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.profileService
+      .getUserProfile()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.profileData.set(res.payload.user);
+          this.updateForm();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   // for firstName, lastName, phone, and image.
@@ -140,15 +148,18 @@ export class ProfileComponent extends AppComponentBase implements OnInit {
   saveChanges(): void {
     if (!this.isFormValid() || !this.updateProfileData()) return;
 
-    this.profileService.updateProfile(this.updateProfileData()!).subscribe({
-      next: () => {
-        this.getUserProfile();
-        this._toastService.toaster('success', 'Profile updated successfully');
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.profileService
+      .updateProfile(this.updateProfileData()!)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.getUserProfile();
+          this._toastService.toaster('success', 'Profile updated successfully');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   // Change Email
@@ -183,14 +194,17 @@ export class ProfileComponent extends AppComponentBase implements OnInit {
     };
 
     this.isEmailControlValid.set(false);
-    this.profileService.requestEmailChange(data).subscribe({
-      next: () => {
-        this.openCodeInput.set(true);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.profileService
+      .requestEmailChange(data)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.openCodeInput.set(true);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   onConfrimEmailBtnClick(): void {
@@ -200,16 +214,19 @@ export class ProfileComponent extends AppComponentBase implements OnInit {
       code: this.codeControl.value!,
     };
 
-    this.profileService.ConfirmEmailChange(data).subscribe({
-      next: () => {
-        this._toastService.toaster('success', 'Email changed successfully');
-        this.resetEmailState();
-        this.getUserProfile();
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.profileService
+      .ConfirmEmailChange(data)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this._toastService.toaster('success', 'Email changed successfully');
+          this.resetEmailState();
+          this.getUserProfile();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   resetEmailState(): void {
@@ -220,21 +237,24 @@ export class ProfileComponent extends AppComponentBase implements OnInit {
 
   // Delete Account
   onDeleteAccountBtnClick(): void {
-    this.profileService.deleteAccount().subscribe({
-      next: (res) => {
-        console.log(res);
-        this.router.navigate(['/login'])
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.profileService
+      .deleteAccount()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   ngOnInit(): void {
     this.getUserProfile();
 
-    this.profileForm.valueChanges.subscribe(() => {
+    this.profileForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.prepareData();
     });
   }
