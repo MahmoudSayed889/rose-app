@@ -25,6 +25,7 @@ export class HomeService {
     categoryId?: string
   ): Observable<ProductsList> {
     const queryParams = categoryId ? { ...params, categoryId } : params;
+
     return this._httpClient.get<ProductsList>(`${this.baseUrl}/api/products`, {
       params: this._helperService.createParams(queryParams),
     });

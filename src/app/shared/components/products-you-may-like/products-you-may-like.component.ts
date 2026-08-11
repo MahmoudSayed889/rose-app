@@ -46,7 +46,6 @@ export class ProductsYouMayLikeComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.products.set(res)
-          console.log(this.products());
         }
       })
   }

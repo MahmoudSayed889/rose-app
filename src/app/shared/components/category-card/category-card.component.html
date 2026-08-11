@@ -1,0 +1,8 @@
+<div class="category-card" (click)="categorySelect.emit(category().id)">
+  <div class="category-card__image">
+    <img [src]="category().image" [alt]="category().title" loading="lazy" />
+  </div>
+  <div class="category-card__label">
+    {{ category().title }}
+  </div>
+</div>

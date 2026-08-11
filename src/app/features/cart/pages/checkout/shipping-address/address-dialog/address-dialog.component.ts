@@ -1,4 +1,4 @@
-import { Component, inject, model, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, model, OnInit, signal } from '@angular/core';
 import { ButtonComponent, InputComponent } from 'reusable-components';
 import { NgClass } from '@angular/common';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
@@ -62,10 +62,20 @@ export class AddressDialogComponent extends AppComponentBase implements OnInit {
 
   icons = icons
 
-  ngOnInit(): void {
-    this.getAddresses()
-    this.createForm()
+  constructor() {
+    super();
+
+    effect(() => {
+      if (!this.isAuthenticated()) {
+        return
+      }
+
+      this.getAddresses()
+      this.createForm()
+    });
   }
+
+  ngOnInit(): void { }
 
   getAddresses() {
     this._addressService.getAddresses().subscribe({
@@ -124,6 +134,7 @@ export class AddressDialogComponent extends AppComponentBase implements OnInit {
     this.visibleForm.set(false);
     this.createForm()
     this.currentStep.set(1)
+    this.addressId.set('')
   }
 
   createOrUpdateAddress() {

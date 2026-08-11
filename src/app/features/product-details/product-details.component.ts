@@ -50,7 +50,7 @@ export class ProductDetailsComponent {
 
   transformProductGallery(product: Product): void {
     try {
-      const galleryArray: string[] = JSON.parse(product.gallery);
+      const galleryArray: string[] = JSON.parse(product.gallery ?? '[]');
       const allImages = [product.cover, ...galleryArray];
 
       const galleriaImages: GalleryImage[] = allImages.map((url, index) => ({
