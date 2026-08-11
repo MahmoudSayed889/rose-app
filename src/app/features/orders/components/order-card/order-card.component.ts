@@ -27,12 +27,6 @@ export class OrderCardComponent {
 
   expanded = signal<boolean>(false);
 
-  isRtl = computed(
-    () =>
-      this._document.documentElement.dir === 'rtl' ||
-      this._document.documentElement.lang === 'ar',
-  );
-
   previewItems = computed<OrderItem[]>(() => this.order().orderItems.slice(0, PREVIEW_ITEMS_COUNT));
   extraItems = computed<OrderItem[]>(() => this.order().orderItems.slice(PREVIEW_ITEMS_COUNT));
   peekItems = computed<OrderItem[]>(() => this.extraItems().slice(0, PREVIEW_ITEMS_COUNT));

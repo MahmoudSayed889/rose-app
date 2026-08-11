@@ -38,6 +38,9 @@
       "LN_REQ_ERROR": "Last Name is required"
     }
   },
+  "search": {
+    "productsYouMayLike": "Products You May Like:"
+  },
   "header": {
     "userMenuItems": {
       "Account": "Account",

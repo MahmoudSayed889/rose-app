@@ -37,6 +37,9 @@
             "LN_REQ_ERROR": "الاسم الأخير مطلوب"
         }
     },
+    "search": {
+        "productsYouMayLike": "منتجات قد تعجبك:"
+    },
     "header": {
         "userMenuItems": {
             "Account": "الحساب الشخصي",
