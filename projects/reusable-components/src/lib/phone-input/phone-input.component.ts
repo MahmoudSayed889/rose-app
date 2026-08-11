@@ -8,14 +8,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
-
-export interface ICountry {
-  name: string;
-  shortName: string;
-  code: string;
-  flag: string;
-  placeHolder: string;
-}
+import { ICountry } from './models/country-interface';
 
 @Component({
   selector: 'lib-phone-input',
