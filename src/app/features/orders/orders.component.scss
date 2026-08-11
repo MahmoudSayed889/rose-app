@@ -1,0 +1,105 @@
+.orders-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--zinc-800, #27272a);
+  margin: 0 0 1.5rem;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Skeleton ──────────────────────────────── */
+.orders-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-skeleton {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--p-surface-border, #e5e7eb);
+}
+
+.order-skeleton-body {
+  padding: 1.25rem;
+  background: var(--zinc-100, #f4f4f5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.order-skeleton-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── Empty / Error states ──────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+
+  .empty-message {
+    font-size: 1.125rem;
+    color: var(--zinc-500);
+    margin: 0;
+  }
+}
+
+.error-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+
+  .error-message {
+    font-size: 1rem;
+    color: #dc2626;
+    margin: 0 0 1rem 0;
+  }
+
+  .retry-btn {
+    padding: 0.625rem 1.5rem;
+    background: var(--p-primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+/* ── Dark mode ──────────────────────────────── */
+:host-context(.dark) {
+  .orders-title {
+    color: var(--zinc-100);
+  }
+
+  .empty-state .empty-message {
+    color: var(--zinc-400);
+  }
+
+  .error-state {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+
+    .error-message {
+      color: #f87171;
+    }
+  }
+}

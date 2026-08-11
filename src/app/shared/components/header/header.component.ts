@@ -7,9 +7,13 @@ import { DialogModule } from 'primeng/dialog';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
-import { LanguageSwitcherComponent, ThemeSwitcherComponent, ButtonComponent } from 'reusable-components';
+import {
+  LanguageSwitcherComponent,
+  ThemeSwitcherComponent,
+  ButtonComponent,
+} from 'reusable-components';
 import { LucideAngularModule, icons } from 'lucide-angular';
-import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NavbarItem } from './models/navbar-item';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
@@ -19,8 +23,8 @@ import { AddressService } from '../../../features/cart/services/checkout/address
 import { Address } from '../../../features/cart/models/checkout/addresses';
 import { CartFacadeService } from '../../../features/cart/services/cart/cart-facade.service';
 import { WishlistFacadeService } from '../../../features/wishlist/services/wishlist-facade.service';
-import { SearchDialogComponent } from "../search-dialog/search-dialog.component";
-import { FormsModule } from "@angular/forms";
+import { SearchDialogComponent } from '../search-dialog/search-dialog.component';
+import { FormsModule } from '@angular/forms';
 import { Popover } from 'primeng/popover';
 import { timeInterval } from 'rxjs';
 
@@ -42,38 +46,37 @@ import { timeInterval } from 'rxjs';
     RouterLinkActive,
     AddressDialogComponent,
     SearchDialogComponent,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent extends AppComponentBase {
-  private readonly _addressService = inject(AddressService)
-  private readonly _userService = inject(UserService)
+  private readonly _addressService = inject(AddressService);
+  private readonly _userService = inject(UserService);
   private readonly _cartFacadeService = inject(CartFacadeService);
   private readonly _wishlistFacadeService = inject(WishlistFacadeService);
   private readonly _translateService = inject(TranslateService);
   private readonly _router = inject(Router);
 
-
-  user = signal<User | null>(null)
-  address = signal<Address | null>(null)
+  user = signal<User | null>(null);
+  address = signal<Address | null>(null);
 
   userMenuItems: MenuItem[] = [];
   notificationItems: MenuItem[] = [];
   secondNavbarItems: NavbarItem[] = [];
 
-  visible = signal<boolean>(false)
-  visibleAddressDialog = signal<boolean>(false)
+  visible = signal<boolean>(false);
+  visibleAddressDialog = signal<boolean>(false);
   activeTap: 'login' | 'register' = 'login';
 
-  icons = icons
+  icons = icons;
 
   cartItems = this._cartFacadeService.cartItems;
-  wishlistItems = this._wishlistFacadeService.wishlistItems
+  wishlistItems = this._wishlistFacadeService.wishlistItems;
 
-  searchVal = signal<string>('')
-  visibleSearchDialog = signal<boolean>(false)
+  searchVal = signal<string>('');
+  visibleSearchDialog = signal<boolean>(false);
 
   constructor() {
     super();
@@ -93,15 +96,15 @@ export class HeaderComponent extends AppComponentBase {
     effect(() => {
       if (this.user()) {
         this.address.set(
-          this._addressService.addresses().find(address => address.isPrimary) ?? null
-        )
+          this._addressService.addresses().find((address) => address.isPrimary) ?? null,
+        );
       }
     });
   }
 
   ngOnInit() {
-    this.initSecondNavbarItems()
-    this.initNotificationItems()
+    this.initSecondNavbarItems();
+    this.initNotificationItems();
 
     if (this.isAuthenticated()) {
       this._translateService.onLangChange.subscribe(() => {
@@ -113,12 +116,12 @@ export class HeaderComponent extends AppComponentBase {
   getUser() {
     this._userService.getUser().subscribe({
       next: (res) => {
-        this.user.set(res.payload.user)
+        this.user.set(res.payload.user);
         this.visible.set(false);
 
-        this.initUserMenuItems()
-      }
-    })
+        this.initUserMenuItems();
+      },
+    });
   }
 
   initUserMenuItems() {
@@ -130,13 +133,31 @@ export class HeaderComponent extends AppComponentBase {
         icon: 'pi pi-user',
         command: () => {
           this._router.navigate(['/account-settings']);
-        }
+        },
       },
-      { label: this._translateService.instant('header.userMenuItems.Addresses'), icon: 'pi pi-map-marker' },
-      { label: this._translateService.instant('header.userMenuItems.Orders'), icon: 'pi pi-shopping-bag' },
-      { label: this._translateService.instant('header.userMenuItems.Dashboard'), icon: 'pi pi-cog' },
+      {
+        label: this._translateService.instant('header.userMenuItems.Addresses'),
+        icon: 'pi pi-map-marker',
+      },
+      {
+        label: this._translateService.instant('header.userMenuItems.Orders'),
+        icon: 'pi pi-shopping-bag',
+        command: () => {
+          this._router.navigate(['/orders']);
+        },
+      },
+      {
+        label: this._translateService.instant('header.userMenuItems.Dashboard'),
+        icon: 'pi pi-cog',
+      },
       { separator: true },
-      { label: this._translateService.instant('header.userMenuItems.Log out'), icon: 'pi pi-sign-out', command: () => { this._authService.logout() } }
+      {
+        label: this._translateService.instant('header.userMenuItems.Log out'),
+        icon: 'pi pi-sign-out',
+        command: () => {
+          this._authService.logout();
+        },
+      },
     ];
   }
 
@@ -148,14 +169,12 @@ export class HeaderComponent extends AppComponentBase {
       { label: 'categories.title', icon: icons.ClipboardList, routerLink: '/categories' },
       { label: 'occasions.title', icon: icons.PartyPopper, routerLink: '/occasions' },
       { label: 'contact.title', icon: icons.Headset, routerLink: '/contact' },
-      { label: 'about.title', icon: icons.Info, routerLink: '/about' }
+      { label: 'about.title', icon: icons.Info, routerLink: '/about' },
     ];
   }
 
   initNotificationItems() {
-    this.notificationItems = [
-      { label: 'Your Order Has Been Shipped', icon: 'pi pi-check-circle' }
-    ];
+    this.notificationItems = [{ label: 'Your Order Has Been Shipped', icon: 'pi pi-check-circle' }];
   }
 
   showDialog(tab: 'login' | 'register' = 'login') {
@@ -168,12 +187,12 @@ export class HeaderComponent extends AppComponentBase {
   }
 
   onFocus() {
-    this.visibleSearchDialog.update(val => val = true)
+    this.visibleSearchDialog.update((val) => (val = true));
   }
 
   onBlur() {
     setTimeout(() => {
-      this.visibleSearchDialog.update(val => val = false)
-    }, 100)
+      this.visibleSearchDialog.update((val) => (val = false));
+    }, 100);
   }
 }

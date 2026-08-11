@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AUTH_API_URL } from 'auth-library';
-import { Category } from '../components/category-card/category.interface';
+import { CategoriesList, Category } from '../components/category-card/category.interface';
 import { HelperService } from './helper.service';
 
 @Service()
@@ -13,14 +13,7 @@ export class CategoriesService {
 
   getAllCategories(): Observable<Category[]> {
     return this.http
-      .get<{
-        status: boolean;
-        code: number;
-        payload: {
-          data: Category[];
-          metadata: unknown;
-        };
-      }>(`${this.baseUrl}/api/categories`, {
+      .get<CategoriesList>(`${this.baseUrl}/api/categories`, {
         params: this.helperService.createParams({ limit: 100 }),
       })
       .pipe(
