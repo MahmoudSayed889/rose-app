@@ -1,4 +1,13 @@
-import { Component, forwardRef, inject, Injector, Input, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  inject,
+  Injector,
+  Input,
+  OnInit,
+  output,
+  signal,
+} from '@angular/core';
 import { ControlValueAccessor, FormsModule, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule, icons } from 'lucide-angular';
@@ -40,6 +49,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   value = signal('');
   isDisabled = signal(false);
   isPasswordVisible = signal(false);
+
+  onInput = output<void>();
 
   ngControl: NgControl | null = null;
 
@@ -110,10 +121,11 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.isDisabled.set(isDisabled);
   }
 
-  onInput(event: Event): void {
+  handleInput(event: Event): void {
     const newValue = (event.target as HTMLInputElement).value;
     this.value.set(newValue);
     this.onChange(newValue);
+    this.onInput.emit();
   }
 
   onBlur(): void {

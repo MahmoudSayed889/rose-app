@@ -11,4 +11,6 @@ export class AccountSettingsEndPoints {
   readonly UpdateProfile = `${this._baseURL}/api/users/profile`;
   readonly ChangePassword = `${this._baseURL}/api/users/change-password`;
   readonly DeleteAccount = `${this._baseURL}/api/users/account`;
+  readonly RequestEmailChange = `${this._baseURL}/api/users/email/request`;
+  readonly ConfirmEmailChange = `${this._baseURL}/api/users/email/confirm`;
 }

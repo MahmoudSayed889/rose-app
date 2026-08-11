@@ -152,12 +152,20 @@
             "You’ll be securely redirected to Stripe to complete your payment": "سيتم تحويلك بشكل آمن إلى موقع Stripe لإتمام عملية الدفع."
         }
     },
-    "profile": {
-        "title": "",
+    "account-settings": {
+        "title": "إعدادات الحساب",
         "change_password": {
+            "title": "تغيير كلمة السر",
             "current password": "كلمة المرور الحالية",
             "new password": "كلمة المرور الجديدة",
             "confirm new password": "تأكيد كلمة المرور الجديدة"
+        },
+        "profile": {
+            "title": "الملف الشخصي",
+            "upload-photo": "تحميل الصورة",
+            "upload-desc": "يمكنك تحميل صورة بصيغة .jpg أو .png أو .gif بحجم أقصى يبلغ 5 ميجابايت.",
+            "request-code": "اطلب كود",
+            "confirm": "تأكيد"
         }
     },
     "productDetails": {
