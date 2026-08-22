@@ -36,7 +36,43 @@
   "prefix": "app",
   "targets": {
     "build": {
+      "executor": "@angular-architects/native-federation:build",
+      "defaultConfiguration": "production",
+      "options": {
+        "cacheExternalArtifacts": true,
+        "tsConfig": "tsconfig.federation.json"
+      },
+      "configurations": {
+        "production": {
+          "target": "rose-app:esbuild:production"
+        },
+        "development": {
+          "target": "rose-app:esbuild:development",
+          "dev": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "rose-app:serve-original:development",
+        "tsConfig": "tsconfig.federation.json",
+        "rebuildDelay": 500,
+        "cacheExternalArtifacts": true,
+        "dev": true,
+        "devServer": true,
+        "port": 0
+      }
+    },
+    "test": {
+      "executor": "@angular/build:unit-test"
+    },
+    "esbuild": {
       "executor": "@angular/build:application",
+      "defaultConfiguration": "production",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "browser": "src/main.ts",
         "tsConfig": "tsconfig.app.json",
@@ -51,7 +87,10 @@
           "src/styles.css",
           "./node_modules/ngx-spinner/animations/square-jelly-box.css"
         ],
-        "outputPath": "dist/rose-app"
+        "outputPath": "dist/rose-app",
+        "polyfills": [
+          "es-module-shims"
+        ]
       },
       "configurations": {
         "production": {
@@ -74,26 +113,22 @@
           "extractLicenses": false,
           "sourceMap": true
         }
-      },
-      "defaultConfiguration": "production",
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      }
     },
-    "serve": {
+    "serve-original": {
       "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4200
+      },
       "configurations": {
         "production": {
-          "buildTarget": "rose-app:build:production"
+          "buildTarget": "rose-app:esbuild:production"
         },
         "development": {
-          "buildTarget": "rose-app:build:development"
+          "buildTarget": "rose-app:esbuild:development"
         }
-      },
-      "defaultConfiguration": "development"
-    },
-    "test": {
-      "executor": "@angular/build:unit-test"
+      }
     }
   }
 }

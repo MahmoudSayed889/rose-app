@@ -37,6 +37,7 @@
   "targets": {
     "build": {
       "executor": "@angular/build:ng-packagr",
+      "defaultConfiguration": "production",
       "configurations": {
         "production": {
           "tsConfig": "projects/auth-library/tsconfig.lib.prod.json"
@@ -44,8 +45,7 @@
         "development": {
           "tsConfig": "projects/auth-library/tsconfig.lib.json"
         }
-      },
-      "defaultConfiguration": "production"
+      }
     },
     "test": {
       "executor": "@angular/build:unit-test",
