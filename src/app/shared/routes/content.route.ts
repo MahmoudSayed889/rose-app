@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { loadRemoteModule } from '@angular-architects/native-federation';
 import { authGuard } from '../../core/guards/auth.guard';
 
 export const ContentRoutes: Routes = [
@@ -38,5 +39,10 @@ export const ContentRoutes: Routes = [
         path: 'orders',
         loadComponent: () => import('../../features/orders/orders.component').then((C) => C.OrdersComponent),
         canActivate: [authGuard]
+    },
+    {
+        path: 'dashboard',
+        loadComponent: () => loadRemoteModule('dashboard', './Component').then((m) => m.App),
+        // canActivate: [authGuard]
     },
 ];

@@ -6,7 +6,10 @@
     "start": "nx serve",
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
-    "test": "nx test"
+    "test": "nx test",
+    "serve:shell": "nx serve rose-app",
+    "serve:dashboard": "nx serve dashboard",
+    "serve:all": "nx run-many --target=serve --projects=rose-app,dashboard --parallel"
   },
   "private": true,
   "engines": {

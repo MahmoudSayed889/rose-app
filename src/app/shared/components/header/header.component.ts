@@ -127,7 +127,7 @@ export class HeaderComponent extends AppComponentBase {
       { label: this._translateService.instant('header.userMenuItems.Account'), icon: 'pi pi-user' },
       { label: this._translateService.instant('header.userMenuItems.Addresses'), icon: 'pi pi-map-marker' },
       { label: this._translateService.instant('header.userMenuItems.Orders'), icon: 'pi pi-shopping-bag' },
-      { label: this._translateService.instant('header.userMenuItems.Dashboard'), icon: 'pi pi-cog' },
+      { label: this._translateService.instant('header.userMenuItems.Dashboard'), icon: 'pi pi-cog', routerLink: '/dashboard' },
       { separator: true },
       { label: this._translateService.instant('header.userMenuItems.Log out'), icon: 'pi pi-sign-out', command: () => { this._authService.logout() } }
     ];
