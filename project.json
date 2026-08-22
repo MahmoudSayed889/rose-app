@@ -1,0 +1,99 @@
+{
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "name": "rose-app",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss",
+      "type": "component",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:directive": {
+      "type": "directive",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:service": {
+      "type": "service",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  },
+  "sourceRoot": "src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "options": {
+        "browser": "src/main.ts",
+        "tsConfig": "tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "public"
+          }
+        ],
+        "styles": [
+          "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+          "src/styles.css",
+          "./node_modules/ngx-spinner/animations/square-jelly-box.css"
+        ],
+        "outputPath": "dist/rose-app"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kB",
+              "maximumError": "1MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kB",
+              "maximumError": "8kB"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "serve": {
+      "executor": "@angular/build:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "rose-app:build:production"
+        },
+        "development": {
+          "buildTarget": "rose-app:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test"
+    }
+  }
+}

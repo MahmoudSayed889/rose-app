@@ -1,0 +1,57 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "auth-library",
+  "projectType": "library",
+  "sourceRoot": "projects/auth-library/src",
+  "prefix": "lib",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss",
+      "type": "component",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:directive": {
+      "type": "directive",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:service": {
+      "type": "service",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@angular/build:ng-packagr",
+      "configurations": {
+        "production": {
+          "tsConfig": "projects/auth-library/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "projects/auth-library/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "tsConfig": "projects/auth-library/tsconfig.spec.json"
+      }
+    }
+  }
+}
