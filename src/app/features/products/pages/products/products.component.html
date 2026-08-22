@@ -1,46 +1,61 @@
-<div class="container m-auto my-20 mb-40 px-7 lg:px-0">
-  <div class="products-layout">
-    <aside class="products-sidebar">
+<div class="container mx-auto my-6 sm:my-10 lg:my-16 mb-24 md:mb-36 px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[300px_minmax(0,1fr)] gap-6 lg:gap-8 items-start">
+    
+    <!-- Filters Sidebar (Sticky on Desktop) -->
+    <aside class="w-full lg:sticky lg:top-24">
       <app-filters-sidebar></app-filters-sidebar>
     </aside>
 
-    @if (allProducts().length) {
-      <div class="products-content">
-        @if (isLoading()) {
-          <div class="loading">{{'common.messages.Loading' | translate}}</div>
-        } @else {
-          <div class="products-grid">
-            @for (product of allProducts(); track product.id) {
-              <lib-product-card
-                [productId]="product.id"
-                [imageUrl]="product.cover"
-                [title]="product.title"
-                [price]="+product.price"
-                [discountType]="product.discountType"
-                [discountValue]="product.discountValue"
-                [rating]="product.rating"
-                [badge]="product.tags || []"
-                [isFavorite]="true"
-                (favoriteToggle)="onFavoriteToggle($event)"
-                (addToCart)="addToCart($event.toString())"
-                (cardClick)="logCardClick($event)"
-              />
-            }
-          </div>
+    <!-- Main Products Area -->
+    <main class="w-full min-w-0">
+      @if (allProducts().length) {
+        <div class="w-full">
+          @if (isLoading()) {
+            <!-- Loading State -->
+            <div class="flex items-center justify-center min-h-87.5 text-zinc-500 font-medium text-base sm:text-lg">
+              <i class="pi pi-spin pi-spinner text-2xl me-2 text-primary"></i>
+              <span>{{ 'common.messages.Loading' | translate }}</span>
+            </div>
+          } @else {
+            <!-- Products Grid: 1 col on XS, 2 on SM, 2-3 on MD/LG, 3-4 on XL -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+              @for (product of allProducts(); track product.id) {
+                <lib-product-card
+                  [productId]="product.id"
+                  [imageUrl]="product.cover"
+                  [title]="product.title"
+                  [price]="+product.price"
+                  [discountType]="product.discountType"
+                  [discountValue]="product.discountValue"
+                  [rating]="product.rating"
+                  [badge]="product.tags || []"
+                  [isFavorite]="true"
+                  (favoriteToggle)="onFavoriteToggle($event)"
+                  (addToCart)="addToCart($event.toString())"
+                  (cardClick)="logCardClick($event)"
+                />
+              }
+            </div>
 
-          <!-- paginator -->
-          <div class="flex justify-center mt-20">
-            <lib-paginator
+            <!-- Paginator -->
+            <div class="flex justify-center mt-10 sm:mt-14 lg:mt-20 overflow-x-auto py-2">
+              <lib-paginator
                 [pagination]="paginator()"
                 (pageChange)="onPageChange($event)"
-            ></lib-paginator>
-          </div>
-        }
-      </div>
-    } @else {
-      <p class=" text-center text-2xl w-full">{{'common.messages.no products found' | translate}}</p>
-    }
-
+              ></lib-paginator>
+            </div>
+          }
+        </div>
+      } @else {
+        <!-- Empty State -->
+        <div class="flex flex-col items-center justify-center min-h-75 text-center p-8 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800">
+          <i class="pi pi-search text-3xl text-zinc-400 mb-3"></i>
+          <p class="text-zinc-600 dark:text-zinc-300 text-lg sm:text-xl font-medium">
+            {{ 'common.messages.no products found' | translate }}
+          </p>
+        </div>
+      }
+    </main>
 
   </div>
 </div>

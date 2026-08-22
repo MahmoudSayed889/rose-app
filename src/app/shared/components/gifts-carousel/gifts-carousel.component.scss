@@ -8,102 +8,96 @@
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
+/* ── PrimeNG Carousel Heights Enforce ──────────────── */
 ::ng-deep .p-carousel {
   height: 100%;
   position: relative;
+
+  .p-carousel-content-container,
+  .p-carousel-content,
+  .p-carousel-items-container,
+  .p-carousel-item-list,
+  .p-carousel-item {
+    height: 100%;
+  }
+
+  .p-carousel-viewport,
+  .p-carousel-items-content {
+    height: 100% !important;
+  }
 }
 
-::ng-deep .p-carousel-content-container {
-  height: 100%;
-}
-
-::ng-deep .p-carousel-content {
-  height: 100%;
-}
-
-::ng-deep .p-carousel-viewport {
-  height: 100% !important;
-}
-
-::ng-deep .p-carousel-items-content {
-  height: 100% !important;
-}
-
-::ng-deep .p-carousel-items-container {
-  height: 100%;
-}
-
-::ng-deep .p-carousel-item-list {
-  height: 100%;
-}
-
-::ng-deep .p-carousel-item {
-  height: 100%;
-}
-
+/* ── Controls Positioning & Responsive Layout ──────── */
 .carousel-controls {
   position: absolute;
-  top: 0;
-  right: 1rem;
-  height: 100%;
+  z-index: 10;
   display: flex;
+  transition: all 0.3s ease;
+  pointer-events: none; // Allows clicking on the image behind except on buttons
+
+  // Desktop default: Vertical at the side
+  top: 0;
+  right: 1.25rem;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-  padding: 2rem 1rem;
-  transition: all 0.3s ease;
+  padding: 1.5rem 0.5rem;
+
+  &.rtl,
+  &:host-context([dir="rtl"]) & {
+    right: auto;
+    left: 1.25rem;
+    align-items: center;
+  }
 }
 
-:host-context([dir="rtl"]) .carousel-controls {
-  right: auto;
-  left: 1rem;
-}
-
-.carousel-controls.rtl {
-  right: auto;
-  left: 1rem;
-  align-items: flex-start;
-}
-
+/* ── Dots ────────────────────────────────────────── */
 .carousel-dots {
   display: flex;
   flex-direction: row;
   gap: 0.4rem;
   align-items: center;
-  order: 1;
+  pointer-events: auto;
 }
 
 .carousel-dot {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 9999px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.7);
   border: none;
   cursor: pointer;
   padding: 0;
   transition: all 0.3s ease;
+
+  &:hover {
+    background: #ffffff;
+  }
+
+  &.active {
+    width: 1.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: #a6252a;
+  }
 }
 
-.carousel-dot.active {
-  width: 1.5rem;
-  height: 0.5rem;
-  border-radius: 9999px;
-  background: #a6252a;
-}
-
+/* ── Arrows ──────────────────────────────────────── */
 .carousel-arrows {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  order: 2;
+  pointer-events: auto;
 }
 
 .carousel-arrow {
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 9999px;
   background: #ffffff;
   border: none;
@@ -112,10 +106,52 @@
   align-items: center;
   justify-content: center;
   color: #a6252a;
-  font-size: 0.75rem;
-  transition: background 0.2s ease;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    background: #fbeaea;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
-.carousel-arrow:hover {
-  background: #fbeaea;
+/* ── Responsive: Mobile & Small Tablet (Below 768px) ── */
+@media (max-width: 768px) {
+  .carousel-controls {
+    top: auto;
+    bottom: 0.75rem;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+
+    &.rtl,
+    &:host-context([dir="rtl"]) & {
+      left: 0.75rem !important;
+      right: 0.75rem !important;
+    }
+  }
+
+  .carousel-arrow {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+
+  .carousel-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+
+    &.active {
+      width: 1.25rem;
+    }
+  }
 }

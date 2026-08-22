@@ -1,10 +1,20 @@
-<div class="container m-auto my-10 mb-40 px-7 lg:px-0">
-  <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_460px] gap-10 xl:gap-12">
-    <div>
-        <router-outlet></router-outlet>
+<div class="container mx-auto my-6 md:my-10 mb-24 md:mb-32 px-4 sm:px-6 lg:px-8">
+  <div
+    class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_440px] gap-6 lg:gap-8 xl:gap-12 items-start"
+  >
+    <!-- Main Content Area -->
+    <div class="w-full min-w-0">
+      <router-outlet></router-outlet>
     </div>
 
-    <app-cart-summary></app-cart-summary>
+    <!-- Sticky Cart Summary on Large Screens -->
+    <aside class="w-full lg:sticky lg:top-24">
+      <app-cart-summary></app-cart-summary>
+    </aside>
   </div>
-  <app-products-you-may-like></app-products-you-may-like>
+
+  <!-- Related Products Section -->
+  <section class="mt-12 md:mt-20">
+    <app-products-you-may-like></app-products-you-may-like>
+  </section>
 </div>

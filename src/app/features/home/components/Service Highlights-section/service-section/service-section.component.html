@@ -1,11 +1,13 @@
-<div class="container mx-auto my-20 px-3 lg:px-0">
+<div class="container mx-auto my-10 md:my-16 lg:my-20 px-4 sm:px-6 lg:px-8">
   <div
-    class="flex flex-row justify-around gap-4 h-[20vh] items-center bg-[#FBEAEA] dark:bg-[#3F3F46] rounded-xl"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 sm:p-8 items-center bg-[#FBEAEA] dark:bg-[#3F3F46] rounded-xl min-h-35"
   >
     <app-icon-label
       icon="truck"
       [title]="isDirRtl() ? 'توصيل مجانا' : 'Free Delivery'"
-      [subTitle]="isDirRtl() ? 'للطلبات التي تزيد قيمتها عن 1200 جنيه مصري' : 'For orders above 1,200 EGP'"
+      [subTitle]="
+        isDirRtl() ? 'للطلبات التي تزيد قيمتها عن 1200 جنيه مصري' : 'For orders above 1,200 EGP'
+      "
       iconType="lucide"
     ></app-icon-label>
 
@@ -15,15 +17,17 @@
       [subTitle]="isDirRtl() ? 'استرداد الأموال خلال 30 يومًا' : 'Refunds within 30 days'"
       iconType="lucide"
     ></app-icon-label>
+
     <app-icon-label
       icon="shield-check"
       [title]="isDirRtl() ? 'الدفع الآمن' : 'Safe Payment'"
       [subTitle]="isDirRtl() ? 'دفع آمن بنسبة 100%' : '100% Secure Payment'"
       iconType="lucide"
     ></app-icon-label>
+
     <app-icon-label
       icon="headset"
-      [title]="isDirRtl() ? 'التسليم مجانا' : 'Free Delivery'"
+      [title]="isDirRtl() ? 'دعم متواصل' : '24/7 Support'"
       [subTitle]="isDirRtl() ? 'تواصل معنا في أي وقت' : 'Contact us at any time'"
       iconType="lucide"
     ></app-icon-label>

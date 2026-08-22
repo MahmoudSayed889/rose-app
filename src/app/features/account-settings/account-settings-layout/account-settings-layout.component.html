@@ -1,40 +1,48 @@
-<section class="max-w-7xl mx-auto my-10">
-  <h1 class="text-5xl font-bold text-zinc-800 dark:text-zinc-100 mb-9">
+<section class="max-w-7xl mx-auto my-6 sm:my-10 px-4 sm:px-6 lg:px-8">
+  <!-- Page Title -->
+  <h1
+    class="text-2xl sm:text-3xl lg:text-4xl font-bold text-zinc-800 dark:text-zinc-100 mb-6 sm:mb-8"
+  >
     {{ 'account-settings.title' | translate }}
   </h1>
-  <div class="flex gap-9 min-h-180">
-    <div
-      class="max-w-75 w-full flex flex-col justify-between bg-zinc-50 dark:bg-[#121212] border border-zinc-100 p-4 rounded-2xl"
+
+  <div class="flex flex-col md:flex-row gap-6 lg:gap-9 min-h-180">
+    <!-- Sidebar / Navigation Tabs -->
+    <aside
+      class="w-full md:w-64 lg:w-72 shrink-0 flex flex-col justify-between gap-4 bg-zinc-50 dark:bg-[#121212] border border-zinc-100 p-3 sm:p-4 rounded-2xl"
     >
-      <div class="space-y-2.5">
-        <div>
+      <!-- Navigation Links -->
+      <div class="flex flex-row md:flex-col gap-2 overflow-x-auto no-scrollbar md:overflow-visible">
+        <div class="flex-1 md:flex-initial min-w-35 md:min-w-0">
           <lib-button
             routerLink="profile"
             [isActive]="isActive('profile')"
-            activeStyle="bg-zinc-800 text-zinc-50"
+            activeStyle="bg-zinc-800 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 shadow-sm"
             [iconLucide]="{
               name: icons.UserPen,
               size: '24px',
             }"
             [text]="'account-settings.profile.title' | translate"
-            styleClass="flex-row-reverse  w-full py-3 px-4 rounded-[8px] font-medium justify-end"
+            styleClass="flex-row-reverse w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] font-medium justify-center md:justify-end text-xs sm:text-sm"
           ></lib-button>
         </div>
-        <div>
+        <div class="flex-1 md:flex-initial min-w-35 md:min-w-0">
           <lib-button
             routerLink="change-password"
             [isActive]="isActive('change-password')"
-            activeStyle="bg-zinc-800 text-zinc-50"
+            activeStyle="bg-zinc-800 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 shadow-sm"
             [iconLucide]="{
               name: icons.Lock,
               size: '24px',
             }"
             [text]="'account-settings.change_password.title' | translate"
-            styleClass="flex-row-reverse  w-full py-3 px-4 rounded-[8px] font-medium justify-end"
+            styleClass="flex-row-reverse w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] font-medium justify-center md:justify-end text-xs sm:text-sm"
           ></lib-button>
         </div>
       </div>
-      <div>
+
+      <!-- Logout Button -->
+      <div class="pt-2 border-t border-zinc-200/60 dark:border-zinc-800 md:border-t-0 md:pt-0">
         <lib-button
           (onClick)="_authService.logout()"
           [text]="'auth.logout' | translate"
@@ -42,10 +50,12 @@
             name: icons.LogOut,
             size: '20px',
           }"
-          styleClass="flex-row-reverse bg-zinc-100 text-[#CD2E33] w-full py-3 px-4 rounded-[8px] font-medium justify-end"
+          styleClass="flex-row-reverse bg-zinc-100 text-[#CD2E33] w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] font-medium justify-center md:justify-end"
         ></lib-button>
       </div>
-    </div>
+    </aside>
+
+    <!-- Main Content Area -->
     <div class="max-h-fit grow">
       <router-outlet></router-outlet>
     </div>
