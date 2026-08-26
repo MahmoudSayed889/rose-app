@@ -4,27 +4,15 @@ import {
   inject,
   Injector,
   Input,
-  input,
-  model,
-  output,
   signal,
   WritableSignal,
 } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
-import { icons } from 'lucide-angular';
-
-export interface ICountry {
-  name: string;
-  shortName: string;
-  code: string;
-  flag: string;
-  placeHolder: string;
-}
+import { ICountry } from './models/country-interface';
 
 @Component({
   selector: 'lib-phone-input',
-  imports: [TranslatePipe, ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './phone-input.component.html',
   styleUrl: './phone-input.component.scss',
   host: {
@@ -96,7 +84,6 @@ export class PhoneInputComponent {
   }
 
   @Input() label = '';
-  @Input() placeholder = '';
   @Input() inputId!: string;
   @Input() styleClass = '';
   @Input() valid: boolean = false;
@@ -118,24 +105,6 @@ export class PhoneInputComponent {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
-  }
-
-  get errorMessage(): string | null {
-    const ctrl = this.ngControl?.control;
-    if (!ctrl || !ctrl.invalid || !ctrl.touched) return null;
-
-    const firstErrorKey = Object.keys(ctrl.errors ?? {})[0];
-    if (!firstErrorKey) return null;
-
-    if (this.customErrorMessages && this.customErrorMessages[firstErrorKey]) {
-      return this.customErrorMessages[firstErrorKey];
-    }
-
-    if (firstErrorKey === 'required') return 'common.validation.required';
-    if (firstErrorKey === 'email') return 'common.validation.email';
-    if (firstErrorKey === 'minlength') return 'common.validation.minlength';
-
-    return `common.validation.${firstErrorKey}`;
   }
 
   private onChange: (value: string) => void = () => {};

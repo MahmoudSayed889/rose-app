@@ -1,11 +1,11 @@
-<form class="space-y-4">
+<form class="space-y-4" [formGroup]="profileForm" (submit)="saveChanges()" (input)="prepareData()">
   <!-- Profile Picture -->
   <div class="flex items-center gap-4">
     <div class="w-30 h-30 relative">
       <img
         class="w-full h-full object-cover rounded-full"
-        src="temp-images/profile-picture.png"
-        alt=""
+        [src]="uploadedImageUrl()"
+        [alt]="profileData()?.firstName + ' ' + profileData()?.lastName + ' profile picture'"
       />
       <label
         for="profile-image"
@@ -32,14 +32,10 @@
     </div>
     <div>
       <p class="mb-4 text-xl font-semibold text-zinc-800 dark:text-zinc-100">
-        {{ isDirRtl() ? 'تحديث الصورة' : 'Upload Photo' }}
+        {{ 'account-settings.profile.upload-photo' | translate }}
       </p>
       <p class="mb-4 text-zinc-500 dark:text-zinc-400">
-        {{
-          isDirRtl()
-            ? 'يمكنك تحميل صورة بصيغة .jpg أو .png أو .gif بحجم أقصى يبلغ 5 ميجابايت.'
-            : 'You can upload a .jpg, .png, or .gif photo with max size of 5MB.'
-        }}
+        {{ 'account-settings.profile.upload-desc' | translate }}
       </p>
     </div>
   </div>
@@ -47,40 +43,98 @@
   <div class="flex flex-col gap-2.5">
     <div class="flex items-center justify-stretch gap-5">
       <div class="w-full">
-        <lib-input [label]="'auth.firstName' | translate" type="text"></lib-input>
+        <lib-input
+          placeholder="First Name"
+          formControlName="firstName"
+          [label]="'auth.firstName' | translate"
+          type="text"
+          id="p-firstName"
+        ></lib-input>
       </div>
       <div class="w-full">
-        <lib-input [label]="'auth.lastName' | translate" type="text"></lib-input>
+        <lib-input
+          placeholder="Last Name"
+          formControlName="lastName"
+          [label]="'auth.lastName' | translate"
+          type="text"
+          id="p-lastName"
+        ></lib-input>
       </div>
     </div>
-    <div>
-      <lib-input [label]="'auth.email' | translate" type="email" [isReadonly]="true"></lib-input>
+    <div class="relative">
+      @if (!openEmailForChange()) {
+        <lib-button
+          (onClick)="onEditEmailBtnClick()"
+          styleClass="absolute end-0 font-semibold"
+          [text]="'common.actions.edit' | translate"
+        ></lib-button>
+      } @else {
+        <lib-button
+          (onClick)="onRequestCodeBtnClick()"
+          [disabled]="!isEmailControlValid()"
+          styleClass="absolute end-0 font-semibold"
+          [text]="'account-settings.profile.request-code' | translate"
+        ></lib-button>
+      }
+      <lib-input
+        (onInput)="onEmailControlInput()"
+        placeholder="Email"
+        formControlName="email"
+        [label]="'auth.email' | translate"
+        type="email"
+        id="p-email"
+      ></lib-input>
     </div>
+    @if (openCodeInput()) {
+      <div class="relative">
+        <lib-button
+          (onClick)="onConfrimEmailBtnClick()"
+          [disabled]="codeControl.invalid"
+          styleClass="absolute end-0 font-semibold"
+          [text]="'account-settings.profile.confirm' | translate"
+        ></lib-button>
+        <lib-input
+          placeholder="Enter the code"
+          label="Code"
+          type="number"
+          id="p-code"
+          [formControl]="codeControl"
+        ></lib-input>
+      </div>
+    }
     <div class="">
-      <lib-phone-input label="Phone"></lib-phone-input>
+      <lib-phone-input
+        formControlName="phone"
+        id="p-phone"
+        label="Phone"
+        formControlName="phone"
+      ></lib-phone-input>
+      @if (profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched) {
+        <p class="text-[#d32f2f] text-[13px] mt-1.5">
+          phone must be at least 2 numbers and shouldn't start with 0
+        </p>
+      }
     </div>
     <div>
       <label for="register-gender" class="block mb-1.5 dark:text-white! capitalize">
         {{ 'auth.gender' | translate }}
       </label>
-      <select
-        disabled
-        id="register-gender"
-        class="bg-zinc-100 dark:bg-zinc-700 rounded-[10px] p-4 w-full"
+      <lib-input
+        placeholder="Gender"
+        id="p-gender"
         formControlName="gender"
-      >
-        <option value="">{{ 'auth.register.selectGender' | translate }}</option>
-        @for (option of genderOptions; track option.value) {
-          <option [value]="option.value">{{ option.label | translate }}</option>
-        }
-      </select>
+        styleClass="bg-zinc-100 dark:bg-zink-700"
+      ></lib-input>
     </div>
     <div class="flex justify-between pt-15">
       <lib-button
+        (onClick)="onDeleteAccountBtnClick()"
         [text]="'common.actions.delete-my-account' | translate"
         styleClass="text-[#CD2E33] dark:text-[#EF4444]"
       ></lib-button>
       <lib-button
+        [disabled]="!isFormValid()"
+        type="submit"
         [text]="'common.actions.save-changes' | translate"
         styleClass="bg-primary text-white py-3.5 px-10 rounded-[10px] dark:text-zinc-900 font-medium"
       ></lib-button>

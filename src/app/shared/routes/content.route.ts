@@ -41,8 +41,8 @@ export const ContentRoutes: Routes = [
     },
     {
         path: 'account-settings',
-        loadComponent: () => import('../../features/account-settings/account-settings-layout/account-settings-layout.component')
-            .then((c) => c.AccountSettingsLayoutComponent),
+        loadChildren: () => import('../../features/account-settings/account-settings.route')
+            .then((c) => c.AccountSettingsRoutes),
         canActivate: [authGuard]
     }
 ];

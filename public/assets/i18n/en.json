@@ -203,13 +203,20 @@
       "You’ll be securely redirected to Stripe to complete your payment": "You’ll be securely redirected to Stripe to complete your payment."
     }
   },
-  "profile": {
-    "title": "",
+  "account-settings": {
+    "title": "Account Settings",
     "change_password": {
-      "change password": "change password",
+      "title": "Change Password",
       "current password": "current password",
       "new password": "new password",
       "confirm new password": "confirm new password"
+    },
+    "profile": {
+      "title": "Profile",
+      "upload-photo": "Upload Photo",
+      "upload-desc": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "request-code": "Request Code",
+      "confirm":"Confirm"
     }
   },
   "productDetails": {
