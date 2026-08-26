@@ -4,7 +4,6 @@ import { map, Observable } from 'rxjs';
 import { AUTH_API_URL } from 'auth-library';
 import { CategoriesList, Category } from '../components/category-card/category.interface';
 import { HelperService } from './helper.service';
-import { CategoriesList } from '../../features/categories/models/category';
 
 @Service()
 export class CategoriesService {
