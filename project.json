@@ -1,0 +1,134 @@
+{
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "name": "rose-app",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss",
+      "type": "component",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:directive": {
+      "type": "directive",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:service": {
+      "type": "service",
+      "addTypeToClassName": true
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  },
+  "sourceRoot": "src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-architects/native-federation:build",
+      "defaultConfiguration": "production",
+      "options": {
+        "cacheExternalArtifacts": true,
+        "tsConfig": "tsconfig.federation.json"
+      },
+      "configurations": {
+        "production": {
+          "target": "rose-app:esbuild:production"
+        },
+        "development": {
+          "target": "rose-app:esbuild:development",
+          "dev": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "rose-app:serve-original:development",
+        "tsConfig": "tsconfig.federation.json",
+        "rebuildDelay": 500,
+        "cacheExternalArtifacts": true,
+        "dev": true,
+        "devServer": true,
+        "port": 0
+      }
+    },
+    "test": {
+      "executor": "@angular/build:unit-test"
+    },
+    "esbuild": {
+      "executor": "@angular/build:application",
+      "defaultConfiguration": "production",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "browser": "src/main.ts",
+        "tsConfig": "tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "public"
+          }
+        ],
+        "styles": [
+          "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+          "src/styles.css",
+          "./node_modules/ngx-spinner/animations/square-jelly-box.css"
+        ],
+        "outputPath": "dist/rose-app",
+        "polyfills": [
+          "es-module-shims"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kB",
+              "maximumError": "1MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kB",
+              "maximumError": "8kB"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      }
+    },
+    "serve-original": {
+      "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4200
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "rose-app:esbuild:production"
+        },
+        "development": {
+          "buildTarget": "rose-app:esbuild:development"
+        }
+      }
+    }
+  }
+}

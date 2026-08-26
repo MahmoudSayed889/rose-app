@@ -1,6 +1,6 @@
 import { initFederation } from '@angular-architects/native-federation';
 
-initFederation('federation.manifest.json', {
+initFederation({}, {
   hostRemoteEntry: { url: "./remoteEntry.json" }
 })
   .catch(err => console.error(err))

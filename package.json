@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "nx serve",
+    "build": "nx build",
+    "watch": "nx build --watch --configuration development",
+    "test": "nx test",
+    "serve:shell": "nx serve rose-app",
+    "serve:dashboard": "nx serve dashboard",
+    "serve:all": "nx run-many --target=serve --projects=rose-app,dashboard --parallel"
   },
   "private": true,
   "engines": {
@@ -26,6 +29,7 @@
     "@ngx-translate/core": "^18.0.0",
     "@ngx-translate/http-loader": "^18.0.0",
     "@primeuix/themes": "^2.0.3",
+    "es-module-shims": "^2.8.0",
     "lucide-angular": "^1.0.0",
     "ngx-cookie-service": "^22.0.0",
     "ngx-spinner": "^21.1.0",
@@ -36,16 +40,35 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-architects/native-federation": "^22.1.1",
+    "@angular-devkit/core": "^22.0.0",
+    "@angular-devkit/schematics": "^22.0.0",
     "@angular/build": "^22.0.0",
     "@angular/cli": "^22.0.0",
     "@angular/compiler-cli": "^22.0.0",
+    "@eslint/js": "^9.8.0",
+    "@nx/angular": "23.1.1",
+    "@nx/eslint": "23.1.1",
+    "@nx/eslint-plugin": "23.1.1",
+    "@nx/js": "23.1.1",
+    "@nx/web": "23.1.1",
+    "@nx/workspace": "23.1.1",
+    "@schematics/angular": "^22.0.0",
+    "@softarc/native-federation-orchestrator": "^4.6.0",
+    "@swc/helpers": "~0.5.18",
     "@tailwindcss/postcss": "^4.1.12",
+    "@typescript-eslint/utils": "^8.58.0",
+    "angular-eslint": "^22.0.0",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^10.0.0",
     "jsdom": "^28.0.0",
     "ng-packagr": "^22.0.0",
+    "nx": "23.1.1",
     "postcss": "^8.5.3",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.1.12",
     "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0",
     "vitest": "^4.0.8"
   }
 }
