@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { AccountSettingsEndPoints } from '../constants/AccountSettingsEndPoints';
 import { Observable } from 'rxjs';
+import { ChangePasswordReq, ChangePasswordRes } from '../models/change-password';
 
 @Service()
 export class ChangePasswordService {

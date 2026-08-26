@@ -1,10 +1,10 @@
-type ChangePasswordReq = {
+export interface ChangePasswordReq {
   currentPassword: string,
   newPassword: string,
   confirmPassword: string
 }
 
-type ChangePasswordRes = {
+export interface ChangePasswordRes {
   code: number,
   message: string,
   status: boolean
