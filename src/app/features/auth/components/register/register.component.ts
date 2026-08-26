@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputComponent, ButtonComponent } from 'reusable-components';
 import { SpLineComponent } from '../../../../shared/components/sp-line/sp-line.component';
 import { AppComponentBase } from '../../../../shared/app-component-base';
+import { VALIDATION_PATTERNS } from '../../../../shared/validators/patterns';
 
 type RegisterStep = 1 | 2 | 3;
 
@@ -61,14 +62,14 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     });
 
     this.otpForm = this._fb.group({
-      code: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
+      code: ['', [Validators.required, Validators.pattern(VALIDATION_PATTERNS.code)]],
     });
 
     this.registerForm = this._fb.group(
       {
         email: [{ value: '', disabled: true }, Validators.required],
         username: ['', Validators.required],
-        password: ['', Validators.required],
+        password: ['', [Validators.required, Validators.pattern(VALIDATION_PATTERNS.password)]],
         confirmPassword: ['', Validators.required],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],

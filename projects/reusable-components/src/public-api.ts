@@ -12,3 +12,4 @@ export * from './lib/theme-switcher/services/theme-switcher.service';
 export * from './lib/product-card/product-card.component';
 export * from './lib/paginator/paginator.component';
 export * from './lib/title/title.component';
+export * from './lib/phone-input/phone-input.component';

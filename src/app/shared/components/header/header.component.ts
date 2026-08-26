@@ -9,7 +9,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
 import { LanguageSwitcherComponent, ThemeSwitcherComponent, ButtonComponent } from 'reusable-components';
 import { LucideAngularModule, icons } from 'lucide-angular';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { NavbarItem } from './models/navbar-item';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
@@ -53,6 +53,7 @@ export class HeaderComponent extends AppComponentBase {
   private readonly _cartFacadeService = inject(CartFacadeService);
   private readonly _wishlistFacadeService = inject(WishlistFacadeService);
   private readonly _translateService = inject(TranslateService);
+  private readonly _router = inject(Router);
 
 
   user = signal<User | null>(null)
@@ -124,7 +125,13 @@ export class HeaderComponent extends AppComponentBase {
     this.userMenuItems = [
       { label: `${this.user()?.firstName} ${this.user()?.lastName}`, linkClass: 'text-primary!' },
       { separator: true },
-      { label: this._translateService.instant('header.userMenuItems.Account'), icon: 'pi pi-user' },
+      {
+        label: this._translateService.instant('header.userMenuItems.Account'),
+        icon: 'pi pi-user',
+        command: () => {
+          this._router.navigate(['/account-settings']);
+        }
+      },
       { label: this._translateService.instant('header.userMenuItems.Addresses'), icon: 'pi pi-map-marker' },
       { label: this._translateService.instant('header.userMenuItems.Orders'), icon: 'pi pi-shopping-bag' },
       { label: this._translateService.instant('header.userMenuItems.Dashboard'), icon: 'pi pi-cog' },
@@ -167,6 +174,6 @@ export class HeaderComponent extends AppComponentBase {
   onBlur() {
     setTimeout(() => {
       this.visibleSearchDialog.update(val => val = false)
-    }, 500)
+    }, 100)
   }
 }

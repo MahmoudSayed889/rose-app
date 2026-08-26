@@ -39,4 +39,10 @@ export const ContentRoutes: Routes = [
         loadComponent: () => import('../../features/orders/orders.component').then((C) => C.OrdersComponent),
         canActivate: [authGuard]
     },
+    {
+        path: 'account-settings',
+        loadComponent: () => import('../../features/account-settings/account-settings-layout/account-settings-layout.component')
+            .then((c) => c.AccountSettingsLayoutComponent),
+        canActivate: [authGuard]
+    }
 ];

@@ -1,42 +1,111 @@
-import { Component, forwardRef, inject, Injector, Input, OnInit, signal } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { LucideAngularModule, icons } from 'lucide-angular';
+import {
+  Component,
+  forwardRef,
+  inject,
+  Injector,
+  Input,
+  input,
+  model,
+  output,
+  signal,
+  WritableSignal,
+} from '@angular/core';
+import { FormsModule, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { icons } from 'lucide-angular';
+
+export interface ICountry {
+  name: string;
+  shortName: string;
+  code: string;
+  flag: string;
+  placeHolder: string;
+}
 
 @Component({
-  selector: 'lib-input',
-  imports: [InputTextModule, FormsModule, LucideAngularModule, TranslatePipe],
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  selector: 'lib-phone-input',
+  imports: [TranslatePipe, ReactiveFormsModule, FormsModule],
+  templateUrl: './phone-input.component.html',
+  styleUrl: './phone-input.component.scss',
   host: {
     class: 'w-full',
   },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => PhoneInputComponent),
       multi: true,
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class PhoneInputComponent {
   private injector = inject(Injector);
+
+  selectedCountry: ICountry = {
+    name: 'Egypt',
+    shortName: 'EG',
+    code: '+20',
+    flag: 'assets/imgs/Flags/flag-egypt.png',
+    placeHolder: '1012345678',
+  };
+  countries: ICountry[] = [
+    {
+      name: 'Palestine',
+      shortName: 'PS',
+      code: '+970',
+      flag: 'assets/imgs/Flags/flag-palestine.png',
+      placeHolder: '59 900 0000',
+    },
+    {
+      name: 'Syria',
+      shortName: 'SY',
+      code: '+963',
+      flag: 'assets/imgs/Flags/flag-Syria.png',
+      placeHolder: '094 095 096',
+    },
+    {
+      name: 'Egypt',
+      shortName: 'EG',
+      code: '+20',
+      flag: 'assets/imgs/Flags/flag-egypt.png',
+      placeHolder: '1012345678',
+    },
+    {
+      name: 'Saudi',
+      shortName: 'SA',
+      code: '+966',
+      flag: 'assets/imgs/Flags/flag-Saudi.png',
+      placeHolder: '11 400 0000',
+    },
+  ];
+
+  getCountry(countryName: string): ICountry | undefined {
+    return this.countries.find((c) => c.name == countryName);
+  }
+  selectCountry(countryName: string) {
+    const country: ICountry | undefined = this.getCountry(countryName);
+    if (country) {
+      this.selectedCountry = country;
+    }
+    this.isListOpen.set(false);
+  }
+
+  isListOpen: WritableSignal<boolean> = signal(false);
+  toggleList(): void {
+    this.isListOpen.set(!this.isListOpen());
+  }
 
   @Input() label = '';
   @Input() placeholder = '';
   @Input() inputId!: string;
   @Input() styleClass = '';
-  @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
   @Input() valid: boolean = false;
   @Input() customErrorMessages: Record<string, string> = {};
 
   @Input() set disabled(value: boolean) {
     this.isDisabled.set(value);
   }
-  @Input() isReadonly: boolean = false;
 
-  icons = icons;
   value = signal('');
   isDisabled = signal(false);
   isPasswordVisible = signal(false);
@@ -51,25 +120,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  get resolvedType(): string {
-    if (this.type !== 'password') return this.type;
-    return this.isPasswordVisible() ? 'text' : 'password';
-  }
-
-  // get errorMessage(): string | null {
-  //   const ctrl = this.ngControl?.control;
-  //   if (!ctrl || !ctrl.invalid || !ctrl.touched) return null;
-
-  //   if (ctrl.errors?.['required']) return 'This field is required';
-  //   if (ctrl.errors?.['email']) return 'Please enter a valid email.';
-  //   if (ctrl.errors?.['minlength']) {
-  //     return `Minimum ${ctrl.errors['minlength'].requiredLength} characters.`;
-  //   }
-
-  //   const firstKey = Object.keys(ctrl.errors ?? {})[0];
-  //   return firstKey ?? 'Invalid value.';
-  // }
-
   get errorMessage(): string | null {
     const ctrl = this.ngControl?.control;
     if (!ctrl || !ctrl.invalid || !ctrl.touched) return null;
@@ -77,17 +127,14 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     const firstErrorKey = Object.keys(ctrl.errors ?? {})[0];
     if (!firstErrorKey) return null;
 
-    // 2. لو الأب باعت Translation Key مخصص للخطأ ده، نرجعه فوراً
     if (this.customErrorMessages && this.customErrorMessages[firstErrorKey]) {
       return this.customErrorMessages[firstErrorKey];
     }
 
-    // 3. لو مفيش رسالة مخصصة، نرجع Translation Keys الافتراضية
     if (firstErrorKey === 'required') return 'common.validation.required';
     if (firstErrorKey === 'email') return 'common.validation.email';
     if (firstErrorKey === 'minlength') return 'common.validation.minlength';
 
-    // 4. Fallback لأي خطأ غير متوقع
     return `common.validation.${firstErrorKey}`;
   }
 
@@ -118,9 +165,5 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   onBlur(): void {
     this.onTouched();
-  }
-
-  togglePasswordVisibility(): void {
-    this.isPasswordVisible.update((v) => !v);
   }
 }
