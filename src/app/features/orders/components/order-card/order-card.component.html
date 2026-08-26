@@ -1,0 +1,108 @@
+<ng-template #itemTpl let-item>
+  <div class="item-card">
+    <div class="item-image">
+      <img [src]="item.product.cover" [alt]="item.product.title" />
+    </div>
+    <div class="item-info">
+      <p class="item-name">{{ item.product.title }}</p>
+      <div class="item-rating">
+        <i class="pi pi-star-fill"></i>
+        <span class="item-rating-value">{{ 'orders.rating' | translate }}: {{ item.product.rating }}/5</span>
+        <span class="item-ratings-count">({{ item.product.ratings }} {{ 'orders.ratings' | translate }})</span>
+      </div>
+      <div class="item-footer">
+        <span class="item-qty">(x{{ item.quantity }})</span>
+        <span class="item-price">{{ item.price | number: '1.0-2' }} {{ 'orders.egp' | translate }}</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div class="order-card">
+
+  <!-- Header -->
+  <div class="order-header">
+    <span class="order-number">{{ 'orders.orderNumber' | translate }}{{ order().id }}</span>
+    <span class="order-date">{{ 'orders.createdIn' | translate }} {{ order().createdAt | date: "d MMMM, y 'at' hh:mma" }}</span>
+  </div>
+
+  <!-- Body -->
+  <div class="order-body">
+
+    <!-- Total + Order status -->
+    <div class="order-row order-row-top">
+      <div class="total-price">
+        <span class="label">{{ 'orders.totalPrice' | translate }}</span>
+        <span class="value">{{ order().total | number: '1.0-2' }} {{ 'orders.egp' | translate }}</span>
+        <span class="badge" [ngClass]="paymentStatusBadgeClass()">
+          <i class="pi pi-check"></i>
+          {{ paymentStatusLabel() }}
+        </span>
+      </div>
+
+      <div class="order-status">
+        <span class="label">{{ 'orders.status' | translate }}</span>
+        <span class="badge" [ngClass]="statusConfig().badgeClass">{{ statusConfig().label }}</span>
+      </div>
+    </div>
+
+    <!-- Payment method -->
+    <div class="order-row info-row">
+      <span class="label">{{ 'orders.paymentMethod' | translate }}</span>
+      <span class="info-value">
+        <i class="pi" [ngClass]="paymentMethodIcon()"></i>
+        {{ paymentMethodLabel() }}
+      </span>
+    </div>
+
+    <!-- Delivery status -->
+    <div class="order-row info-row">
+      <span class="label">{{ 'orders.deliveryStatus' | translate }}</span>
+      <span class="info-value" [ngClass]="deliveryConfig().colorClass">
+        <i class="pi" [ngClass]="deliveryConfig().icon"></i>
+        {{ deliveryConfig().label }}
+      </span>
+    </div>
+
+    <!-- Order items -->
+    <p class="order-items-label">{{ 'orders.orderItems' | translate }}</p>
+
+    <div class="items-grid">
+      @for (item of previewItems(); track item.id) {
+        <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
+      }
+    </div>
+
+    @if (hasExtraItems()) {
+      @if (!expanded()) {
+        <div class="items-peek">
+          <div class="items-grid peek-grid" aria-hidden="true">
+            @for (item of peekItems(); track item.id) {
+              <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
+            }
+          </div>
+          <div class="peek-fade"></div>
+          <button type="button" class="toggle-button-wrapper" (click)="toggleExpanded()">
+            <div class="toggle-btn">
+              {{ 'orders.showAll' | translate }}
+            </div>
+            <i class="pi pi-chevron-down"></i>
+          </button>
+        </div>
+      } @else {
+        <div class="items-grid">
+          @for (item of extraItems(); track item.id) {
+            <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
+          }
+        </div>
+        <button class="toggle-wrapper" (click)="toggleExpanded()">
+          <i class="pi pi-chevron-up"></i>
+          <div type="button" class="toggle-btn">
+            {{ 'orders.showLess' | translate }}
+          </div>
+        </button>
+      }
+    }
+
+  </div>
+</div>

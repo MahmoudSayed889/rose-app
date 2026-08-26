@@ -3,7 +3,7 @@
     'flex justify-center items-center': !filteredProducts().length
 }">
     @if(searchVal() == '') {
-        <h5 class="text-primary font-bold mb-4">{{isDirRtl() ? 'منتجات قد تعجبك:' : 'Products You May Like:'}}</h5>
+        <h5 class="text-primary font-bold mb-4">{{'search.productsYouMayLike' | translate}}</h5>
     }
 
     @for (product of filteredProducts(); track product.id; let isLast = $last) {

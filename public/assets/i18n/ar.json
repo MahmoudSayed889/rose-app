@@ -44,6 +44,9 @@
             }
         }
     },
+    "search": {
+        "productsYouMayLike": "منتجات قد تعجبك:"
+    },
     "header": {
         "userMenuItems": {
             "Account": "الحساب الشخصي",
@@ -151,6 +154,57 @@
         "addToWishlistError": "فشل إضافة المنتج إلى قائمة الأمنيات"
     },
     "cart": {},
+    "orders": {
+        "title": "الطلبات",
+        "orderNumber": "طلب #",
+        "createdIn": "تم الإنشاء في:",
+        "totalPrice": "السعر الإجمالي:",
+        "status": "الحالة:",
+        "paymentMethod": "طريقة الدفع:",
+        "deliveryStatus": "حالة التوصيل:",
+        "orderItems": "عناصر الطلب:",
+        "showAll": "عرض الكل",
+        "showLess": "عرض أقل",
+        "rating": "التقييم",
+        "ratings": "تقييمات",
+        "egp": "ج.م",
+        "noOrders": "ليس لديك أي طلبات حتى الآن",
+        "loadError": "فشل تحميل الطلبات. يرجى المحاولة مرة أخرى.",
+        "statuses": {
+            "PENDING": "قيد الانتظار",
+            "IN_PROGRESS": "قيد التنفيذ",
+            "PROCESSING": "قيد التنفيذ",
+            "SHIPPED": "تم الشحن",
+            "DELIVERED": "تم التوصيل",
+            "COMPLETED": "مكتمل",
+            "CANCELED": "ملغي",
+            "CANCELLED": "ملغي"
+        },
+        "deliveryStatuses": {
+            "PENDING": "قيد الانتظار",
+            "IN_PROGRESS": "قيد الانتظار",
+            "PROCESSING": "قيد الانتظار",
+            "SHIPPED": "تم الشحن",
+            "DELIVERED": "تم التوصيل",
+            "COMPLETED": "تم التوصيل",
+            "CANCELED": "ملغي",
+            "CANCELLED": "ملغي"
+        },
+        "paymentStatuses": {
+            "PAID": "مدفوع",
+            "PENDING": "قيد الانتظار",
+            "UNPAID": "غير مدفوع",
+            "FAILED": "فشل",
+            "REFUNDED": "مسترجع"
+        },
+        "paymentMethods": {
+            "CASH": "نقداً",
+            "CASH_ON_DELIVERY": "نقداً",
+            "CARD": "بطاقة ائتمان",
+            "CREDIT_CARD": "بطاقة ائتمان",
+            "STRIPE": "بطاقة ائتمان"
+        }
+    },
     "checkout": {
         "payment-methods": {
             "Cash on Delivery": "الدفع عند الاستلام",

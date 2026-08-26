@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AUTH_API_URL } from 'auth-library';
-import { Category } from '../components/category-card/category.interface';
+import { CategoriesList, Category } from '../components/category-card/category.interface';
 import { HelperService } from './helper.service';
 import { CategoriesList } from '../../features/categories/models/category';
 

@@ -1,1 +1,41 @@
-<p>orders works!</p>
+<div class="container m-auto my-10 mb-32 px-4 sm:px-7 lg:px-0">
+
+  <h1 class="orders-title">{{ 'orders.title' | translate }}</h1>
+
+  @if (isLoading()) {
+    <div class="orders-skeleton-list">
+      @for (i of [1, 2]; track i) {
+        <div class="order-skeleton">
+          <p-skeleton width="100%" height="52px" borderRadius="12px 12px 0 0" />
+          <div class="order-skeleton-body">
+            <p-skeleton width="45%" height="24px" />
+            <p-skeleton width="30%" height="18px" />
+            <p-skeleton width="30%" height="18px" />
+            <div class="order-skeleton-items">
+              <p-skeleton width="100%" height="90px" borderRadius="10px" />
+              <p-skeleton width="100%" height="90px" borderRadius="10px" />
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (error()) {
+    <div class="error-state">
+      <p class="error-message">{{ error() }}</p>
+      <button type="button" class="retry-btn" (click)="onRetry()">
+        {{ 'common.actions.retry' | translate }}
+      </button>
+    </div>
+  } @else if (orders().length) {
+    <div class="orders-list">
+      @for (order of orders(); track order.id) {
+        <app-order-card [order]="order" />
+      }
+    </div>
+  } @else if (loaded()) {
+    <div class="empty-state">
+      <p class="empty-message">{{ 'orders.noOrders' | translate }}</p>
+    </div>
+  }
+
+</div>
