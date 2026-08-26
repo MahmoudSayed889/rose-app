@@ -1,8 +1,9 @@
-<div class="filters-sidebar border-e border-e-gray-200! dark:border-e-gray-600!">
+<div class="filters-sidebar p-4 sm:p-5 lg:p-0 lg:pe-5 lg:border-e lg:border-e-gray-200 lg:dark:border-e-gray-600 bg-white dark:bg-zinc-900 lg:bg-transparent rounded-2xl lg:rounded-none border border-zinc-100 dark:border-zinc-800 lg:border-t-0 lg:border-s-0 lg:border-b-0 shadow-sm lg:shadow-none">
+  
   <!-- Category Section -->
   <div class="filters-section">
     <div class="filters-section__header">
-      <span class="filters-section__title">Category</span>
+      <span class="filters-section__title text-zinc-900 dark:text-zinc-100">Category</span>
       @if (selectedCategoryIds().length > 0) {
         <button
           class="filters-section__reset"
@@ -27,7 +28,7 @@
   <!-- Occasion Section -->
   <div class="filters-section">
     <div class="filters-section__header">
-      <span class="filters-section__title">Occasion</span>
+      <span class="filters-section__title text-zinc-900 dark:text-zinc-100">Occasion</span>
       @if (selectedOccasionIds().length > 0) {
         <button
           class="filters-section__reset"
@@ -52,7 +53,7 @@
   <!-- Rating Section -->
   <div class="filters-section">
     <div class="filters-section__header">
-      <span class="filters-section__title">Rating</span>
+      <span class="filters-section__title text-zinc-900 dark:text-zinc-100">Rating</span>
       @if (minRating() !== null) {
         <button
           class="filters-section__reset"
@@ -83,7 +84,7 @@
   <!-- Price Section -->
   <div class="filters-section">
     <div class="filters-section__header">
-      <span class="filters-section__title">Price</span>
+      <span class="filters-section__title text-zinc-900 dark:text-zinc-100">Price</span>
       @if (minPrice() !== null || maxPrice() !== null) {
         <button
           class="filters-section__reset"
@@ -100,6 +101,7 @@
         <input
           class="price-input"
           type="number"
+          placeholder="0"
           [value]="minPriceInput()"
           (input)="minPriceInput.set($any($event.target).value)"
           (blur)="onPriceBlur()"
@@ -112,6 +114,7 @@
         <input
           class="price-input"
           type="number"
+          placeholder="5000"
           [value]="maxPriceInput()"
           (input)="maxPriceInput.set($any($event.target).value)"
           (blur)="onPriceBlur()"
@@ -122,9 +125,9 @@
     </div>
   </div>
 
-  <!-- Reset All Button - always at the bottom -->
+  <!-- Reset All Button -->
   <button class="reset-all-btn" (click)="resetAll()">
     <i class="pi pi-refresh"></i>
-    Reset All
+    <span>Reset All</span>
   </button>
 </div>

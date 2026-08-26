@@ -5,14 +5,10 @@ import {
   Injector,
   Input,
   OnInit,
+  output,
   signal,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormsModule,
-  NgControl,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule, icons } from 'lucide-angular';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -22,6 +18,9 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [InputTextModule, FormsModule, LucideAngularModule, TranslatePipe],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
+  host: {
+    class: 'w-full',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -31,7 +30,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   ],
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
-
   private injector = inject(Injector);
 
   @Input() label = '';
@@ -45,11 +43,14 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() set disabled(value: boolean) {
     this.isDisabled.set(value);
   }
+  @Input() isReadonly: boolean = false;
 
   icons = icons;
   value = signal('');
   isDisabled = signal(false);
   isPasswordVisible = signal(false);
+
+  onInput = output<void>();
 
   ngControl: NgControl | null = null;
 
@@ -61,12 +62,10 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-
   get resolvedType(): string {
     if (this.type !== 'password') return this.type;
     return this.isPasswordVisible() ? 'text' : 'password';
   }
-
 
   // get errorMessage(): string | null {
   //   const ctrl = this.ngControl?.control;
@@ -103,8 +102,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     return `common.validation.${firstErrorKey}`;
   }
 
-  private onChange: (value: string) => void = () => { };
-  private onTouched: () => void = () => { };
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
 
   writeValue(val: string | null): void {
     this.value.set(val ?? '');
@@ -122,11 +121,11 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.isDisabled.set(isDisabled);
   }
 
-
-  onInput(event: Event): void {
+  handleInput(event: Event): void {
     const newValue = (event.target as HTMLInputElement).value;
     this.value.set(newValue);
     this.onChange(newValue);
+    this.onInput.emit();
   }
 
   onBlur(): void {
@@ -134,6 +133,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   togglePasswordVisibility(): void {
-    this.isPasswordVisible.update(v => !v);
+    this.isPasswordVisible.update((v) => !v);
   }
 }

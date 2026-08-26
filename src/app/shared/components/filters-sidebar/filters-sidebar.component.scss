@@ -1,16 +1,15 @@
 .filters-sidebar {
-  padding-inline-end: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  width: 100%;
 }
 
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -21,76 +20,76 @@
   animation: fadeSlideIn 0.3s ease forwards;
 }
 
-.filters-section:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.filters-section:nth-child(2) {
-  animation-delay: 0.08s;
-}
-
-.filters-section:nth-child(3) {
-  animation-delay: 0.16s;
-}
-
-.filters-section:nth-child(4) {
-  animation-delay: 0.24s;
-}
+.filters-section:nth-child(1) { animation-delay: 0s; }
+.filters-section:nth-child(2) { animation-delay: 0.05s; }
+.filters-section:nth-child(3) { animation-delay: 0.1s; }
+.filters-section:nth-child(4) { animation-delay: 0.15s; }
 
 .filters-section__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .filters-section__title {
-  font-size: 16px;
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
 .filters-section__reset {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: #dc2626;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .filters-section__list {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  max-height: 280px;
+  max-height: 240px;
   overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.filters-section__list::-webkit-scrollbar {
-  display: none;
 }
 
 .filters-section__occasions-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
-  max-height: 320px;
+  max-height: 260px;
   overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
-.filters-section__occasions-grid::-webkit-scrollbar {
-  display: none;
+/* Styled Scrollbars */
+.filters-section__list,
+.filters-section__occasions-grid {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(161, 161, 170, 0.4) transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(161, 161, 170, 0.4);
+    border-radius: 4px;
+  }
 }
 
 .filters-section__stars {
   display: flex;
   flex-direction: row;
-  gap: 0.25rem;
+  gap: 0.35rem;
   align-items: center;
 }
 
@@ -98,48 +97,48 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  transition: transform 0.1s ease;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  .pi-star-fill {
+    color: #fba707;
+    font-size: 1.35rem;
+  }
+
+  .pi-star {
+    color: #d4d4d8;
+    font-size: 1.35rem;
+  }
 }
 
-.star-btn:hover {
-  transform: scale(1.2);
-}
-
-.star-btn .pi-star-fill,
-.star-btn .pi-star {
-  transition: color 0.15s ease, transform 0.15s ease;
-}
-
-.star-btn .pi-star-fill {
-  color: #fba707;
-  font-size: 1.4rem;
-}
-
-.star-btn .pi-star {
-  color: #d4d4d8;
-  font-size: 1.4rem;
+:host-context(.dark) .star-btn .pi-star {
+  color: #52525b;
 }
 
 .filters-section__price {
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .price-field {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.3rem;
   flex: 1;
+  min-width: 0;
 }
 
 .price-field__label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: #71717a;
 }
@@ -150,78 +149,77 @@
 
 .price-input {
   width: 100%;
-  height: 49px;
+  height: 42px;
   border-radius: 10px;
   border: 1px solid #e4e4e7;
-  padding: 16px;
-  font-size: 0.875rem;
+  padding: 8px 12px;
+  font-size: 0.85rem;
   color: #a6252a;
   background: transparent;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
 
-.price-input::placeholder {
-  color: #a6252a;
-  opacity: 0.5;
-}
+  &::placeholder {
+    color: #a6252a;
+    opacity: 0.4;
+  }
 
-.price-input:focus {
-  border-color: #a6252a;
-  box-shadow: 0 0 0 3px rgba(166, 37, 42, 0.1);
-}
+  &:focus {
+    border-color: #a6252a;
+    box-shadow: 0 0 0 3px rgba(166, 37, 42, 0.1);
+  }
 
-/* Hide number input arrows */
-.price-input::-webkit-outer-spin-button,
-.price-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-.price-input[type='number'] {
-  -moz-appearance: textfield;
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
 }
 
 :host-context(.dark) .price-input {
   color: #ffa3b9;
   border-color: #52525b;
-}
 
-:host-context(.dark) .price-input::placeholder {
-  color: #ffa3b9;
-  opacity: 0.5;
-}
+  &::placeholder {
+    color: #ffa3b9;
+    opacity: 0.4;
+  }
 
-:host-context(.dark) .price-input:focus {
-  border-color: #ffa3b9;
-  box-shadow: 0 0 0 3px rgba(255, 163, 185, 0.1);
+  &:focus {
+    border-color: #ffa3b9;
+    box-shadow: 0 0 0 3px rgba(255, 163, 185, 0.1);
+  }
 }
 
 .reset-all-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  height: 41px;
-  padding: 10px 16px;
+  height: 42px;
+  padding: 8px 16px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
   background-color: #fbeaea;
   color: #a6252a;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   transition: transform 0.15s ease, opacity 0.2s ease, background-color 0.2s ease;
-}
 
-.reset-all-btn:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
-}
+  &:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
 
-.reset-all-btn:active {
-  transform: translateY(0);
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 :host-context(.dark) .reset-all-btn {

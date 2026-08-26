@@ -5,15 +5,16 @@
 
   <div class="relative">
     <input
+      [readOnly]="isReadonly"
       pInputText
       [id]="inputId"
       class="w-full"
       [class]="styleClass"
-      [type]="type == 'password' ? isPasswordVisible() ? 'text' : 'password' : type"
+      [type]="type == 'password' ? (isPasswordVisible() ? 'text' : 'password') : type"
       [placeholder]="placeholder"
       [value]="value()"
       [disabled]="isDisabled()"
-      (input)="onInput($event)"
+      (input)="handleInput($event)"
       (blur)="onBlur()"
       [invalid]="valid"
       variant="filled"
@@ -22,12 +23,24 @@
 
     @if (type == 'password') {
       <div>
-        <button type="button" class="btn-show bg-transparent p-2 cursor-pointer absolute bottom-0 right-1.75 rtl:right-auto rtl:left-1.75" (click)="togglePasswordVisibility()">
+        <button
+          type="button"
+          class="btn-show bg-transparent p-2 cursor-pointer absolute bottom-0 right-1.75 rtl:right-auto rtl:left-1.75"
+          (click)="togglePasswordVisibility()"
+        >
           @if (isPasswordVisible()) {
-            <lucide-angular [name]="icons.Eye" class="opacity-75" strokeWidth="1.5px"></lucide-angular>
+            <lucide-angular
+              [name]="icons.Eye"
+              class="opacity-75"
+              strokeWidth="1.5px"
+            ></lucide-angular>
           }
           @if (!isPasswordVisible()) {
-            <lucide-angular [name]="icons.EyeOff" class="opacity-75" strokeWidth="1.5px"></lucide-angular>
+            <lucide-angular
+              [name]="icons.EyeOff"
+              class="opacity-75"
+              strokeWidth="1.5px"
+            ></lucide-angular>
           }
         </button>
       </div>

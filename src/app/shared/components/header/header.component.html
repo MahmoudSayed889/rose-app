@@ -1,198 +1,156 @@
-<header class="py-2.5 px-7 md:px-7 w-full flex items-center justify-between ">
+<header
+  class="py-2.5 px-3 sm:px-6 lg:px-8 w-full flex flex-wrap md:flex-nowrap items-center justify-between gap-y-3 gap-x-2 sm:gap-x-4 border-b border-gray-100 dark:border-zinc-800">
+  <!-- Logo -->
+  <div class="flex items-center relative shrink-0">
+    <img src="assets/imgs/logo.png" alt="Rose Logo" class="h-10 sm:h-12 md:h-14 w-auto object-contain" />
+  </div>
 
-    <div class="flex items-center relative shrink-0">
-        <img src="assets/imgs/logo.png" alt="Rose Logo" class="h-17 w-auto object-contain" />
+  <!-- Address (Hidden on Mobile, Visible on md+) -->
+  @if (isAuthenticated() && address()) {
+  <button (click)="showAddressDialog()"
+    class="hidden md:flex flex-col items-start leading-tight cursor-pointer shrink-0">
+    <span class="opacity-60 text-xs">{{ isDirRtl() ? 'التسليم إلى:' : 'Deliver to:' }}</span>
+    <div class="flex items-center gap-1">
+      <lucide-angular [name]="icons.MapPinPen" class="text-primary" size="16px"> </lucide-angular>
+      <span class="text-primary font-medium text-xs sm:text-sm truncate max-w-22.5 lg:max-w-30">{{
+        address()?.city || ''
+        }}</span>
+    </div>
+  </button>
+  }
+
+  <!-- Search Bar (Takes full row on mobile via w-full order-3, fits into middle on md) -->
+  <div class="w-full md:w-auto md:flex-1 md:max-w-xl lg:max-w-2xl md:mx-2 lg:mx-4 relative order-3 md:order-0">
+    <div class="w-full relative">
+      <i
+        class="pi pi-search absolute left-4 rtl:left-auto rtl:right-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs sm:text-sm"></i>
+      <input type="text" [(ngModel)]="searchVal" (focus)="onFocus()" (blur)="onBlur()"
+        [placeholder]="'common.messages.What awesome gift are you looking for?' | translate"
+        class="w-full placeholder-gray-400 ps-12! p-2 sm:p-2.5 md:p-3 rounded-xl border border-gray-200 dark:border-zinc-600 focus:outline-none focus:border-primary transition-colors text-xs sm:text-sm" />
     </div>
 
-    @if (isAuthenticated() && address()) {
-        <button (click)="showAddressDialog()" class="flex flex-col items-start leading-2.5 cursor-pointer">
-            <span class="opacity-60 text-sm">{{isDirRtl() ? 'التسليم إلى:' : 'Deliver to:'}}</span>
+    <app-search-dialog [visibleSearchDialog]="visibleSearchDialog()" [searchVal]="searchVal()"></app-search-dialog>
+  </div>
 
-            <div class="flex items-center gap-1">
-                <lucide-angular 
-                    [name]="icons.MapPinPen" 
-                    class="text-primary" 
-                    size="18px">
-                </lucide-angular>
-                <span class="text-primary font-medium">{{address()?.city || ''}}</span>
-            </div>
-        </button>
+  <!-- Actions (Single Container for Mobile & Desktop) -->
+  <div class="flex items-center gap-2.5 sm:gap-4 lg:gap-5 shrink-0 font-medium">
+    <!-- Auth / User Profile -->
+    @if (isAuthenticated()) {
+    <div class="flex justify-center">
+      <p-menu #menu [model]="userMenuItems" [popup]="true" />
+      <button class="flex items-center gap-1 sm:gap-2 cursor-pointer" type="button" pButton
+        (click)="menu.toggle($event)">
+        <div class="hidden sm:flex flex-col items-start leading-tight">
+          <span class="opacity-60 text-xs">{{ isDirRtl() ? 'مرحباً' : 'Hello' }}</span>
+          <span class="text-primary text-sm font-semibold truncate max-w-20">{{
+            this.user()?.firstName
+            }}</span>
+        </div>
+        <!-- On mobile just show an icon or chevron -->
+        <lucide-angular [name]="icons.User" class="opacity-90 sm:hidden" size="20px"></lucide-angular>
+        <lucide-angular [name]="icons.ChevronDown" class="opacity-75 hidden sm:block" size="16px"></lucide-angular>
+      </button>
+    </div>
+    } @else {
+    <a (click)="showDialog('login')"
+      class="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer text-xs sm:text-sm">
+      <lucide-angular [name]="icons.User" class="opacity-90" size="20px"></lucide-angular>
+      <span class="hidden sm:inline">{{ 'auth.login' | translate }}</span>
+    </a>
     }
 
-    <div class="flex-1 max-w-3xl mx-4 relative">
-        <div class="w-full relative">
-            <i class="pi pi-search absolute left-4 rtl:left-auto rtl:right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-            <input 
-                type="text" 
-                [(ngModel)]="searchVal"
-                (focus)="onFocus()"
-                (blur)="onBlur()"
-                [placeholder]="'common.messages.What awesome gift are you looking for?' | translate"
-                class="w-full placeholder-gray-400 ps-12 p-3.5 rounded-xl border border-gray-200 dark:border-zinc-600 focus:outline-none focus:border-primary transition-colors text-sm" />
-        </div>
+    <!-- Wishlist -->
+    <a routerLink="/wishlist" class="flex items-center hover:text-primary transition-colors relative p-1">
+      <lib-button styleClass="hover:text-primary gap-0! p-0.5"
+        [iconLucide]="{ name: icons.Heart, class: 'opacity-75', size: '20px' }"></lib-button>
+      @if (wishlistItems().length) {
+      <span
+        class="count absolute bg-primary text-white dark:text-black rounded-full text-[10px] w-4 h-4 flex justify-center items-center -top-1 -right-1 rtl:pt-0.5">
+        {{ wishlistItems().length }}
+      </span>
+      }
+    </a>
 
-        <app-search-dialog [visibleSearchDialog]="visibleSearchDialog()" [searchVal]="searchVal()"></app-search-dialog>
+    <!-- Cart -->
+    <a routerLink="/purchase" class="hover:text-primary relative p-1">
+      <lib-button styleClass="gap-0! p-0.5"
+        [iconLucide]="{ name: icons.ShoppingCart, class: 'opacity-75', size: '20px' }"></lib-button>
+      @if (cartItems().length) {
+      <span
+        class="count absolute bg-primary text-white dark:text-black rounded-full text-[10px] w-4 h-4 flex justify-center items-center -top-1 -right-1 rtl:pt-0.5">
+        {{ cartItems().length }}
+      </span>
+      }
+    </a>
+
+    <!-- Notifications (Hidden on very small screens, visible from sm+) -->
+    <div class="relative hidden sm:block">
+      <lib-button styleClass="hover:text-primary gap-0! p-0.5"
+        [iconLucide]="{ name: icons.Bell, class: 'opacity-75', size: '20px' }"></lib-button>
+      <p-menu #notiMenu [model]="notificationItems" [popup]="true"></p-menu>
     </div>
 
-    <div class="flex items-center gap-5 shrink-0 font-medium">
+    <!-- Separator -->
+    <span class="h-6 w-px bg-gray-200 dark:bg-zinc-600 hidden sm:block"></span>
 
-        @if (isAuthenticated()) {
-            <div class="flex justify-center">
-                <p-menu #menu [model]="userMenuItems" [popup]="true"/>
-                <button class=" flex items-end gap-3 cursor-pointer" type="button" pButton (click)="menu.toggle($event)">
-                    <div class="flex flex-col items-start leading-2.5">
-                        <span class="opacity-60 text-sm">{{isDirRtl() ? 'مرحباً' : 'Hello'}}</span>
-                        <span class="text-primary">{{this.user()?.firstName}}</span>
-                    </div>
-                    
-
-                    <lucide-angular 
-                        [name]="icons.ChevronDown" 
-                        class="opacity-75" 
-                        size="18px">
-                    </lucide-angular>
-                </button>
-            </div>
-        } @else {
-            <a (click)="showDialog('login')"
-                class="flex items-center gap-1.5 hover:text-primary transition-colors cursor-pointer">
-                <lucide-angular 
-                    [name]="icons.User" 
-                    class="opacity-90" 
-                    size="24px">
-                </lucide-angular>
-                <span>{{ 'auth.login' | translate }}</span>
-            </a>
-        }
-
-        <span class="h-9 w-px bg-gray-200 dark:bg-zinc-500 hidden md:block"></span>
-        <a routerLink="/wishlist" class="flex items-center gap-1.5 hover:text-primary transition-colors relative">
-            <lib-button
-            styleClass="hover:text-primary gap-0! p-1"
-            [iconLucide]="{
-                name: icons.Heart,
-                class: 'opacity-75',
-                size: '20px'
-            }"
-            ></lib-button>
-            @if(wishlistItems().length) {
-                <span class="count absolute bg-primary text-white dark:text-black rounded-full text-xs w-4.5 h-4.5 flex justify-center items-center top-1 right-1 translate-x-[50%] translate-y-[-50%] rtl:pt-0.5">
-                    {{wishlistItems().length}}
-                </span>
-            }
-        </a>
-
-        <a routerLink="/purchase" class="hover:text-primary relative">
-            <lib-button
-                styleClass="gap-0! p-1"
-                [iconLucide]="{
-                    name: icons.ShoppingCart,
-                    class: 'opacity-75',
-                    size: '20px'
-                }"
-            ></lib-button>
-            @if(cartItems().length) {
-                <span class="count absolute bg-primary text-white dark:text-black rounded-full text-xs w-4.5 h-4.5 flex justify-center items-center top-1 right-1 translate-x-[50%] translate-y-[-50%] rtl:pt-0.5">
-                    {{cartItems().length}}
-                </span>
-            }
-        </a>
-
-        <div class="relative">
-            <lib-button
-                styleClass="hover:text-primary gap-0! p-1"
-                [iconLucide]="{
-                    name: icons.Bell,
-                    class: 'opacity-75',
-                    size: '20px'
-                }"
-            ></lib-button>
-            <p-menu #notiMenu [model]="notificationItems" [popup]="true"></p-menu>
-        </div>
-
-        <lib-theme-switcher></lib-theme-switcher>
-
-        <span class="h-9 w-px bg-gray-200 dark:bg-zinc-500"></span>
-
-        <lib-language-switcher></lib-language-switcher>
-    </div>
+    <!-- Controls -->
+    <lib-theme-switcher></lib-theme-switcher>
+    <lib-language-switcher></lib-language-switcher>
+  </div>
 </header>
 
-<p-dialog 
-    [(visible)]="visible" 
-    [modal]="true" 
-    [style]="{ width: '30rem' }"
-    [breakpoints]="{ '1199px': '75vw', '575px': '95vw' }" 
-    [draggable]="false" 
-    [resizable]="false"
-    dismissableMask="true"
-    styleClass="border-0!"
->
-    <ng-template pTemplate="header">
-        <div class="flex w-full overflow-hidden rounded-t-xl border-b border-gray-200 dark:border-zinc-700">
-            <button 
-                (click)="activeTap = 'login'" 
-                [ngClass]="
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '95vw' }" [draggable]="false" [resizable]="false" dismissableMask="true"
+  styleClass="border-0!">
+  <ng-template pTemplate="header">
+    <div class="flex w-full overflow-hidden rounded-t-xl border-b border-gray-200 dark:border-zinc-700">
+      <button (click)="activeTap = 'login'" [ngClass]="
                     activeTap === 'login'
                     ? 'bg-primary text-white dark:text-zinc-900'
                     : 'hover:bg-gray-100 dark:hover:bg-zinc-950'
-                "       
-                class="flex-1 py-3 text-center font-medium text-sm transition-colors border-none cursor-pointer">
-                {{ 'auth.login' | translate }}
-            </button>
+                " class="flex-1 py-3 text-center font-medium text-sm transition-colors border-none cursor-pointer">
+        {{ 'auth.login' | translate }}
+      </button>
 
-            <button 
-                (click)="activeTap = 'register'" 
-                [ngClass]="
+      <button (click)="activeTap = 'register'" [ngClass]="
                     activeTap === 'register'
                     ? 'bg-primary text-white dark:text-zinc-900'
                     : 'hover:bg-gray-100 dark:hover:bg-zinc-950'
-                " 
-                class="flex-1 py-3 text-center font-medium text-sm transition-colors border-none cursor-pointer">
-                {{ 'auth.register now' | translate }}
-            </button>
-        </div>
-    </ng-template>
-
-    <div class="pt-4">
-
-        @if (activeTap === 'login') {
-            <app-login [inPoppup]="true"></app-login>
-        } @else {
-            <app-register [inPoppup]="true"></app-register>
-        }
+                " class="flex-1 py-3 text-center font-medium text-sm transition-colors border-none cursor-pointer">
+        {{ 'auth.register now' | translate }}
+      </button>
     </div>
+  </ng-template>
+
+  <div class="pt-4">
+
+    @if (activeTap === 'login') {
+    <app-login [inPoppup]="true"></app-login>
+    } @else {
+    <app-register [inPoppup]="true"></app-register>
+    }
+  </div>
 </p-dialog>
 
-
 <!-- second navbar -->
-<div class="w-full">
-    <div class="w-full bg-[#741C21] dark:bg-primary flex justify-center items-center px-8 shadow-md">
-        <div class="flex items-center justify-center gap-6 md:gap-8">
-            @for (item of secondNavbarItems; track item.label) {
-                <a 
-                    [routerLink]="[item.routerLink]"
-                    routerLinkActive="text-rose-300! border-rose-300! dark:text-[#741C21]! dark:border-[#741C21]!" 
-                    class="flex items-end gap-2 text-white dark:text-zinc-900 px-1 py-4 pb-3 transition-all hover:text-rose-300 hover:border-rose-300
-                    dark:hover:text-[#741C21] dark:hover:border-[#741C21]
-                    border-b-2 border-transparent cursor-pointer font-medium"
-                >
-                    
-                    @if (item.icon) {
-                        <lucide-angular 
-                            [name]="item.icon" 
-                            class="opacity-90" 
-                            size="24px">
-                        </lucide-angular>
-                    }
-                    <span class="capitalize">{{ item.label | translate }}</span>
-                </a>
-            }
-        </div>
+<nav class="w-full bg-[#741C21] dark:bg-primary shadow-md">
+  <div
+    class="w-full max-w-7xl mx-auto flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-4 sm:gap-6 md:gap-8 whitespace-nowrap">
+      @for (item of secondNavbarItems; track item.label) {
+      <a [routerLink]="[item.routerLink]"
+        routerLinkActive="text-rose-300! border-rose-300! dark:text-[#741C21]! dark:border-[#741C21]!"
+        class="flex items-center gap-1.5 sm:gap-2 text-white dark:text-zinc-900 px-1 py-3 sm:py-3.5 transition-all hover:text-rose-300 hover:border-rose-300 dark:hover:text-[#741C21] dark:hover:border-[#741C21] border-b-2 border-transparent cursor-pointer font-medium text-xs sm:text-sm shrink-0">
+        @if (item.icon) {
+        <lucide-angular [name]="item.icon" class="opacity-90" size="24px">
+        </lucide-angular>
+        }
+        <span class="capitalize">{{ item.label | translate }}</span>
+      </a>
+      }
     </div>
-</div>
+  </div>
+</nav>
 
-
-<app-address-dialog
-    [(visible)]="visibleAddressDialog">
+<app-address-dialog [(visible)]="visibleAddressDialog">
 </app-address-dialog>

@@ -1,0 +1,69 @@
+@if (label) {
+  <label [for]="inputId" class="dark:text-white mb-1.5 block">{{ label }}</label>
+}
+<div
+  class="flex items-center -space-x-px border relative rounded-md bg-[#f8fafc] dark:bg-[#27272a] dark:border-[#52525b] border-[#cbd5e1]"
+>
+  <button
+    (click)="toggleList()"
+    id="dropdown-phone-button"
+    data-dropdown-toggle="dropdown-phone"
+    type="button"
+    class="inline-flex items-center shrink-0 z-10 text-body hover:opacity-70 hover:text-heading focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 text-sm px-4 py-2.5 focus:outline-none"
+  >
+    <div>
+      <img class="w-6 mr-2" [src]="selectedCountry.flag" alt="" />
+    </div>
+    <span class="text-[#334155] dark:text-white"
+      >{{ selectedCountry.shortName }}({{ selectedCountry.code }})</span
+    >
+    <span class="text-[#334155] dark:text-white">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-chevrons-up-down-icon lucide-chevrons-up-down"
+      >
+        <path d="m7 15 5 5 5-5" />
+        <path d="m7 9 5-5 5 5" />
+      </svg>
+    </span>
+  </button>
+  <div
+    id="dropdown-phone"
+    class="z-10 bg-white dark:bg-zinc-600 border border-[#ebe6e7] rounded-xl shadow-lg w-54 absolute top-9 left-0"
+    [class.hidden]="!isListOpen()"
+  >
+    <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdown-phone-button">
+      @for (flag of countries; track $index) {
+        <li class="cursor-pointer" (click)="selectCountry(flag.name)">
+          <div
+            class="inline-flex items-center w-full p-2 hover:bg-[#f6f3f4] dark:hover:bg-zinc-400 hover:text-heading rounded-md"
+          >
+            <img class="w-6 mr-2 rounded-full" [src]="flag.flag" alt="" />
+            <div>{{ flag.name }} ({{ flag.code }})</div>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+  <div class="relative w-full">
+    <input
+      [id]="inputId"
+      type="phone"
+      class="w-full z-20 text-heading text-sm focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand block px-3 py-2.5 placeholder:text-body"
+      [placeholder]="selectedCountry.placeHolder || ''"
+      [value]="value()"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      (invalid)="valid"
+      variant="filled"
+    />
+  </div>
+</div>

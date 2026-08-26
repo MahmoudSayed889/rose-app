@@ -45,4 +45,9 @@ export const ContentRoutes: Routes = [
         loadComponent: () => loadRemoteModule('dashboard', './Component').then((m) => m.App),
         // canActivate: [authGuard]
     },
+        path: 'account-settings',
+        loadChildren: () => import('../../features/account-settings/account-settings.route')
+            .then((c) => c.AccountSettingsRoutes),
+        canActivate: [authGuard]
+    }
 ];

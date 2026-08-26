@@ -35,7 +35,14 @@
       "PASSWORD_PATTERN_ERROR": "Please enter a valid password",
       "USERNAME_REQ_ERROR": "Username is required",
       "FN_REQ_ERROR": "First Name is required",
-      "LN_REQ_ERROR": "Last Name is required"
+      "LN_REQ_ERROR": "Last Name is required",
+      "PASSWORD_PATTERN_ERRORS": {
+        "8 or more characters": "8 or more characters",
+        "At least one uppercase letter A-Z": "At least one uppercase letter A-Z",
+        "At least one lowercase letter a-z": "At least one lowercase letter a-z",
+        "At least one number 0-9": "At least one number 0-9",
+        "At least one special character like": "At least one special character like #@&-"
+      }
     }
   },
   "search": {
@@ -196,8 +203,21 @@
       "You’ll be securely redirected to Stripe to complete your payment": "You’ll be securely redirected to Stripe to complete your payment."
     }
   },
-  "profile": {
-    "title": ""
+  "account-settings": {
+    "title": "Account Settings",
+    "change_password": {
+      "title": "Change Password",
+      "current password": "current password",
+      "new password": "new password",
+      "confirm new password": "confirm new password"
+    },
+    "profile": {
+      "title": "Profile",
+      "upload-photo": "Upload Photo",
+      "upload-desc": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "request-code": "Request Code",
+      "confirm":"Confirm"
+    }
   },
   "productDetails": {
     "left in stock": "left in stock",

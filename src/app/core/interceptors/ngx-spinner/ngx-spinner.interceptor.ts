@@ -6,7 +6,7 @@ import { finalize } from 'rxjs';
 export const ngxSpinnerInterceptor: HttpInterceptorFn = (req, next) => {
   const spinner = inject(SpinnerService);
 
-  if (req.url.includes('auth')) {
+  if (req.url.includes('auth') || req.url.includes('users')) {
     return next(req);
   }
 

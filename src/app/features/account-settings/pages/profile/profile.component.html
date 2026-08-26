@@ -1,0 +1,159 @@
+<form class="space-y-6" [formGroup]="profileForm" (submit)="saveChanges()" (input)="prepareData()">
+  <!-- Profile Picture Section -->
+  <div
+    class="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 text-center sm:text-start pb-4 border-b border-zinc-100 dark:border-zinc-800"
+  >
+    <div class="w-24 h-24 sm:w-28 sm:h-28 relative shrink-0">
+      <img
+        class="w-full h-full object-cover rounded-full border-2 border-zinc-200 dark:border-zinc-700 shadow-sm"
+        [src]="uploadedImageUrl()"
+        [alt]="profileData()?.firstName + ' ' + profileData()?.lastName + ' profile picture'"
+      />
+      <label
+        for="profile-image"
+        class="absolute cursor-pointer inset-e-0 bottom-0 w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex items-center justify-center shadow hover:scale-105 transition"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-cloud-upload"
+        >
+          <path d="M12 13v8" />
+          <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+          <path d="m8 17 4-4 4 4" />
+        </svg>
+        <input id="profile-image" class="hidden" type="file" (input)="onFileSelected($event)" />
+      </label>
+    </div>
+
+    <div class="space-y-1">
+      <p class="text-base sm:text-lg font-semibold text-zinc-800 dark:text-zinc-100">
+        {{ 'account-settings.profile.upload-photo' | translate }}
+      </p>
+      <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-sm">
+        {{ 'account-settings.profile.upload-desc' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Form Fields -->
+  <div class="flex flex-col gap-4">
+    <!-- First & Last Name (Stacked on mobile, 2 cols on sm+) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="w-full">
+        <lib-input
+          placeholder="First Name"
+          formControlName="firstName"
+          [label]="'auth.firstName' | translate"
+          type="text"
+          id="p-firstName"
+        ></lib-input>
+      </div>
+      <div class="w-full">
+        <lib-input
+          placeholder="Last Name"
+          formControlName="lastName"
+          [label]="'auth.lastName' | translate"
+          type="text"
+          id="p-lastName"
+        ></lib-input>
+      </div>
+    </div>
+
+    <!-- Email Field -->
+    <div class="relative">
+      @if (!openEmailForChange()) {
+        <lib-button
+          (onClick)="onEditEmailBtnClick()"
+          styleClass="absolute end-0 top-0 font-semibold text-xs sm:text-sm text-primary"
+          [text]="'common.actions.edit' | translate"
+        ></lib-button>
+      } @else {
+        <lib-button
+          (onClick)="onRequestCodeBtnClick()"
+          [disabled]="!isEmailControlValid()"
+          styleClass="absolute end-0 top-0 font-semibold text-xs sm:text-sm text-primary disabled:opacity-50"
+          [text]="'account-settings.profile.request-code' | translate"
+        ></lib-button>
+      }
+      <lib-input
+        (onInput)="onEmailControlInput()"
+        placeholder="Email"
+        formControlName="email"
+        [label]="'auth.email' | translate"
+        type="email"
+        id="p-email"
+      ></lib-input>
+    </div>
+
+    <!-- Verification Code (Conditional) -->
+    @if (openCodeInput()) {
+      <div class="relative">
+        <lib-button
+          (onClick)="onConfrimEmailBtnClick()"
+          [disabled]="codeControl.invalid"
+          styleClass="absolute end-0 top-0 font-semibold text-xs sm:text-sm text-primary disabled:opacity-50"
+          [text]="'account-settings.profile.confirm' | translate"
+        ></lib-button>
+        <lib-input
+          placeholder="Enter the code"
+          label="Code"
+          type="number"
+          id="p-code"
+          [formControl]="codeControl"
+        ></lib-input>
+      </div>
+    }
+
+    <!-- Phone Field -->
+    <div>
+      <lib-phone-input formControlName="phone" id="p-phone" label="Phone"></lib-phone-input>
+      @if (profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched) {
+        <p class="text-[#d32f2f] text-xs sm:text-[13px] mt-1.5">
+          phone must be at least 2 numbers and shouldn't start with 0
+        </p>
+      }
+    </div>
+
+    <!-- Gender Field -->
+    <div>
+      <label
+        for="p-gender"
+        class="block mb-1.5 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 capitalize"
+      >
+        {{ 'auth.gender' | translate }}
+      </label>
+      <lib-input
+        placeholder="Gender"
+        id="p-gender"
+        formControlName="gender"
+        styleClass="bg-zinc-100 dark:bg-zinc-800"
+      ></lib-input>
+    </div>
+
+    <!-- Actions (Delete Account & Save Changes) pt-15 -->
+    <div
+      class="flex items-center justify-between gap-4 pt-6 sm:pt-10 border-t border-zinc-200 dark:border-zinc-950"
+    >
+      <lib-button
+        (onClick)="onDeleteAccountBtnClick()"
+        [text]="'common.actions.delete-my-account' | translate"
+        styleClass="text-[#CD2E33] dark:text-[#EF4444] text-xs sm:text-sm font-medium hover:underline p-2"
+      ></lib-button>
+
+      <lib-button
+        [disabled]="!isFormValid()"
+        type="submit"
+        [text]="'common.actions.save-changes' | translate"
+        styleClass="w-full sm:w-auto bg-primary text-white py-3 px-8 rounded-xl dark:text-zinc-900 font-semibold text-sm hover:opacity-90 transition disabled:opacity-50"
+      ></lib-button>
+    </div>
+  </div>
+</form>
