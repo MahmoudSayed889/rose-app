@@ -71,7 +71,7 @@
           }
         ],
         "styles": [
-          "projects/dashboard/src/styles.scss"
+          "projects/dashboard/src/styles.css"
         ],
         "polyfills": [
           "es-module-shims"
