@@ -273,8 +273,8 @@
     }
 
     &.sidebar-menu-button--active {
-      background: transparent;
-
+      // background: transparent;
+      border-radius: 10px;
       i {
         background: var(--sidebar-item-active-bg);
         color: var(--sidebar-item-active-text);

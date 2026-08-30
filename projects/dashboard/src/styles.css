@@ -107,4 +107,18 @@ html[lang="en"] .lang-switcher {
   p-drawer .p-drawer-header {
     display: none !important;
   }
+  .p-breadcrumb-item .p-breadcrumb-item-label {
+    font-size: 13px;
+  }
+  .p-breadcrumb-separator svg {
+    width: 12px;
+    height: 12px;
+  }
+  .p-breadcrumb {
+    padding: 0.7rem 0.3rem !important;
+  }
+}
+
+.p-breadcrumb-item:last-child .p-breadcrumb-item-label {
+  color: var(--p-primary-color);
 }
