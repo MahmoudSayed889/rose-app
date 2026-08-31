@@ -23,7 +23,8 @@
   <!-- Header -->
   <div class="order-header">
     <span class="order-number">{{ 'orders.orderNumber' | translate }}{{ order().id }}</span>
-    <span class="order-date">{{ 'orders.createdIn' | translate }} {{ order().createdAt | date: "d MMMM, y 'at' hh:mma" }}</span>
+    <span class="order-date">{{ 'orders.createdIn' | translate }} {{ order().createdAt | date: "d MMMM, y 'at' hh:mma"
+      }}</span>
   </div>
 
   <!-- Body -->
@@ -45,6 +46,21 @@
         <span class="badge" [ngClass]="statusConfig().badgeClass">{{ statusConfig().label }}</span>
       </div>
     </div>
+
+    <!-- pay now -->
+     @if (order().paymentStatus == 'PROCESSING' && order().paymentMethod == 'CREDIT_CARD') {
+      <div class="order-status">
+        <span class="label capitalize">{{ 'orders.pay' | translate }}</span>
+        <lib-button 
+          (onClick)="pay()"
+          styleClass="text-green-700"
+          [iconLucide]="{
+            name: icons.Banknote,
+            size: '24px',
+          }">
+        </lib-button>
+      </div>
+    }
 
     <!-- Payment method -->
     <div class="order-row info-row">
@@ -69,39 +85,39 @@
 
     <div class="items-grid">
       @for (item of previewItems(); track item.id) {
-        <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
+      <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
       }
     </div>
 
     @if (hasExtraItems()) {
-      @if (!expanded()) {
-        <div class="items-peek">
-          <div class="items-grid peek-grid" aria-hidden="true">
-            @for (item of peekItems(); track item.id) {
-              <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
-            }
-          </div>
-          <div class="peek-fade"></div>
-          <button type="button" class="toggle-button-wrapper" (click)="toggleExpanded()">
-            <div class="toggle-btn">
-              {{ 'orders.showAll' | translate }}
-            </div>
-            <i class="pi pi-chevron-down"></i>
-          </button>
+    @if (!expanded()) {
+    <div class="items-peek">
+      <div class="items-grid peek-grid" aria-hidden="true">
+        @for (item of peekItems(); track item.id) {
+        <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
+        }
+      </div>
+      <div class="peek-fade"></div>
+      <button type="button" class="toggle-button-wrapper" (click)="toggleExpanded()">
+        <div class="toggle-btn">
+          {{ 'orders.showAll' | translate }}
         </div>
-      } @else {
-        <div class="items-grid">
-          @for (item of extraItems(); track item.id) {
-            <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
-          }
-        </div>
-        <button class="toggle-wrapper" (click)="toggleExpanded()">
-          <i class="pi pi-chevron-up"></i>
-          <div type="button" class="toggle-btn">
-            {{ 'orders.showLess' | translate }}
-          </div>
-        </button>
+        <i class="pi pi-chevron-down"></i>
+      </button>
+    </div>
+    } @else {
+    <div class="items-grid">
+      @for (item of extraItems(); track item.id) {
+      <ng-container [ngTemplateOutlet]="itemTpl" [ngTemplateOutletContext]="{ $implicit: item }" />
       }
+    </div>
+    <button class="toggle-wrapper" (click)="toggleExpanded()">
+      <i class="pi pi-chevron-up"></i>
+      <div type="button" class="toggle-btn">
+        {{ 'orders.showLess' | translate }}
+      </div>
+    </button>
+    }
     }
 
   </div>

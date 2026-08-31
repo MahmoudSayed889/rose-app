@@ -84,71 +84,89 @@ export class CheckoutComponent extends AppComponentBase implements OnInit {
     } as CreateOrderRequest;
 
     const selectedPaymentMethod = this._checkoutFacadeService.paymentMethod()?.method;
-    if (selectedPaymentMethod === 'pm_card_visa') {
+
+    if (selectedPaymentMethod === 'CASH_ON_DELIVERY') {
+      this._ordersService.createOrder(dataToSend).subscribe({
+        next: () => {
+          this.afterSubmited();
+          this._router.navigate(['/orders']);
+        },
+      });
+      return
+    }
+
+    if (selectedPaymentMethod === 'CREDIT_CARD') {
       this.isProcessing.set(true);
       this._ordersService.createOrder(dataToSend).subscribe({
-        next: (orderResponse) => {
-          const orderId = orderResponse.payload.order.id;
-          this._checkoutFacadeService.orderId.set(orderId);
-          const paymentMethodId = this._checkoutFacadeService.paymentMethodId();
-
-          if (!paymentMethodId) {
-            this._toastService.toaster(
-              'error',
-              'Missing payment method identifier. Integrate Stripe card collection to provide a real paymentMethodId.',
-            );
-            this.isProcessing.set(false);
-            return;
-          }
-
-          this._paymentService.createPaymentIntent({ orderId }).subscribe({
-            next: (intentResponse) => {
-              if (!intentResponse.status || !intentResponse.payload) {
-                this._toastService.toaster('error', 'Failed to create payment intent.');
-                this.isProcessing.set(false);
-                return;
-              }
-
-              const paymentIntentId = intentResponse.payload;
-              this._paymentService.confirmPayment({ paymentIntentId, paymentMethodId }).subscribe({
-                next: (confirmResponse) => {
-                  if (!confirmResponse.status) {
-                    this._toastService.toaster('error', 'Payment confirmation failed.');
-                    this.isProcessing.set(false);
-                    return;
-                  }
-
-                  this._toastService.toaster('success', 'Payment completed successfully.');
-                  this.afterSubmited();
-                  this._router.navigate(['/orders']);
-                  this.isProcessing.set(false);
-                },
-                error: () => {
-                  this._toastService.toaster('error', 'Unable to confirm payment.');
-                  this.isProcessing.set(false);
-                },
-              });
-            },
-            error: () => {
-              this._toastService.toaster('error', 'Unable to create payment intent.');
-              this.isProcessing.set(false);
-            },
-          });
+        next: (res) => {
+          // console.log(res);
+          window.location.href = res.payload.checkout.checkoutUrl;
         },
         error: () => {
-          this._toastService.toaster('error', 'Unable to create order.');
           this.isProcessing.set(false);
         },
       });
-
-      return;
     }
 
-    this._ordersService.createOrder(dataToSend).subscribe({
-      next: () => {
-        this.afterSubmited();
-        this._router.navigate(['/orders']);
-      },
-    });
+
+    // if (selectedPaymentMethod === 'pm_card_visa') {
+    //   this.isProcessing.set(true);
+    //   this._ordersService.createOrder(dataToSend).subscribe({
+    //     next: (orderResponse) => {
+    //       const orderId = orderResponse.payload.order.id;
+    //       this._checkoutFacadeService.orderId.set(orderId);
+    //       const paymentMethodId = this._checkoutFacadeService.paymentMethodId();
+
+    //       if (!paymentMethodId) {
+    //         this._toastService.toaster(
+    //           'error',
+    //           'Missing payment method identifier. Integrate Stripe card collection to provide a real paymentMethodId.',
+    //         );
+    //         this.isProcessing.set(false);
+    //         return;
+    //       }
+
+    //       this._paymentService.createPaymentIntent({ orderId }).subscribe({
+    //         next: (intentResponse) => {
+    //           if (!intentResponse.status || !intentResponse.payload) {
+    //             this._toastService.toaster('error', 'Failed to create payment intent.');
+    //             this.isProcessing.set(false);
+    //             return;
+    //           }
+
+    //           const paymentIntentId = intentResponse.payload;
+    //           this._paymentService.confirmPayment({ paymentIntentId, paymentMethodId }).subscribe({
+    //             next: (confirmResponse) => {
+    //               if (!confirmResponse.status) {
+    //                 this._toastService.toaster('error', 'Payment confirmation failed.');
+    //                 this.isProcessing.set(false);
+    //                 return;
+    //               }
+
+    //               this._toastService.toaster('success', 'Payment completed successfully.');
+    //               this.afterSubmited();
+    //               this._router.navigate(['/orders']);
+    //               this.isProcessing.set(false);
+    //             },
+    //             error: () => {
+    //               this._toastService.toaster('error', 'Unable to confirm payment.');
+    //               this.isProcessing.set(false);
+    //             },
+    //           });
+    //         },
+    //         error: () => {
+    //           this._toastService.toaster('error', 'Unable to create payment intent.');
+    //           this.isProcessing.set(false);
+    //         },
+    //       });
+    //     },
+    //     error: () => {
+    //       this._toastService.toaster('error', 'Unable to create order.');
+    //       this.isProcessing.set(false);
+    //     },
+    //   });
+
+    //   return;
+    // }
   }
 }

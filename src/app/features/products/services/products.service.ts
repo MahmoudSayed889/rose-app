@@ -78,7 +78,10 @@ export class ProductsService {
   }
 
   getProductsYouMayLike(): Observable<Product[]> {
-    return this.getProducts().pipe(
+    const params = {
+      limit: 100
+    }
+    return this.getProducts(params).pipe(
       map(res =>
         res.payload.data.filter(item => item.tags?.includes('hot'))
       ));
