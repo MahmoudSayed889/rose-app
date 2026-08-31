@@ -23,4 +23,8 @@ export class PaymentService {
   confirmPayment(data: ConfirmPaymentRequest): Observable<PaymentResponse> {
     return this._httpClient.post<PaymentResponse>(`${this._baseURL}/api/payments/confirm`, data);
   }
+
+  CheckoutSession(data: CreatePaymentIntentRequest): Observable<PaymentResponse> {
+    return this._httpClient.post<PaymentResponse>(`${this._baseURL}/api/payments/checkout-session`, data);
+  }
 }

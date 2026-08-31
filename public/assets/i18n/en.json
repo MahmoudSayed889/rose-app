@@ -142,8 +142,7 @@
     "addedToWishlist": "Added to wishlist",
     "addToWishlistError": "Failed to add item to wishlist"
   },
-  "cart": {
-  },
+  "cart": {},
   "orders": {
     "title": "Orders",
     "orderNumber": "Order #",
@@ -162,13 +161,14 @@
     "loadError": "Failed to load orders. Please try again.",
     "statuses": {
       "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
       "IN_PROGRESS": "In Progress",
-      "PROCESSING": "In Progress",
+      "PROCESSING": "Processing",
       "SHIPPED": "Shipped",
       "DELIVERED": "Delivered",
       "COMPLETED": "Completed",
       "CANCELED": "Canceled",
-      "CANCELLED": "Canceled"
+      "CANCELLED": "Cancelled"
     },
     "deliveryStatuses": {
       "PENDING": "Pending",
@@ -181,8 +181,10 @@
       "CANCELLED": "Canceled"
     },
     "paymentStatuses": {
-      "PAID": "Paid",
       "PENDING": "Pending",
+      "PROCESSING": "Processing",
+      "SUCCEEDED": "Paid",
+      "PAID": "Paid",
       "UNPAID": "Unpaid",
       "FAILED": "Failed",
       "REFUNDED": "Refunded"
@@ -216,7 +218,7 @@
       "upload-photo": "Upload Photo",
       "upload-desc": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
       "request-code": "Request Code",
-      "confirm":"Confirm"
+      "confirm": "Confirm"
     }
   },
   "productDetails": {

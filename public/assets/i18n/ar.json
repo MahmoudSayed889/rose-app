@@ -172,8 +172,9 @@
         "loadError": "فشل تحميل الطلبات. يرجى المحاولة مرة أخرى.",
         "statuses": {
             "PENDING": "قيد الانتظار",
+            "CONFIRMED": "تم التأكيد",
             "IN_PROGRESS": "قيد التنفيذ",
-            "PROCESSING": "قيد التنفيذ",
+            "PROCESSING": "جاري المعالجة",
             "SHIPPED": "تم الشحن",
             "DELIVERED": "تم التوصيل",
             "COMPLETED": "مكتمل",
@@ -191,11 +192,13 @@
             "CANCELLED": "ملغي"
         },
         "paymentStatuses": {
-            "PAID": "مدفوع",
             "PENDING": "قيد الانتظار",
+            "PROCESSING": "جاري المعالجة",
+            "SUCCEEDED": "تم الدفع",
+            "PAID": "مدفوع",
             "UNPAID": "غير مدفوع",
-            "FAILED": "فشل",
-            "REFUNDED": "مسترجع"
+            "FAILED": "فشل الدفع",
+            "REFUNDED": "تم رد المبلغ"
         },
         "paymentMethods": {
             "CASH": "نقداً",

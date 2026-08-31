@@ -15,6 +15,7 @@ export interface OrderesListPayload {
 export type SingleOrder = MainResponse<SingleOrderPayload>
 
 export interface SingleOrderPayload {
+    checkout: Checkout
     order: Order
 }
 
@@ -42,13 +43,13 @@ export interface Order {
 }
 
 export interface OrderItem {
-  id: string
-  orderId: string
-  productId: string
-  quantity: number
-  price: string
-  createdAt: string
-  product: Product
+    id: string
+    orderId: string
+    productId: string
+    quantity: number
+    price: string
+    createdAt: string
+    product: Product
 }
 
 export interface CreateOrderRequest {
@@ -56,4 +57,11 @@ export interface CreateOrderRequest {
     paymentMethod: string
     couponCode: string
     notes: string
+}
+
+export interface Checkout {
+    checkoutUrl: string
+    sessionId: string
+    expiresAt: string
+    reused: boolean
 }
