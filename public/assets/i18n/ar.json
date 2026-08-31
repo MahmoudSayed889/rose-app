@@ -215,6 +215,11 @@
             "You’ll pay in cash when your order is delivered": "ستدفع نقداً عند تسليم طلبك.",
             "Credit Card": "بطاقة إئتمان",
             "You’ll be securely redirected to Stripe to complete your payment": "سيتم تحويلك بشكل آمن إلى موقع Stripe لإتمام عملية الدفع."
+        },
+        "success": {
+            "payment successful": "تم الدفع بنجاح",
+            "view orders": "عرض الطلبات",
+            "explore products": "المنتجات"
         }
     },
     "account-settings": {

@@ -204,6 +204,11 @@
       "You’ll pay in cash when your order is delivered": "You’ll pay in cash when your order is delivered.",
       "Credit Card": "Credit Card",
       "You’ll be securely redirected to Stripe to complete your payment": "You’ll be securely redirected to Stripe to complete your payment."
+    },
+    "success": {
+      "payment successful": "payment successful",
+      "view orders": "view orders",
+      "explore products": "explore products"
     }
   },
   "account-settings": {

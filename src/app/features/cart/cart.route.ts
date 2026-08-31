@@ -32,10 +32,6 @@ export const CartRoutes: Routes = [
                         path: 'payment-method',
                         loadComponent: () => import('./pages/checkout/payment-method/payment-method.component').then((c) => c.PaymentMethodComponent),
                     },
-                    {
-                        path: 'success',
-                        loadComponent: () => import('./pages/checkout/success/success.component').then((c) => c.SuccessComponent),
-                    }
                 ],
             },
         ]

@@ -41,6 +41,10 @@ export const ContentRoutes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'checkout/success',
+        loadComponent: () => import('../../features/cart/pages/checkout/success/success.component').then((c) => c.SuccessComponent),
+    },
+    {
         path: 'dashboard',
         loadComponent: () => loadRemoteModule('dashboard', './Component').then((m) => m.App),
         // canActivate: [authGuard]
