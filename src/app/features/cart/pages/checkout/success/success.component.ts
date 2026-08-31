@@ -22,16 +22,16 @@ export class SuccessComponent extends AppComponentBase implements OnInit {
 
 
   ngOnInit(): void {
+    this.getCheckoutSession()
+  }
+
+  getCheckoutSession() {
     const sessionId = this.route.snapshot.queryParamMap.get('session_id') as string;
 
     if (!sessionId) {
       return
     }
 
-    this.getCheckoutSession(sessionId)
-  }
-
-  getCheckoutSession(sessionId: string) {
     this._paymentService.getCheckoutSession(sessionId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
       next: () => {
         this._toastService.toaster('success', this.isDirRtl() ? 'تمت عملية الدفع بنجاح' : 'Payment successful')
