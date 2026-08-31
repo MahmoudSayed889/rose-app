@@ -51,6 +51,24 @@ export class OrdersComponent extends AppComponentBase implements OnInit {
       });
   }
 
+  payOrder(orderId: string): void {
+    // this._ordersService.payOrder(orderId)
+    //   .pipe(takeUntilDestroyed(this._destroyRef))
+    //   .subscribe({
+    //     next: (res) => {
+    //       console.log('Payment success', res);
+    //     },
+    //     error: () => {
+    //       const errorMsg = this._translateService.instant('orders.paymentError');
+    //       this._toastService.toaster('error', errorMsg);
+    //     },
+    //   });
+
+    console.log(orderId);
+    
+  }
+
+
   onRetry(): void {
     this.loadOrders();
   }
