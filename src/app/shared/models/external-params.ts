@@ -9,4 +9,5 @@ export interface ExternalParams {
     minRating?: number,
     isApproved?: boolean,
     isActive?: boolean,
+    sortOrder?: string
 }

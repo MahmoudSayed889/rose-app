@@ -6,6 +6,8 @@ import { AppComponentBase } from '../../shared/app-component-base';
 import { OrdersService } from './services/orders.service';
 import { Order } from './models/orders';
 import { OrderCardComponent } from './components/order-card/order-card.component';
+import { PaymentService } from '../cart/services/checkout/payment.service';
+import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-orders',
@@ -18,6 +20,7 @@ export class OrdersComponent extends AppComponentBase implements OnInit {
   private readonly _ordersService = inject(OrdersService);
   private readonly _translateService = inject(TranslateService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _paymentService = inject(PaymentService);
 
   orders = signal<Order[]>([]);
   isLoading = signal<boolean>(false);
@@ -50,6 +53,31 @@ export class OrdersComponent extends AppComponentBase implements OnInit {
         },
       });
   }
+
+  payOrder(orderId: string): void {
+    const dataToSend = {
+      orderId: orderId
+    }
+
+    this._paymentService.CheckoutSession(dataToSend).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+      next: (res) => {
+        // console.log(res);
+        window.location.href = res.payload.checkoutUrl;
+      }
+    })
+
+  }
+
+  getCheckoutSession(sessionId: string) {
+    this._paymentService.getCheckoutSession(sessionId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+      next: () => {
+        this._toastService.toaster('success', this.isDirRtl() ? 'تمت عملية الدفع بنجاح' : 'Payment successful')
+      }, error: () => {
+
+      }
+    })
+  }
+
 
   onRetry(): void {
     this.loadOrders();
