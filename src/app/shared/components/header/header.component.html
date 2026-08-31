@@ -85,10 +85,32 @@
 
     <!-- Notifications (Hidden on very small screens, visible from sm+) -->
     <div class="relative hidden sm:block">
-      <lib-button styleClass="hover:text-primary gap-0! p-0.5"
-        [iconLucide]="{ name: icons.Bell, class: 'opacity-75', size: '20px' }"></lib-button>
-      <p-menu #notiMenu [model]="notificationItems" [popup]="true"></p-menu>
+      <div cdkOverlayOrigin #notiOrigin="cdkOverlayOrigin" class="inline-block relative">
+        <lib-button type="button" aria-label="Notifications" aria-haspopup="true"
+          [attr.aria-expanded]="notificationsOpen()" (onClick)="toggleNotificationsOpen()"
+          styleClass="hover:text-primary gap-0! p-0.5"
+          [iconLucide]="{ name: icons.Bell, class: 'opacity-75', size: '20px' }"></lib-button>
+        @if (_notificationsFacade.unreadNotificationsCount() > 0) {
+        <span role="status" aria-live="polite"
+          [attr.aria-label]="_notificationsFacade.unreadNotificationsCount() + ' unread notifications'"
+          class="absolute bg-primary text-white dark:text-black rounded-full text-[10px] font-medium min-w-4 h-4 flex justify-center items-center -top-1 -inset-e-1 rtl:pt-0.5 select-none pointer-events-none">
+          {{ _notificationsFacade.unreadNotificationsCount() > 99 ? '99+' :
+          _notificationsFacade.unreadNotificationsCount() }}
+        </span>
+        }
+      </div>
     </div>
+
+    <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="notiOrigin"
+      [cdkConnectedOverlayOpen]="notificationsOpen()"
+      [cdkConnectedOverlayHasBackdrop]="true"
+      [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+      cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+      (backdropClick)="notificationsOpen.set(false)"
+      (detach)="notificationsOpen.set(false)"
+      (overlayKeydown)="onOverlayKeydown($event)">
+      <app-notifications (closePanel)="notificationsOpen.set(false)"></app-notifications>
+    </ng-template>
 
     <!-- Separator -->
     <span class="h-6 w-px bg-gray-200 dark:bg-zinc-600 hidden sm:block"></span>
