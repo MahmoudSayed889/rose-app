@@ -142,8 +142,7 @@
     "addedToWishlist": "Added to wishlist",
     "addToWishlistError": "Failed to add item to wishlist"
   },
-  "cart": {
-  },
+  "cart": {},
   "orders": {
     "title": "Orders",
     "orderNumber": "Order #",
@@ -216,7 +215,7 @@
       "upload-photo": "Upload Photo",
       "upload-desc": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
       "request-code": "Request Code",
-      "confirm":"Confirm"
+      "confirm": "Confirm"
     }
   },
   "productDetails": {
@@ -307,5 +306,12 @@
         "overlayText": "Mark Every Year of Love with a Meaningful Surprise"
       }
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "clear_all": "Clear all",
+    "read_all": "Mark all as read",
+    "read_notification": "Mark as read",
+    "delete_notification": "Delete notification"
   }
 }

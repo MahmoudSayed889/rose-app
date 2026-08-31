@@ -6,7 +6,9 @@
     class="flex items-center justify-between bg-[#741C21] dark:bg-[#FFC2D0] p-4 text-white dark:text-zinc-800"
   >
     <h2 class="text-xl font-bold">
-      Notifications ({{ notificationsFacadeService.notificationsList().length }})
+      {{ 'notifications.title' | translate }} ({{
+        notificationsFacadeService.notificationsList().length
+      }})
     </h2>
   </div>
 
@@ -40,7 +42,7 @@
         <path d="M19 14H5l-1.973 6.767A1 1 0 0 0 4 22h16a1 1 0 0 0 .973-1.233z" />
         <path d="m8 22 1-4" />
       </svg>
-      <span>Clear all</span>
+      <span>{{'notifications.clear_all'|translate}}</span>
     </button>
 
     <button
@@ -67,7 +69,7 @@
         <path d="M18 6 7 17l-5-5" />
         <path d="m22 10-7.5 7.5L13 16" />
       </svg>
-      <span>Mark all as read</span>
+      <span>{{'notifications.read_all'|translate}}</span>
     </button>
   </div>
 

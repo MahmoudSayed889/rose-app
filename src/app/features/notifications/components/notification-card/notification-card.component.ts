@@ -1,10 +1,11 @@
 import { Component, computed, input, output, signal } from '@angular/core';
 import { Notification } from '../../models/notifications.interface';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notification-card',
-  imports: [OverlayModule],
+  imports: [OverlayModule, TranslatePipe],
   templateUrl: './notification-card.component.html',
   styleUrl: './notification-card.component.css',
 })

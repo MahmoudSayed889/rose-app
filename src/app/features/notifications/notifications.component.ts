@@ -3,10 +3,11 @@ import { NotificationsFacadeService } from './services/notifications-facade.serv
 import { EmptyNotificationsComponent } from './components/empty-notifications/empty-notifications.component';
 import { NotificationCardComponent } from './components/notification-card/notification-card.component';
 import { NotificationsLoadingComponent } from './components/notifications-loading/notifications-loading.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notifications',
-  imports: [NotificationCardComponent, EmptyNotificationsComponent, NotificationsLoadingComponent],
+  imports: [NotificationCardComponent, EmptyNotificationsComponent, NotificationsLoadingComponent, TranslatePipe],
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.css',
 })
