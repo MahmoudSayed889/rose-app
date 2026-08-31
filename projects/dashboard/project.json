@@ -41,7 +41,8 @@
     "test": {
       "executor": "@angular/build:unit-test",
       "options": {
-        "watch": false
+        "watch": false,
+        "buildTarget": "dashboard:esbuild:development"
       }
     },
     "serve-static": {
@@ -71,7 +72,7 @@
           }
         ],
         "styles": [
-          "projects/dashboard/src/styles.scss"
+          "projects/dashboard/src/styles.css"
         ],
         "polyfills": [
           "es-module-shims"

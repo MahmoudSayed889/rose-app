@@ -1,0 +1,49 @@
+<p-drawer
+  [(visible)]="open"
+  [modal]="overlay()"
+  [dismissible]="overlay()"
+  [closeOnEscape]="overlay()"
+  [showCloseIcon]="false"
+  position="left"
+  [attr.data-overlay]="overlay() ? '' : null"
+>
+  <div class="sidebar-header">
+    <img src="assets/imgs/logo.png" alt="Rose" class="sidebar-logo sidebar-logo--desktop" />
+    <img src="assets/imgs/sidebar-responsive.svg" alt="Rose" class="sidebar-logo sidebar-logo--mobile" />
+  </div>
+
+  <a class="preview-btn" [href]="previewWebsiteUrl()" target="_blank" rel="noopener">
+    <i class="pi pi-external-link"></i>
+    <span>{{ 'sidebar.previewWebsite' | translate }}</span>
+  </a>
+
+  <nav class="sidebar-content">
+    <ul class="sidebar-menu">
+      @for (item of items(); track item.id) {
+        <li class="sidebar-menu-item">
+          <a
+            class="sidebar-menu-button"
+            [routerLink]="item.routerLink"
+            routerLinkActive="sidebar-menu-button--active"
+            (click)="handleItemClick()"
+          >
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <img [src]="userAvatar()" alt="" class="footer-avatar" />
+    <div class="footer-user-info">
+      <span class="footer-user-name">{{ userName() }}</span>
+      <span class="footer-user-email">{{ userEmail() }}</span>
+    </div>
+    <button type="button" class="footer-more-btn" (click)="userMenu.toggle($event)" aria-label="More options">
+      <i class="pi pi-ellipsis-v"></i>
+    </button>
+    <p-menu #userMenu [model]="userMenuItems" [popup]="true" appendTo="body" />
+  </div>
+</p-drawer>
