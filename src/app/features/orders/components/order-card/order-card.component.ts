@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, DOCUMENT, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DOCUMENT, inject, input, output, signal } from '@angular/core';
 import { DatePipe, DecimalPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Order, OrderItem } from '../../models/orders';
@@ -11,10 +11,12 @@ import {
   STATUS_BADGE_CLASSES,
   StatusConfig,
 } from './order-card.config';
+import { ButtonComponent } from "reusable-components";
+import { icons } from 'lucide-angular';
 
 @Component({
   selector: 'app-order-card',
-  imports: [TranslatePipe, DecimalPipe, DatePipe, NgClass, NgTemplateOutlet],
+  imports: [TranslatePipe, DecimalPipe, DatePipe, NgClass, NgTemplateOutlet, ButtonComponent],
   templateUrl: './order-card.component.html',
   styleUrl: './order-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,8 +24,11 @@ import {
 export class OrderCardComponent {
   private readonly _document = inject(DOCUMENT);
   private readonly _translateService = inject(TranslateService);
-
+  
+  icons = icons;
+  
   order = input.required<Order>();
+  payOrder = output<string>();
 
   expanded = signal<boolean>(false);
 
@@ -78,6 +83,10 @@ export class OrderCardComponent {
     const method = (this.order().paymentMethod ?? '').toUpperCase();
     return PAYMENT_METHOD_ICONS[method] ?? 'pi-wallet';
   });
+
+  pay(): void {
+    this.payOrder.emit(this.order().id);
+  }
 
   toggleExpanded(): void {
     this.expanded.update((value) => !value);

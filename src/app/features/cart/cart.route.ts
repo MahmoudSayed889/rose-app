@@ -31,9 +31,9 @@ export const CartRoutes: Routes = [
                     {
                         path: 'payment-method',
                         loadComponent: () => import('./pages/checkout/payment-method/payment-method.component').then((c) => c.PaymentMethodComponent),
-                    }
+                    },
                 ],
-            }
+            },
         ]
     }
 ];
