@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Toolbar } from '../toolbar/toolbar';
-import { Sidebar, AppSidebarItem } from '../sidebar/sidebar';
+import { Sidebar } from '../sidebar/sidebar';
+import { AppSidebarItem } from '../models/sidebar.interface';
 
 // Keep in sync with the breakpoint in dashboard-layout.scss.
 @Component({

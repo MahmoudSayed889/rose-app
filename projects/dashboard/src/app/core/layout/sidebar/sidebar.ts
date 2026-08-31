@@ -3,17 +3,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { MenuModule } from 'primeng/menu';
 import type { MenuItem } from 'primeng/api';
-
-export interface AppSidebarItem {
-  id: string;
-  label: string;
-  icon: string;
-  routerLink: string | string[];
-}
+import { TranslatePipe } from '@ngx-translate/core';
+import { AppSidebarItem } from '../models/sidebar.interface';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive, DrawerModule, MenuModule],
+  imports: [RouterLink, RouterLinkActive, DrawerModule, MenuModule, TranslatePipe],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })
