@@ -1,0 +1,124 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+@import "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+:root {
+  --p-primary-color: #A6252A !important;
+  --p-primary-hover-color: #A6252A !important;
+  --p-primary-active-color: #A6252A !important;
+  --p-primary-contrast-color: #ffffff !important;
+
+  --p-checkbox-border-radius: .45rem !important;
+  --p-checkbox-border-color: #A6252A !important;
+  --p-checkbox-hover-border-color: #A6252A !important;
+
+  --zink-50: #FAFAFA;
+  --zink-200:#E4E4E7;
+  --zinc-400: #A1A1AA;
+  --zinc-500: #71717A;
+  --zinc-700: #3F3F46;
+  --zinc-800: #27272A;
+  --maroon-900:#501419;
+  --maroon-700: #741C21;
+  --maroon-600: #A6252A;
+  --maroon-400: #D75458;
+  --danger: #DC2626;
+  --soft-pink: #FF668B;
+  --light-pink:#FBEAEA;
+  --p-rating-icon-color: #FBA707 !important;
+  --p-rating-icon-active-color: #FBA707 !important;
+
+  --p-toast-text-gap: 0rem !important;
+
+  --p-paginator-nav-button-border-radius: 12px !important;
+  --p-paginator-nav-button-color: #000 !important;
+  --p-paginator-nav-button-selected-color: #fff !important;
+  --p-paginator-nav-button-selected-background: #A6252A !important;
+
+  --title-after-background: #FF668B;
+  --title-before-background: #fcd6df;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #3F3F46;
+  --sidebar-border: #E4E4E7;
+  --sidebar-item-hover-bg: #FBEAEA;
+  --sidebar-item-active-bg: #FBEAEA;
+  --sidebar-item-active-text: #A6252A;
+}
+
+.dark {
+  --p-primary-color: #FFA3B9 !important;
+  --p-primary-hover-color: #FFA3B9 !important;
+  --p-primary-active-color: #FFA3B9 !important;
+
+  --p-inputtext-background: #3F3F46 !important;
+  --p-inputtext-disabled-background: #212124 !important;
+
+  --p-checkbox-border-color: #FFA3B9 !important;
+  --p-checkbox-hover-border-color: #FFA3B9 !important;
+
+  --p-paginator-background: transparent !important;
+  --p-paginator-nav-button-color: #fff !important;
+  --p-paginator-nav-button-background: #3F3F46 !important;
+  --p-paginator-nav-button-selected-color: #000 !important;
+  --p-paginator-nav-button-selected-background: #FFA3B9 !important;
+
+  --title-after-background: #FF668B;
+  --title-before-background: #3F3F46;
+
+  --sidebar-bg: #27272A;
+  --sidebar-text: #E4E4E7;
+  --sidebar-border: #3F3F46;
+  --sidebar-item-hover-bg: rgba(255, 163, 185, 0.12);
+  --sidebar-item-active-bg: rgba(255, 163, 185, 0.16);
+  --sidebar-item-active-text: #FFA3B9;
+
+  background: #27272A;
+}
+
+body {
+  overflow-x: hidden !important;
+}
+
+html[lang="ar"] body {
+  font-family: "Zain", sans-serif;
+}
+
+html[lang="en"] body {
+  font-family: "Sarabun", sans-serif;
+}
+
+html[lang="ar"] .lang-switcher {
+  font-family: "Sarabun", sans-serif;
+}
+
+html[lang="en"] .lang-switcher {
+  font-family: "Zain", sans-serif;
+}
+
+@font-face {
+  font-family: 'Edwardian Script ITC';
+  src: url('/assets/fonts/edwardianscriptitc.ttf') format('truetype');
+}
+@media (max-width: 768px) {
+  p-drawer .p-drawer-header {
+    display: none !important;
+  }
+  .p-breadcrumb-item .p-breadcrumb-item-label {
+    font-size: 13px;
+  }
+  .p-breadcrumb-separator svg {
+    width: 12px;
+    height: 12px;
+  }
+  .p-breadcrumb {
+    padding: 0.7rem 0.3rem !important;
+  }
+}
+
+.p-breadcrumb-item:last-child .p-breadcrumb-item-label {
+  color: var(--p-primary-color);
+}

@@ -1,0 +1,18 @@
+<div class="toolbar-row">
+  <div class="toolbar-logo">
+    <img src="assets/imgs/logo.png" alt="Rose" />
+  </div>
+
+  <p-breadcrumb class="toolbar-breadcrumb" [model]="items()" />
+
+  <button
+    type="button"
+    class="toolbar-user-trigger"
+    (click)="userMenu.toggle($event)"
+    aria-label="Open user menu"
+  >
+    <img [src]="userAvatar()" alt="" class="toolbar-avatar" />
+    <i class="pi pi-bars"></i>
+  </button>
+  <p-menu #userMenu [model]="userMenuItems" [popup]="true" appendTo="body" />
+</div>

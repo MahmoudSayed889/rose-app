@@ -1,0 +1,57 @@
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+}
+
+.toolbar-logo {
+  display: none;
+  flex-shrink: 0;
+
+  img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+.toolbar-breadcrumb {
+  flex: 1;
+  min-width: 0;
+}
+
+.toolbar-user-trigger {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  .pi-bars {
+    font-size: 1.15rem;
+    color: var(--zinc-700, #3f3f46);
+  }
+}
+
+.toolbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+// Keep in sync with the breakpoint in sidebar.scss / dashboard-layout.scss.
+// Below this width the sidebar collapses into a bottom bar and the
+// logo + user menu move up here instead.
+@media (max-width: 768px) {
+  .toolbar-logo,
+  .toolbar-user-trigger {
+    display: flex !important;
+  }
+}
+
+
