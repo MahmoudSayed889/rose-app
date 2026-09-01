@@ -315,5 +315,12 @@
         "overlayText": "Mark Every Year of Love with a Meaningful Surprise"
       }
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "clear_all": "Clear all",
+    "read_all": "Mark all as read",
+    "read_notification": "Mark as read",
+    "delete_notification": "Delete notification"
   }
 }

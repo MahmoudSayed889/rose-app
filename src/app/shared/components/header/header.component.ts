@@ -27,6 +27,9 @@ import { SearchDialogComponent } from '../search-dialog/search-dialog.component'
 import { FormsModule } from '@angular/forms';
 import { Popover } from 'primeng/popover';
 import { timeInterval } from 'rxjs';
+import { NotificationsComponent } from '../../../features/notifications/notifications.component';
+import { NotificationsFacadeService } from '../../../features/notifications/services/notifications-facade.service';
+import { OverlayModule, ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-header',
@@ -47,6 +50,8 @@ import { timeInterval } from 'rxjs';
     AddressDialogComponent,
     SearchDialogComponent,
     FormsModule,
+    NotificationsComponent,
+    OverlayModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -58,12 +63,13 @@ export class HeaderComponent extends AppComponentBase {
   private readonly _wishlistFacadeService = inject(WishlistFacadeService);
   private readonly _translateService = inject(TranslateService);
   private readonly _router = inject(Router);
+  protected readonly _notificationsFacade = inject(NotificationsFacadeService);
+  private readonly sso = inject(ScrollStrategyOptions);
 
   user = signal<User | null>(null);
   address = signal<Address | null>(null);
 
   userMenuItems: MenuItem[] = [];
-  notificationItems: MenuItem[] = [];
   secondNavbarItems: NavbarItem[] = [];
 
   visible = signal<boolean>(false);
@@ -74,6 +80,8 @@ export class HeaderComponent extends AppComponentBase {
 
   cartItems = this._cartFacadeService.cartItems;
   wishlistItems = this._wishlistFacadeService.wishlistItems;
+
+  notificationsCount = this._notificationsFacade.unreadNotificationsCount();
 
   searchVal = signal<string>('');
   visibleSearchDialog = signal<boolean>(false);
@@ -86,6 +94,7 @@ export class HeaderComponent extends AppComponentBase {
         this.getUser();
         this._cartFacadeService.getCartItems();
         this._wishlistFacadeService.loadWishlist();
+        this._notificationsFacade.getUnreadNotificationsCount();
       }
 
       if (!this.isAuthenticated()) {
@@ -104,7 +113,6 @@ export class HeaderComponent extends AppComponentBase {
 
   ngOnInit() {
     this.initSecondNavbarItems();
-    this.initNotificationItems();
 
     if (this.isAuthenticated()) {
       this._translateService.onLangChange.subscribe(() => {
@@ -173,10 +181,6 @@ export class HeaderComponent extends AppComponentBase {
     ];
   }
 
-  initNotificationItems() {
-    this.notificationItems = [{ label: 'Your Order Has Been Shipped', icon: 'pi pi-check-circle' }];
-  }
-
   showDialog(tab: 'login' | 'register' = 'login') {
     this.activeTap = tab;
     this.visible.set(true);
@@ -194,5 +198,18 @@ export class HeaderComponent extends AppComponentBase {
     setTimeout(() => {
       this.visibleSearchDialog.update((val) => (val = false));
     }, 100);
+  }
+
+  notificationsOpen = signal<boolean>(false);
+  scrollStrategy = this.sso.close({ threshold: 10 });
+
+  onOverlayKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.notificationsOpen.set(false);
+    }
+  }
+
+  toggleNotificationsOpen(): void {
+    this.notificationsOpen.update((v) => !v);
   }
 }

@@ -309,5 +309,12 @@
                 "overlayText": "احتفل بكل عام من الحب بمفاجأة ذات معنى"
             }
         }
+    },
+    "notifications": {
+        "title": "الإشعارات",
+        "clear_all": "مسح الكل",
+        "read_all": "تحديد الكل كمقروء",
+        "read_notification": "تحديد كمقروء",
+        "delete_notification": "حذف الإشعار"
     }
 }
