@@ -1,5 +1,16 @@
 {
   "sidebar": {
-    "previewWebsite": "Preview website"
+    "previewWebsite": "Preview website",
+    "nav": {
+      "dashboard": "Dashboard",
+      "overview": "Overview",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "products": "Products"
+    },
+    "userMenu": {
+      "profile": "Profile",
+      "logout": "Logout"
+    }
   }
 }

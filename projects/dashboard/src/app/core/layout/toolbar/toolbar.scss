@@ -3,6 +3,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 1rem;
+    border-bottom: 1px solid #E4E4E7;
 }
 
 .toolbar-logo {
@@ -44,6 +45,25 @@
   object-fit: cover;
 }
 
+.toolbar-switchers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+// Shown instead, inside the user popup menu, once the standalone toolbar
+// switchers are hidden on mobile (see the media query below).
+.user-menu-switchers {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem 0.75rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--p-surface-border, #e5e7eb);
+}
+
 // Keep in sync with the breakpoint in sidebar.scss / dashboard-layout.scss.
 // Below this width the sidebar collapses into a bottom bar and the
 // logo + user menu move up here instead.
@@ -51,6 +71,33 @@
   .toolbar-logo,
   .toolbar-user-trigger {
     display: flex !important;
+  }
+
+  // The theme/language switchers move into the user popup menu on mobile
+  // instead of sitting as standalone toolbar buttons.
+  .toolbar-switchers {
+    display: none;
+  }
+
+  .user-menu-switchers {
+    display: flex;
+  }
+}
+
+// The separator icon is a fixed chevron-right glyph with no built-in RTL
+// awareness — flip it so it still reads as "next" in a right-to-left trail.
+:host-context([dir='rtl']) {
+  ::ng-deep .p-breadcrumb-separator svg {
+    transform: scaleX(-1);
+  }
+}
+
+:host-context(.dark) {
+  ::ng-deep .p-breadcrumb {
+    background: var(--p-surface-800);
+  }
+  .toolbar-row {
+  border-bottom: 1px solid #3F3F46;
   }
 }
 
