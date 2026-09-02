@@ -8,6 +8,6 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'overview',
-    loadComponent: () => import('./features/overview/overview').then((m) => m.Overview),
+    loadComponent: () => import('./features/overview/overview.component').then((m) => m.OverviewComponent),
   },
 ];

@@ -31,7 +31,7 @@
       @for (order of orders(); track order.id) {
         <app-order-card 
           [order]="order" 
-          (payOrder)="payOrder($event)"
+          (payOrder)="payOrder(order)"
         />
       }
     </div>

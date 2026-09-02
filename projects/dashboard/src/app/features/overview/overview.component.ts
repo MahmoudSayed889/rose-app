@@ -7,7 +7,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DashboardPayload } from '../../core/models/dashboard.models';
@@ -15,11 +15,11 @@ import {
   StatisticsParams,
   StatisticsService,
 } from '../../core/services/statistics.service';
+import { LayoutService } from '../../core/services/layout.service';
 
 @Component({
   selector: 'app-overview',
-  standalone: true,
-  imports: [ChartModule, DecimalPipe],
+  imports: [ChartModule, DecimalPipe, NgClass],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +27,7 @@ import {
 export class OverviewComponent {
   private readonly statisticsService = inject(StatisticsService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly _layoutService = inject(LayoutService);
 
   stats = signal<DashboardPayload | null>(null);
   isLoading = signal<boolean>(false);
@@ -113,11 +114,12 @@ export class OverviewComponent {
 
   getTopProductBg(index: number): string {
     const bgs = [
-      'linear-gradient(90deg,rgba(223,172,22,.25) 0%,rgba(223,172,22,.1) 100%)',
-      'linear-gradient(90deg,rgba(117,127,149,.25) 0%,rgba(117,127,149,.1) 100%)',
-      'linear-gradient(90deg,rgba(145,68,0,.25) 0%,rgba(145,68,0,.1) 100%)',
+      'top-product-gold',
+      'top-product-silver',
+      'top-product-bronze',
     ];
-    return bgs[index] ?? '#F4F4F5';
+
+    return bgs[index] ?? 'top-product-default';
   }
 
   constructor() {
@@ -125,6 +127,8 @@ export class OverviewComponent {
       this.revenuePeriod();
       this.loadStats();
     });
+
+    this._layoutService.setToolbarItems([{ label: 'sidebar.nav.dashboard' }, { label: 'sidebar.nav.overview' }]);
   }
 
   loadStats(): void {

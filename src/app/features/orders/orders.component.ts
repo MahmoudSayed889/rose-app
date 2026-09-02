@@ -54,15 +54,20 @@ export class OrdersComponent extends AppComponentBase implements OnInit {
       });
   }
 
-  payOrder(orderId: string): void {
+  payOrder(order: Order): void {
     const dataToSend = {
-      orderId: orderId
+      orderId: order.id
     }
 
     this._paymentService.CheckoutSession(dataToSend).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
       next: (res) => {
         // console.log(res);
         window.location.href = res.payload.checkoutUrl;
+      }, error: (err) => {
+        console.log(err.error.message);
+        if (err.error.message.includes('Order is already paid')) {
+          this.getCheckoutSession(order.stripeCheckoutSessionId)
+        }
       }
     })
 
@@ -71,9 +76,9 @@ export class OrdersComponent extends AppComponentBase implements OnInit {
   getCheckoutSession(sessionId: string) {
     this._paymentService.getCheckoutSession(sessionId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
       next: () => {
-        this._toastService.toaster('success', this.isDirRtl() ? 'تمت عملية الدفع بنجاح' : 'Payment successful')
+        // this._toastService.toaster('success', this.isDirRtl() ? 'تمت عملية الدفع بنجاح' : 'Payment successful')
+        this.loadOrders();
       }, error: () => {
-
       }
     })
   }

@@ -23,11 +23,12 @@ export interface Order {
     id: string
     userId: string
     addressId: string
-    couponId: string
+    couponId: any
     status: string
     paymentMethod: string
     paymentStatus: string
     stripePaymentIntentId: any
+    stripeCheckoutSessionId: string
     subtotal: string
     discount: string
     shipping: string
@@ -38,7 +39,7 @@ export interface Order {
     updatedAt: string
     user: User
     address: Address
-    coupon: Coupon
+    coupon: any
     orderItems: OrderItem[]
 }
 

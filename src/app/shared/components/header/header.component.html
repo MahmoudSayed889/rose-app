@@ -93,7 +93,7 @@
         @if (_notificationsFacade.unreadNotificationsCount() > 0) {
         <span role="status" aria-live="polite"
           [attr.aria-label]="_notificationsFacade.unreadNotificationsCount() + ' unread notifications'"
-          class="absolute bg-primary text-white dark:text-black rounded-full text-[10px] font-medium min-w-4 h-4 flex justify-center items-center -top-1 -inset-e-1 rtl:pt-0.5 select-none pointer-events-none">
+          class="absolute bg-primary text-white dark:text-black rounded-full text-[10px] font-medium min-w-4 h-4 flex justify-center items-center -top-1 -right-1 pb-0.5 rtl:pb-0 rtl:pt-0.5 select-none pointer-events-none">
           {{ _notificationsFacade.unreadNotificationsCount() > 99 ? '99+' :
           _notificationsFacade.unreadNotificationsCount() }}
         </span>

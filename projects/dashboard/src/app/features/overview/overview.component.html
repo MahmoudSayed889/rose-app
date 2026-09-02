@@ -7,7 +7,8 @@
   <div class="dashboard-grid-1">
 
     <div class="stat-cards">
-      <div class="stat-card" style="background:#FBEAEA">
+      <!-- Products -->
+      <div class="stat-card bg-[#FBEAEA] dark:bg-[#3A2525]">
         <i class="pi pi-box" style="color:#A6252A;font-size:1.5rem"></i>
         <span class="stat-value" style="color:#A6252A">
           {{ stats()?.summary?.totalProducts }}
@@ -15,7 +16,8 @@
         <span class="stat-label">Total Products</span>
       </div>
 
-      <div class="stat-card" style="background:#EFF6FF">
+      <!-- Orders -->
+      <div class="stat-card bg-[#EFF6FF] dark:bg-[#1E2D4A]">
         <i class="pi pi-file" style="color:#155DFC;font-size:1.5rem"></i>
         <span class="stat-value" style="color:#155DFC">
           {{ stats()?.summary?.totalOrders }}
@@ -23,7 +25,8 @@
         <span class="stat-label">Total Orders</span>
       </div>
 
-      <div class="stat-card" style="background:#F5F0FF">
+      <!-- Categories -->
+      <div class="stat-card bg-[#F5F0FF] dark:bg-[#30234A]">
         <i class="pi pi-list" style="color:#753CBF;font-size:1.5rem"></i>
         <span class="stat-value" style="color:#753CBF">
           {{ stats()?.summary?.totalCategories }}
@@ -31,7 +34,8 @@
         <span class="stat-label">Total Categories</span>
       </div>
 
-      <div class="stat-card" style="background:#ECFDF5">
+      <!-- Revenue -->
+      <div class="stat-card bg-[#ECFDF5] dark:bg-[#173B30]">
         <i class="pi pi-dollar" style="color:#009966;font-size:1.5rem"></i>
         <span class="stat-value" style="color:#009966">
           {{ stats()?.summary?.totalRevenue | number }}
@@ -41,52 +45,73 @@
       </div>
     </div>
 
-    <div class="panel">
-      <h3 class="section-title">All Categories</h3>
+
+    <div class="panel bg-white dark:bg-[#18181B] border border-gray-200 dark:border-[#27272A]">
+      <h3 class="section-title text-gray-900 dark:text-white">
+        All Categories
+      </h3>
+
       <div class="scroll-list">
         @for (cat of stats()?.categories ?? []; track cat.id) {
-          <div class="list-row">
-            <span>{{ cat.title }}</span>
-            <span class="muted">{{ cat.productCount }} Products</span>
+          <div class="list-row border-b border-gray-100 dark:border-[#27272A] hover:bg-gray-50 dark:hover:bg-[#222225]">
+            <span class="text-gray-800 dark:text-gray-200">
+              {{ cat.title }}
+            </span>
+
+            <span class="muted text-gray-500 dark:text-gray-400">
+              {{ cat.productCount }} Products
+            </span>
           </div>
         }
       </div>
     </div>
+
 
   </div>
 
   <!-- SECTION 2: orders doughnut (4fr) + revenue line (8fr) -->
   <div class="dashboard-grid-2">
 
-    <div class="panel">
-      <h3 class="section-title">Orders Status</h3>
+    <!-- Orders Status -->
+    <div class="panel bg-white dark:bg-[#18181B] border border-gray-200 dark:border-[#27272A]">
+      <h3 class="section-title text-gray-900 dark:text-white">
+        Orders Status
+      </h3>
+
       <div class="chart-wrap">
-        <p-chart type="doughnut"
+        <p-chart
+          type="doughnut"
           [data]="ordersChartData()"
           [options]="ordersChartOptions">
         </p-chart>
       </div>
+
       <div class="legend">
-        <div class="legend-item">
+        <div class="legend-item text-gray-800 dark:text-gray-200">
           <span class="dot green"></span>
           <span>Completed</span>
-          <span class="muted ms-auto">
+
+          <span class="muted ms-auto text-gray-500 dark:text-gray-400">
             {{ stats()?.orderStatus?.completed?.count }}
             ({{ completedPercent() }}%)
           </span>
         </div>
-        <div class="legend-item">
+
+        <div class="legend-item text-gray-800 dark:text-gray-200">
           <span class="dot blue"></span>
           <span>In progress</span>
-          <span class="muted ms-auto">
+
+          <span class="muted ms-auto text-gray-500 dark:text-gray-400">
             {{ stats()?.orderStatus?.inProgress?.count }}
             ({{ inProgressPercent() }}%)
           </span>
         </div>
-        <div class="legend-item">
+
+        <div class="legend-item text-gray-800 dark:text-gray-200">
           <span class="dot red"></span>
           <span>Cancelled</span>
-          <span class="muted ms-auto">
+
+          <span class="muted ms-auto text-gray-500 dark:text-gray-400">
             {{ stats()?.orderStatus?.canceled?.count }}
             ({{ cancelledPercent() }}%)
           </span>
@@ -94,50 +119,90 @@
       </div>
     </div>
 
-    <div class="panel">
+
+    <!-- Revenue -->
+    <div class="panel bg-white dark:bg-[#18181B] border border-gray-200 dark:border-[#27272A]">
+
       <div class="panel-header">
-        <h3 class="section-title">Revenue</h3>
+        <h3 class="section-title text-gray-900 dark:text-white">
+          Revenue
+        </h3>
+
         <div class="period-toggle">
           <button
+            class="text-gray-600 dark:text-gray-400
+                  hover:bg-gray-100 dark:hover:bg-[#27272A]"
             [class.active]="revenuePeriod() === 'monthly'"
             (click)="revenuePeriod.set('monthly')">
             Monthly
           </button>
+
           <button
+            class="text-gray-600 dark:text-gray-400
+                  hover:bg-gray-100 dark:hover:bg-[#27272A]"
             [class.active]="revenuePeriod() === 'weekly'"
             (click)="revenuePeriod.set('weekly')">
             Last Week
           </button>
         </div>
       </div>
-      <p-chart type="line"
+
+      <p-chart
+        type="line"
         [data]="revenueChartData()"
         [options]="revenueChartOptions">
       </p-chart>
+
     </div>
 
   </div>
 
+
   <!-- SECTION 3: top selling (6fr) + low stock (6fr) -->
   <div class="dashboard-grid-3">
 
-    <div class="panel">
-      <h3 class="section-title">Top Selling Products</h3>
-      @for (p of stats()?.topSellingProducts ?? [];
-            track p.productId; let i = $index) {
-        <div class="product-row" [style.background]="getTopProductBg(i)">
-          <span class="product-name">{{ p.title }}</span>
-          <span class="muted">{{ p.totalSales }} Sales</span>
+    <!-- Top Selling Products -->
+    <div class="panel bg-white dark:bg-[#18181B] border border-gray-200 dark:border-[#27272A]">
+      <h3 class="section-title text-gray-900 dark:text-white">
+        Top Selling Products
+      </h3>
+
+      @for (p of stats()?.topSellingProducts ?? []; track p.productId; let i = $index) {
+        <div
+          class="product-row text-gray-800 dark:text-gray-200"
+          [ngClass]="getTopProductBg(i)"
+        >
+          <span class="product-name">
+            {{ p.title }}
+          </span>
+
+          <span class="muted text-gray-500 dark:text-gray-400">
+            {{ p.totalSales }} Sales
+          </span>
         </div>
       }
     </div>
 
-    <div class="panel">
-      <h3 class="section-title">Low Stock Products</h3>
+
+    <!-- Low Stock Products -->
+    <div class="panel bg-white dark:bg-[#18181B] border border-gray-200 dark:border-[#27272A]">
+      <h3 class="section-title text-gray-900 dark:text-white">
+        Low Stock Products
+      </h3>
+
       @for (p of stats()?.lowStockProducts ?? []; track p.id) {
-        <div class="product-row plain">
-          <span class="product-name">{{ p.title }}</span>
-          <span [class.critical]="p.stock < 5">
+        <div
+          class="product-row plain text-gray-800 dark:text-gray-200
+                border-b border-gray-100 dark:border-[#27272A]"
+        >
+          <span class="product-name">
+            {{ p.title }}
+          </span>
+
+          <span
+            class="text-gray-600 dark:text-gray-400"
+            [class.critical]="p.stock < 5"
+          >
             {{ p.stock }} Products
           </span>
         </div>
@@ -145,6 +210,7 @@
     </div>
 
   </div>
+
 
   }
 </div>
