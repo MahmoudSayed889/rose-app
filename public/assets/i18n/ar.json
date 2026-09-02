@@ -160,6 +160,7 @@
         "createdIn": "تم الإنشاء في:",
         "totalPrice": "السعر الإجمالي:",
         "status": "الحالة:",
+        "pay": "ادفع الآن:",
         "paymentMethod": "طريقة الدفع:",
         "deliveryStatus": "حالة التوصيل:",
         "orderItems": "عناصر الطلب:",
@@ -172,8 +173,9 @@
         "loadError": "فشل تحميل الطلبات. يرجى المحاولة مرة أخرى.",
         "statuses": {
             "PENDING": "قيد الانتظار",
+            "CONFIRMED": "تم التأكيد",
             "IN_PROGRESS": "قيد التنفيذ",
-            "PROCESSING": "قيد التنفيذ",
+            "PROCESSING": "جاري المعالجة",
             "SHIPPED": "تم الشحن",
             "DELIVERED": "تم التوصيل",
             "COMPLETED": "مكتمل",
@@ -191,11 +193,13 @@
             "CANCELLED": "ملغي"
         },
         "paymentStatuses": {
-            "PAID": "مدفوع",
             "PENDING": "قيد الانتظار",
+            "PROCESSING": "جاري المعالجة",
+            "SUCCEEDED": "تم الدفع",
+            "PAID": "مدفوع",
             "UNPAID": "غير مدفوع",
-            "FAILED": "فشل",
-            "REFUNDED": "مسترجع"
+            "FAILED": "فشل الدفع",
+            "REFUNDED": "تم رد المبلغ"
         },
         "paymentMethods": {
             "CASH": "نقداً",
@@ -211,6 +215,11 @@
             "You’ll pay in cash when your order is delivered": "ستدفع نقداً عند تسليم طلبك.",
             "Credit Card": "بطاقة إئتمان",
             "You’ll be securely redirected to Stripe to complete your payment": "سيتم تحويلك بشكل آمن إلى موقع Stripe لإتمام عملية الدفع."
+        },
+        "success": {
+            "payment successful": "تم الدفع بنجاح",
+            "view orders": "عرض الطلبات",
+            "explore products": "المنتجات"
         }
     },
     "account-settings": {
@@ -300,5 +309,12 @@
                 "overlayText": "احتفل بكل عام من الحب بمفاجأة ذات معنى"
             }
         }
+    },
+    "notifications": {
+        "title": "الإشعارات",
+        "clear_all": "مسح الكل",
+        "read_all": "تحديد الكل كمقروء",
+        "read_notification": "تحديد كمقروء",
+        "delete_notification": "حذف الإشعار"
     }
 }

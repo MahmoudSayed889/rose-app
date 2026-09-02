@@ -1,0 +1,26 @@
+.portal-layout {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.portal-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+}
+
+// Keep in sync with the breakpoint in sidebar.scss / toolbar.scss.
+@media (max-width: 768px) {
+  // The sidebar becomes a fixed bottom nav bar at this width — keep it from
+  // covering the last bit of scrollable page content.
+  .content {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+}

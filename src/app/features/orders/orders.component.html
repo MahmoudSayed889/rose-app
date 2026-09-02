@@ -29,7 +29,10 @@
   } @else if (orders().length) {
     <div class="orders-list">
       @for (order of orders(); track order.id) {
-        <app-order-card [order]="order" />
+        <app-order-card 
+          [order]="order" 
+          (payOrder)="payOrder($event)"
+        />
       }
     </div>
   } @else if (loaded()) {

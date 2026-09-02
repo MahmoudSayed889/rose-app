@@ -142,14 +142,14 @@
     "addedToWishlist": "Added to wishlist",
     "addToWishlistError": "Failed to add item to wishlist"
   },
-  "cart": {
-  },
+  "cart": {},
   "orders": {
     "title": "Orders",
     "orderNumber": "Order #",
     "createdIn": "Created in:",
     "totalPrice": "Total Price:",
     "status": "Status:",
+    "pay": "Pay now:",
     "paymentMethod": "Payment Method:",
     "deliveryStatus": "Delivery Status:",
     "orderItems": "Order Items:",
@@ -162,13 +162,14 @@
     "loadError": "Failed to load orders. Please try again.",
     "statuses": {
       "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
       "IN_PROGRESS": "In Progress",
-      "PROCESSING": "In Progress",
+      "PROCESSING": "Processing",
       "SHIPPED": "Shipped",
       "DELIVERED": "Delivered",
       "COMPLETED": "Completed",
       "CANCELED": "Canceled",
-      "CANCELLED": "Canceled"
+      "CANCELLED": "Cancelled"
     },
     "deliveryStatuses": {
       "PENDING": "Pending",
@@ -181,8 +182,10 @@
       "CANCELLED": "Canceled"
     },
     "paymentStatuses": {
-      "PAID": "Paid",
       "PENDING": "Pending",
+      "PROCESSING": "Processing",
+      "SUCCEEDED": "Paid",
+      "PAID": "Paid",
       "UNPAID": "Unpaid",
       "FAILED": "Failed",
       "REFUNDED": "Refunded"
@@ -201,6 +204,11 @@
       "You’ll pay in cash when your order is delivered": "You’ll pay in cash when your order is delivered.",
       "Credit Card": "Credit Card",
       "You’ll be securely redirected to Stripe to complete your payment": "You’ll be securely redirected to Stripe to complete your payment."
+    },
+    "success": {
+      "payment successful": "payment successful",
+      "view orders": "view orders",
+      "explore products": "explore products"
     }
   },
   "account-settings": {
@@ -216,7 +224,7 @@
       "upload-photo": "Upload Photo",
       "upload-desc": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
       "request-code": "Request Code",
-      "confirm":"Confirm"
+      "confirm": "Confirm"
     }
   },
   "productDetails": {
@@ -307,5 +315,12 @@
         "overlayText": "Mark Every Year of Love with a Meaningful Surprise"
       }
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "clear_all": "Clear all",
+    "read_all": "Mark all as read",
+    "read_notification": "Mark as read",
+    "delete_notification": "Delete notification"
   }
 }
