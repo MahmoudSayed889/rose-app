@@ -2,12 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
   effect,
   inject,
   signal,
 } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DashboardPayload } from '../../core/models/dashboard.models';
 import {
   StatisticsParams,
@@ -24,6 +26,7 @@ import {
 })
 export class OverviewComponent {
   private readonly statisticsService = inject(StatisticsService);
+  private readonly destroyRef = inject(DestroyRef);
 
   stats = signal<DashboardPayload | null>(null);
   isLoading = signal<boolean>(false);
@@ -132,12 +135,15 @@ export class OverviewComponent {
       topProductsLimit: 10,
       lowStockLimit: 10,
     };
-    this.statisticsService.getStatistics(params).subscribe({
-      next: (data) => {
-        this.stats.set(data);
-        this.isLoading.set(false);
-      },
-      error: () => this.isLoading.set(false),
-    });
+    this.statisticsService
+      .getStatistics(params)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (data) => {
+          this.stats.set(data);
+          this.isLoading.set(false);
+        },
+        error: () => this.isLoading.set(false),
+      });
   }
 }
