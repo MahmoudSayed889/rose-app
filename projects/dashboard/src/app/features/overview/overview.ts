@@ -11,6 +11,6 @@ export class Overview {
   private readonly _layoutService = inject(LayoutService);
 
   constructor() {
-    this._layoutService.setToolbarItems([{ label: 'Dashboard' }, { label: 'Overview' }]);
+    this._layoutService.setToolbarItems([{ label: 'sidebar.nav.dashboard' }, { label: 'sidebar.nav.overview' }]);
   }
 }

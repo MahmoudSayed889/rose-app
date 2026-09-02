@@ -13,9 +13,9 @@ import { AppSidebarItem } from '../models/sidebar.interface';
 })
 export class DashboardLayout {
   protected readonly navItems: AppSidebarItem[] = [
-    { id: 'overview', label: 'Overview', icon: 'pi pi-th-large', routerLink: '/overview' },
-    { id: 'categories', label: 'Categories', icon: 'pi pi-clipboard', routerLink: '/categories' },
-    { id: 'occasions', label: 'Occasions', icon: 'pi pi-calendar', routerLink: '/occasions' },
-    { id: 'products', label: 'Products', icon: 'pi pi-box', routerLink: '/products' },
+    { id: 'overview', label: 'sidebar.nav.overview', icon: 'pi pi-th-large', routerLink: '/overview' },
+    { id: 'categories', label: 'sidebar.nav.categories', icon: 'pi pi-clipboard', routerLink: '/categories' },
+    { id: 'occasions', label: 'sidebar.nav.occasions', icon: 'pi pi-calendar', routerLink: '/occasions' },
+    { id: 'products', label: 'sidebar.nav.products', icon: 'pi pi-box', routerLink: '/products' },
   ];
 }

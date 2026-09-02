@@ -28,7 +28,7 @@
             (click)="handleItemClick()"
           >
             <i [class]="item.icon"></i>
-            <span>{{ item.label }}</span>
+            <span>{{ item.label | translate }}</span>
           </a>
         </li>
       }
@@ -44,6 +44,6 @@
     <button type="button" class="footer-more-btn" (click)="userMenu.toggle($event)" aria-label="More options">
       <i class="pi pi-ellipsis-v"></i>
     </button>
-    <p-menu #userMenu [model]="userMenuItems" [popup]="true" appendTo="body" />
+    <p-menu #userMenu [model]="userMenuItems()" [popup]="true" appendTo="body" />
   </div>
 </p-drawer>

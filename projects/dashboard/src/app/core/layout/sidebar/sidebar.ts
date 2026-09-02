@@ -1,9 +1,9 @@
-import { Component, input, model } from '@angular/core';
+import { Component, computed, inject, input, model } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { MenuModule } from 'primeng/menu';
 import type { MenuItem } from 'primeng/api';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AppSidebarItem } from '../models/sidebar.interface';
 
 @Component({
@@ -13,6 +13,8 @@ import { AppSidebarItem } from '../models/sidebar.interface';
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
+  private readonly _translateService = inject(TranslateService);
+
   readonly items = input<AppSidebarItem[]>([]);
 
   /** Two-way bound open/expanded state — controlled by the consuming layout. */
@@ -27,10 +29,14 @@ export class Sidebar {
   readonly userEmail = input('user-email@example.com');
   readonly userAvatar = input('temp-images/profile-picture.png');
 
-  protected readonly userMenuItems: MenuItem[] = [
-    { label: 'Profile', icon: 'pi pi-user' },
-    { label: 'Logout', icon: 'pi pi-sign-out' },
-  ];
+  protected readonly userMenuItems = computed<MenuItem[]>(() => {
+    this._translateService.currentLang();
+
+    return [
+      { label: this._translateService.instant('sidebar.userMenu.profile'), icon: 'pi pi-user' },
+      { label: this._translateService.instant('sidebar.userMenu.logout'), icon: 'pi pi-sign-out' },
+    ];
+  });
 
   protected handleItemClick(): void {
     if (this.overlay()) {

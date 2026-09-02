@@ -3,7 +3,12 @@
     <img src="assets/imgs/logo.png" alt="Rose" />
   </div>
 
-  <p-breadcrumb class="toolbar-breadcrumb" [model]="items()" />
+  <p-breadcrumb class="toolbar-breadcrumb" [model]="translatedItems()" />
+
+  <div class="toolbar-switchers">
+    <lib-theme-switcher styleClass="toolbar-switcher-btn" />
+    <lib-language-switcher />
+  </div>
 
   <button
     type="button"
@@ -14,5 +19,13 @@
     <img [src]="userAvatar()" alt="" class="toolbar-avatar" />
     <i class="pi pi-bars"></i>
   </button>
-  <p-menu #userMenu [model]="userMenuItems" [popup]="true" appendTo="body" />
+
+  <p-menu #userMenu [model]="userMenuItems()" [popup]="true" appendTo="body">
+    <ng-template #start>
+      <div class="user-menu-switchers">
+        <lib-theme-switcher styleClass="user-menu-switcher-btn" />
+        <lib-language-switcher />
+      </div>
+    </ng-template>
+  </p-menu>
 </div>
