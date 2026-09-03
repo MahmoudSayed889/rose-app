@@ -5,6 +5,8 @@ import { MenuModule } from 'primeng/menu';
 import type { MenuItem } from 'primeng/api';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AppSidebarItem } from '../models/sidebar.interface';
+import { environment } from '../../../../environments/environment';
+import { AuthService } from 'auth-library';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,6 +16,7 @@ import { AppSidebarItem } from '../models/sidebar.interface';
 })
 export class Sidebar {
   private readonly _translateService = inject(TranslateService);
+  private readonly _authService = inject(AuthService)
 
   readonly items = input<AppSidebarItem[]>([]);
 
@@ -33,8 +36,17 @@ export class Sidebar {
     this._translateService.currentLang();
 
     return [
-      { label: this._translateService.instant('sidebar.userMenu.profile'), icon: 'pi pi-user' },
-      { label: this._translateService.instant('sidebar.userMenu.logout'), icon: 'pi pi-sign-out' },
+      {
+        label: this._translateService.instant('sidebar.userMenu.profile'),
+        icon: 'pi pi-user'
+      },
+      {
+        label: this._translateService.instant('sidebar.userMenu.logout'),
+        icon: 'pi pi-sign-out',
+        command: () => {
+          this.logout()
+        }
+      },
     ];
   });
 
@@ -42,5 +54,13 @@ export class Sidebar {
     if (this.overlay()) {
       this.open.set(false);
     }
+  }
+
+  logout() {
+    this._authService.logout(true)
+    const authUrl = new URL('/login', environment.hostUrl)
+    authUrl.searchParams.set('callbackurl', window.location.href)
+
+    window.location.href = authUrl.toString();
   }
 }

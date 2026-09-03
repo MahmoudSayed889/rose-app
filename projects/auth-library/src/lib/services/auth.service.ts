@@ -19,6 +19,8 @@ import { RequestPasswordResetREQ, ForgotPasswordRES, ResetPasswordREQ } from '..
 import { BForgotpass } from '../interfaces/back-interfaces/b-forgotpass';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from "@angular/router";
+import { jwtDecode } from "jwt-decode";
+import { DecodedPayload, UserRole } from '../interfaces/decoded-payload';
 
 @Service()
 export class AuthService implements AuthAPI {
@@ -95,9 +97,21 @@ export class AuthService implements AuthAPI {
     return adapt(res);
   }
 
-  logout(): void {
+  getUserRole(token: string): UserRole | null {
+
+    const decoded = jwtDecode<DecodedPayload>(token);
+    const role = decoded.role?.toLowerCase();
+
+    if (role != null) {
+      return role as UserRole
+    }
+
+    return null
+  }
+
+  logout(callbackurl?: boolean): void {
     this._cookieService.delete('user');
     this.isAuthenticated.set(false);
-    this._router.navigate(['/login']);
+    !callbackurl ? this._router.navigate(['/login']) : '';
   }
 }

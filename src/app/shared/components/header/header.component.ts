@@ -30,6 +30,7 @@ import { timeInterval } from 'rxjs';
 import { NotificationsComponent } from '../../../features/notifications/notifications.component';
 import { NotificationsFacadeService } from '../../../features/notifications/services/notifications-facade.service';
 import { OverlayModule, ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -157,6 +158,10 @@ export class HeaderComponent extends AppComponentBase {
       {
         label: this._translateService.instant('header.userMenuItems.Dashboard'),
         icon: 'pi pi-cog',
+        visible: this.user()?.role.toLocaleLowerCase() == 'admin',
+        command: () => {
+          window.location.href = environment.dashboardRemoteUrl
+        }
       },
       { separator: true },
       {

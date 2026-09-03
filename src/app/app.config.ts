@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { errorInterceptor } from './core/interceptors/error/error.interceptor';
 import { MessageService } from 'primeng/api';
 import { ngxSpinnerInterceptor } from './core/interceptors/ngx-spinner/ngx-spinner.interceptor';
+import { environment } from '../environments/environment';
 
 
 export const appConfig: ApplicationConfig = {
@@ -48,7 +49,7 @@ export const appConfig: ApplicationConfig = {
     MessageService,
     {
       provide: AUTH_API_URL,
-      useValue: 'https://rose-app.elevate-bootcamp.cloud'
+      useValue: environment.apiUrl
     }
   ]
 };

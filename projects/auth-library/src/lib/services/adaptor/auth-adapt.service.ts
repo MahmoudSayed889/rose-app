@@ -48,6 +48,7 @@ export class AuthAdapt implements Adaptor {
       firstName: data.payload.user.firstName,
       lastName: data.payload.user.lastName,
       phone: data.payload.user.phone,
+      role: data.payload.user.role,
       token: data.payload.token,
     };
   }

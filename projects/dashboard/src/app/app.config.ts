@@ -6,14 +6,20 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AUTH_API_URL, tokenInterceptor } from 'auth-library';
+import { AUTH_API_URL } from 'auth-library';
+import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
+import { errorInterceptor } from './core/interceptors/error/error.interceptor';
+import { environment } from '../environments/environment';
+import { MessageService } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(
       withInterceptors([
-        tokenInterceptor
+        tokenInterceptor,
+        errorInterceptor
       ])
     ),
     provideRouter(appRoutes),
@@ -33,9 +39,11 @@ export const appConfig: ApplicationConfig = {
         suffix: '.json'
       }),
     }),
+    CookieService,
+    MessageService,
     {
       provide: AUTH_API_URL,
-      useValue: 'https://rose-app.elevate-bootcamp.cloud'
+      useValue: environment.apiUrl
     }
   ],
 };
