@@ -12,4 +12,9 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./features/overview/overview.component').then((m) => m.OverviewComponent),
     canActivate: [adminGuard]
   },
+  {
+    path: 'products',
+    loadComponent: () => import('./features/products/products.component').then((c) => c.ProductsComponent),
+    canActivate: [adminGuard]
+  },
 ];
