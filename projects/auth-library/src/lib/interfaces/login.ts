@@ -9,5 +9,6 @@ export interface LoginRES {
     phone: string;
     firstName: string;
     lastName: string;
+    role: string
     token: string;
 }

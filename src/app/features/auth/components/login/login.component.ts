@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { SpLineComponent } from "../../../../shared/components/sp-line/sp-line.component";
-import { Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputComponent, ButtonComponent } from 'reusable-components'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -26,6 +26,7 @@ export class LoginComponent extends AppComponentBase implements OnInit {
 
   private fb = inject(FormBuilder)
   private _router = inject(Router)
+  private _activatedRoute = inject(ActivatedRoute)
 
   inPoppup = input<boolean>(false)
 
@@ -53,9 +54,7 @@ export class LoginComponent extends AppComponentBase implements OnInit {
 
     this._authService.Login(dataToSend).subscribe({
       next: (res) => {
-
         this.formSubmited.set(false)
-        this._router.navigate([ this._router.url.includes('login') ? '/home' : this._router.url])
 
         if (this.form.value.rememberMe) {
           this._cookieService.set('user', JSON.stringify(res.token), 90)
@@ -65,7 +64,14 @@ export class LoginComponent extends AppComponentBase implements OnInit {
           this._authService.isAuthenticated.set(true);
         }
 
-        this._toastService.toaster('success', 'Login Successfully')
+        const callbackUrl = this._activatedRoute.snapshot.queryParamMap.get('callbackurl');
+        
+        if (callbackUrl && res.role.toLocaleLowerCase() == 'admin') {
+          window.location.href = callbackUrl;
+        } else {
+          this._router.navigate([this._router.url.includes('login') ? '/home' : this._router.url])
+          this._toastService.toaster('success', 'Login Successfully')
+        }
 
       }, error: () => {
         this.formSubmited.set(false)
